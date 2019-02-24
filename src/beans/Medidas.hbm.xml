@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Medidas" table="medidas" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idmedidas" type="java.lang.Integer">
+            <column name="idmedidas" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="productosapartados" class="beans.Productosapartados" fetch="select" lazy="false">
+            <column name="productosapartados_id" />
+        </many-to-one>
+        <property name="talle" type="float">
+            <column name="talle" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="sise" type="java.lang.Float">
+            <column name="sise" precision="12" scale="0" />
+        </property>
+        <property name="hombros" type="java.lang.Float">
+            <column name="hombros" precision="12" scale="0" />
+        </property>
+        <property name="busto" type="java.lang.Float">
+            <column name="busto" precision="12" scale="0" />
+        </property>
+        <property name="largoFalda" type="java.lang.Float">
+            <column name="largoFalda" precision="12" scale="0" />
+        </property>
+        <property name="anchoPuno" type="java.lang.Float">
+            <column name="anchoPuno" precision="12" scale="0" />
+        </property>
+        <property name="cintura" type="java.lang.Float">
+            <column name="cintura" precision="12" scale="0" />
+        </property>
+        <property name="cadera" type="java.lang.Float">
+            <column name="cadera" precision="12" scale="0" />
+        </property>
+        <property name="fecharegistro" type="string">
+            <column name="fecharegistro" length="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Productosapartados" table="productosapartados" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idproductosapartados" type="java.lang.Integer">
+            <column name="idproductosapartados" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="clientes" class="beans.Clientes" fetch="select" lazy="false">
+            <column name="cliente_id" />
+        </many-to-one>
+        <many-to-one name="productos" class="beans.Productos" fetch="select" lazy="false">
+            <column name="producto_id" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="beans.Usuarios" fetch="select" lazy="false">
+            <column name="usuario_id" />
+        </many-to-one>
+        <property name="fecharegistro" type="string">
+            <column name="fecharegistro" length="15" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="70" />
+        </property>
+        <property name="cantidadVenta" type="int">
+            <column name="cantidadVenta" not-null="true" />
+        </property>
+        <property name="detallesproducto" type="string">
+            <column name="detallesproducto" length="100" />
+        </property>
+        <set name="productosvendidoses" table="productosvendidos" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="productosapartados_id" />
+            </key>
+            <one-to-many class="beans.Productosvendidos" />
+        </set>
+        <set name="medidases" table="medidas" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="productosapartados_id" />
+            </key>
+            <one-to-many class="beans.Medidas" />
+        </set>
+        <set name="fechaspruebases" table="fechaspruebas" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="productosapartados_id" />
+            </key>
+            <one-to-many class="beans.Fechaspruebas" />
+        </set>
+    </class>
+</hibernate-mapping>

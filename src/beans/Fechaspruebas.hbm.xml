@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Fechaspruebas" table="fechaspruebas" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idfechaspruebas" type="java.lang.Integer">
+            <column name="idfechaspruebas" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="productosapartados" class="beans.Productosapartados" fetch="select" lazy="false">
+            <column name="productosapartados_id" />
+        </many-to-one>
+        <property name="fechaprueba" type="string">
+            <column name="fechaprueba" length="15" />
+        </property>
+        <property name="fechaevento" type="string">
+            <column name="fechaevento" length="15" not-null="true" />
+        </property>
+        <property name="fecharegistro" type="string">
+            <column name="fecharegistro" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Clientes" table="clientes" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idclientes" type="java.lang.Integer">
+            <column name="idclientes" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarios" class="beans.Usuarios" fetch="select" lazy="false">
+            <column name="usuario_id" />
+        </many-to-one>
+        <property name="nombrecompleto" type="string">
+            <column name="nombrecompleto" length="40" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="10" />
+        </property>
+        <property name="fecharegistro" type="string">
+            <column name="fecharegistro" length="15" not-null="true" />
+        </property>
+        <set name="deudatotals" table="deudatotal" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cliente_id" />
+            </key>
+            <one-to-many class="beans.Deudatotal" />
+        </set>
+        <set name="productosapartadoses" table="productosapartados" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cliente_id" />
+            </key>
+            <one-to-many class="beans.Productosapartados" />
+        </set>
+    </class>
+</hibernate-mapping>

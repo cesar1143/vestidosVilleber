@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Usuarios" table="usuarios" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idusuarios" type="java.lang.Integer">
+            <column name="idusuarios" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <property name="apaterno" type="string">
+            <column name="apaterno" length="20" />
+        </property>
+        <property name="amaterno" type="string">
+            <column name="amaterno" length="20" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="20" />
+        </property>
+        <property name="contra" type="string">
+            <column name="contra" length="10" />
+        </property>
+        <set name="pagoses" table="pagos" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="usuario_id" />
+            </key>
+            <one-to-many class="beans.Pagos" />
+        </set>
+        <set name="productoses" table="productos" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="usuario_id" />
+            </key>
+            <one-to-many class="beans.Productos" />
+        </set>
+        <set name="productosapartadoses" table="productosapartados" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="usuario_id" />
+            </key>
+            <one-to-many class="beans.Productosapartados" />
+        </set>
+        <set name="clienteses" table="clientes" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="usuario_id" />
+            </key>
+            <one-to-many class="beans.Clientes" />
+        </set>
+    </class>
+</hibernate-mapping>

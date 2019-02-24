@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Productos" table="productos" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idproductos" type="java.lang.Integer">
+            <column name="idproductos" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarios" class="beans.Usuarios" fetch="select" lazy="false">
+            <column name="usuario_id" />
+        </many-to-one>
+        <property name="clave" type="string">
+            <column name="clave" length="40" />
+        </property>
+        <property name="precio" type="java.lang.Integer">
+            <column name="precio" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="20" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="20" />
+        </property>
+        <property name="fecharegistro" type="timestamp">
+            <column name="fecharegistro" length="19" />
+        </property>
+        <property name="foto" type="binary">
+            <column name="foto" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" not-null="true" />
+        </property>
+        <set name="productosapartadoses" table="productosapartados" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="producto_id" />
+            </key>
+            <one-to-many class="beans.Productosapartados" />
+        </set>
+    </class>
+</hibernate-mapping>

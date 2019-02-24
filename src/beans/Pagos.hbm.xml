@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jun-2018 21:10:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Pagos" table="pagos" catalog="bd_aryam" optimistic-lock="version">
+        <id name="idpagos" type="java.lang.Integer">
+            <column name="idpagos" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="deudatotal" class="beans.Deudatotal" fetch="select" lazy="false">
+            <column name="deudatotal_id" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="beans.Usuarios" fetch="select" lazy="false">
+            <column name="usuario_id" />
+        </many-to-one>
+        <property name="abono" type="java.lang.Integer">
+            <column name="abono" />
+        </property>
+        <property name="fecharegistro" type="string">
+            <column name="fecharegistro" length="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
