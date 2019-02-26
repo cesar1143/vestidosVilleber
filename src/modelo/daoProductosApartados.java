@@ -6,15 +6,18 @@
 package modelo;
 
 import almacenamientoDeListas.almacenamientoDeListas;
+import beans.Clientes;
 import beans.Deudatotal;
 import beans.Medidas;
 import beans.Pagos;
 import beans.Productosapartados;
+import beans.Usuarios;
 import interfaces.metodosDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -104,27 +107,27 @@ public class daoProductosApartados implements metodosDao {
 
     @Override
     public boolean eliminar(Object bean) {
-            boolean ban=false;
-        Productosapartados beanPA= (Productosapartados) bean;
+        boolean ban = false;
+        Productosapartados beanPA = (Productosapartados) bean;
         try {
-            session=sessionFactory.openSession();
-            transaction=session.beginTransaction();
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
             session.delete(beanPA);
-             transaction.commit();
-            ban=true;
-            
+            transaction.commit();
+            ban = true;
+
         } catch (HibernateException e) {
-            JOptionPane.showMessageDialog(null,"Error al eliminar medidas " +  e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-       
-            if (transaction!=null) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar medidas " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            if (transaction != null) {
                 transaction.rollback();
             }
-        }finally{
-        session.close();
-    }
-    
-    return ban;
-    
+        } finally {
+            session.close();
+        }
+
+        return ban;
+
     }
 
     public Productosapartados obtenerUltimoIdaverestewey(String id) {
@@ -166,16 +169,16 @@ public class daoProductosApartados implements metodosDao {
 
         return listaObj;
     }
-    
+
     public List<Pagos> consultarTodosPorDia(String fecha) {
-           // List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
-       List<Pagos> listaObj = new ArrayList<Pagos>();
+        // List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
+        List<Pagos> listaObj = new ArrayList<Pagos>();
         try {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             //listaObj = session.createQuery("from Productosapartados where status='Pagado entregado' and fecharegistro='"+fecha+"'" ).list();
-            listaObj = session.createQuery("from Pagos where  fecharegistro='"+fecha+"'" ).list();
+            listaObj = session.createQuery("from Pagos where  fecharegistro='" + fecha + "'").list();
 
             transaction.commit();
         } catch (HibernateException e) {
@@ -190,14 +193,14 @@ public class daoProductosApartados implements metodosDao {
 
         return listaObj;
     }
-    
-    public List<Pagos> consultarTodosPorSemana(String fechaInicio,String fechafinal) {
-         List<Pagos> listaObj = new ArrayList<Pagos>();
+
+    public List<Pagos> consultarTodosPorSemana(String fechaInicio, String fechafinal) {
+        List<Pagos> listaObj = new ArrayList<Pagos>();
         try {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            listaObj = session.createQuery("from Pagos where  fecharegistro>='"+fechaInicio+"' and fecharegistro<='"+fechafinal+"'" ).list();
+            listaObj = session.createQuery("from Pagos where  fecharegistro>='" + fechaInicio + "' and fecharegistro<='" + fechafinal + "'").list();
 
             transaction.commit();
         } catch (HibernateException e) {
@@ -212,13 +215,14 @@ public class daoProductosApartados implements metodosDao {
 
         return listaObj;
     }
-    public List<Pagos> consultarTodosPorAño(String fechaInicio,String fechafinal) {
-      List<Pagos> listaObj = new ArrayList<Pagos>();
+
+    public List<Pagos> consultarTodosPorAño(String fechaInicio, String fechafinal) {
+        List<Pagos> listaObj = new ArrayList<Pagos>();
         try {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            listaObj = session.createQuery("from Pagos where fecharegistro>='"+fechaInicio+"' and fecharegistro<='"+fechafinal+"'" ).list();
+            listaObj = session.createQuery("from Pagos where fecharegistro>='" + fechaInicio + "' and fecharegistro<='" + fechafinal + "'").list();
 
             transaction.commit();
         } catch (HibernateException e) {
@@ -233,13 +237,14 @@ public class daoProductosApartados implements metodosDao {
 
         return listaObj;
     }
-     public List<Productosapartados> consultarMesConMasVentas(String fechaInicio,String fechafinal) {
+
+    public List<Productosapartados> consultarMesConMasVentas(String fechaInicio, String fechafinal) {
         List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
         try {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            listaObj = session.createQuery("from Productosapartados where status='Pagado entregado' and fecharegistro>='"+fechaInicio+"' and fecharegistro<='"+fechafinal+"'" ).list();
+            listaObj = session.createQuery("from Productosapartados where status='Pagado entregado' and fecharegistro>='" + fechaInicio + "' and fecharegistro<='" + fechafinal + "'").list();
 
             transaction.commit();
         } catch (HibernateException e) {
@@ -254,16 +259,16 @@ public class daoProductosApartados implements metodosDao {
 
         return listaObj;
     }
-    
-          public List<Deudatotal> consultarTodosProApartdosPorId(String id) {
-       // List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
-       List<Deudatotal> listaObj = new ArrayList<Deudatotal>();
+
+    public List<Deudatotal> consultarTodosProApartdosPorId(String id) {
+        // List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
+        List<Deudatotal> listaObj = new ArrayList<Deudatotal>();
         try {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             //listaObj = session.createQuery("from Productosapartados where status='Pagado entregado' and fecharegistro='"+fecha+"'" ).list();
-            listaObj = session.createQuery("from Deudatotal where  iddeudatotal='"+id+"'" ).list();
+            listaObj = session.createQuery("from Deudatotal where  iddeudatotal='" + id + "'").list();
 
             transaction.commit();
         } catch (HibernateException e) {
@@ -277,5 +282,40 @@ public class daoProductosApartados implements metodosDao {
         }
 
         return listaObj;
+    }
+
+    public List<Clientes> consultarClienteConDeuda() {
+        List<Clientes> lista = new ArrayList<Clientes>();
+        try {
+            session=sessionFactory.openSession();
+           transaction=session.beginTransaction();
+           Query hql=session.createQuery("select distinct cli.idclientes,cli.nombrecompleto,cli.telefono from Productosapartados as c  inner join c.clientes as cli where c.status!='Pagado entregado' order by cli.nombrecompleto");
+                                                                                                                                                                                                           
+           List<Object[]>listaRes=hql.list();
+            for (int i = 0; i < listaRes.size(); i++) {
+                   String id= listaRes.get(i)[0]+"";
+                String nombre=listaRes.get(i)[1]+"";
+                String  telefono=listaRes.get(i)[2]+"";
+             
+                Clientes bean=new Clientes();
+                bean.setIdclientes(i);
+                bean.setNombrecompleto(nombre);
+                bean.setTelefono(telefono);
+              
+                lista.add(bean);
+               
+            }
+           transaction.commit();
+           
+        } catch (Exception e) {
+            if (transaction!=null) {
+                transaction.rollback();
+            }
+             JOptionPane.showMessageDialog(null, "Error en daoproductosapartados consultarClienteConDeuda" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }finally{
+            session.close();
+        }
+        return lista;
+
     }
 }

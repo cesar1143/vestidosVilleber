@@ -58,12 +58,12 @@ public class controlProductoPendientes {
             vaciarTabla(tabla, defaultTabla);
 
             for (int i = 0; i < lista.size(); i++) {
-                
+
                 Set<Fechaspruebas> listaFechas = lista.get(i).getFechaspruebases();
-            
+
                 Fechaspruebas beanFechas = null;
                 if (listaFechas.size() > 0) {
-                   
+
                     for (Fechaspruebas listaFecha : listaFechas) {
                         defaultTabla.addRow(new Object[]{lista.get(i).getIdproductosapartados(), lista.get(i).getProductos().getClave(),
                             lista.get(i).getClientes().getNombrecompleto(), lista.get(i).getStatus(), lista.get(i).getCantidadVenta(), listaFecha.getFechaprueba(),
@@ -71,7 +71,7 @@ public class controlProductoPendientes {
                     }
 
                 } else {
-                 
+
                     defaultTabla.addRow(new Object[]{lista.get(i).getIdproductosapartados(), lista.get(i).getProductos().getClave(),
                         lista.get(i).getClientes().getNombrecompleto(), lista.get(i).getStatus(), lista.get(i).getCantidadVenta(), "Sin Fechas",
                         "Sin Fechas"});
@@ -131,7 +131,7 @@ public class controlProductoPendientes {
     }
 
     public void buscarCliente(JTextField txtBuscarCliente, JTable tabla, DefaultTableModel defaultTabla) {
-       
+
         if (validar.validarCampos(txtBuscarCliente)) {
             //vaciamos la tabla
             vaciarTabla(tabla, defaultTabla);
@@ -239,8 +239,8 @@ public class controlProductoPendientes {
                             llenarTablaPendientes(tabla, defaultTabla);
 
                         } else {
-                            mensajeError  menError = new mensajeError ();
-                            mensajeError .labelMensaje.setText("Error al eliminar");
+                            mensajeError menError = new mensajeError();
+                            mensajeError.labelMensaje.setText("Error al eliminar");
                             menError.setVisible(true);
                             menError.setAlwaysOnTop(true);
                             //JOptionPane.showMessageDialog(null, "Error al eliminar", "Error", JOptionPane.ERROR_MESSAGE);
@@ -392,11 +392,11 @@ public class controlProductoPendientes {
             beanProApartados.setFecharegistro(validar.obtenerFechaActual());
             if (new daoProductosApartados().editar(beanProApartados)) {
                 mensajeExito menExito = new mensajeExito();
-            mensajeExito .labelMensaje.setText("Los estados se cambiaron corectamente");
-            menExito.setVisible(true);
-            menExito .setAlwaysOnTop(true);
-                
-               // JOptionPane.showMessageDialog(null, "Los estados se cambiaron corectamente");
+                mensajeExito.labelMensaje.setText("Los estados se cambiaron corectamente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+
+                // JOptionPane.showMessageDialog(null, "Los estados se cambiaron corectamente");
                 frame.dispose();
                 principal.controlcambiarEstadoProductosApartados = false;
                 //actualizamos la tabla pendietes
@@ -413,9 +413,9 @@ public class controlProductoPendientes {
         if (tablaCambiarEstadoProdcutos.getSelectedRow() == -1) {
             mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);
-           // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
             String status[] = {"Pagado entregado", "Pagado NO entregado"};
             Object estadoPro = JOptionPane.showInputDialog(frame, "Estado del producto", "Seleccionar el estado de los productos", JOptionPane.QUESTION_MESSAGE, null, status, status[0]);
@@ -426,11 +426,11 @@ public class controlProductoPendientes {
             beanProApartados.setStatus(estadoPro + "");
             beanProApartados.setFecharegistro(validar.obtenerFechaActual());
             if (new daoProductosApartados().editar(beanProApartados)) {
-mensajeExito menExito = new mensajeExito();
-            mensajeExito .labelMensaje.setText("El estado del producto  se cambio correctamente");
-            menExito.setVisible(true);
-            menExito .setAlwaysOnTop(true);
-               // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
+                mensajeExito menExito = new mensajeExito();
+                mensajeExito.labelMensaje.setText("El estado del producto  se cambio correctamente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
 
                 defaulttablaCambiar.removeRow(fila);
 
@@ -449,7 +449,7 @@ mensajeExito menExito = new mensajeExito();
     // metodo para hacer entrega deproductos con estado pagado no entregado
     public void btnEntregarProdcutos(String nombreCliente) {
         Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(nombreCliente);
-      //  System.out.println("bean cliente control " + beanCliente.getNombrecompleto());
+        //  System.out.println("bean cliente control " + beanCliente.getNombrecompleto());
         if (beanCliente != null) {
             cambiarEstadoProductosApartados.beanCliente2 = beanCliente;
             cambiarEstadoProductosApartados cambiar = new cambiarEstadoProductosApartados();
@@ -535,7 +535,7 @@ mensajeExito menExito = new mensajeExito();
                                         //agregamos el producto cancelado a la tabla producto con su cantidad de tabal
                                         if (new DaoProductos().modificarCantidadYEstadoProducto2(beanProApar.getProductos().getIdproductos(), valorCantidad)) {
                                             System.out.println("se modifico la cantidad");
-                                        }else{
+                                        } else {
                                             System.out.println("errore al modificar cantidad");
                                         }
                                         mensajeExito menExito = new mensajeExito();
@@ -568,7 +568,6 @@ mensajeExito menExito = new mensajeExito();
                                             System.out.println("se modifica la deuda000");
                                             System.out.println("fila " + fila);
 
-                                           
                                             mensajeExito menExito = new mensajeExito();
                                             mensajeExito.labelMensaje.setText("Se cancelaron los productos del cliente");
                                             menExito.setVisible(true);
@@ -655,7 +654,7 @@ mensajeExito menExito = new mensajeExito();
                         System.out.println("eliminamos el producto apartado 2");
                         //si  elimina el pro apartado actualizaremos la deuda , el estado y la fecharegistro
                         Set<Deudatotal> listaDeuda = beanProApar.getClientes().getDeudatotals();
-                       // System.out.println("esto trae la lista " + listaDeuda.size());
+                        // System.out.println("esto trae la lista " + listaDeuda.size());
                         if (listaDeuda.size() > 0) {
                             for (Deudatotal deudatotal : listaDeuda) {
                                 if (deudatotal.getStatus().equals("No pagado")) {
@@ -719,5 +718,19 @@ mensajeExito menExito = new mensajeExito();
         }
 
     }
+    //estos clientes son los que tienen deuda  y pomner un estatus si esta persona ya paso un año su deuda
 
+    public void llenarTablaClientes(JTable tbCliente, DefaultTableModel tablaClientesModel) {
+
+        List<Clientes> lista = daoApartados.consultarClienteConDeuda();
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                tablaClientesModel.addRow(new Object[]{lista.get(i).getIdclientes(),lista.get(i).getNombrecompleto(),lista.get(i).getTelefono()});
+
+            }
+        } else {
+
+        }
+
+    }
 }
