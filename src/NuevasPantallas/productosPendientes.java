@@ -449,7 +449,8 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                 String estado = jTable4.getValueAt(fila, 2) + "";
                 System.out.println("estado " + estado);
                 if (estado.equalsIgnoreCase("Apartado")) {
-                    String idCliente = tbClientes.getValueAt(fila, 0) + "";
+                    int  filaCliente=tbClientes.getSelectedRow();
+                    String idCliente = tbClientes.getValueAt(filaCliente, 0) + "";
                     
                    // new controlPagos().mostrarInformacionDeuda(nombre);
                     verPagos.idCliente=idCliente;

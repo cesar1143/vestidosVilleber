@@ -66,8 +66,10 @@ public class verPagos extends javax.swing.JFrame {
 
         validar.soloNumeros(txtAbono);
         validar.soloNumeros(txtEfectivoRecibido);
-        //llenamos los campos
-        if (beanClientes != null) {
+        //llenamos los campos123
+        
+        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos);
+        /*if (beanClientes != null) {
             //Set<Productosapartados>listaProApartados=beanCliente.getProductosapartadoses();
             txtNombreDelCiente.setText(beanClientes.getNombrecompleto().toUpperCase());
             Set<Deudatotal> listaDeuda = beanClientes.getDeudatotals();
@@ -95,7 +97,7 @@ public class verPagos extends javax.swing.JFrame {
             }
         } else {
 
-        }
+        }*/
     }
 
     /**

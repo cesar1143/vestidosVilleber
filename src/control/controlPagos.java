@@ -292,7 +292,17 @@ public class controlPagos {
 //*********************** metodos nuevos cesar 2019 ********************************************
 
     public void mostrarPagosyabonos(String idCliente,JTable tablaPagos,DefaultTableModel modelPagos) {
-        
+        List<Clientes>lista=daoP.mostrarPagosyabonos(idCliente);
+        if (lista.size()>0) {
+            for (int i = 0; i <  lista.size(); i++) {
+                modelPagos.addRow(new Object[]{lista.get(i).getPagos().getIdpagos(),
+                lista.get(i).getPagos().getAbono(),
+                lista.get(i).getPagos().getFecharegistro(),
+                lista.get(i).getUsuarios().getNombre()});
+            }
+        }else{
+            
+        }
 
     }
 

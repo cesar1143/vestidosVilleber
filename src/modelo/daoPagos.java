@@ -6,8 +6,10 @@
 package modelo;
 
 import beans.Clientes;
+import beans.Deudatotal;
 import beans.Medidas;
 import beans.Pagos;
+import beans.Usuarios;
 import interfaces.metodosDao;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,13 +60,13 @@ public class daoPagos implements metodosDao {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            bean = (Pagos) session.createQuery("from Pagos  where idpagos='"+id+"'").uniqueResult();
+            bean = (Pagos) session.createQuery("from Pagos  where idpagos='" + id + "'").uniqueResult();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            JOptionPane.showMessageDialog(null, "Error alregistrar pago "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error alregistrar pago " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             session.close();
         }
@@ -122,26 +124,65 @@ public class daoPagos implements metodosDao {
         return ban;
 
     }
-    
+
     //*******       metoodos nuevos cesar 2019 ***********************************
-    public List<Clientes> mostrarPagosyabonos(String idCliente){
-        List<Clientes> lista= new ArrayList<Clientes>();
+ 
+    public List<Clientes> mostrarPagosyabonos(String idCliente) {
+        List<Clientes> lista = new ArrayList<Clientes>();
         try {
-            session=sessionFactory.openSession();
-            transaction=session.beginTransaction();
-            Query hql=session.createQuery("select u.nombre from Clientes as c inner join c.usuarios where c.idclientes='"+idCliente+"'");
-            List<Object[]>listaRes=hql.list();
-            if (listaRes.size()>0) {
-                for (int i = 0; i < listaRes.size(); i++) {
-                    String nombre=listaRes.get(i)[0]+"";
-                    System.out.println("nombre " + nombre);
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            //obtenemos la deuda total por medio del idCliente
+            Query hqlDeuda = session.createQuery("select d.iddeudatotal,d.deudatotal,d.status,d.fecharegistro from Deudatotal as d inner join d.clientes as cli where cli.idclientes='" + idCliente + "' and d.status!='pagado'");
+            List<Object[]> listaRes2 = hqlDeuda.list();
+            if (listaRes2.size() > 0) {
+                for (int j = 0; j < listaRes2.size(); j++) {
+                    
+                    String idDeuda = listaRes2.get(j)[0] + "";
+                    String deuda = listaRes2.get(j)[1] + "";
+                    String status = listaRes2.get(j)[2] + "";
+                    String fechaRegistro = listaRes2.get(j)[3] + "";
+                    Deudatotal deu = new Deudatotal();
+                    deu.setIddeudatotal(Integer.parseInt(idDeuda));
+                    deu.setDeudatotal(Integer.parseInt(deuda));
+                    deu.setStatus(status);
+                    deu.setFecharegistro(fechaRegistro);
+                 
+                   
+                    //obtenemos los pagos
+                    
+                   
+                    Query hqlPagos = session.createQuery("select p.idpagos,p.abono,p.fecharegistro,u.nombre from Pagos as p inner join p.deudatotal as d inner join p.usuarios  as u where d.iddeudatotal='" + idDeuda + "'");
+                    List<Object[]> listaPagos = hqlPagos.list();
+               
+                    for (int k = 0; k < listaPagos.size(); k++) {
+                         Clientes bean = new Clientes();
+                        String idPagos = listaPagos.get(k)[0] + "";
+                       
+                        String abono = listaPagos.get(k)[1] + "";
+                        String fecha = listaPagos.get(k)[2] + "";
+                        String nombreusu = listaPagos.get(k)[3] + "";
+                        Pagos p = new Pagos();
+                        p.setIdpagos(Integer.parseInt(idPagos));
+                        p.setAbono(Integer.parseInt(abono));
+                        p.setFecharegistro(fecha);
+                        bean.setPagos(p);
+                        Usuarios u = new Usuarios();
+                        u.setNombre(nombreusu);
+                        bean.setUsuarios(u);
+                        lista.add(bean);
+
+                    }
+                     
+
                 }
-            }else{
-                
+            } else {
+
             }
+
             transaction.commit();
         } catch (Exception e) {
-          JOptionPane.showMessageDialog(null, "Error en daoPAgos mostrarPagosyabonos " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error en daoPAgos mostrarPagosyabonos " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
             if (transaction != null) {
                 transaction.rollback();
@@ -151,4 +192,6 @@ public class daoPagos implements metodosDao {
         }
         return lista;
     }
+
+   
 }
