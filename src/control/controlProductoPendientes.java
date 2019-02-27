@@ -86,6 +86,37 @@ public class controlProductoPendientes {
         }
 
     }
+    public void llenarTablaPendientesNew( JTable tablaPendientes,DefaultTableModel modelTablaPendientes,
+            JTable tablaClientes,DefaultTableModel modelTablaClientes,
+             JTable tablaMedidas,DefaultTableModel modelMedidas,JTextArea txtDescripcion){
+        if (tablaMedidas.getRowCount()>0) {
+            vaciarTabla(tablaMedidas, modelMedidas);
+        }else{
+            
+        }
+        txtDescripcion.setText("");
+       int fila=tablaClientes.getSelectedRow();
+        String idCliente=modelTablaClientes.getValueAt(fila, 0)+"";
+       
+         List<Productosapartados> lista=daoApartados.llenarTablaPendientesNew(idCliente);
+       
+         if (lista.size()>0) {
+             vaciarTabla(tablaPendientes, modelTablaPendientes);
+             
+             for (int i = 0; i < lista.size(); i++) {
+                   modelTablaPendientes.addRow(new Object[]{
+                   lista.get(i).getIdproductosapartados()
+                   ,lista.get(i).getClave()
+                   ,lista.get(i).getStatus().toUpperCase()
+                   ,lista.get(i).getCantidadVenta()
+                   ,lista.get(i).getFechaPrueba()      
+                   ,lista.get(i).getFechaEvento()});
+             }
+           
+        }else{
+             
+         }
+    }
 
     public List<Productosapartados> consultarTodos() {
         List<Productosapartados> lista = new ArrayList<Productosapartados>();
@@ -186,6 +217,20 @@ public class controlProductoPendientes {
                 }
 
             }
+
+        }
+    }
+
+    public void buscarClienteFiltrado(JTable tablaClientes,DefaultTableModel modelTablaClientes,JTextField txtNombre) {
+      
+        List<Clientes> lista = daoApartados.buscarClienteFiltrado(txtNombre.getText());
+        if (lista.size() > 0) {
+            vaciarTabla(tablaClientes, modelTablaClientes);
+            for (int i = 0; i < lista.size(); i++) {
+                modelTablaClientes.addRow(new Object[]{lista.get(i).getIdclientes(), lista.get(i).getNombrecompleto(), lista.get(i).getTelefono()});
+
+            }
+        } else {
 
         }
     }
@@ -460,9 +505,9 @@ public class controlProductoPendientes {
 
     //metodo para cancelar todos los productos apartados que tiene ese cliente
     /*1.-buscamos  si tiene medidas y fechas los eliminamos
-    2.-eliminamos el producto apartado
-    3.- eliminamos los pagos
-    4.- cambiamos el estado a productos apartados*/
+     2.-eliminamos el producto apartado
+     3.- eliminamos los pagos
+     4.- cambiamos el estado a productos apartados*/
     public void btnCanclearProdcutos(String nombreCliente) {
         Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(nombreCliente);
         if (beanCliente != null) {
@@ -590,16 +635,16 @@ public class controlProductoPendientes {
                     if (tablaCambiarEstadoProdcutos.getRowCount() == 0) {
                         //aqui actualizamos la tabla pendientes
                         /* para boton eliminar pedido 
-                        Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(beanProApar.getClientes().getNombrecompleto());
-                        Set<Deudatotal> listaDeuda2 = beanCliente.getDeudatotals();
-                        if (listaDeuda2.size() > 0) {
+                         Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(beanProApar.getClientes().getNombrecompleto());
+                         Set<Deudatotal> listaDeuda2 = beanCliente.getDeudatotals();
+                         if (listaDeuda2.size() > 0) {
 
-                            if (new daoClientes().eliminar(beanCliente)) {
-                                System.out.println("se elimino el cliente");
-                            } else {
+                         if (new daoClientes().eliminar(beanCliente)) {
+                         System.out.println("se elimino el cliente");
+                         } else {
 
-                            }
-                        }
+                         }
+                         }
                          */
                         frame.dispose();
                         principal.controlcancelarProductosApartados = false;
@@ -679,16 +724,16 @@ public class controlProductoPendientes {
                                     if (new daoDeudaTotal().editar(deudatotal)) {
                                         System.out.println("se modifico la dueda");
                                         /* para boton eliminar pedido
-                                        Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(beanProApar.getClientes().getNombrecompleto());
-                                        Set<Deudatotal> listaDeuda2 = beanCliente.getDeudatotals();
-                                        if (listaDeuda2.size() > 0) {
+                                         Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(beanProApar.getClientes().getNombrecompleto());
+                                         Set<Deudatotal> listaDeuda2 = beanCliente.getDeudatotals();
+                                         if (listaDeuda2.size() > 0) {
 
-                                            if (new daoClientes().eliminar(beanCliente)) {
-                                                System.out.println("se elimino el cliente");
-                                            } else {
+                                         if (new daoClientes().eliminar(beanCliente)) {
+                                         System.out.println("se elimino el cliente");
+                                         } else {
 
-                                            }
-                                        }
+                                         }
+                                         }
                                          */
 
                                         JOptionPane.showMessageDialog(null, "Se cancelaron todos los productos del cliente", "Exito", JOptionPane.INFORMATION_MESSAGE);
@@ -723,9 +768,11 @@ public class controlProductoPendientes {
     public void llenarTablaClientes(JTable tbCliente, DefaultTableModel tablaClientesModel) {
 
         List<Clientes> lista = daoApartados.consultarClienteConDeuda();
+        
         if (lista.size() > 0) {
+            vaciarTabla(tbCliente, tablaClientesModel);
             for (int i = 0; i < lista.size(); i++) {
-                tablaClientesModel.addRow(new Object[]{lista.get(i).getIdclientes(),lista.get(i).getNombrecompleto(),lista.get(i).getTelefono()});
+                tablaClientesModel.addRow(new Object[]{lista.get(i).getIdclientes(), lista.get(i).getNombrecompleto().toUpperCase(), lista.get(i).getTelefono()});
 
             }
         } else {

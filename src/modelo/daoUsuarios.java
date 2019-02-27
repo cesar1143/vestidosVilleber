@@ -142,7 +142,7 @@ public class daoUsuarios implements metodosDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-
+            
             bean = (Usuarios) session.createQuery("from Usuarios where usuario='" + usuario + "' and contra='" + contra + "'").uniqueResult();
 
             transaction.commit();

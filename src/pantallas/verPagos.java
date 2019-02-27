@@ -35,6 +35,7 @@ public class verPagos extends javax.swing.JFrame {
     //intanciamos las clases
     validarCampos validar = new validarCampos();
     public static Clientes beanClientes;
+    public static String idCliente="";
     controlPagos controlP = new controlPagos();
 
     //tablas
@@ -68,14 +69,14 @@ public class verPagos extends javax.swing.JFrame {
         //llenamos los campos
         if (beanClientes != null) {
             //Set<Productosapartados>listaProApartados=beanCliente.getProductosapartadoses();
-            txtNombreDelCiente.setText(beanClientes.getNombrecompleto());
+            txtNombreDelCiente.setText(beanClientes.getNombrecompleto().toUpperCase());
             Set<Deudatotal> listaDeuda = beanClientes.getDeudatotals();
             if (listaDeuda.size() > 0) {
                 for (Deudatotal deudatotal : listaDeuda) {
                     if (deudatotal.getStatus().equals("No pagado")) {
                         txtDeudTotal.setText(deudatotal.getDeudatotal() + "");
                         Set<Pagos> listaPagos = deudatotal.getPagoses();
-                        System.out.println("tamñao pago " +listaPagos.size() );
+                        
                         if (listaPagos.size() > 0) {
                             int sumaPagos = 0;
 
@@ -315,7 +316,7 @@ public class verPagos extends javax.swing.JFrame {
 
         txtNombreDelCiente.setEditable(false);
         txtNombreDelCiente.setBackground(new java.awt.Color(229, 222, 222));
-        txtNombreDelCiente.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtNombreDelCiente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtNombreDelCiente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -424,6 +425,7 @@ public class verPagos extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -432,25 +434,21 @@ public class verPagos extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNombreDelCiente, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNombreDelCiente, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(66, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNombreDelCiente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombreDelCiente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

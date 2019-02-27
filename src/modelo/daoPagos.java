@@ -5,12 +5,15 @@
  */
 package modelo;
 
+import beans.Clientes;
 import beans.Medidas;
 import beans.Pagos;
 import interfaces.metodosDao;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -118,5 +121,34 @@ public class daoPagos implements metodosDao {
 
         return ban;
 
+    }
+    
+    //*******       metoodos nuevos cesar 2019 ***********************************
+    public List<Clientes> mostrarPagosyabonos(String idCliente){
+        List<Clientes> lista= new ArrayList<Clientes>();
+        try {
+            session=sessionFactory.openSession();
+            transaction=session.beginTransaction();
+            Query hql=session.createQuery("select u.nombre from Clientes as c inner join c.usuarios where c.idclientes='"+idCliente+"'");
+            List<Object[]>listaRes=hql.list();
+            if (listaRes.size()>0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+                    String nombre=listaRes.get(i)[0]+"";
+                    System.out.println("nombre " + nombre);
+                }
+            }else{
+                
+            }
+            transaction.commit();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, "Error en daoPAgos mostrarPagosyabonos " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return lista;
     }
 }

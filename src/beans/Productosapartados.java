@@ -22,6 +22,16 @@ public class Productosapartados  implements java.io.Serializable {
      private Set productosvendidoses = new HashSet(0);
      private Set medidases = new HashSet(0);
      private Set fechaspruebases = new HashSet(0);
+     private Medidas medidas;
+
+     
+     //datos extras para llenar la tabla pendientes
+     private String clave;
+     private String nombrecompleto;
+     private String idFechas;
+     private String fechaPrueba;
+     private String fechaEvento;
+     private byte[] foto;
 
     public Productosapartados() {
     }
@@ -130,6 +140,62 @@ public class Productosapartados  implements java.io.Serializable {
     
     public void setFechaspruebases(Set fechaspruebases) {
         this.fechaspruebases = fechaspruebases;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getNombrecompleto() {
+        return nombrecompleto;
+    }
+
+    public void setNombrecompleto(String nombrecompleto) {
+        this.nombrecompleto = nombrecompleto;
+    }
+
+    public String getIdFechas() {
+        return idFechas;
+    }
+
+    public void setIdFechas(String idFechas) {
+        this.idFechas = idFechas;
+    }
+
+    public String getFechaPrueba() {
+        return fechaPrueba;
+    }
+
+    public void setFechaPrueba(String fechaPrueba) {
+        this.fechaPrueba = fechaPrueba;
+    }
+
+    public String getFechaEvento() {
+        return fechaEvento;
+    }
+
+    public void setFechaEvento(String fechaEvento) {
+        this.fechaEvento = fechaEvento;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public Medidas getMedidas() {
+        return medidas;
+    }
+
+    public void setMedidas(Medidas medidas) {
+        this.medidas = medidas;
     }
 
 

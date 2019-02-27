@@ -75,9 +75,8 @@ public class controlPagos {
                                             Set<Pagos> listaPagos = beanDeuda.getPagoses();
                                             int sumaPagos = 0;
                                             for (Pagos listaPago : listaPagos) {
-                                              
+
                                                 sumaPagos = sumaPagos + listaPago.getAbono();
-                                             
 
                                                 defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
                                             }
@@ -88,7 +87,6 @@ public class controlPagos {
                                             //para cambiar el estado de los productos a pagado entregregado o pagado no entregado
                                             //y tambien cambiar el estado de la deuda a pagado y actualizamos la tabla pendientes
                                             //la  tabla pagos
-                                          
                                             if (Integer.parseInt(txtDeuda.getText()) == sumaPagos) {
                                                 //quiere decirque se acubierto la deuda
 
@@ -209,21 +207,20 @@ public class controlPagos {
                     Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(nombreCliente);
                     Set<Deudatotal> listaDeuda = beanCliente.getDeudatotals();
                     //verifcamos su deuda
-                  //  System.out.println("lista deuda " + listaDeuda.size());
+                    //  System.out.println("lista deuda " + listaDeuda.size());
                     if (listaDeuda.size() > 0) {
                         for (Deudatotal deudatotal : listaDeuda) {
-                          
+
                             if (deudatotal.getStatus().equals("No pagado")) {
 
-                           
                                 //obtnemos su pagos
                                 Set<Pagos> listaPagos = deudatotal.getPagoses();
                                 int sumaPagos = 0;
-                                
+
                                 if (listaPagos.size() > 0) {
-                                   
+
                                     for (Pagos listaPago : listaPagos) {
-                                      
+
                                         sumaPagos = sumaPagos + listaPago.getAbono();
 
                                         defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
@@ -290,6 +287,12 @@ public class controlPagos {
             }
         } catch (Exception e) {
         }
+
+    }
+//*********************** metodos nuevos cesar 2019 ********************************************
+
+    public void mostrarPagosyabonos(String idCliente,JTable tablaPagos,DefaultTableModel modelPagos) {
+        
 
     }
 

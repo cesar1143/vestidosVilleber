@@ -208,8 +208,9 @@ public class controlInicioSesion {
 
             //VALIDAMOS SI ENCONTRO LOS DATOS DEL USUARIO EN LA BD
             if (bean != null) {
+            
                 if (bean.getContra().equals(contra.getText())) {
-
+                   
                     principal.usuario = bean.getUsuario();
                     principal.idUsuario = bean.getIdusuarios();
 

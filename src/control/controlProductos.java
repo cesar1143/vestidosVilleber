@@ -380,7 +380,7 @@ public class controlProductos {
                     //Y SE ELIMINA SIN PROBLEMA ALGUNO
                     for (Productosapartados productosapartados : litsaProApartado) {
                         if (productosapartados.getStatus().equals("Pagado entregado")) {
-                           // System.out.println("entro aqui")11111111;
+                            // System.out.println("entro aqui")11111111;
                             //buscaremos si tiene medidas y fechas este producto y los eliminaremos 
                             Set<Medidas> listaMedidas = productosapartados.getMedidases();
                             Set<Fechaspruebas> listaFechas = productosapartados.getFechaspruebases();
@@ -449,7 +449,7 @@ public class controlProductos {
                         mensajeError.labelMensaje.setText("Error al eliminar");
                         menError.setVisible(true);
                         menError.setAlwaysOnTop(true);
-                       // JOptionPane.showMessageDialog(null, "Error al eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+                        // JOptionPane.showMessageDialog(null, "Error al eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 
                     }
                     mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
@@ -493,13 +493,15 @@ public class controlProductos {
         //y lo enviamos a la pantalla editar pro para llenar los campos
         editarProducto.bean = bean;
     }
-  public void consultaEspecificaParaModificarPendientes(String clave) {
+
+    public void consultaEspecificaParaModificarPendientes(String clave) {
         boolean ban = false;
         Productos bean = (Productos) dao.consultaEspecificaPorClave(clave + "");
         //encontramos nuestro id en lalista y obtenmos el bean 
         //y lo enviamos a la pantalla editar pro para llenar los campos
         editarProducto.bean = bean;
     }
+
     public void consultaEspecificaParaEnviarAPantllas(int id, int existencias, String deDondeViene) {
         //hacemos una consulta especifica 
         //y lo enviamos a la pantalla que se requiere pro para llenar los campos
@@ -556,7 +558,7 @@ public class controlProductos {
 
         Productos bean = (Productos) dao.consultaEspecifica12PorClave(clave);
         //System.out.println("bean " + bean);
-       // System.out.println("bean foto " + bean.getFoto());
+        // System.out.println("bean foto " + bean.getFoto());
         Image imagen = null;
 
         try {
@@ -655,9 +657,9 @@ public class controlProductos {
         } else {
             mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("No hay productos registrados");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);
-           // JOptionPane.showMessageDialog(null, "No hay productos registrados", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            // JOptionPane.showMessageDialog(null, "No hay productos registrados", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -688,10 +690,10 @@ public class controlProductos {
         } else {
             mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("No hay ningun registro");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);
-            
-           // JOptionPane.showMessageDialog(null, "No hay ningun registro", "Inforamción", JOptionPane.INFORMATION_MESSAGE);
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+
+            // JOptionPane.showMessageDialog(null, "No hay ningun registro", "Inforamción", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -713,10 +715,10 @@ public class controlProductos {
 
             } else {
                 mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
-            mensajeAdvertencia.labelMensaje.setText("El producto no esta registrado");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);
-              //  JOptionPane.showMessageDialog(null, "El producto no esta registrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                mensajeAdvertencia.labelMensaje.setText("El producto no esta registrado");
+                menAdvertencia.setVisible(true);
+                menAdvertencia.setAlwaysOnTop(true);
+                //  JOptionPane.showMessageDialog(null, "El producto no esta registrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
 
         } else {
@@ -742,11 +744,11 @@ public class controlProductos {
 
             }
         } else {
-          mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("El producto  no esta registrado");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);  
-          //  JOptionPane.showMessageDialog(null, "El producto  no esta registrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            //  JOptionPane.showMessageDialog(null, "El producto  no esta registrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
 //vaciamos la tabla para meter el producto que buscamos
 
@@ -808,7 +810,7 @@ public class controlProductos {
             JButton btnAtras, JButton btnSiguiente, JLabel labelIdProducto16, JLabel labelIdProducto17, JLabel labelIdProducto18, JLabel labelIdProducto19,
             JLabel labelIdProducto20, JLabel labelIdProducto21, JLabel labelIdProducto22, JLabel labelIdProducto23,
             int contCatalogoImg, int canlis) {
-      //  System.out.println("entro a actualizar catalogo");
+        //  System.out.println("entro a actualizar catalogo");
 //    ------------------------- CONTADOR CUANDO LLEGUE A 7 DEBE IMPRIMIR 8 IMG
         canlis = listaImg.size();
 //        canlis = 7;
@@ -858,7 +860,7 @@ public class controlProductos {
 //                    System.out.println("para ver al presionasr next " + contCatalogoImg);
                     if (listaImg.get(contCatalogoImg).getImagen() == null) {
                         icon1 = null;
-                     //   System.out.println("soy null ala verga " + listaImg.get(contCatalogoImg).getImagen());
+                        //   System.out.println("soy null ala verga " + listaImg.get(contCatalogoImg).getImagen());
                     } else {
 
                         icon1 = new ImageIcon(listaImg.get(contCatalogoImg).getImagen().getScaledInstance(230, 300, listaImg.get(contCatalogoImg).getImagen().SCALE_DEFAULT));
@@ -951,5 +953,51 @@ public class controlProductos {
             // JOptionPane.showMessageDialog(null, "El producto no esta registrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }
+//************************************ metodos nuevos cesar 2019 *************************************************
 
+    public Productosapartados consultarImgYmedidas(String idproApartados,
+            JLabel labelFoto, JTable tablaMedidas, DefaultTableModel modelMedidas, JTextArea txtdescripcion) {
+        boolean ban = false;
+        //HACEMOS LACONSUTLA ESPECIFICA PARA OBTEBENER LOS DATOS DEL PRODUCTO
+
+        List<Productosapartados> lista = dao.consultarImgYmedidas(idproApartados);
+        //System.out.println("bean " + bean);
+        // System.out.println("bean foto " + bean.getFoto());
+        Image imagen = null;
+
+        try {
+
+            if (lista.get(0).getFoto() == null) {
+
+                labelFoto.setIcon(null);
+                labelFoto.setText("Sin foto");
+            } else {
+
+                imagen = dao.getImg(lista.get(0).getFoto(), false);
+
+                Icon icon = new ImageIcon(imagen.getScaledInstance(200, 300, Image.SCALE_DEFAULT));
+                labelFoto.setIcon(icon);
+            }
+            //llenamos la tabla medidas
+            vaciarTabla(tablaMedidas, modelMedidas);
+            modelMedidas.addRow(new Object[]{
+                lista.get(0).getMedidas().getIdmedidas(),
+                lista.get(0).getMedidas().getTalle(),
+                lista.get(0).getMedidas().getSise(),
+                lista.get(0).getMedidas().getHombros(),
+                lista.get(0).getMedidas().getBusto(),
+                lista.get(0).getMedidas().getLargoFalda(),
+                lista.get(0).getMedidas().getAnchoPuno(),
+                lista.get(0).getMedidas().getCintura(),
+                lista.get(0).getMedidas().getCadera()});
+            
+            txtdescripcion.setText( lista.get(0).getDetallesproducto().toUpperCase());
+        } catch (Exception ex) {
+
+            System.out.println("error al cargar al imagen " + ex.getMessage());
+
+        }
+        return lista.get(0);
+
+    }
 }
