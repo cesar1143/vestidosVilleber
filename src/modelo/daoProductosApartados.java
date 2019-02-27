@@ -412,7 +412,7 @@ public class daoProductosApartados implements metodosDao {
                 String telefono = listaRes.get(i)[2] + "";
 
                 Clientes bean = new Clientes();
-                bean.setIdclientes(i);
+                bean.setIdclientes(Integer.parseInt(id));
                 bean.setNombrecompleto(nombre);
                 bean.setTelefono(telefono);
 

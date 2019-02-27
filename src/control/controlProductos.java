@@ -972,7 +972,7 @@ public class controlProductos {
                 labelFoto.setIcon(null);
                 labelFoto.setText("Sin foto");
             } else {
-
+                labelFoto.setText("");
                 imagen = dao.getImg(lista.get(0).getFoto(), false);
 
                 Icon icon = new ImageIcon(imagen.getScaledInstance(200, 300, Image.SCALE_DEFAULT));
@@ -990,8 +990,8 @@ public class controlProductos {
                 lista.get(0).getMedidas().getAnchoPuno(),
                 lista.get(0).getMedidas().getCintura(),
                 lista.get(0).getMedidas().getCadera()});
-            
-            txtdescripcion.setText( lista.get(0).getDetallesproducto().toUpperCase());
+
+            txtdescripcion.setText(lista.get(0).getDetallesproducto().toUpperCase());
         } catch (Exception ex) {
 
             System.out.println("error al cargar al imagen " + ex.getMessage());

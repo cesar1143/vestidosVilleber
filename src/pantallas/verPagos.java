@@ -68,7 +68,7 @@ public class verPagos extends javax.swing.JFrame {
         validar.soloNumeros(txtEfectivoRecibido);
         //llenamos los campos123
         
-        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos);
+        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos,txtDeudTotal,txtRestan);
         /*if (beanClientes != null) {
             //Set<Productosapartados>listaProApartados=beanCliente.getProductosapartadoses();
             txtNombreDelCiente.setText(beanClientes.getNombrecompleto().toUpperCase());
@@ -604,7 +604,7 @@ public class verPagos extends javax.swing.JFrame {
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtDeudTotal;
     private javax.swing.JTextField txtEfectivoRecibido;
-    private javax.swing.JTextField txtNombreDelCiente;
+    public static javax.swing.JTextField txtNombreDelCiente;
     private javax.swing.JTextField txtRestan;
     // End of variables declaration//GEN-END:variables
 }

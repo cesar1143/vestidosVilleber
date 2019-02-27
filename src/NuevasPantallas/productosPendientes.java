@@ -39,66 +39,65 @@ public class productosPendientes extends javax.swing.JFrame {
     DefaultTableModel tablaPendientes, tablaMedidas, tablaClientes;
     //recibimos el frame  de ver pagos
     public static JFrame frameverpagos;
-    
+
     public productosPendientes() {
         tablaPendientes = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; //To change body of generated methods, choose Tools | Templates.
             }
-            
+
         };
-        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave producto",  "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         tablaMedidas = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; //To change body of generated methods, choose Tools | Templates.
             }
-            
+
         };
         tablaMedidas.setColumnIdentifiers(new Object[]{"Id", "Talle", "Sise", "Hombros", "Busto", "Largo falda", "Ancho puño", "Cintura", "Cadera"});
-        
+
         tablaClientes = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; //To change body of generated methods, choose Tools | Templates.
             }
-            
+
         };
-        tablaClientes.setColumnIdentifiers(new Object[]{"id", "Nombre","Teléfono"});
-        
+        tablaClientes.setColumnIdentifiers(new Object[]{"id", "Nombre", "Teléfono"});
+
         initComponents();
-        
-     
-tbClientes.getColumnModel().getColumn(0).setMaxWidth(0);
-tbClientes.getColumnModel().getColumn(0).setMinWidth(0);
-tbClientes.getColumnModel().getColumn(0).setPreferredWidth(0);
-tbClientes.getColumnModel().getColumn(0).setWidth(0);
-tbClientes.getColumnModel().getColumn(1).setPreferredWidth(200);
+        this.setState(MAXIMIZED_BOTH);
+        tbClientes.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbClientes.getColumnModel().getColumn(0).setMinWidth(0);
+        tbClientes.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tbClientes.getColumnModel().getColumn(0).setWidth(0);
+        tbClientes.getColumnModel().getColumn(1).setPreferredWidth(200);
 //tbClientes.getColumnModel().getColumn(2).setMaxWidth(150);
-tbClientes.getColumnModel().getColumn(1).setMinWidth(200);
+        tbClientes.getColumnModel().getColumn(1).setMinWidth(200);
 
 //ocultar columna de tbpendientes
-jTable4.getColumnModel().getColumn(0).setMaxWidth(0);
-jTable4.getColumnModel().getColumn(0).setMinWidth(0);
-jTable4.getColumnModel().getColumn(0).setPreferredWidth(0);
-jTable4.getColumnModel().getColumn(0).setWidth(0);
-jTable4.getColumnModel().getColumn(1).setPreferredWidth(100);
-jTable4.getColumnModel().getColumn(1).setMinWidth(100);
-jTable4.getColumnModel().getColumn(2).setPreferredWidth(200);
-jTable4.getColumnModel().getColumn(2).setMinWidth(200);
+        jTable4.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable4.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable4.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTable4.getColumnModel().getColumn(0).setWidth(0);
+        jTable4.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTable4.getColumnModel().getColumn(1).setMinWidth(100);
+        jTable4.getColumnModel().getColumn(2).setPreferredWidth(200);
+        jTable4.getColumnModel().getColumn(2).setMinWidth(200);
 
 //ocultar columna de tbmedidas
-jTable5.getColumnModel().getColumn(0).setMaxWidth(0);
-jTable5.getColumnModel().getColumn(0).setMinWidth(0);
-jTable5.getColumnModel().getColumn(0).setPreferredWidth(0);
-jTable5.getColumnModel().getColumn(0).setWidth(0);
+        jTable5.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable5.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable5.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTable5.getColumnModel().getColumn(0).setWidth(0);
 
-
-        controlPendientes.llenarTablaClientes(tbClientes, tablaClientes);
+        controlPendientes.llenarTablaClientes(tbClientes, tablaClientes,jTable4,tablaPendientes
+            ,jTable5,tablaMedidas,txtAreaDetalleProductoPendiente,labelFotoPendientes);
         //validar quien esta iniciando sesion 
         if (usuario.equalsIgnoreCase("Mayra")) {
-            
+
         } else {
             btnCancelarPedidoPendientes.setVisible(false);
         }
@@ -106,7 +105,7 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
         validar.soloNumerosYLetras(txtBuscarProductosPendientes);
         //mandamos el frame a pantalla  principal para controlarlo al abrirlo
         principal.frameproductosPendientes = this;
-        this.setState(MAXIMIZED_BOTH);
+
         //====================
         //mandar tabla pendietes aa cambiarEstadoProductosApartados
         cambiarEstadoProductosApartados.tablaPendientes = jTable4;
@@ -114,11 +113,11 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
         cambiarEstadoProductosApartados.defaultTablaPendientes = tablaPendientes;
         //mandar tabla pendientes a cancelar productos apartados
         cancelarProductosApartados.tablaPendientes = jTable4;
-        
+
         cancelarProductosApartados.defaultTablaPendientes = tablaPendientes;
 
         //LLenamos la tabla pendientes
-       // controlPendientes.llenarTablaPendientes(jTable4, tablaPendientes);
+        // controlPendientes.llenarTablaPendientes(jTable4, tablaPendientes);
     }
 
     /**
@@ -416,21 +415,25 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarProductosPendientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosPendientesKeyReleased
-        
+        //limpiamos la tabla pendientes,medidas,txtDescripcion  y label foto
+       
         if (txtBuscarProductosPendientes.getText().isEmpty()) {
-           controlPendientes.llenarTablaClientes(tbClientes, tablaClientes);
+
+            controlPendientes.llenarTablaClientes(tbClientes, tablaClientes,jTable4,tablaPendientes
+            ,jTable5,tablaMedidas,txtAreaDetalleProductoPendiente,labelFotoPendientes);
         } else {
-            controlPendientes.buscarClienteFiltrado(tbClientes,tablaClientes,txtBuscarProductosPendientes);
+            controlPendientes.buscarClienteFiltrado(tbClientes, tablaClientes, txtBuscarProductosPendientes,jTable4,tablaPendientes
+            ,jTable5,tablaMedidas,txtAreaDetalleProductoPendiente,labelFotoPendientes);
         }
     }//GEN-LAST:event_txtBuscarProductosPendientesKeyReleased
 
     private void jTable4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MousePressed
         int fila = jTable4.getSelectedRow();
-        
+
         int valorId = Integer.parseInt(jTable4.getValueAt(fila, 0) + "");
         String valorClave = jTable4.getValueAt(fila, 1) + "";
         byte[] foto;
-        controlPro.consultarImgYmedidas(valorId+"", labelFotoPendientes,jTable5, tablaMedidas, txtAreaDetalleProductoPendiente);
+        controlPro.consultarImgYmedidas(valorId + "", labelFotoPendientes, jTable5, tablaMedidas, txtAreaDetalleProductoPendiente);
         //controlPro.mostrarImagen2(valorClave, labelFotoPendientes);
         //controlPendientes.mostrarMedidasProductos(valorId, jTable5, tablaMedidas, txtAreaDetalleProductoPendiente);
     }//GEN-LAST:event_jTable4MousePressed
@@ -447,14 +450,16 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
             if (principal.controlverPagos == false) {
                 int fila = jTable4.getSelectedRow();
                 String estado = jTable4.getValueAt(fila, 2) + "";
-                System.out.println("estado " + estado);
+
                 if (estado.equalsIgnoreCase("Apartado")) {
-                    int  filaCliente=tbClientes.getSelectedRow();
+                    int filaCliente = tbClientes.getSelectedRow();
                     String idCliente = tbClientes.getValueAt(filaCliente, 0) + "";
-                    
-                   // new controlPagos().mostrarInformacionDeuda(nombre);
-                    verPagos.idCliente=idCliente;
+                    String nombreCliente = tbClientes.getValueAt(filaCliente, 1) + "";
+                    // new controlPagos().mostrarInformacionDeuda(nombre);
+
+                    verPagos.idCliente = idCliente;
                     verPagos verP = new verPagos();
+                    verPagos.txtNombreDelCiente.setText(nombreCliente);
                     verP.setVisible(true);
                     principal.controlverPagos = true;
                 } else {
@@ -474,9 +479,10 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                 principal.frameverPagos.setAlwaysOnTop(true);
                 principal.frameverPagos.setAlwaysOnTop(false);
             }
-            
+
         }
     }//GEN-LAST:event_btnAbonarPagoPendientesActionPerformed
+//para  obtener la deudaTotal 
 
     private void btnEntregarProductoPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregarProductoPendientesActionPerformed
         if (jTable4.getSelectedRow() == -1) {
@@ -489,7 +495,7 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
             if (principal.controlcambiarEstadoProductosApartados == false) {
                 int fila = jTable4.getSelectedRow();
                 String estado = jTable4.getValueAt(fila, 3) + "";
-                
+
                 if (estado.equalsIgnoreCase("Pagado NO entregado")) {
                     String nombre = jTable4.getValueAt(fila, 2) + "";
                     System.out.println("nobre pantalla " + nombre);
@@ -503,7 +509,7 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                     //  JOptionPane.showMessageDialog(null, "El cliente no tiene productos pendientes", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
                 }
-                
+
             } else {
                 mensajeAdvertencia men = new mensajeAdvertencia();
                 mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
@@ -514,7 +520,7 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                 principal.framecambiarEstadoProductosApartados.setAlwaysOnTop(true);
                 principal.framecambiarEstadoProductosApartados.setAlwaysOnTop(false);
             }
-            
+
         }
 
     }//GEN-LAST:event_btnEntregarProductoPendientesActionPerformed
@@ -527,11 +533,11 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
             men.setAlwaysOnTop(true);
             //JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
-            
+
             if (principal.controlcancelarProductosApartados == false) {
                 int fila = jTable4.getSelectedRow();
                 String estado = jTable4.getValueAt(fila, 3) + "";
-                
+
                 if (estado.equalsIgnoreCase("Apartado")) {
                     String nombre = jTable4.getValueAt(fila, 2) + "";
                     System.out.println("nombre cancelar " + nombre);
@@ -554,7 +560,7 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                 principal.framecancelarProductosApartados.setAlwaysOnTop(true);
                 principal.framecancelarProductosApartados.setAlwaysOnTop(false);
             }
-            
+
         }
     }//GEN-LAST:event_btnCancelarPedidoPendientesActionPerformed
 
@@ -586,7 +592,7 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                 String valorClave = jTable4.getValueAt(fila, 1) + "";
                 controlPro.consultaEspecificaParaModificarPendientes(valorClave);
                 editarProducto ep = new editarProducto();
-                
+
                 ep.setVisible(true);
                 principal.controleditarProducto = true;
             } else {
@@ -598,21 +604,22 @@ jTable5.getColumnModel().getColumn(0).setWidth(0);
                 principal.frameeditarProducto.setAlwaysOnTop(true);
                 principal.frameeditarProducto.setAlwaysOnTop(false);
             }
-            
+
         }
     }//GEN-LAST:event_btnEditarProProductosActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        controlPendientes.llenarTablaClientes(tbClientes, tablaClientes);
+        controlPendientes.llenarTablaClientes(tbClientes, tablaClientes,jTable4,tablaPendientes
+            ,jTable5,tablaMedidas,txtAreaDetalleProductoPendiente,labelFotoPendientes);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void tbClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbClientesKeyPressed
-      
+
     }//GEN-LAST:event_tbClientesKeyPressed
 
     private void tbClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMousePressed
-        controlPendientes.llenarTablaPendientesNew(jTable4, tablaPendientes, tbClientes, tablaClientes,jTable5, tablaMedidas,txtAreaDetalleProductoPendiente);
-        
+        controlPendientes.llenarTablaPendientesNew(jTable4, tablaPendientes, tbClientes, tablaClientes, jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
+
     }//GEN-LAST:event_tbClientesMousePressed
 
     /**

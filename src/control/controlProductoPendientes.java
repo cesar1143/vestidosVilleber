@@ -86,36 +86,40 @@ public class controlProductoPendientes {
         }
 
     }
-    public void llenarTablaPendientesNew( JTable tablaPendientes,DefaultTableModel modelTablaPendientes,
-            JTable tablaClientes,DefaultTableModel modelTablaClientes,
-             JTable tablaMedidas,DefaultTableModel modelMedidas,JTextArea txtDescripcion){
-        if (tablaMedidas.getRowCount()>0) {
+
+    public void llenarTablaPendientesNew(JTable tablaPendientes, DefaultTableModel modelTablaPendientes,
+            JTable tablaClientes, DefaultTableModel modelTablaClientes,
+            JTable tablaMedidas, DefaultTableModel modelMedidas, JTextArea txtDescripcion, JLabel labelFoto) {
+        if (tablaMedidas.getRowCount() > 0) {
             vaciarTabla(tablaMedidas, modelMedidas);
-        }else{
-            
+        } else {
+
         }
+        //limpiamos el campo descripcion y foto
         txtDescripcion.setText("");
-       int fila=tablaClientes.getSelectedRow();
-        String idCliente=modelTablaClientes.getValueAt(fila, 0)+"";
-       
-         List<Productosapartados> lista=daoApartados.llenarTablaPendientesNew(idCliente);
-       
-         if (lista.size()>0) {
-             vaciarTabla(tablaPendientes, modelTablaPendientes);
-             
-             for (int i = 0; i < lista.size(); i++) {
-                   modelTablaPendientes.addRow(new Object[]{
-                   lista.get(i).getIdproductosapartados()
-                   ,lista.get(i).getClave()
-                   ,lista.get(i).getStatus().toUpperCase()
-                   ,lista.get(i).getCantidadVenta()
-                   ,lista.get(i).getFechaPrueba()      
-                   ,lista.get(i).getFechaEvento()});
-             }
-           
-        }else{
-             
-         }
+        labelFoto.setText("");
+        labelFoto.setIcon(null);
+        int fila = tablaClientes.getSelectedRow();
+        String idCliente = modelTablaClientes.getValueAt(fila, 0) + "";
+
+        List<Productosapartados> lista = daoApartados.llenarTablaPendientesNew(idCliente);
+
+        if (lista.size() > 0) {
+            vaciarTabla(tablaPendientes, modelTablaPendientes);
+
+            for (int i = 0; i < lista.size(); i++) {
+                modelTablaPendientes.addRow(new Object[]{
+                    lista.get(i).getIdproductosapartados(),
+                    lista.get(i).getClave(),
+                    lista.get(i).getStatus().toUpperCase(),
+                    lista.get(i).getCantidadVenta(),
+                    lista.get(i).getFechaPrueba(),
+                    lista.get(i).getFechaEvento()});
+            }
+
+        } else {
+
+        }
     }
 
     public List<Productosapartados> consultarTodos() {
@@ -221,13 +225,24 @@ public class controlProductoPendientes {
         }
     }
 
-    public void buscarClienteFiltrado(JTable tablaClientes,DefaultTableModel modelTablaClientes,JTextField txtNombre) {
-      
+    public void buscarClienteFiltrado(JTable tablaClientes, DefaultTableModel modelTablaClientes, JTextField txtNombre,
+            JTable tablaPen, DefaultTableModel modelPendientes, JTable tablaMe, DefaultTableModel modelMe, JTextArea txtDesc,
+            JLabel labelFoto) {
+        //limpimaos campos
+        if (tablaPen.getRowCount() > 0) {
+            vaciarTabla(tablaPen, modelPendientes);
+        }
+        if (tablaMe.getRowCount() > 0) {
+            vaciarTabla(tablaMe, modelMe);
+        }
+        txtDesc.setText("");
+        labelFoto.setText("");
+        labelFoto.setIcon(null);
         List<Clientes> lista = daoApartados.buscarClienteFiltrado(txtNombre.getText());
         if (lista.size() > 0) {
             vaciarTabla(tablaClientes, modelTablaClientes);
             for (int i = 0; i < lista.size(); i++) {
-                modelTablaClientes.addRow(new Object[]{lista.get(i).getIdclientes(), lista.get(i).getNombrecompleto(), lista.get(i).getTelefono()});
+                modelTablaClientes.addRow(new Object[]{lista.get(i).getIdclientes(), lista.get(i).getNombrecompleto().toUpperCase(), lista.get(i).getTelefono()});
 
             }
         } else {
@@ -765,10 +780,21 @@ public class controlProductoPendientes {
     }
     //estos clientes son los que tienen deuda  y pomner un estatus si esta persona ya paso un año su deuda
 
-    public void llenarTablaClientes(JTable tbCliente, DefaultTableModel tablaClientesModel) {
-
+    public void llenarTablaClientes(JTable tbCliente, DefaultTableModel tablaClientesModel,
+            JTable tablaPen, DefaultTableModel modelPendientes, JTable tablaMe, DefaultTableModel modelMe, JTextArea txtDesc,
+            JLabel labelFoto) {
+        //limpimaos campos
+        if (tablaPen.getRowCount() > 0) {
+            vaciarTabla(tablaPen, modelPendientes);
+        }
+        if (tablaMe.getRowCount() > 0) {
+            vaciarTabla(tablaMe, modelMe);
+        }
+        txtDesc.setText("");
+        labelFoto.setText("");
+        labelFoto.setIcon(null);
         List<Clientes> lista = daoApartados.consultarClienteConDeuda();
-        
+
         if (lista.size() > 0) {
             vaciarTabla(tbCliente, tablaClientesModel);
             for (int i = 0; i < lista.size(); i++) {
@@ -780,4 +806,5 @@ public class controlProductoPendientes {
         }
 
     }
+
 }

@@ -291,15 +291,24 @@ public class controlPagos {
     }
 //*********************** metodos nuevos cesar 2019 ********************************************
 
-    public void mostrarPagosyabonos(String idCliente,JTable tablaPagos,DefaultTableModel modelPagos) {
+    public void mostrarPagosyabonos(String idCliente,JTable tablaPagos,DefaultTableModel modelPagos,
+            JTextField txtDeuda,JTextField txtRestan) {
         List<Clientes>lista=daoP.mostrarPagosyabonos(idCliente);
         if (lista.size()>0) {
+            String deuda="";
+            int restan=0;
             for (int i = 0; i <  lista.size(); i++) {
                 modelPagos.addRow(new Object[]{lista.get(i).getPagos().getIdpagos(),
                 lista.get(i).getPagos().getAbono(),
                 lista.get(i).getPagos().getFecharegistro(),
                 lista.get(i).getUsuarios().getNombre()});
+                deuda=lista.get(i).getDeudatotal().getDeudatotal()+"";
+                restan=restan+lista.get(i).getPagos().getAbono();
             }
+            restan=Integer.parseInt(deuda)-restan;
+            txtDeuda.setText(deuda);
+            txtRestan.setText(restan+"");
+            
         }else{
             
         }

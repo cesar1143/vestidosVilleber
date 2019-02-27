@@ -126,7 +126,6 @@ public class daoPagos implements metodosDao {
     }
 
     //*******       metoodos nuevos cesar 2019 ***********************************
- 
     public List<Clientes> mostrarPagosyabonos(String idCliente) {
         List<Clientes> lista = new ArrayList<Clientes>();
         try {
@@ -137,28 +136,20 @@ public class daoPagos implements metodosDao {
             List<Object[]> listaRes2 = hqlDeuda.list();
             if (listaRes2.size() > 0) {
                 for (int j = 0; j < listaRes2.size(); j++) {
-                    
+
                     String idDeuda = listaRes2.get(j)[0] + "";
                     String deuda = listaRes2.get(j)[1] + "";
                     String status = listaRes2.get(j)[2] + "";
                     String fechaRegistro = listaRes2.get(j)[3] + "";
-                    Deudatotal deu = new Deudatotal();
-                    deu.setIddeudatotal(Integer.parseInt(idDeuda));
-                    deu.setDeudatotal(Integer.parseInt(deuda));
-                    deu.setStatus(status);
-                    deu.setFecharegistro(fechaRegistro);
-                 
-                   
+
                     //obtenemos los pagos
-                    
-                   
                     Query hqlPagos = session.createQuery("select p.idpagos,p.abono,p.fecharegistro,u.nombre from Pagos as p inner join p.deudatotal as d inner join p.usuarios  as u where d.iddeudatotal='" + idDeuda + "'");
                     List<Object[]> listaPagos = hqlPagos.list();
-               
+
                     for (int k = 0; k < listaPagos.size(); k++) {
-                         Clientes bean = new Clientes();
+                        Clientes bean = new Clientes();
                         String idPagos = listaPagos.get(k)[0] + "";
-                       
+
                         String abono = listaPagos.get(k)[1] + "";
                         String fecha = listaPagos.get(k)[2] + "";
                         String nombreusu = listaPagos.get(k)[3] + "";
@@ -170,10 +161,16 @@ public class daoPagos implements metodosDao {
                         Usuarios u = new Usuarios();
                         u.setNombre(nombreusu);
                         bean.setUsuarios(u);
+                        //para la deuda
+                        Deudatotal deu = new Deudatotal();
+                        deu.setIddeudatotal(Integer.parseInt(idDeuda));
+                        deu.setDeudatotal(Integer.parseInt(deuda));
+                        deu.setStatus(status);
+                        deu.setFecharegistro(fechaRegistro);
+                        bean.setDeudatotal(deu);
                         lista.add(bean);
 
                     }
-                     
 
                 }
             } else {
@@ -193,5 +190,4 @@ public class daoPagos implements metodosDao {
         return lista;
     }
 
-   
 }
