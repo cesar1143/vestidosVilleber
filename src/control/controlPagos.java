@@ -291,28 +291,180 @@ public class controlPagos {
     }
 //*********************** metodos nuevos cesar 2019 ********************************************
 
-    public void mostrarPagosyabonos(String idCliente,JTable tablaPagos,DefaultTableModel modelPagos,
-            JTextField txtDeuda,JTextField txtRestan) {
-        List<Clientes>lista=daoP.mostrarPagosyabonos(idCliente);
-        if (lista.size()>0) {
-            String deuda="";
-            int restan=0;
-            for (int i = 0; i <  lista.size(); i++) {
+    public void mostrarPagosyabonos(String idCliente, JTable tablaPagos, DefaultTableModel modelPagos,
+            JTextField txtDeuda, JTextField txtRestan) {
+        List<Clientes> lista = daoP.mostrarPagosyabonos(idCliente);
+        if (lista.size() > 0) {
+            String deuda = "";
+            int restan = 0;
+            for (int i = 0; i < lista.size(); i++) {
                 modelPagos.addRow(new Object[]{lista.get(i).getPagos().getIdpagos(),
-                lista.get(i).getPagos().getAbono(),
-                lista.get(i).getPagos().getFecharegistro(),
-                lista.get(i).getUsuarios().getNombre()});
-                deuda=lista.get(i).getDeudatotal().getDeudatotal()+"";
-                restan=restan+lista.get(i).getPagos().getAbono();
+                    lista.get(i).getPagos().getAbono(),
+                    lista.get(i).getPagos().getFecharegistro(),
+                    lista.get(i).getUsuarios().getNombre()});
+                deuda = lista.get(i).getDeudatotal().getDeudatotal() + "";
+                restan = restan + lista.get(i).getPagos().getAbono();
             }
-            restan=Integer.parseInt(deuda)-restan;
+            restan = Integer.parseInt(deuda) - restan;
             txtDeuda.setText(deuda);
-            txtRestan.setText(restan+"");
-            
-        }else{
-            
+            txtRestan.setText(restan + "");
+
+        } else {
+
+        }
+
+    }
+//*********************************** nuevos metodo cesar 2019  ***************************************
+    //al registrar  el abono debemos de ver si ya es el ultimo pago   
+
+    public void registrarAbono(JTextField txtAbono, JTextField txtEfectivoRecibido, JTextField txtCambio, JTextField txtDeuda, JTextField txtResta,
+            String nombreCliente, JTable tablaPagos, DefaultTableModel defaultTablaPagos, String idUsuario, JFrame frame) {
+        if (validar.validarCampos(txtAbono)) {
+            if (validar.validarCampos(txtEfectivoRecibido)) {
+                if (Integer.parseInt(txtAbono.getText()) <= Integer.parseInt(txtResta.getText())) {
+                    if (Integer.parseInt(txtAbono.getText()) <= Integer.parseInt(txtEfectivoRecibido.getText())) {
+                        Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(nombreCliente);
+                        Usuarios benaUsuario = (Usuarios) new daoUsuarios().consultaEspecifica(idUsuario);
+                        if (beanCliente != null) {
+                            //mandamos el bean a ver pagos
+                            Set<Deudatotal> listaDeuda = beanCliente.getDeudatotals();
+                            if (listaDeuda.size() > 0) {
+                                for (Deudatotal deudatotal : listaDeuda) {
+                                    if (deudatotal.getStatus().equals("No pagado")) {
+                                        //aqui llenamos el bean pago ya que ya tenemos la deuda
+                                        Pagos beanPagos = new Pagos();
+                                        beanPagos.setDeudatotal(deudatotal);
+                                        beanPagos.setUsuarios(benaUsuario);
+                                        beanPagos.setAbono(Integer.parseInt(txtAbono.getText()));
+                                        beanPagos.setFecharegistro(validar.obtenerFechaActual());
+                                        if (daoP.registrar(beanPagos)) {
+                                            mensajeExito menExito = new mensajeExito();
+                                            mensajeExito.labelMensaje.setText("El abono se registro correctamente");
+                                            menExito.setVisible(true);
+                                            menExito.setAlwaysOnTop(true);
+
+                                            //JOptionPane.showMessageDialog(null, "El abono se registro correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                                            //en cuanto se registre actualizamos la tabla pagos y el resto
+                                            vaciarTabla(tablaPagos, defaultTablaPagos);
+                                            validar.limpiarCampos(txtAbono);
+                                            validar.limpiarCampos(txtEfectivoRecibido);
+                                            validar.limpiarCampos(txtCambio);
+                                            Deudatotal beanDeuda = (Deudatotal) new daoDeudaTotal().consultaEspecifica(deudatotal.getIddeudatotal() + "");
+                                            System.out.println("id deuda " + beanDeuda.getIddeudatotal());
+                                            Set<Pagos> listaPagos = beanDeuda.getPagoses();
+                                            int sumaPagos = 0;
+                                            for (Pagos listaPago : listaPagos) {
+
+                                                sumaPagos = sumaPagos + listaPago.getAbono();
+
+                                                defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
+                                            }
+                                            int restante = Integer.parseInt(txtDeuda.getText()) - sumaPagos;
+                                            txtResta.setText(restante + "");
+
+                                            //vamos a verificar si con el abono registrado ya se cubrio  la deuda
+                                            //para cambiar el estado de los productos a pagado entregregado o pagado no entregado
+                                            //y tambien cambiar el estado de la deuda a pagado y actualizamos la tabla pendientes
+                                            //la  tabla pagos
+                                            if (Integer.parseInt(txtDeuda.getText()) == sumaPagos) {
+                                                //quiere decirque se acubierto la deuda
+
+                                                mensajeExito.labelMensaje.setText("La deuda se ha cubierto completamente");
+                                                menExito.setVisible(true);
+                                                menExito.setAlwaysOnTop(true);
+
+                                                //JOptionPane.showMessageDialog(null, "La deuda se ha cubierto completamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                                                System.out.println("se cubrio la deuda");
+                                                //hacemos el cambio de estado de los productos apartados
+
+                                                //modificaremos el estado de la deuda total
+                                                beanDeuda.setFecharegistro(validar.obtenerFechaActual());
+                                                beanDeuda.setStatus("Pagado");
+                                                if (new daoDeudaTotal().editar(beanDeuda)) {
+                                                    cambiarEstadoProductosApartados.beanCliente = beanCliente;
+                                                    principal.controlverPagos = false;
+                                                    frame.dispose();
+
+                                                    cambiarEstadoProductosApartados cambiar = new cambiarEstadoProductosApartados();
+                                                    cambiar.setVisible(true);
+                                                } else {
+                                                    System.out.println("fallo al modificar el estado de la deuda");
+                                                }
+
+                                            } else {
+
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+
+                        } else {
+
+                        }
+                    } else {
+                        txtAbono.requestFocus();
+                        mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                        mensajeAdvertencia.labelMensaje.setText("Ingresa un abono menor");
+                        menAdvertencia.setVisible(true);
+                        menAdvertencia.setAlwaysOnTop(true);
+                        //  JOptionPane.showMessageDialog(null, "Ingresa un abono menor, al efectivo Recibido");
+                    }
+
+                } else {
+                    txtAbono.requestFocus();
+                    mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ingresa un abono menor al restante de la deuda");
+                    menAdvertencia.setVisible(true);
+                    menAdvertencia.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ingresa un abono menor al restante de la deuda ");
+                }
+
+            }
+
         }
 
     }
 
+    public void registrarAbono2(JTextField txtAbono, JTextField txtEfectivoRecibido, JTextField txtCambio,
+            JTextField txtDeuda, JTextField txtResta, String nombreCliente, JTable tablaPagos,
+            DefaultTableModel defaultTablaPagos, String idUsuario, JFrame frame,String idCliente) {
+        if (validar.validarCampos(txtAbono)) {
+            if (validar.validarCampos(txtEfectivoRecibido)) {
+                int abono = Integer.parseInt(txtAbono.getText());
+                int efectivoRecibido = Integer.parseInt(txtEfectivoRecibido.getText());
+                int deudaRestante = Integer.parseInt(txtResta.getText());
+
+                //vemos si el abono ingresado cubre la deuda
+                if (abono == deudaRestante) {
+                    //si  es  igual se registra el abono,se cambia el estatus de de la deuda a pagado y cambiamos el
+                    //estatus de los productos y se actualizan los campos de  restan y deuda total
+                } else if (abono > deudaRestante) {
+                    mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ingresa un abono menor");
+                    menAdvertencia.setVisible(true);
+                    menAdvertencia.setAlwaysOnTop(true);
+                } else if(abono<deudaRestante){
+                    //si el abono el menor a lo que se debe solo registrmos el abono y actualizamos los campos de resta 0
+                    registrarSoloAbono(idCliente, abono);
+                }
+
+            }
+
+        }
+
+    }
+
+    public void registrarSoloAbono(String idCliente, int abono) {
+        System.out.println("idClientes " + idCliente);
+        if (daoP.registrarSoloAbono2(idCliente, abono)) {
+            mensajeExito exito = new mensajeExito();
+            mensajeExito.labelMensaje.setText("Registro Exitoso!");
+            exito.setVisible(true);
+            exito.setAlwaysOnTop(true);
+        } else {
+
+        }
+    }
 }

@@ -472,8 +472,10 @@ public class verPagos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controlP.registrar(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan, txtNombreDelCiente.getText(),
-                jTable1, tablaPagos, principal.idUsuario + "", this);
+        /*controlP.registrar(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
+        txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.idUsuario + "", this);*/
+        controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan, 
+                txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.usuario+"", this, idCliente);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
