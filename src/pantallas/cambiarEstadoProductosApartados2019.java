@@ -6,6 +6,8 @@
 package pantallas;
 
 import NuevasPantallas.principal;
+import NuevasPantallas.productosPendientes;
+import static NuevasPantallas.productosPendientes.jTable4;
 import beans.Clientes;
 import beans.Deudatotal;
 import beans.Fechaspruebas;
@@ -14,29 +16,39 @@ import beans.Productosapartados;
 import control.controlProductoPendientes;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import mensajes.mensajeAdvertencia;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import static pantallas.verPagos.beanClientes;
+import util.NewHibernateUtil;
 
 /**
  *
  * @author famsa
  */
-public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
+public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
 //para el frame
+
     int x = 0, y = 0;
     /**
      * Creates new form cambiarEstadoProductosApartados
      */
     DefaultTableModel tablaCambioEstado;
-    public static Clientes beanCliente;
-    public static Clientes beanCliente2;//se utilizara para productos pagados no entregados
-    public static JTable tablaPendientes = new JTable();
+    public static String idCliente = "";//biene de metodo controlPagos registrarSoloAbonoYcambiarEstatusProductos();
+    public static JTable tablaPendientes = new JTable();//lo mandamos desde productos apartados jframe
     public static DefaultTableModel defaultTablaPendientes = new DefaultTableModel();
 
-    public cambiarEstadoProductosApartados() {
+    public cambiarEstadoProductosApartados2019() {
         tablaCambioEstado = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -44,73 +56,43 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
             }
 
         };
-        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Nombre cliente", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         initComponents();
+        //ocultamos el id
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        jTable1.getColumnModel().getColumn(0).setWidth(0);
+
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+        jTable1.getColumnModel().getColumn(2).setMinWidth(200);
+
         this.setLocationRelativeTo(null);
         principalUsuarios.framecambiarEstadoProductosApartados = this;
         principal.framecambiarEstadoProductosApartados = this;
-        if (beanCliente != null) {
-            Set<Productosapartados> listaProApartados = beanCliente.getProductosapartadoses();
-            if (listaProApartados.size() > 0) {
+        llenarTablaCambioEstadoPro();
+    }
 
-                for (Productosapartados listaProApartado : listaProApartados) {
-                    if (listaProApartado.getStatus().equals("Apartado")) {
-                        //llenamos la tabla
-                        Set<Fechaspruebas> listaFechas = listaProApartado.getFechaspruebases();
-                        Fechaspruebas beanFechas = null;
-                        if (listaFechas.size() > 0) {
-                            for (Fechaspruebas listaFecha : listaFechas) {
-                                tablaCambioEstado.addRow(new Object[]{listaProApartado.getIdproductosapartados(), listaProApartado.getProductos().getClave(),
-                                    listaProApartado.getClientes().getNombrecompleto(), listaProApartado.getStatus(), listaProApartado.getCantidadVenta(), listaFecha.getFechaprueba(),
-                                    listaFecha.getFechaevento()});
-                            }
+    public void llenarTablaCambioEstadoPro() {
 
-                        } else {
-                            tablaCambioEstado.addRow(new Object[]{listaProApartado.getIdproductosapartados(), listaProApartado.getProductos().getClave(),
-                                listaProApartado.getClientes().getNombrecompleto(), listaProApartado.getStatus(), listaProApartado.getCantidadVenta(), "Sin Fechas",
-                                "Sin Fechas"});
-                        }
-                    }
-                }
-            } else {
-
-            }
-
-        } else {
-
-            if (beanCliente2 != null) {
-
-                Set<Productosapartados> listaProApartados = beanCliente2.getProductosapartadoses();
-                if (listaProApartados.size() > 0) {
-
-                    for (Productosapartados listaProApartado : listaProApartados) {
-                        if (listaProApartado.getStatus().equalsIgnoreCase("Pagado no entregado")) {
-                            //llenamos la tabla
-                            Set<Fechaspruebas> listaFechas = listaProApartado.getFechaspruebases();
-                            Fechaspruebas beanFechas = null;
-                            if (listaFechas.size() > 0) {
-                                for (Fechaspruebas listaFecha : listaFechas) {
-                                    tablaCambioEstado.addRow(new Object[]{listaProApartado.getIdproductosapartados(), listaProApartado.getProductos().getClave(),
-                                        listaProApartado.getClientes().getNombrecompleto(), listaProApartado.getStatus(), listaProApartado.getCantidadVenta(), listaFecha.getFechaprueba(),
-                                        listaFecha.getFechaevento()});
-                                }
-
-                            } else {
-                                tablaCambioEstado.addRow(new Object[]{listaProApartado.getIdproductosapartados(), listaProApartado.getProductos().getClave(),
-                                    listaProApartado.getClientes().getNombrecompleto(), listaProApartado.getStatus(), listaProApartado.getCantidadVenta(), "Sin Fechas",
-                                    "Sin Fechas"});
-                            }
-                        }
-                    }
-                } else {
+        defaultTablaPendientes = productosPendientes.tablaPendientes;
+        for (int i = 0; i < defaultTablaPendientes.getRowCount(); i++) {
+            String id = defaultTablaPendientes.getValueAt(i, 0) + "";
+            String clave = defaultTablaPendientes.getValueAt(i, 1) + "";
+            String estado = defaultTablaPendientes.getValueAt(i, 2) + "";
+            String cantidad = defaultTablaPendientes.getValueAt(i, 3) + "";
+            String fechaPrueba = defaultTablaPendientes.getValueAt(i, 4) + "";
+            String fechaEvento = defaultTablaPendientes.getValueAt(i, 5) + "";
+        
+                if (estado.equalsIgnoreCase("apartado")) {
+                    tablaCambioEstado.addRow(new Object[]{id, clave, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
 
                 }
-
-            } else {
-
-            }
+            
 
         }
+
     }
 
     /**
@@ -132,9 +114,8 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -221,21 +202,13 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Entregar productos");
+        jLabel10.setText("Cambio de estado de productos");
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
-            }
-        });
-
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel15MouseClicked(evt);
             }
         });
 
@@ -248,9 +221,7 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel15)
-                .addGap(13, 13, 13))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +229,6 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel15)
                     .addComponent(jLabel11))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -313,40 +283,37 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
 
     private void btnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosActionPerformed
         //descpues de cambiar los estado tenemos que actualizar la tabla pendientes y cerrar esta ventana
-        new controlProductoPendientes().btncambiarEstadoProductosTodos(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes);
+        new controlProductoPendientes().btncambiarEstadoProductosTodo2(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
 
     }//GEN-LAST:event_btnTodosActionPerformed
 
     private void btnUnoPorUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoPorUnoActionPerformed
-        new controlProductoPendientes().btncambiarEstadoProductosUnoPorUno(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes);
+        new controlProductoPendientes().btncambiarEstadoProductosUnoPorUno2(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
     }//GEN-LAST:event_btnUnoPorUnoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         principal1.controlcambiarEstadoProductosApartados = false;
-          principalUsuarios.controlcambiarEstadoProductosApartados = false;
+        principalUsuarios.controlcambiarEstadoProductosApartados = false;
+        principal.controlcambiarEstadoProductosEntregadosNoPagados2019=false;
+      
     }//GEN-LAST:event_formWindowClosing
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         this.setState(ICONIFIED);
     }//GEN-LAST:event_jLabel11MouseClicked
 
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        principal.controlcambiarEstadoProductosApartados=false;
-        dispose();
-    }//GEN-LAST:event_jLabel15MouseClicked
-
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-       
+
 
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-    x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
@@ -367,20 +334,21 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados2019.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados2019.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados2019.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cambiarEstadoProductosApartados2019.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new cambiarEstadoProductosApartados().setVisible(true);
+                new cambiarEstadoProductosApartados2019().setVisible(true);
             }
         });
     }
@@ -390,7 +358,6 @@ public class cambiarEstadoProductosApartados extends javax.swing.JFrame {
     private javax.swing.JButton btnUnoPorUno;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

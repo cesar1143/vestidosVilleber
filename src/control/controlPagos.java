@@ -25,6 +25,7 @@ import modelo.daoDeudaTotal;
 import modelo.daoPagos;
 import modelo.daoUsuarios;
 import pantallas.cambiarEstadoProductosApartados;
+import pantallas.cambiarEstadoProductosApartados2019;
 import pantallas.verPagos;
 import pantallas.verPagos2;
 import validaciones.validarCampos;
@@ -304,7 +305,9 @@ public class controlPagos {
                     lista.get(i).getUsuarios().getNombre()});
                 deuda = lista.get(i).getDeudatotal().getDeudatotal() + "";
                 restan = restan + lista.get(i).getPagos().getAbono();
+
             }
+            verPagos.idDeuda = lista.get(0).getDeudatotal().getIddeudatotal() + "";
             restan = Integer.parseInt(deuda) - restan;
             txtDeuda.setText(deuda);
             txtRestan.setText(restan + "");
@@ -429,7 +432,7 @@ public class controlPagos {
 
     public void registrarAbono2(JTextField txtAbono, JTextField txtEfectivoRecibido, JTextField txtCambio,
             JTextField txtDeuda, JTextField txtResta, String nombreCliente, JTable tablaPagos,
-            DefaultTableModel defaultTablaPagos, String idUsuario, JFrame frame,String idCliente) {
+            DefaultTableModel defaultTablaPagos, String idUsuario, JFrame frame, String idCliente) {
         if (validar.validarCampos(txtAbono)) {
             if (validar.validarCampos(txtEfectivoRecibido)) {
                 int abono = Integer.parseInt(txtAbono.getText());
@@ -438,16 +441,37 @@ public class controlPagos {
 
                 //vemos si el abono ingresado cubre la deuda
                 if (abono == deudaRestante) {
+
                     //si  es  igual se registra el abono,se cambia el estatus de de la deuda a pagado y cambiamos el
                     //estatus de los productos y se actualizan los campos de  restan y deuda total
+                    if (registrarSoloAbonoYcambiarEstatusProductos(idCliente, abono, defaultTablaPagos)) {
+                        //recalculamos el resto
+                        deudaRestante = deudaRestante - abono;
+                        txtResta.setText(deudaRestante + "");
+                        txtAbono.setText("");
+                        txtEfectivoRecibido.setText("");
+                        txtCambio.setText("");
+                        frame.dispose();
+                        principal.controlverPagos = false;
+                    }
                 } else if (abono > deudaRestante) {
                     mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                     mensajeAdvertencia.labelMensaje.setText("Ingresa un abono menor");
                     menAdvertencia.setVisible(true);
                     menAdvertencia.setAlwaysOnTop(true);
-                } else if(abono<deudaRestante){
+                } else if (abono < deudaRestante) {
                     //si el abono el menor a lo que se debe solo registrmos el abono y actualizamos los campos de resta 0
-                    registrarSoloAbono(idCliente, abono);
+                    if (registrarSoloAbono(idCliente, abono, defaultTablaPagos)) {
+                        //recalculamos el resto
+                        deudaRestante = deudaRestante - abono;
+                        txtResta.setText(deudaRestante + "");
+                        txtAbono.setText("");
+                        txtEfectivoRecibido.setText("");
+                        txtCambio.setText("");
+                    } else {
+
+                    }
+
                 }
 
             }
@@ -456,15 +480,155 @@ public class controlPagos {
 
     }
 
-    public void registrarSoloAbono(String idCliente, int abono) {
+    public boolean registrarSoloAbono(String idCliente, int abono, DefaultTableModel defaultTablaPagos) {
+        boolean ban = false;
         System.out.println("idClientes " + idCliente);
-        if (daoP.registrarSoloAbono2(idCliente, abono)) {
+        if (daoP.registrarSoloAbono2(idCliente, abono, defaultTablaPagos)) {
             mensajeExito exito = new mensajeExito();
             mensajeExito.labelMensaje.setText("Registro Exitoso!");
             exito.setVisible(true);
             exito.setAlwaysOnTop(true);
+            ban = true;
         } else {
 
         }
+
+        return ban;
+    }
+
+    public boolean registrarSoloAbonoYcambiarEstatusProductos(String idCliente, int abono, DefaultTableModel defaultTablaPagos) {
+        boolean ban = false;
+   
+        if (daoP.registrarSoloAbonoYcambiarEstatusProductos(idCliente, abono, defaultTablaPagos)) {
+
+            mensajeExito exito = new mensajeExito();
+            mensajeExito.labelMensaje.setText("Ultimo abono registrado correctamente!");
+            exito.setVisible(true);
+            exito.setAlwaysOnTop(true);
+            //para cambiar el estatus de  los productos apartados y cambiar el  estatus de deuda total
+        
+            cambiarEstadoProductosApartados2019 c = new cambiarEstadoProductosApartados2019();
+            cambiarEstadoProductosApartados2019.idCliente = idCliente;
+
+            c.setVisible(true);
+            ban = true;
+        } else {
+
+        }
+
+        return ban;
+    }
+
+    public void editar2019(JTable tablaPagos, DefaultTableModel defaultTablaPagos,
+            String nombreCliente, JTextField txtDeuda, JTextField txtResta, JFrame frame, String idCliente,
+             String idDeuda) {
+        int fila = tablaPagos.getSelectedRow();
+        int valorId = Integer.parseInt(tablaPagos.getValueAt(fila, 0) + "");
+        int deuda = Integer.parseInt(txtDeuda.getText());
+        int resta = Integer.parseInt(txtResta.getText());
+        int valorAbono = Integer.parseInt(tablaPagos.getValueAt(fila, 1) + "");
+
+        try {
+            int abono = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el nuevo abono"));
+            resta = resta + valorAbono;
+            if (resta < abono) {
+                mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Ingresa un abono menor");
+                menAdvertencia.setVisible(true);
+                menAdvertencia.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "El abono es mayor a la deuda ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (resta == abono) {
+                System.out.println("idDeuda " + idDeuda);
+                //se edita el  pago se cambia el  estatus de la deuda y cambiamos el estado de los productos
+                if (daoP.editar2019(valorId + "", abono + "")) {
+                    daoP.editarStatusDeuda2019(idDeuda);
+                    tablaPagos.setValueAt(abono, fila, 1);
+                    int nuevaResta = deuda - sumaPagos(defaultTablaPagos);
+
+                    txtResta.setText(nuevaResta + "");
+                    mensajeExito menExito = new mensajeExito();
+                    mensajeExito.labelMensaje.setText("El ultimo abono se modifico correctamente");
+                    menExito.setVisible(true);
+                    menExito.setAlwaysOnTop(true);
+                    frame.dispose();
+                    principal.controlverPagos = false;
+               
+                    cambiarEstadoProductosApartados2019.idCliente = idCliente;
+                    cambiarEstadoProductosApartados2019 c = new cambiarEstadoProductosApartados2019();
+
+                    c.setVisible(true);
+
+                } else {
+
+                }
+
+            } else if (abono < resta) {
+
+                if (daoP.editar2019(valorId + "", abono + "")) {
+                    mensajeExito menExito = new mensajeExito();
+                    mensajeExito.labelMensaje.setText("El abono se modifico correctamente");
+                    menExito.setVisible(true);
+                    menExito.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "El abono se modifico correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    //cambiamos el abono en la tabla  de apagos y recalcular cuanto resta
+                    //pintamos  el  nuevo abono
+                    tablaPagos.setValueAt(abono, fila, 1);
+
+                    int nuevaResta = deuda - sumaPagos(defaultTablaPagos);
+                    txtResta.setText(nuevaResta + "");
+                }
+            } else {
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al modificar el abono " + e.getMessage());
+        }
+
+    }
+
+    public void eliminar2019(JTable tablaPagos, DefaultTableModel defaultTablaPagos,
+            String nombreCliente, JTextField txtDeuda, JTextField txtResta, JFrame frame, String idCliente) {
+        int fila = tablaPagos.getSelectedRow();
+        int valorId = Integer.parseInt(tablaPagos.getValueAt(fila, 0) + "");
+        int deuda = Integer.parseInt(txtDeuda.getText());
+        int resta = Integer.parseInt(txtResta.getText());
+        try {
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta  seguro de eliminar  el pago ?");
+            if (respuesta == 0) {
+                if (daoP.eliminar2109(valorId + "")) {
+                    mensajeExito menExito = new mensajeExito();
+                    mensajeExito.labelMensaje.setText("Eliminado corretamente correctamente");
+                    menExito.setVisible(true);
+                    menExito.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "El abono se modifico correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    //cambiamos el abono en la tabla  de apagos y recalcular cuanto resta
+                    //pintamos  el  nuevo abono
+                    defaultTablaPagos.removeRow(fila);
+                    int nuevaResta = deuda - sumaPagos(defaultTablaPagos);
+                    txtResta.setText(nuevaResta + "");
+                }
+            } else {
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al eliminar el abono " + e.getMessage());
+        }
+
+    }
+
+    public int sumaPagos(DefaultTableModel tabla) {
+        int sumPagos = 0;
+        if (tabla.getRowCount() > 0) {
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+                int abono = Integer.parseInt(tabla.getValueAt(i, 1) + "");
+                sumPagos += abono;
+            }
+        } else {
+
+        }
+
+        return sumPagos;
     }
 }

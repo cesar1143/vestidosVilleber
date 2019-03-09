@@ -54,6 +54,7 @@ import validaciones.validarCampos;
  */
 public class controlProductos {
 
+    byte[] fotoGlobal = null;
     daoProductos dao = new daoProductos();
     validarCampos validar = new validarCampos();
     Productos beanGlobal = new Productos();
@@ -83,34 +84,28 @@ public class controlProductos {
                             Productos bean = new Productos();
                             bean.setClave(clave.getText());
                             //System.out.println("clave bean " + bean.getClave());
-                            bean.setNombre(nombre.getText());
+                            bean.setNombre(nombre.getText().toUpperCase());
                             bean.setPrecio(Integer.parseInt(precio.getText()));
                             bean.setColor(color.getText());
                             bean.setTipo(tipo);
                             bean.setCantidad(Integer.parseInt(cantidad.getText()));
-                            bean.setDescripcion(desc);
+                            bean.setDescripcion(desc.toUpperCase());
 
                             bean.setFotoString(String.valueOf(file));
                             //VALIDAMOS SI EL PRODUCTO YA ESTA REGISTRADO
                             //SI ES TRUE MOSTRAMOS MENSAJE DE QUE YA ESTA REGISTRADO
                             if (validarProductoExisteten(clave.getText())) {
-                                validar.limpiarCampos(clave);
-                                validar.limpiarCampos(nombre);
-                                validar.limpiarCampos(precio);
-                                validar.limpiarCampos(color);
-                                validar.limpiarCampos(cantidad);
-                                descripcion.setText("");
-                                foto.setIcon(null);
+
                                 mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                                 mensajeAdvertencia.labelMensaje.setText("El producto ya esta registrado");
                                 menAdvertencia.setVisible(true);
                                 menAdvertencia.setAlwaysOnTop(true);
                                 //JOptionPane.showMessageDialog(null, "El producto ya esta registrado", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
-                                editarProducto.bean = beanGlobal;
+                                /* editarProducto.bean = beanGlobal;
                                 editarProducto editarPro = new editarProducto();
 
-                                editarPro.setVisible(true);
+                                editarPro.setVisible(true);*/
                             } else {
                                 //EN CASO DE SER FALSE  ENTONCES REGISTRAMOS EL PRODUCTO
                                 if (dao.registrarSQL(bean)) {
@@ -129,8 +124,7 @@ public class controlProductos {
                                     menExito.setAlwaysOnTop(true);
 
                                     //JOptionPane.showMessageDialog(null, "Registro exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                                    llenarTabla(tabla, defaultTabla);
-
+                                    // llenarTabla(tabla, defaultTabla);
                                 } else {
                                     mensajeError menError = new mensajeError();
                                     mensajeError.labelMensaje.setText("Error al registrar");
@@ -287,62 +281,84 @@ public class controlProductos {
                             } else {
 
                             }
-                            //SI TODOS LOS CAMPOS FUERON COMPLETADOS ENTONCES HACEMOS EL REGISTRO
-                            Productos bean = new Productos();
-
-                            bean.setClave(clave.getText());
-                            bean.setNombre(nombre.getText());
-                            bean.setPrecio(Integer.parseInt(precio.getText()));
-                            bean.setColor(color.getText());
-                            bean.setTipo(tipo);
-                            bean.setCantidad(Integer.parseInt(cantidad.getText()));
-                            bean.setDescripcion(desc);
-                            bean.setIdproductos(Integer.parseInt(id.getText()));
-
-                            bean.setFotoString(String.valueOf(file));
-                            //VALIDAMOS SI ES UNA IMAGEN DE LA BD O UNA IMAGEN NUEVA
-
-                            if (bean.getFotoString().equals("null")) {
-                                //MANDAMOS AMODIFICAR EL PRODUCTO
-                                if (dao.modificarProductoFotoActual(bean)) {
-                                    //SI SE MODIFICA EL PRODUCTO ACTUALIZAMOS LA TABLA Y CERRAMOS LA PANTALLA
-
-                                    principal.controleditarProducto = false;
-                                    frame.dispose();
-                                    mensajeExito menExito = new mensajeExito();
-                                    mensajeExito.labelMensaje.setText("Se edito correctamente");
-                                    menExito.setVisible(true);
-                                    menExito.setAlwaysOnTop(true);
-
-                                    // JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                                    llenarTabla(tabla, defaultTabla);
-
-                                } else {
-                                    mensajeError menError = new mensajeError();
-                                    mensajeError.labelMensaje.setText("Error al editar ");
-                                    menError.setVisible(true);
-                                    menError.setAlwaysOnTop(true);
-                                    //  JOptionPane.showMessageDialog(null, "Error al editar ", "Error", JOptionPane.ERROR_MESSAGE);
-                                }
+                              int fila = tabla.getSelectedRow();
+                              String valorClave=defaultTabla.getValueAt(fila, 1)+"";
+                              
+                            //validamos si el producto ya esta registrado
+                            if (validarProductoExisteten(clave.getText()) &&!clave.getText().equalsIgnoreCase(valorClave)) {
+                                mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                                mensajeAdvertencia.labelMensaje.setText("El producto ya esta registrado");
+                                menAdvertencia.setVisible(true);
+                                menAdvertencia.setAlwaysOnTop(true);
                             } else {
-                                if (dao.modificarProductoConFoto(bean)) {
-                                    //SI SE MODIFICA EL PRODUCTO ACTUALIZAMOS LA TABLA Y CERRAMOS LA PANTALLA
-                                    principal.controleditarProducto = false;
-                                    frame.dispose();
-                                    mensajeExito menExito = new mensajeExito();
-                                    mensajeExito.labelMensaje.setText("Se edito correctamente");
-                                    menExito.setVisible(true);
-                                    menExito.setAlwaysOnTop(true);
-                                    //JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                                    llenarTabla(tabla, defaultTabla);
+                                //SI TODOS LOS CAMPOS FUERON COMPLETADOS ENTONCES HACEMOS EL REGISTRO
+                                Productos bean = new Productos();
 
+                                bean.setClave(clave.getText());
+                                bean.setNombre(nombre.getText().toUpperCase());
+                                bean.setPrecio(Integer.parseInt(precio.getText()));
+                                bean.setColor(color.getText());
+                                bean.setTipo(tipo);
+                                bean.setCantidad(Integer.parseInt(cantidad.getText()));
+                                bean.setDescripcion(desc.toUpperCase());
+                                bean.setIdproductos(Integer.parseInt(id.getText()));
+
+                                bean.setFotoString(String.valueOf(file));
+                                //VALIDAMOS SI ES UNA IMAGEN DE LA BD O UNA IMAGEN NUEVA
+
+                                if (bean.getFotoString().equals("null")) {
+                                    //MANDAMOS AMODIFICAR EL PRODUCTO
+                                    if (dao.modificarProductoFotoActual(bean)) {
+                                        //SI SE MODIFICA EL PRODUCTO ACTUALIZAMOS LA TABLA Y CERRAMOS LA PANTALLA
+
+                                        principal.controleditarProducto = false;
+                                        frame.dispose();
+                                        mensajeExito menExito = new mensajeExito();
+                                        mensajeExito.labelMensaje.setText("Se edito correctamente");
+                                        menExito.setVisible(true);
+                                        menExito.setAlwaysOnTop(true);
+
+                                        // JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                                        // llenarTabla(tabla, defaultTabla);
+                                       
+                                        defaultTabla.setValueAt(bean.getClave(), fila, 1);
+                                        defaultTabla.setValueAt(bean.getNombre().toUpperCase(), fila, 2);
+                                        defaultTabla.setValueAt(bean.getDescripcion().toUpperCase(), fila, 3);
+                                        defaultTabla.setValueAt(bean.getClave(), fila, 4);
+                                        defaultTabla.setValueAt(bean.getPrecio(), fila, 5);
+
+                                    } else {
+                                        mensajeError menError = new mensajeError();
+                                        mensajeError.labelMensaje.setText("Error al editar ");
+                                        menError.setVisible(true);
+                                        menError.setAlwaysOnTop(true);
+                                        //  JOptionPane.showMessageDialog(null, "Error al editar ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
                                 } else {
-                                    mensajeError menError = new mensajeError();
-                                    mensajeError.labelMensaje.setText("Error al editar ");
-                                    menError.setVisible(true);
-                                    menError.setAlwaysOnTop(true);
-                                    //  JOptionPane.showMessageDialog(null, "Error al editar ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    if (dao.modificarProductoConFoto(bean)) {
+                                        //SI SE MODIFICA EL PRODUCTO ACTUALIZAMOS LA TABLA Y CERRAMOS LA PANTALLA
+                                        principal.controleditarProducto = false;
+                                        frame.dispose();
+                                        mensajeExito menExito = new mensajeExito();
+                                        mensajeExito.labelMensaje.setText("Se edito correctamente");
+                                        menExito.setVisible(true);
+                                        menExito.setAlwaysOnTop(true);
+                                        //JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                                    
+                                        defaultTabla.setValueAt(bean.getClave(), fila, 1);
+                                        defaultTabla.setValueAt(bean.getNombre().toUpperCase(), fila, 2);
+                                        defaultTabla.setValueAt(bean.getDescripcion().toUpperCase(), fila, 3);
+                                        defaultTabla.setValueAt(bean.getClave(), fila, 4);
+                                        defaultTabla.setValueAt(bean.getPrecio(), fila, 5);
 
+                                    } else {
+                                        mensajeError menError = new mensajeError();
+                                        mensajeError.labelMensaje.setText("Error al editar ");
+                                        menError.setVisible(true);
+                                        menError.setAlwaysOnTop(true);
+                                        //  JOptionPane.showMessageDialog(null, "Error al editar ", "Error", JOptionPane.ERROR_MESSAGE);
+
+                                    }
                                 }
                             }
 
@@ -488,7 +504,7 @@ public class controlProductos {
 
     public void consultaEspecificaParaModificar(int id) {
         boolean ban = false;
-        Productos bean = (Productos) dao.consultaEspecifica(id + "");
+        Productos bean = (Productos) dao.consultaEspecifica2019(id + "");
         //encontramos nuestro id en lalista y obtenmos el bean 
         //y lo enviamos a la pantalla editar pro para llenar los campos
         editarProducto.bean = bean;
@@ -506,7 +522,7 @@ public class controlProductos {
         //hacemos una consulta especifica 
         //y lo enviamos a la pantalla que se requiere pro para llenar los campos
         if (deDondeViene.equalsIgnoreCase("detallesVenderProducto")) {
-            Productos bean = (Productos) dao.consultaEspecifica(id + "");
+            Productos bean = (Productos) dao.consultaEspecifica2019(id + "");
             bean.setCantidad(existencias);
 
             detallesVenderProducto.bean = bean;
@@ -530,16 +546,16 @@ public class controlProductos {
         Image imagen = null;
 
         try {
-
+            fotoGlobal = bean.getFoto();
             if (bean.getFoto() == null) {
 
                 labelFoto.setIcon(null);
                 labelFoto.setText("Sin foto");
             } else {
-
+                labelFoto.setText("");
                 imagen = dao.getImage(bean, false);
 
-                Icon icon = new ImageIcon(imagen.getScaledInstance(130, 176, Image.SCALE_DEFAULT));
+                Icon icon = new ImageIcon(imagen.getScaledInstance(100, 130, Image.SCALE_DEFAULT));
                 labelFoto.setIcon(icon);
             }
 
@@ -619,7 +635,7 @@ public class controlProductos {
 
     public boolean validarProductoExisteten(String clave) {
         boolean ban = false;
-        Productos bean = (Productos) dao.consultaEspecificaPorClave(clave);
+        Productos bean = (Productos) dao.consultaEspecificaPorClave2019(clave);
 
         //SI RETORNA QUIERE DECIR QUE LA CLAVE YA ESTA REGISTRADO EN LA BD
         if (bean != null) {
@@ -650,8 +666,8 @@ public class controlProductos {
             vaciarTabla(tabla, defaultTabla);
 
             for (int i = 0; i < lista.size(); i++) {
-                defaultTabla.addRow(new Object[]{lista.get(i).getIdProductos(), lista.get(i).getClave(), lista.get(i).getNombre(),
-                    lista.get(i).getDescripcion(), lista.get(i).getCantidad(), lista.get(i).getPrecio()});
+                defaultTabla.addRow(new Object[]{lista.get(i).getIdProductos(), lista.get(i).getClave(), lista.get(i).getNombre().toUpperCase(),
+                    lista.get(i).getDescripcion().toUpperCase(), lista.get(i).getCantidad(), lista.get(i).getPrecio()});
 
             }
         } else {
@@ -945,8 +961,8 @@ public class controlProductos {
             vaciarTabla(tabla, defaultTabla);
 
             for (int i = 0; i < lista.size(); i++) {
-                defaultTabla.addRow(new Object[]{lista.get(i).getIdProductos(), lista.get(i).getClave(), lista.get(i).getNombre(),
-                    lista.get(i).getDescripcion(), lista.get(i).getCantidad(), lista.get(i).getPrecio()});
+                defaultTabla.addRow(new Object[]{lista.get(i).getIdProductos(), lista.get(i).getClave(), lista.get(i).getNombre().toUpperCase(),
+                    lista.get(i).getDescripcion().toUpperCase(), lista.get(i).getCantidad(), lista.get(i).getPrecio()});
 
             }
         } else {
@@ -998,6 +1014,27 @@ public class controlProductos {
 
         }
         return lista.get(0);
+
+    }
+    
+     public void eliminar2109(String id, JTable tabla, DefaultTableModel defaultTabla) {
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta seguro de eliminar el producto seleccionado?");
+
+        try {
+            if (respuesta == 0) {
+                if (dao.elimianrProducto2019(id)) {
+                    //lo quitamos de la tabla
+                    int fila=tabla.getSelectedRow();
+                    defaultTabla.removeRow(fila);
+                }else{
+                    
+                }
+            } else {
+
+            }
+
+        } catch (Exception e) {
+        }
 
     }
 }

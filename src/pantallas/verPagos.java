@@ -12,6 +12,7 @@ import beans.Clientes;
 import beans.Deudatotal;
 import beans.Pagos;
 import control.controlPagos;
+import java.awt.Color;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +36,8 @@ public class verPagos extends javax.swing.JFrame {
     //intanciamos las clases
     validarCampos validar = new validarCampos();
     public static Clientes beanClientes;
-    public static String idCliente="";
+    public static String idCliente = "";
+    public static String idDeuda = "";
     controlPagos controlP = new controlPagos();
 
     //tablas
@@ -60,6 +62,11 @@ public class verPagos extends javax.swing.JFrame {
             btnEliminar.setVisible(false);
         }
         this.setLocationRelativeTo(null);
+        //ocultamos idTabla pagos
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTable1.getColumnModel().getColumn(0).setWidth(0);
         //enviamos el frame a pro pendientes
 
         principal.frameverPagos = this;
@@ -67,8 +74,8 @@ public class verPagos extends javax.swing.JFrame {
         validar.soloNumeros(txtAbono);
         validar.soloNumeros(txtEfectivoRecibido);
         //llenamos los campos123
-        
-        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos,txtDeudTotal,txtRestan);
+
+        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos, txtDeudTotal, txtRestan);
         /*if (beanClientes != null) {
             //Set<Productosapartados>listaProApartados=beanCliente.getProductosapartadoses();
             txtNombreDelCiente.setText(beanClientes.getNombrecompleto().toUpperCase());
@@ -474,8 +481,8 @@ public class verPagos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         /*controlP.registrar(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
         txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.idUsuario + "", this);*/
-        controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan, 
-                txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.usuario+"", this, idCliente);
+        controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
+                txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.usuario + "", this, idCliente);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -483,11 +490,18 @@ public class verPagos extends javax.swing.JFrame {
         if (txtEfectivoRecibido.getText().isEmpty()) {
 
         } else {
-            if (Integer.parseInt(txtAbono.getText()) <= Integer.parseInt(txtEfectivoRecibido.getText())) {
-                int cambio = Integer.parseInt(txtEfectivoRecibido.getText()) - Integer.parseInt(txtAbono.getText());
-                txtCambio.setText(cambio + "");
+            /*if (Integer.parseInt(txtAbono.getText()) <= Integer.parseInt(txtEfectivoRecibido.getText())) {
+                
             } else {
+                
+            }*/
 
+            int cambio = Integer.parseInt(txtEfectivoRecibido.getText()) - Integer.parseInt(txtAbono.getText());
+            txtCambio.setText(cambio + "");
+            if (cambio < 0) {
+                txtCambio.setForeground(Color.red);
+            } else {
+                txtCambio.setForeground(Color.BLACK);
             }
         }
 
@@ -501,7 +515,8 @@ public class verPagos extends javax.swing.JFrame {
             menAdvertencia.setAlwaysOnTop(true);
             // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
         } else {
-            controlP.editar(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(), txtDeudTotal, txtRestan);
+            controlP.editar2019(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(),
+                    txtDeudTotal, txtRestan, this, idCliente, idDeuda);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -513,7 +528,7 @@ public class verPagos extends javax.swing.JFrame {
             menAdvertencia.setAlwaysOnTop(true);
             // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
         } else {
-            controlP.eliminar(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(), txtDeudTotal, txtRestan);
+            controlP.eliminar2019(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(), txtDeudTotal, txtRestan, this, idCliente);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

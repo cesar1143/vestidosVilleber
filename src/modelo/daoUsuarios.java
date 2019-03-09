@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -114,7 +115,7 @@ public class daoUsuarios implements metodosDao {
             transaction = session.beginTransaction();
             System.out.println("id bean usuario " + beanUsu.getIdusuarios());
             System.out.println("id bean usuario dao" + beanUsu.getApaterno());
-           
+
             session.update(beanUsu);
             transaction.commit();
 
@@ -136,13 +137,13 @@ public class daoUsuarios implements metodosDao {
     public boolean eliminar(Object bean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-     public Object consultaEspecificaSession(String usuario,String contra) {
+
+    public Object consultaEspecificaSession(String usuario, String contra) {
         Usuarios bean = new Usuarios();
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            
+
             bean = (Usuarios) session.createQuery("from Usuarios where usuario='" + usuario + "' and contra='" + contra + "'").uniqueResult();
 
             transaction.commit();
@@ -157,8 +158,8 @@ public class daoUsuarios implements metodosDao {
         }
         return bean;
     }
-     
-       public Object consultaEspecificaPorUsuario(String id) {
+
+    public Object consultaEspecificaPorUsuario(String id) {
         Usuarios bean = new Usuarios();
         try {
             session = sessionFactory.openSession();
@@ -166,6 +167,94 @@ public class daoUsuarios implements metodosDao {
 
             bean = (Usuarios) session.createQuery("from Usuarios where idusuarios='" + id + "'").uniqueResult();
 
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar el usuario " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        return bean;
+    }
+    //nuevos meotodos 2019 cesar
+
+    public Usuarios consultaEspecificaSession2019(String usuario, String contra) {
+        Usuarios bean = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            
+            Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u where u.usuario='"+usuario+"' and u.contra='"+contra+"'");
+           
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+                    bean = new Usuarios();
+              String id=listaRes.get(i)[0]+"";
+              String nombre=listaRes.get(i)[1]+"";
+              String apaterno=listaRes.get(i)[2]+"";
+              String amaterno=listaRes.get(i)[3]+"";
+              String usuario2=listaRes.get(i)[4]+"";
+              String contra2=listaRes.get(i)[5]+"";
+                   
+              bean.setIdusuarios(Integer.parseInt(id));
+              bean.setNombre(nombre);
+              bean.setApaterno(apaterno);
+              bean.setAmaterno(amaterno);
+              bean.setUsuario(usuario2);
+              bean.setContra(contra2);
+             
+                }
+            } else {
+
+            }
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error daoUsuario consultaEspecificaSession2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        return bean;
+    }
+    
+     public Usuarios consultaEspecifica2019(String id) {
+        Usuarios bean = new Usuarios();
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+           Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u where u.idusuarios='"+id+"'");
+           
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+                    bean = new Usuarios();
+              String idPro=listaRes.get(i)[0]+"";
+              String nombre=listaRes.get(i)[1]+"";
+              String apaterno=listaRes.get(i)[2]+"";
+              String amaterno=listaRes.get(i)[3]+"";
+              String usuario2=listaRes.get(i)[4]+"";
+              String contra2=listaRes.get(i)[5]+"";
+                   
+              bean.setIdusuarios(Integer.parseInt(idPro));
+              bean.setNombre(nombre);
+              bean.setApaterno(apaterno);
+              bean.setAmaterno(amaterno);
+              bean.setUsuario(usuario2);
+              bean.setContra(contra2);
+             
+                }
+            } else {
+
+            }
             transaction.commit();
         } catch (HibernateException e) {
             JOptionPane.showMessageDialog(null, "Error al consultar el usuario " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

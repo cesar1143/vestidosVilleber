@@ -7,6 +7,7 @@ package control;
 
 import ModeloProductos.DaoProductos;
 import NuevasPantallas.principal;
+import NuevasPantallas.productosPendientes;
 import beans.Clientes;
 import beans.Deudatotal;
 import beans.Fechaspruebas;
@@ -14,11 +15,19 @@ import beans.Medidas;
 import beans.Pagos;
 import beans.Productos;
 import beans.Productosapartados;
+import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,6 +46,7 @@ import modelo.daoPagos;
 import modelo.daoProductos;
 import modelo.daoProductosApartados;
 import modelo.daocontrolProductosApartados;
+import org.hibernate.engine.jdbc.BinaryStream;
 import pantallas.cambiarEstadoProductosApartados;
 import pantallas.cancelarProductosApartados;
 import validaciones.validarCampos;
@@ -477,24 +487,29 @@ public class controlProductoPendientes {
             menAdvertencia.setAlwaysOnTop(true);
             // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
-            String status[] = {"Pagado entregado", "Pagado NO entregado"};
-            Object estadoPro = JOptionPane.showInputDialog(frame, "Estado del producto", "Seleccionar el estado de los productos", JOptionPane.QUESTION_MESSAGE, null, status, status[0]);
+            try {
+                String status[] = {"Pagado entregado", "Pagado NO entregado"};
+                Object estadoPro = JOptionPane.showInputDialog(frame, "Estado del producto", "Seleccionar el estado de los productos", JOptionPane.QUESTION_MESSAGE, null, status, status[0]);
 
-            int fila = tablaCambiarEstadoProdcutos.getSelectedRow();
-            int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(fila, 0) + "");
-            Productosapartados beanProApartados = (Productosapartados) new daoProductosApartados().consultaEspecifica(valorId + "");
-            beanProApartados.setStatus(estadoPro + "");
-            beanProApartados.setFecharegistro(validar.obtenerFechaActual());
-            if (new daoProductosApartados().editar(beanProApartados)) {
-                mensajeExito menExito = new mensajeExito();
-                mensajeExito.labelMensaje.setText("El estado del producto  se cambio correctamente");
-                menExito.setVisible(true);
-                menExito.setAlwaysOnTop(true);
-                // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
+                int fila = tablaCambiarEstadoProdcutos.getSelectedRow();
+                int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(fila, 0) + "");
+                Productosapartados beanProApartados = (Productosapartados) new daoProductosApartados().consultaEspecifica(valorId + "");
+                beanProApartados.setStatus(estadoPro + "");
+                beanProApartados.setFecharegistro(validar.obtenerFechaActual());
+                if (new daoProductosApartados().editar(beanProApartados)) {
+                    mensajeExito menExito = new mensajeExito();
+                    mensajeExito.labelMensaje.setText("El estado del producto  se cambio correctamente");
+                    menExito.setVisible(true);
+                    menExito.setAlwaysOnTop(true);
+                    // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
 
-                defaulttablaCambiar.removeRow(fila);
+                    defaulttablaCambiar.removeRow(fila);
 
+                }
+
+            } catch (Exception e) {
             }
+
         }
         if (tablaCambiarEstadoProdcutos.getRowCount() == 0) {
             frame.dispose();
@@ -806,5 +821,587 @@ public class controlProductoPendientes {
         }
 
     }
+//metodos nuevos cesar 2019
 
+    public void btncambiarEstadoProductosUnoPorUno2(JFrame frame, JTable tablaCambiarEstadoProdcutos, DefaultTableModel defaulttablaCambiar,
+            JTable tablaPendientes, DefaultTableModel defaultTablaPendientes, String idCliente) {
+
+        if (tablaCambiarEstadoProdcutos.getSelectedRow() == -1) {
+            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+            mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                String status[] = {"Pagado entregado", "Pagado NO entregado"};
+                Object estadoPro = JOptionPane.showInputDialog(frame, "Estado del producto", "Seleccionar el estado de los productos", JOptionPane.QUESTION_MESSAGE, null, status, status[0]);
+                if (estadoPro != null) {
+                    int fila = tablaCambiarEstadoProdcutos.getSelectedRow();
+                    int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(fila, 0) + "");
+
+                    if (new daoProductosApartados().editarSoloEstatusProApartadpos(estadoPro + "", valorId + "")) {
+                        mensajeExito menExito = new mensajeExito();
+                        mensajeExito.labelMensaje.setText("El estado del producto  se cambio correctamente");
+                        menExito.setVisible(true);
+                        menExito.setAlwaysOnTop(true);
+                        // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
+
+                        defaulttablaCambiar.removeRow(fila);
+                        //le cambiamos el estado a los de la tabla de propendientes
+                        if (String.valueOf(estadoPro).equalsIgnoreCase("pagado no entregado")) {
+                            //se cambiara el status por medio del id
+
+                            for (int i = 0; i < productosPendientes.tablaPendientes.getRowCount(); i++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(i, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.setValueAt("PAGADO NO ENTREGADO", i, 2);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else if (String.valueOf(estadoPro).equalsIgnoreCase("pagado entregado")) {
+                            //se elminara el status por medio del id
+
+                            for (int i = 0; i < productosPendientes.tablaPendientes.getRowCount(); i++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(i, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.removeRow(i);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else {
+
+                        }
+                        if (productosPendientes.tablaPendientes.getRowCount() > 0) {
+
+                        } else {
+                            //vemos si todos se  entregaron el eliminamos a nuestro cliente de la tabla
+                            for (int i = 0; i < productosPendientes.tablaClientes.getRowCount(); i++) {
+                                String id = productosPendientes.tablaClientes.getValueAt(i, 0) + "";
+                                if (id.equalsIgnoreCase(idCliente)) {
+                                    productosPendientes.tablaClientes.removeRow(i);
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                } else {
+                    mensajeAdvertencia m = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Selecciona un estado");
+                    m.setVisible(true);
+                    m.setAlwaysOnTop(true);
+                }
+
+            } catch (Exception e) {
+                System.out.println("error elimianr de uno en uno");
+            }
+
+        }
+        if (tablaCambiarEstadoProdcutos.getRowCount() == 0) {
+            frame.dispose();
+            principal.controlcambiarEstadoProductosApartados = false;
+
+        }
+
+    }
+
+    public void btncambiarEstadoProductosTodo2(JFrame frame, JTable tablaCambiarEstadoProdcutos,
+            DefaultTableModel defaulttablaCambiar,
+            JTable tablaPendientes, DefaultTableModel defaultTablaPendientes, String idCliente) {
+
+        try {
+            String status[] = {"Pagado entregado", "Pagado NO entregado"};
+            Object estadoPro = JOptionPane.showInputDialog(frame, "Estado del producto", "Seleccionar el estado de los productos", JOptionPane.QUESTION_MESSAGE, null, status, status[0]);
+            if (estadoPro != null) {
+                int cantFilas = tablaCambiarEstadoProdcutos.getRowCount();
+                for (int i = 0; i < cantFilas; i++) {
+
+                    int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(i, 0) + "");
+
+                    if (new daoProductosApartados().editarSoloEstatusProApartadpos(estadoPro + "", valorId + "")) {
+                        System.out.println("entro  " + i);
+                        // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
+                        // defaulttablaCambiar.removeRow(0);
+                        //le cambiamos el estado a los de la tabla de propendientes
+                        //le cambiamos el estado a los de la tabla de propendientes
+                        if (String.valueOf(estadoPro).equalsIgnoreCase("pagado no entregado")) {
+                            //se cambiara el status por medio del id
+
+                            for (int k = 0; k < productosPendientes.tablaPendientes.getRowCount(); k++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(k, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.setValueAt("PAGADO NO ENTREGADO", k, 2);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else if (String.valueOf(estadoPro).equalsIgnoreCase("pagado entregado")) {
+                            //se elminara el status por medio del id
+
+                            for (int l = 0; l < productosPendientes.tablaPendientes.getRowCount(); l++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(l, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.removeRow(l);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else {
+
+                        }
+                        if (productosPendientes.tablaPendientes.getRowCount() > 0) {
+
+                        } else {
+                            //vemos si todos se  entregaron el eliminamos a nuestro cliente de la tabla
+                            for (int j = 0; j < productosPendientes.tablaClientes.getRowCount(); j++) {
+                                String id = productosPendientes.tablaClientes.getValueAt(j, 0) + "";
+                                if (id.equalsIgnoreCase(idCliente)) {
+                                    productosPendientes.tablaClientes.removeRow(j);
+                                    break;
+                                }
+                            }
+                        }
+
+                    } else {
+
+                    }
+
+                }
+                //termina el for muestra el mns
+                mensajeExito menExito = new mensajeExito();
+                mensajeExito.labelMensaje.setText("El estado del producto  se cambio correctamente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+                frame.dispose();
+                principal.controlcambiarEstadoProductosApartados = false;
+
+            } else {
+                mensajeAdvertencia m = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un estado");
+                m.setVisible(true);
+                m.setAlwaysOnTop(true);
+            }
+
+        } catch (Exception e) {
+            System.out.println("error elimianr de todos  " + e.getMessage());
+        }
+
+    }
+
+    public void btncambiarEstadoProductosPagadoNoEntregadoUnoPorUno2019(JFrame frame, JTable tablaCambiarEstadoProdcutos, DefaultTableModel defaulttablaCambiar,
+            JTable tablaPendientes, DefaultTableModel defaultTablaPendientes, String idCliente) {
+
+        if (tablaCambiarEstadoProdcutos.getSelectedRow() == -1) {
+            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+            mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+
+                Object estadoPro = "Pagado entregado";
+                if (estadoPro != null) {
+                    int fila = tablaCambiarEstadoProdcutos.getSelectedRow();
+                    int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(fila, 0) + "");
+
+                    if (new daoProductosApartados().editarSoloEstatusProApartadpos(estadoPro + "", valorId + "")) {
+                        mensajeExito menExito = new mensajeExito();
+                        mensajeExito.labelMensaje.setText("El estado del producto  se cambio correctamente");
+                        menExito.setVisible(true);
+                        menExito.setAlwaysOnTop(true);
+                        // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
+
+                        defaulttablaCambiar.removeRow(fila);
+                        //le cambiamos el estado a los de la tabla de propendientes
+                        if (String.valueOf(estadoPro).equalsIgnoreCase("pagado no entregado")) {
+                            //se cambiara el status por medio del id
+
+                            for (int i = 0; i < productosPendientes.tablaPendientes.getRowCount(); i++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(i, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.setValueAt("PAGADO NO ENTREGADO", i, 2);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else if (String.valueOf(estadoPro).equalsIgnoreCase("pagado entregado")) {
+                            //se elminara el status por medio del id
+
+                            for (int i = 0; i < productosPendientes.tablaPendientes.getRowCount(); i++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(i, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.removeRow(i);
+
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else {
+
+                        }
+                        if (productosPendientes.tablaPendientes.getRowCount() > 0) {
+
+                        } else {
+                            //vemos si todos se  entregaron el eliminamos a nuestro cliente de la tabla
+                            for (int i = 0; i < productosPendientes.tablaClientes.getRowCount(); i++) {
+                                String id = productosPendientes.tablaClientes.getValueAt(i, 0) + "";
+                                if (id.equalsIgnoreCase(idCliente)) {
+                                    productosPendientes.tablaClientes.removeRow(i);
+
+                                    mensajeExito.labelMensaje.setText("Se entregaron los productos al cliente");
+                                    menExito.setVisible(true);
+                                    menExito.setAlwaysOnTop(true);
+
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                } else {
+                    mensajeAdvertencia m = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Selecciona un estado");
+                    m.setVisible(true);
+                    m.setAlwaysOnTop(true);
+                }
+
+            } catch (Exception e) {
+                System.out.println("error btncambiarEstadoProductosPagadoNoEntregadoUnoPorUno  " + e.getMessage());
+            }
+
+        }
+        if (tablaCambiarEstadoProdcutos.getRowCount() == 0) {
+            frame.dispose();
+            principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
+
+        }
+
+    }
+
+    public void btncambiarEstadoProductosPagadoNoEntregadoTodos2019(JFrame frame, JTable tablaCambiarEstadoProdcutos,
+            DefaultTableModel defaulttablaCambiar,
+            JTable tablaPendientes, DefaultTableModel defaultTablaPendientes, String idCliente) {
+
+        try {
+
+            Object estadoPro = "Pagado entregado";
+            if (estadoPro != null) {
+                int cantFilas = tablaCambiarEstadoProdcutos.getRowCount();
+                for (int i = 0; i < cantFilas; i++) {
+
+                    int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(i, 0) + "");
+
+                    if (new daoProductosApartados().editarSoloEstatusProApartadpos(estadoPro + "", valorId + "")) {
+                        System.out.println("entro  " + i);
+                        // JOptionPane.showMessageDialog(null, "El estado del producot  se cambio correctamente");
+                        // defaulttablaCambiar.removeRow(0);
+                        //le cambiamos el estado a los de la tabla de propendientes
+                        //le cambiamos el estado a los de la tabla de propendientes
+                        if (String.valueOf(estadoPro).equalsIgnoreCase("pagado no entregado")) {
+                            //se cambiara el status por medio del id
+
+                            for (int k = 0; k < productosPendientes.tablaPendientes.getRowCount(); k++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(k, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.setValueAt("PAGADO NO ENTREGADO", k, 2);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else if (String.valueOf(estadoPro).equalsIgnoreCase("pagado entregado")) {
+                            //se elminara el status por medio del id
+
+                            for (int l = 0; l < productosPendientes.tablaPendientes.getRowCount(); l++) {
+                                int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(l, 0) + "");
+                                if (id == valorId) {
+                                    productosPendientes.tablaPendientes.removeRow(l);
+                                    break;
+                                } else {
+
+                                }
+                            }
+
+                        } else {
+
+                        }
+                        if (productosPendientes.tablaPendientes.getRowCount() > 0) {
+
+                        } else {
+                            //vemos si todos se  entregaron el eliminamos a nuestro cliente de la tabla
+                            for (int j = 0; j < productosPendientes.tablaClientes.getRowCount(); j++) {
+                                String id = productosPendientes.tablaClientes.getValueAt(j, 0) + "";
+                                if (id.equalsIgnoreCase(idCliente)) {
+                                    productosPendientes.tablaClientes.removeRow(j);
+
+                                    break;
+                                }
+                            }
+                        }
+
+                    } else {
+
+                    }
+
+                }
+
+                //termina el for muestra el mns
+                mensajeExito menExito = new mensajeExito();
+                mensajeExito.labelMensaje.setText("Se entregaron los productos al cliente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+                frame.dispose();
+                principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
+
+            } else {
+                mensajeAdvertencia m = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un estado");
+                m.setVisible(true);
+                m.setAlwaysOnTop(true);
+            }
+
+        } catch (Exception e) {
+            System.out.println("error btncambiarEstadoProductosPagadoNoEntregadoTodos2019 de todos  " + e.getMessage());
+        }
+
+    }
+
+    public void btnCancelarProdcutosUnoPorUno2019(JFrame frame, JTable tablaCambiarEstadoProdcutos, DefaultTableModel defaulttablaCambiar,
+            JTable tablaPendientes, DefaultTableModel defaultTablaPendientes, String idCliente) {
+
+        if (tablaCambiarEstadoProdcutos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta seguro que desea cancelar el producto?");
+                if (respuesta == 0) {
+                    //eliminar de proApartados,eliminar si tiene medidas si tiene fechas,regresar el producto 
+                    //a la tb productos restamos la deuda total el precio del producto
+                    int fila = tablaCambiarEstadoProdcutos.getSelectedRow();
+                    int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(fila, 0) + "");
+                    int valorCantidad = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(fila, 3) + "");
+
+                    if (tablaCambiarEstadoProdcutos.getRowCount() > 0) {
+
+                        //metodo  que descuenta el precio del producto a la deudatotal y  regresa el  productos a producto
+                        if (tablaCambiarEstadoProdcutos.getRowCount() == 1) {
+                            if (daoApartados.editarDeudaTotaYEstatusl2019(valorId + "", valorCantidad)) {
+                                System.out.println("bien hecho");
+                                //editamos el precio del producto y lo restamos a la deuda total
+                                //metodo  elimina medidas,fechas y  pro aparatado
+                                if (daoApartados.btnCancelarProdcutosUnoPorUno2019(valorId + "")) {
+                                    mensajeExito m = new mensajeExito();
+                                    mensajeExito.labelMensaje.setText("Cancelado con exito");
+                                    m.setVisible(true);
+                                    m.setAlwaysOnTop(true);
+
+                                    for (int i = 0; i < productosPendientes.tablaPendientes.getRowCount(); i++) {
+                                        int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(i, 0) + "");
+                                        if (id == valorId) {
+                                            productosPendientes.tablaPendientes.removeRow(i);
+                                            break;
+                                        } else {
+
+                                        }
+
+                                        //eliminamos el id Cliente
+                                        for (int k = 0; k < productosPendientes.tablaClientes.getRowCount(); k++) {
+                                            String idc = productosPendientes.tablaClientes.getValueAt(k, 0) + "";
+                                            if (idc.equalsIgnoreCase(idCliente)) {
+                                                productosPendientes.tablaClientes.removeRow(k);
+                                                break;
+                                            }
+                                        }
+                                    }//termina el for
+                                    defaulttablaCambiar.removeRow(fila);
+                                    frame.dispose();
+                                    principal.controlcancelarProductosApartados = false;
+
+                                }
+
+                            } else {
+                                System.out.println("mal");
+                            }
+                        } else {
+                            if (daoApartados.editarDeudaTotal2019(valorId + "", valorCantidad)) {
+                                System.out.println("bien hecho");
+                                //editamos el precio del producto y lo restamos a la deuda total
+                                //metodo  que descuenta el precio del producto a la deudatotal y  regresa el  productos a producto
+                                if (daoApartados.btnCancelarProdcutosUnoPorUno2019(valorId + "")) {
+                                    mensajeExito m = new mensajeExito();
+                                    mensajeExito.labelMensaje.setText("Cancelado con exito");
+                                    m.setVisible(true);
+                                    m.setAlwaysOnTop(true);
+                                    for (int i = 0; i < productosPendientes.tablaPendientes.getRowCount(); i++) {
+                                        int id = Integer.parseInt(productosPendientes.tablaPendientes.getValueAt(i, 0) + "");
+                                        if (id == valorId) {
+                                            productosPendientes.tablaPendientes.removeRow(i);
+                                            break;
+                                        } else {
+
+                                        }
+                                    }
+
+                                    defaulttablaCambiar.removeRow(fila);
+                                }
+
+                            } else {
+                                System.out.println("mal");
+                            }
+                        }
+
+                    } else {
+
+                    }
+
+                } else {
+
+                }
+            } catch (Exception e) {
+                System.out.println("error en  controlProductosPendientes btnCancelarProdcutosUnoPorUno2019 " + e.getMessage());
+            }
+
+        }
+
+    }
+
+    public void btnCancelarProdcutosTodos2019(JFrame frame, JTable tablaCambiarEstadoProdcutos, DefaultTableModel defaulttablaCambiar,
+            JTable tablaPendientes, DefaultTableModel defaultTablaPendientes, String idCliente) {
+
+        try {
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta seguro que desea cancelar todos los productos?");
+            if (respuesta == 0) {
+                //eliminar de proApartados,eliminar si tiene medidas si tiene fechas,regresar el producto 
+                //a la tb productos restamos la deuda total el precio del producto
+                for (int i = 0; i < tablaCambiarEstadoProdcutos.getRowCount(); i++) {
+                    int valorId = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(i, 0) + "");
+                    int valorCantidad = Integer.parseInt(tablaCambiarEstadoProdcutos.getValueAt(i, 3) + "");
+
+                    //metodo  que descuenta el precio del producto a la deudatotal y  regresa el  productos a producto
+                    if (daoApartados.editarDeudaTotaYEstatusl2019(valorId + "", valorCantidad)) {
+
+                        //editamos el precio del producto y lo restamos a la deuda total
+                        //metodo  elimina medidas,fechas y  pro aparatado
+                        if (daoApartados.btnCancelarProdcutosUnoPorUno2019(valorId + "")) {
+
+                            //defaulttablaCambiar.removeRow(i);
+                        }
+
+                    } else {
+                        System.out.println("mal");
+                    }
+
+                }
+                mensajeExito m = new mensajeExito();
+                mensajeExito.labelMensaje.setText("Cancelados con exito");
+                m.setVisible(true);
+                m.setAlwaysOnTop(true);
+
+                frame.dispose();
+                principal.controlcancelarProductosApartados = false;
+                vaciarTabla(productosPendientes.jTable4, productosPendientes.tablaPendientes);
+                //eliminamos el id Cliente
+                for (int i = 0; i < productosPendientes.tablaClientes.getRowCount(); i++) {
+                    String id = productosPendientes.tablaClientes.getValueAt(i, 0) + "";
+                    if (id.equalsIgnoreCase(idCliente)) {
+                        productosPendientes.tablaClientes.removeRow(i);
+                        break;
+                    }
+                }
+            } else {
+
+            }
+        } catch (Exception e) {
+            System.out.println("error en  controlProductosPendientes btnCancelarProdcutosTodos2019 " + e.getMessage());
+        }
+
+    }
+
+    public void editarProductos2019(JTextField id, JTextArea descripcion,
+            JLabel foto, File file, JFrame frame, String idProA) {
+        String desc = descripcion.getText().toString();
+        String foto1 = foto.getText().toString();
+
+        if (descripcion.getText().toString().isEmpty()) {
+            desc = "SIN DESCRIPCIÓN";
+
+            if (foto.getIcon() == null) {
+                file = null;
+            } else {
+
+            }
+        } else {
+
+        }
+        //SI TODOS LOS CAMPOS FUERON COMPLETADOS ENTONCES HACEMOS EL REGISTRO
+        Productos bean = new Productos();
+
+        bean.setDescripcion(desc);
+        bean.setIdproductos(Integer.parseInt(id.getText()));
+
+        bean.setFotoString(String.valueOf(file));
+        //VALIDAMOS SI ES UNA IMAGEN DE LA BD O UNA IMAGEN NUEVA
+        System.out.println("bean " + bean.getDescripcion() + bean.getFotoString());
+        if (bean.getFotoString().equals("null")) {
+            //MANDAMOS AMODIFICAR EL PRODUCTO
+            if (daoApartados.modificarProductoFotoActual2019(bean, idProA)) {
+                //SI SE MODIFICA EL PRODUCTO ACTUALIZAMOS LA TABLA Y CERRAMOS LA PANTALLA
+
+                principal.controleditarProductoPendientes2019 = false;
+                frame.dispose();
+                mensajeExito menExito = new mensajeExito();
+                mensajeExito.labelMensaje.setText("Se edito correctamente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+                productosPendientes.txtAreaDetalleProductoPendiente.setText(descripcion.getText().toUpperCase());
+                // JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                mensajeError menError = new mensajeError();
+                mensajeError.labelMensaje.setText("Error al editar ");
+                menError.setVisible(true);
+                menError.setAlwaysOnTop(true);
+                //  JOptionPane.showMessageDialog(null, "Error al editar ", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if (daoApartados.modificarProductoFotoNueva2019(bean, idProA)) {
+                //SI SE MODIFICA EL PRODUCTO ACTUALIZAMOS LA TABLA Y CERRAMOS LA PANTALLA
+                principal.controleditarProductoPendientes2019 = false;
+                frame.dispose();
+                mensajeExito menExito = new mensajeExito();
+                mensajeExito.labelMensaje.setText("Se edito correctamente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                productosPendientes.txtAreaDetalleProductoPendiente.setText(descripcion.getText().toUpperCase());
+               
+
+            } else {
+                mensajeError menError = new mensajeError();
+                mensajeError.labelMensaje.setText("Error al editar ");
+                menError.setVisible(true);
+                menError.setAlwaysOnTop(true);
+                //  JOptionPane.showMessageDialog(null, "Error al editar ", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+
+    }
 }

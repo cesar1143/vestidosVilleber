@@ -203,7 +203,7 @@ public class controlInicioSesion {
         boolean ban = false;
 
         if (validar.validarCampos(contra)) {
-            Usuarios bean = (Usuarios) dao.consultaEspecificaSession(usuario, contra.getText());
+            Usuarios bean = (Usuarios) dao.consultaEspecificaSession2019(usuario, contra.getText());
             //BUSCAMOS EN LA LISTA SI EXISTE SU USUARIO Y  CONTRASEÑA DEL USUARIO
 
             //VALIDAMOS SI ENCONTRO LOS DATOS DEL USUARIO EN LA BD

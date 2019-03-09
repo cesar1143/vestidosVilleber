@@ -256,17 +256,10 @@ public class iniciarSesion extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         String usuario = spinnerUsuario.getSelectedItem().toString();
-       // this.setEnabled(false);
-        JFrame t=this;
-       
-        
-                
-               
-                control.iniciarSesion(usuario, txtContra, t);
-            
+        // this.setEnabled(false);
+        JFrame t = this;
 
-      
-     
+        control.iniciarSesion(usuario, txtContra, t);
 
 
     }//GEN-LAST:event_btnIniciarSesionActionPerformed

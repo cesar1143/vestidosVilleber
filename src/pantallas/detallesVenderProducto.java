@@ -73,7 +73,7 @@ public class detallesVenderProducto extends javax.swing.JFrame {
 
                 imagen = dao.getImage(bean, false);
 
-                Icon icon = new ImageIcon(imagen.getScaledInstance(194, 307, Image.SCALE_DEFAULT));
+                Icon icon = new ImageIcon(imagen.getScaledInstance(160, 210, Image.SCALE_DEFAULT));
                 labelFotoDetallesVenta.setIcon(icon);
             }
 
@@ -135,6 +135,7 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
 
+        labelFotoDetallesVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFotoDetallesVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -330,11 +331,10 @@ public class detallesVenderProducto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(68, 68, 68)))
-                .addGap(18, 18, 18)
                 .addComponent(btnAceptarDetallesVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btncancelarDetallesVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -480,11 +480,11 @@ public class detallesVenderProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel labelFotoDetallesVenta;
+    public static javax.swing.JLabel labelFotoDetallesVenta;
     private javax.swing.JTextField txtCantidadDetallesVenta;
-    private javax.swing.JTextField txtExistenciasDetallesVenta;
-    private javax.swing.JTextField txtNombreDetallesVenta;
-    private javax.swing.JTextField txtPrecioDetallesVenta;
+    public static javax.swing.JTextField txtExistenciasDetallesVenta;
+    public static javax.swing.JTextField txtNombreDetallesVenta;
+    public static javax.swing.JTextField txtPrecioDetallesVenta;
     private javax.swing.JTextField txtSubTotalDetallesVenta;
     // End of variables declaration//GEN-END:variables
 }

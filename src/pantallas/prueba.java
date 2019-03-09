@@ -5,6 +5,7 @@
  */
 package pantallas;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,17 +17,14 @@ public class prueba extends javax.swing.JFrame {
     /**
      * Creates new form prueba
      */
-    
     DefaultTableModel tabla;
+
     public prueba() {
-        tabla=new DefaultTableModel();
-        tabla.setColumnIdentifiers(new  Object[]{"id","nombre"});
-        
+        tabla = new DefaultTableModel();
+        tabla.setColumnIdentifiers(new Object[]{"id", "nombre"});
+
         initComponents();
-         tb.getColumnModel().getColumn(0).setMaxWidth(0);
-           tb.getColumnModel().getColumn(0).setMinWidth(0);
-            tb.getColumnModel().getColumn(0).setPreferredWidth(0);
-       tb.getColumnModel().getColumn(0).setWidth(0);
+
     }
 
     /**
@@ -38,33 +36,46 @@ public class prueba extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tb = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tb.setModel(tabla);
-        jScrollPane1.setViewportView(tb);
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(126, 126, 126)
+                .addComponent(jButton1)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(138, 138, 138)
+                .addComponent(jButton1)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int g=Integer.parseInt(JOptionPane.showInputDialog(null,"ingresa nuevo valor"));
+       
+       System.out.println("g  " + g);
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,7 +113,6 @@ public class prueba extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

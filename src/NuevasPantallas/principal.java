@@ -47,6 +47,8 @@ public class principal extends javax.swing.JFrame {
     public static boolean controlreportes = false;
     public static boolean controlusuarios = false;
     public static boolean controlventaRapida = false;
+    public static  boolean controlcambiarEstadoProductosEntregadosNoPagados2019=false;
+    public static boolean controleditarProductoPendientes2019=false;
 
     public static JFrame frameDetallesProducto;
     public static JFrame framecambiarEstadoProductosApartados;
@@ -59,6 +61,8 @@ public class principal extends javax.swing.JFrame {
     public static JFrame framenuevoRegistro;
     public static JFrame frameregistrarProducto;
     public static JFrame frameverPagos;
+     public static JFrame framecambiarEstadoProductosEntregadosNoPagados2019;
+     public static JFrame frameeditarProductoPendientes2019;
 
     //para validar las pantallas principales
     public static JFrame framecatalogo;

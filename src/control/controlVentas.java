@@ -327,10 +327,10 @@ public class controlVentas {
 
         //vamos a buscar si un producto ya esta registrado solo le modificaremos la cantidad
         for (int i = 0; i < tablaVentas.getRowCount(); i++) {
-     
+
             int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
             if (valorId == bean.getIdproductos()) {
-               
+
                 //si es igual quiere decir que si encontro este producto en la tabla entonces obtendremos la cantidad de la tabla y
                 //y le sumaremos la nueva cantidad 
                 int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
@@ -351,7 +351,7 @@ public class controlVentas {
             //si es true quiere decir que ya fue modificado
         } else {
             //si el producto no esta en la tabla ventas entonces lo registramos
-           
+
             int subtotal = bean.getPrecio() * cantidadParaComprar;
             defaultTabla.addRow(new Object[]{bean.getIdproductos(), bean.getClave(), cantidadParaComprar, bean.getPrecio(), subtotal});
             ban = true;
@@ -478,7 +478,6 @@ public class controlVentas {
     public void registrarVenta(JTable tablaVentas, DefaultTableModel defaultTableVentas, JTextField txtTotalApagar,
             JTextField txtEfectivoRecibido, JTextField txtCambio, String idUsuario, JFrame frame,
             JTable tablaProductos, DefaultTableModel defaultTablaProductos, JTable tablaPendientes, DefaultTableModel defaultTablaPendientes) {
-
 
 //el cliente se registra en 2 ocasiones
 //1.-  cuando la deuda es mas grande que el efectivo recibido y se pone como apartado
@@ -1113,140 +1112,137 @@ public class controlVentas {
                                     banRegistroVenta = true;
                                     System.out.println("se  registro la deuda 56");
                                     System.out.println("registramos el pago 56");
-                                    Deudatotal deudatotal1=(Deudatotal)daoDeuda.consultaEspecifica(almacenamientoDeListas.ultimoRegistroDeuda+"");
-                                   
+                                    Deudatotal deudatotal1 = (Deudatotal) daoDeuda.consultaEspecifica(almacenamientoDeListas.ultimoRegistroDeuda + "");
+
                                     //como el cliente noexiste en la bd entonces no puede tener mas que un soloregistro en la tabla  deuda 
                                     //el cual sera su primera deuda
-                                    
-                                    
-                                        Pagos beanPagos = new Pagos();
-                                        beanPagos.setDeudatotal(deudatotal1);
-                                        Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
-                                        beanPagos.setUsuarios(beanUsuario);
+                                    Pagos beanPagos = new Pagos();
+                                    beanPagos.setDeudatotal(deudatotal1);
+                                    Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
+                                    beanPagos.setUsuarios(beanUsuario);
 
-                                        System.out.println("abonoPagoGlobal 5 " + abonoPago);
-                                        beanPagos.setAbono(abonoPago);
-                                        beanPagos.setFecharegistro(validar.obtenerFechaActual());
+                                    System.out.println("abonoPagoGlobal 5 " + abonoPago);
+                                    beanPagos.setAbono(abonoPago);
+                                    beanPagos.setFecharegistro(validar.obtenerFechaActual());
 
-                                        if (daoPag.registrar(beanPagos)) {
-                                            banRegistroVenta = true;
-                                            System.out.println("registro el pago 5");
-                                            System.out.println("ahora si registraremos los productos apartados con fechas y con medidas 5");
+                                    if (daoPag.registrar(beanPagos)) {
+                                        banRegistroVenta = true;
+                                        System.out.println("registro el pago 5");
+                                        System.out.println("ahora si registraremos los productos apartados con fechas y con medidas 5");
 
-                                            for (int i = 0; i < tablaVentas.getRowCount(); i++) {
-                                                int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
-                                                int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
-                                                Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
-                                                Productosapartados beanProApartados = new Productosapartados();
-                                                beanProApartados.setClientes(beanCliente);
-                                                beanProApartados.setProductos(beanProductos);
-                                                beanProApartados.setUsuarios(beanUsuario);
-                                                beanProApartados.setFecharegistro(validar.obtenerFechaActual());
-                                                beanProApartados.setStatus(estadoProductoApartado);
-                                                beanProApartados.setCantidadVenta(valorCantidad);
-                                                //aqui  vamos a sacar la descripcion de cada producto 
-                                                for (int j = 0; j < almacenamientoDeListas.listaDescripcion.size(); j++) {
-                                                    if (almacenamientoDeListas.listaDescripcion.get(j).getIdProducto() == valorId) {
-                                                        System.out.println("este pro lleva detalle  " + almacenamientoDeListas.listaDescripcion.get(j).getIdProducto());
-                                                        beanProApartados.setDetallesproducto(almacenamientoDeListas.listaDescripcion.get(j).getDetallesproducto());
-                                                        j = almacenamientoDeListas.listaDescripcion.size();
-                                                    }
+                                        for (int i = 0; i < tablaVentas.getRowCount(); i++) {
+                                            int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
+                                            int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
+                                            Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
+                                            Productosapartados beanProApartados = new Productosapartados();
+                                            beanProApartados.setClientes(beanCliente);
+                                            beanProApartados.setProductos(beanProductos);
+                                            beanProApartados.setUsuarios(beanUsuario);
+                                            beanProApartados.setFecharegistro(validar.obtenerFechaActual());
+                                            beanProApartados.setStatus(estadoProductoApartado);
+                                            beanProApartados.setCantidadVenta(valorCantidad);
+                                            //aqui  vamos a sacar la descripcion de cada producto 
+                                            for (int j = 0; j < almacenamientoDeListas.listaDescripcion.size(); j++) {
+                                                if (almacenamientoDeListas.listaDescripcion.get(j).getIdProducto() == valorId) {
+                                                    System.out.println("este pro lleva detalle  " + almacenamientoDeListas.listaDescripcion.get(j).getIdProducto());
+                                                    beanProApartados.setDetallesproducto(almacenamientoDeListas.listaDescripcion.get(j).getDetallesproducto());
+                                                    j = almacenamientoDeListas.listaDescripcion.size();
                                                 }
-                                                if (daoProAP.registrar(beanProApartados)) {
-                                                    banRegistroVenta = true;
+                                            }
+                                            if (daoProAP.registrar(beanProApartados)) {
+                                                banRegistroVenta = true;
 
-                                                    //ya estaba
-                                                    int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
-                                                    beanProductos.setCantidad(nuevaExistencia);
-                                                    System.out.println("actualizamos las existencias de los productos ");
-                                                    if (daoProductos.editar(beanProductos)) {
-                                                        System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
-                                                    }
+                                                //ya estaba
+                                                int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
+                                                beanProductos.setCantidad(nuevaExistencia);
+                                                System.out.println("actualizamos las existencias de los productos ");
+                                                if (daoProductos.editar(beanProductos)) {
+                                                    System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
+                                                }
 
-                                                    System.out.println("se registraron los productos en apartados " + i);
-                                                    //hasta aqui
+                                                System.out.println("se registraron los productos en apartados " + i);
+                                                //hasta aqui
 
-                                                    Productosapartados benaProApar2 = (Productosapartados) daoProAP.consultaEspecifica(almacenamientoDeListas.idProductoApartadoRegistrado + "");
-                                                    System.out.println("ultimo  id de pro apartados " + benaProApar2.getIdproductosapartados());
-                                                    //aqui mero
-                                                    if (buscarMedidas(valorId) != null) {
-                                                        System.out.println("si traigo medidas");
-                                                        Medidas beanMedidas2 = buscarMedidas(valorId);
-                                                        //conusltamos el ultimo producto aparatado
+                                                Productosapartados benaProApar2 = (Productosapartados) daoProAP.consultaEspecifica(almacenamientoDeListas.idProductoApartadoRegistrado + "");
+                                                System.out.println("ultimo  id de pro apartados " + benaProApar2.getIdproductosapartados());
+                                                //aqui mero
+                                                if (buscarMedidas(valorId) != null) {
+                                                    System.out.println("si traigo medidas");
+                                                    Medidas beanMedidas2 = buscarMedidas(valorId);
+                                                    //conusltamos el ultimo producto aparatado
 
-                                                        beanMedidas2.setProductosapartados(benaProApar2);
-                                                        //el bean trae las medidas
-                                                        if (daoMedi.registrar(beanMedidas2)) {
-                                                            banRegistroVenta = true;
-                                                            System.out.println("se registraron las medidas 5");
+                                                    beanMedidas2.setProductosapartados(benaProApar2);
+                                                    //el bean trae las medidas
+                                                    if (daoMedi.registrar(beanMedidas2)) {
+                                                        banRegistroVenta = true;
+                                                        System.out.println("se registraron las medidas 5");
 
-                                                            // si se registran la medidas buscamos las fechas
-                                                            if (buscarFechas(valorId) != null) {
-
-                                                                Fechaspruebas beanFechas2 = buscarFechas(valorId);
-                                                                System.out.println("si trigo  fechas homie " + beanFechas2.getFechaevento());
-                                                                beanFechas2.setProductosapartados(benaProApar2);
-                                                                if (daoFech.registrar(beanFechas2)) {
-                                                                    banRegistroVenta = true;
-                                                                    System.out.println("se registraron las fechas 5");
-                                                                    //si se  registra  en fechas registramos la deudaTotal
-
-                                                                } else {
-                                                                    banRegistroVenta = false;
-
-                                                                    System.out.println("error  al registrar fechas 5");
-                                                                }
-                                                            } else {
-                                                                System.out.println("trae medidas pero no fechas");
-                                                                //tiene fechas pero no tiene medidas
-
-                                                            }
-
-                                                        } else {
-                                                            //no tiene medidas
-                                                            banRegistroVenta = false;
-                                                            System.out.println("Error al registrar medidas 5");
-                                                        }
-
-                                                        System.out.println("si tengo medidas homie  5");
-
-                                                    } else {
-                                                        //el producto no tiene medidas
-                                                        //buscamos si tiene fechas 
-                                                        System.out.println("no tiene medidas 5");
-
+                                                        // si se registran la medidas buscamos las fechas
                                                         if (buscarFechas(valorId) != null) {
-                                                            Fechaspruebas beanFechas2 = buscarFechas(valorId);
-                                                            beanFechas2.setProductosapartados(benaProApar2);
 
+                                                            Fechaspruebas beanFechas2 = buscarFechas(valorId);
+                                                            System.out.println("si trigo  fechas homie " + beanFechas2.getFechaevento());
+                                                            beanFechas2.setProductosapartados(benaProApar2);
                                                             if (daoFech.registrar(beanFechas2)) {
                                                                 banRegistroVenta = true;
+                                                                System.out.println("se registraron las fechas 5");
                                                                 //si se  registra  en fechas registramos la deudaTotal
+
                                                             } else {
                                                                 banRegistroVenta = false;
-                                                                System.out.println("error al registrar fechas sin medidas 5");
+
+                                                                System.out.println("error  al registrar fechas 5");
                                                             }
                                                         } else {
-                                                            //no tiene medidas y tampoco fechas
+                                                            System.out.println("trae medidas pero no fechas");
+                                                            //tiene fechas pero no tiene medidas
+
                                                         }
 
+                                                    } else {
+                                                        //no tiene medidas
+                                                        banRegistroVenta = false;
+                                                        System.out.println("Error al registrar medidas 5");
                                                     }
 
-                                                    //go a add the measurements and dates
-                                                    System.out.println("se registraron los productos en apartados 5  " + i);
+                                                    System.out.println("si tengo medidas homie  5");
 
                                                 } else {
-                                                    banRegistroVenta = false;
-                                                    System.out.println("error al registrar los pro apartados " + i);
+                                                    //el producto no tiene medidas
+                                                    //buscamos si tiene fechas 
+                                                    System.out.println("no tiene medidas 5");
+
+                                                    if (buscarFechas(valorId) != null) {
+                                                        Fechaspruebas beanFechas2 = buscarFechas(valorId);
+                                                        beanFechas2.setProductosapartados(benaProApar2);
+
+                                                        if (daoFech.registrar(beanFechas2)) {
+                                                            banRegistroVenta = true;
+                                                            //si se  registra  en fechas registramos la deudaTotal
+                                                        } else {
+                                                            banRegistroVenta = false;
+                                                            System.out.println("error al registrar fechas sin medidas 5");
+                                                        }
+                                                    } else {
+                                                        //no tiene medidas y tampoco fechas
+                                                    }
+
                                                 }
 
+                                                //go a add the measurements and dates
+                                                System.out.println("se registraron los productos en apartados 5  " + i);
+
+                                            } else {
+                                                banRegistroVenta = false;
+                                                System.out.println("error al registrar los pro apartados " + i);
                                             }
 
-                                        } else {
-                                            banRegistroVenta = false;
-                                            System.out.println("eroro al  registrar el pago");
                                         }
 
+                                    } else {
+                                        banRegistroVenta = false;
+                                        System.out.println("eroro al  registrar el pago");
+                                    }
 
                                 } else {
                                     banRegistroVenta = false;
@@ -1304,7 +1300,7 @@ public class controlVentas {
 
     public Clientes buscarClienteSiTieneDeuda(int precioProducto) {
         Clientes bean = null;
-       // System.out.println("llamado por otra  ventana");
+        // System.out.println("llamado por otra  ventana");
         if (almacenamientoDeListas.listaClientes.size() != 0) {
 
             bean = (Clientes) daoCliente.consultaEspecificaPorNombreBean(almacenamientoDeListas.listaClientes.get(0).getNombrecompleto());
@@ -1336,9 +1332,9 @@ public class controlVentas {
     }
 
     public void limpiarListas() {
-       // System.out.println("tamañao lista  al limpiar " + almacenamientoDeListas.listaClientes.size());
+        // System.out.println("tamañao lista  al limpiar " + almacenamientoDeListas.listaClientes.size());
         almacenamientoDeListas.listaClientes.clear();
-      //  System.out.println("lista cliente limpiada " + almacenamientoDeListas.listaClientes.size());
+        //  System.out.println("lista cliente limpiada " + almacenamientoDeListas.listaClientes.size());
         almacenamientoDeListas.listaFechas.clear();
         almacenamientoDeListas.listaMedidas.clear();
         almacenamientoDeListas.listaDescripcion.clear();
@@ -1414,21 +1410,21 @@ public class controlVentas {
                                         if (fechaPrueba.getDate() != null) {
                                             if (fechaEvento.getDate() != null) {
 
-                                                if (Integer.parseInt(talle.getText()) >= 0) {
+                                               /* if (Integer.parseInt(talle.getText()) >= 0) {
                                                     if (Integer.parseInt(sise.getText()) >= 0) {
                                                         if (Integer.parseInt(hombros.getText()) >= 0) {
                                                             if (Integer.parseInt(busto.getText()) >= 0) {
                                                                 if (Integer.parseInt(cintura.getText()) >= 0) {
                                                                     if (Integer.parseInt(cadera.getText()) >= 0) {
                                                                         if (Integer.parseInt(largoFalda.getText()) >= 0) {
-                                                                            if (Integer.parseInt(anchoPuño.getText()) >= 0) {
+                                                                            if (Integer.parseInt(anchoPuño.getText()) >= 0) {*/
 
                                                                                 //SI YA  TODOS LOS CAMPOS REQUERIDOS FUERON COMPLETADOS ENTONCES GUARDAREMOS TODA LA INFORMACION
                                                                                 //MEDIDAS,FECHAS Y PRODUCTO , Y LO MOSTRAREMOS EN LA TABLA VENTA
                                                                                 //OBTENEMOS LOS DATOS DE LAS MEDIDAS
                                                                                 Medidas beanM = new Medidas();
                                                                                 beanM.setIdProducto(beanProductos.getIdproductos());
-                                                                               // System.out.println("en medidas bean  " + beanProductos.getIdproductos());
+                                                                                // System.out.println("en medidas bean  " + beanProductos.getIdproductos());
                                                                                 beanM.setTalle(Float.parseFloat(talle.getText()));
                                                                                 beanM.setSise(Float.parseFloat(sise.getText()));
                                                                                 //System.out.println("bean m sise puto " + beanM.getSise());
@@ -1461,7 +1457,7 @@ public class controlVentas {
                                                                                 }
 
                                                                                 String fechaPrue = dia1 + "-" + mes1 + "-" + año;
-                                                                              //  System.out.println("fecha preuba " + fechaPrue);
+                                                                                //  System.out.println("fecha preuba " + fechaPrue);
                                                                                 int diaE = fechaEvento.getCalendar().get(Calendar.DAY_OF_MONTH);
                                                                                 int mesE = fechaEvento.getCalendar().get(Calendar.MARCH);
                                                                                 int añoE = fechaEvento.getCalendar().get(Calendar.YEAR);
@@ -1470,7 +1466,7 @@ public class controlVentas {
 
                                                                                 if (mesE <= 9) {
                                                                                     mes2 = "0" + String.valueOf(mes);
-                                                                                  //  System.out.println("entro a cambiar fecha ");
+                                                                                    //  System.out.println("entro a cambiar fecha ");
                                                                                 }
 
                                                                                 if (diaE <= 9) {
@@ -1479,7 +1475,7 @@ public class controlVentas {
                                                                                 }
 
                                                                                 String fechaEven = dia2 + "-" + mes2 + "-" + añoE;
-                                                                               // System.out.println("fechas  " + fechaEven);
+                                                                                // System.out.println("fechas  " + fechaEven);
 
                                                                                 Fechaspruebas beanFechas = new Fechaspruebas();
                                                                                 beanFechas.setIdProducto(beanProductos.getIdproductos());
@@ -1488,11 +1484,11 @@ public class controlVentas {
                                                                                 //aqui pa la fecha 
                                                                                 beanFechas.setFecharegistro(validar.obtenerFechaActual());
                                                                                 //System.out.println("fecha evento " + beanFechas.getFechaevento());
-                                                                               // System.out.println("fechaPrueba " + beanFechas.getFechaprueba());
+                                                                                // System.out.println("fechaPrueba " + beanFechas.getFechaprueba());
                                                                                 llenarListaFechas(beanFechas, beanProductos.getIdproductos());
                                                                                 ban = true;
 
-                                                                            } else {
+                                                                         /*   } else {
                                                                                 anchoPuño.requestFocus();
                                                                                 mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                                                                                 mensajeAdvertencia.labelMensaje.setText("Ingresa un valor mayor a 0");
@@ -1568,7 +1564,7 @@ public class controlVentas {
                                                     menAdvertencia.setAlwaysOnTop(true);
                                                     // JOptionPane.showMessageDialog(null, "Ingresa un valor mayor a 0 ", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
-                                                }
+                                                }*/
 
                                             } else {
                                                 mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
@@ -1625,7 +1621,7 @@ public class controlVentas {
                                                         if (Integer.parseInt(cintura.getText()) >= 0) {
                                                             if (Integer.parseInt(cadera.getText()) >= 0) {
                                                                 if (Integer.parseInt(largoFalda.getText()) >= 0) {
-                                                                    if (Integer.parseInt(anchoPuño.getText()) >=0) {
+                                                                    if (Integer.parseInt(anchoPuño.getText()) >= 0) {
                                                                         //SI YA  TODOS LOS CAMPOS REQUERIDOS FUERON COMPLETADOS ENTONCES GUARDAREMOS TODA LA INFORMACION
                                                                         //MEDIDAS,FECHAS Y PRODUCTO , Y LO MOSTRAREMOS EN LA TABLA VENTA
                                                                         //OBTENEMOS LOS DATOS DE LAS MEDIDAS
@@ -1792,8 +1788,8 @@ public class controlVentas {
                 beanFechas.setFechaevento(fechaEven);
                 //aqui pa la fecha
                 beanFechas.setFecharegistro(validar.obtenerFechaActual());
-               // System.out.println("fecha evento " + beanFechas.getFechaevento());
-               // System.out.println("fechaPrueba " + beanFechas.getFechaprueba());
+                // System.out.println("fecha evento " + beanFechas.getFechaevento());
+                // System.out.println("fechaPrueba " + beanFechas.getFechaprueba());
                 llenarListaFechas(beanFechas, beanProductos.getIdproductos());
                 ban = true;
             } else {
@@ -1822,7 +1818,7 @@ public class controlVentas {
             String idUsuario, JTextField txtTotalApagar, JTextField txtEfectivoRecibido, JTextField txtCambio, JTable tablaVentas, DefaultTableModel defaultTablaVentas,
             JTable tablaProductos, DefaultTableModel defaultTablaProductos) {
 
-      if (validar.validarCampos(txtNombre)) {
+        if (validar.validarCampos(txtNombre)) {
 
             Thread hilo = new Thread() {
                 @Override
@@ -1944,62 +1940,55 @@ public class controlVentas {
                                     System.out.println("registramos el pago");
 //consultamos la deuda   total por medio del ultimo registro
                                     Deudatotal deudatotal1 = (Deudatotal) daoDeuda.consultaEspecifica(almacenamientoDeListas.ultimoRegistroDeuda + "");
-                                   
 
-                                  
-                                       
-                                       
-                                            System.out.println("soy el id deuda total " + deudatotal1);
-                                            //buscamos su deuda y obtenemos el id deuda para guardarlo en la tabla pagos
-                                            Pagos beanPagos = new Pagos();
+                                    System.out.println("soy el id deuda total " + deudatotal1);
+                                    //buscamos su deuda y obtenemos el id deuda para guardarlo en la tabla pagos
+                                    Pagos beanPagos = new Pagos();
 
-                                            beanPagos.setDeudatotal(deudatotal1);
-                                            Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
-                                            beanPagos.setUsuarios(beanUsuario);
-                                            beanPagos.setAbono(almacenamientoDeListas.abonoPagoGlobal);
-                                            beanPagos.setFecharegistro(validar.obtenerFechaActual());
+                                    beanPagos.setDeudatotal(deudatotal1);
+                                    Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
+                                    beanPagos.setUsuarios(beanUsuario);
+                                    beanPagos.setAbono(almacenamientoDeListas.abonoPagoGlobal);
+                                    beanPagos.setFecharegistro(validar.obtenerFechaActual());
 
-                                            if (daoPag.registrar(beanPagos)) {
+                                    if (daoPag.registrar(beanPagos)) {
+                                        banRegistroVenta = true;
+                                        System.out.println("registro el pago");
+                                        System.out.println("ahora si registraremos los productos apartados sin fechas y sin medidas ");
+
+                                        for (int i = 0; i < tablaVentas.getRowCount(); i++) {
+                                            int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
+                                            int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
+                                            Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
+                                            Productosapartados beanProApartados = new Productosapartados();
+                                            beanProApartados.setClientes(beanCliente);
+                                            beanProApartados.setProductos(beanProductos);
+                                            beanProApartados.setUsuarios(beanUsuario);
+                                            beanProApartados.setFecharegistro(validar.obtenerFechaActual());
+                                            beanProApartados.setStatus(almacenamientoDeListas.estadoProductoAPartadoGlobal);
+                                            beanProApartados.setCantidadVenta(valorCantidad);
+                                            beanProApartados.setDetallesproducto("Sin detalles");
+                                            if (daoProAP.registrar(beanProApartados)) {
                                                 banRegistroVenta = true;
-                                                System.out.println("registro el pago");
-                                                System.out.println("ahora si registraremos los productos apartados sin fechas y sin medidas ");
-
-                                                for (int i = 0; i < tablaVentas.getRowCount(); i++) {
-                                                    int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
-                                                    int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
-                                                    Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
-                                                    Productosapartados beanProApartados = new Productosapartados();
-                                                    beanProApartados.setClientes(beanCliente);
-                                                    beanProApartados.setProductos(beanProductos);
-                                                    beanProApartados.setUsuarios(beanUsuario);
-                                                    beanProApartados.setFecharegistro(validar.obtenerFechaActual());
-                                                    beanProApartados.setStatus(almacenamientoDeListas.estadoProductoAPartadoGlobal);
-                                                    beanProApartados.setCantidadVenta(valorCantidad);
-                                                    beanProApartados.setDetallesproducto("Sin detalles");
-                                                    if (daoProAP.registrar(beanProApartados)) {
-                                                        banRegistroVenta = true;
-                                                        int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
-                                                        beanProductos.setCantidad(nuevaExistencia);
-                                                        System.out.println("actualizamos las existencias de los productos ");
-                                                        if (daoProductos.editar(beanProductos)) {
-                                                            System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
-                                                        }
-
-                                                        System.out.println("se registraron los productos en apartados " + i);
-                                                    } else {
-                                                        banRegistroVenta = false;
-                                                        System.out.println("error al registrar los pro apartados " + i);
-                                                    }
-
+                                                int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
+                                                beanProductos.setCantidad(nuevaExistencia);
+                                                System.out.println("actualizamos las existencias de los productos ");
+                                                if (daoProductos.editar(beanProductos)) {
+                                                    System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
                                                 }
 
+                                                System.out.println("se registraron los productos en apartados " + i);
                                             } else {
                                                 banRegistroVenta = false;
-                                                System.out.println("eroro al  registrar el pago");
+                                                System.out.println("error al registrar los pro apartados " + i);
                                             }
-                              
 
-                                
+                                        }
+
+                                    } else {
+                                        banRegistroVenta = false;
+                                        System.out.println("eroro al  registrar el pago");
+                                    }
 
                                 } else {
                                     banRegistroVenta = false;
@@ -2058,56 +2047,54 @@ public class controlVentas {
                                 banRegistroVenta = true;
                                 System.out.println("se  registro la deuda");
                                 System.out.println("registramos el pago");
-                                Deudatotal deudatotal1=(Deudatotal)daoDeuda.consultaEspecifica(almacenamientoDeListas.ultimoRegistroDeuda+"");
-                               
-                                    Pagos beanPagos = new Pagos();
-                                    beanPagos.setDeudatotal(deudatotal1);
-                                    Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
-                                    beanPagos.setUsuarios(beanUsuario);
-                                    System.out.println("abonoPagoGlobal " + almacenamientoDeListas.abonoPagoGlobal);
-                                    beanPagos.setAbono(almacenamientoDeListas.abonoPagoGlobal);
-                                    beanPagos.setFecharegistro(validar.obtenerFechaActual());
+                                Deudatotal deudatotal1 = (Deudatotal) daoDeuda.consultaEspecifica(almacenamientoDeListas.ultimoRegistroDeuda + "");
 
-                                    if (daoPag.registrar(beanPagos)) {
-                                        banRegistroVenta = true;
-                                        System.out.println("registro el pago");
-                                        System.out.println("ahora si registraremos los productos apartados sin fechas y sin medidas ");
+                                Pagos beanPagos = new Pagos();
+                                beanPagos.setDeudatotal(deudatotal1);
+                                Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
+                                beanPagos.setUsuarios(beanUsuario);
+                                System.out.println("abonoPagoGlobal " + almacenamientoDeListas.abonoPagoGlobal);
+                                beanPagos.setAbono(almacenamientoDeListas.abonoPagoGlobal);
+                                beanPagos.setFecharegistro(validar.obtenerFechaActual());
 
-                                        for (int i = 0; i < tablaVentas.getRowCount(); i++) {
-                                            int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
-                                            int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
-                                            Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
-                                            Productosapartados beanProApartados = new Productosapartados();
-                                            beanProApartados.setClientes(beanCliente);
-                                            beanProApartados.setProductos(beanProductos);
-                                            beanProApartados.setUsuarios(beanUsuario);
-                                            beanProApartados.setFecharegistro(validar.obtenerFechaActual());
-                                            beanProApartados.setStatus(almacenamientoDeListas.estadoProductoAPartadoGlobal);
-                                            beanProApartados.setCantidadVenta(valorCantidad);
-                                            beanProApartados.setDetallesproducto("Sin detalles");
-                                            if (daoProAP.registrar(beanProApartados)) {
-                                                banRegistroVenta = true;
-                                                int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
-                                                beanProductos.setCantidad(nuevaExistencia);
-                                                System.out.println("actualizamos las existencias de los productos ");
-                                                if (daoProductos.editar(beanProductos)) {
-                                                    System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
-                                                }
+                                if (daoPag.registrar(beanPagos)) {
+                                    banRegistroVenta = true;
+                                    System.out.println("registro el pago");
+                                    System.out.println("ahora si registraremos los productos apartados sin fechas y sin medidas ");
 
-                                                System.out.println("se registraron los productos en apartados " + i);
-                                            } else {
-                                                banRegistroVenta = false;
-                                                System.out.println("error al registrar los pro apartados " + i);
+                                    for (int i = 0; i < tablaVentas.getRowCount(); i++) {
+                                        int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
+                                        int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
+                                        Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
+                                        Productosapartados beanProApartados = new Productosapartados();
+                                        beanProApartados.setClientes(beanCliente);
+                                        beanProApartados.setProductos(beanProductos);
+                                        beanProApartados.setUsuarios(beanUsuario);
+                                        beanProApartados.setFecharegistro(validar.obtenerFechaActual());
+                                        beanProApartados.setStatus(almacenamientoDeListas.estadoProductoAPartadoGlobal);
+                                        beanProApartados.setCantidadVenta(valorCantidad);
+                                        beanProApartados.setDetallesproducto("Sin detalles");
+                                        if (daoProAP.registrar(beanProApartados)) {
+                                            banRegistroVenta = true;
+                                            int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
+                                            beanProductos.setCantidad(nuevaExistencia);
+                                            System.out.println("actualizamos las existencias de los productos ");
+                                            if (daoProductos.editar(beanProductos)) {
+                                                System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
                                             }
 
+                                            System.out.println("se registraron los productos en apartados " + i);
+                                        } else {
+                                            banRegistroVenta = false;
+                                            System.out.println("error al registrar los pro apartados " + i);
                                         }
 
-                                    } else {
-                                        banRegistroVenta = false;
-                                        System.out.println("eroro al  registrar el pago");
                                     }
 
-                              
+                                } else {
+                                    banRegistroVenta = false;
+                                    System.out.println("eroro al  registrar el pago");
+                                }
 
                             } else {
                                 banRegistroVenta = false;
@@ -2159,20 +2146,19 @@ public class controlVentas {
         }
 
         return beanCliente;
-        
+
     }
 
     public Clientes registrarCliente2(JTextField txtNombre, JTextField txtTelefono, JFrame frame,
             String idUsuario, JTextField txtTotalApagar, JTextField txtEfectivoRecibido, JTextField txtCambio, JTable tablaVentas, DefaultTableModel defaultTablaVentas,
             JTable tablaProductos, DefaultTableModel defaultTablaProductos) {
 
-       
         if (validar.validarCampos(txtNombre)) {
 
             Thread hilo = new Thread() {
                 @Override
                 public void run() {
-                     String telefono = "Sin telefono";
+                    String telefono = "Sin telefono";
                     if (txtTelefono.getText().isEmpty()) {
 
                     } else {
@@ -2269,9 +2255,9 @@ public class controlVentas {
                             menExito.setAlwaysOnTop(true);
                             //JOptionPane.showMessageDialog(null, "La venta se registro correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                             new controlProductos().llenarTabla(tablaProductos, defaultTablaProductos);
-car.dispose();
+                            car.dispose();
                         } else {
-car.dispose();
+                            car.dispose();
                         }
                     } else {
                         Clientes beanCliente2 = new Clientes();
@@ -2374,11 +2360,11 @@ car.dispose();
                             menExito.setAlwaysOnTop(true);
                             //JOptionPane.showMessageDialog(null, "La venta se registro correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                             System.out.println("5555");
-                            
+
                             System.out.println("1666666666");
 
                         } else {
-car.dispose();
+                            car.dispose();
                         }
 
                     }
@@ -2419,18 +2405,18 @@ car.dispose();
                                 //validar  datos del producto
                                 Productos beanProductos = new Productos();
                                 //consultamos para ver si la clave ya  existe en la bd
-                                Productos beanProductos2 = (Productos) daoProductos.consultaEspecificaPorClave(txtClavePro.getText());
+                                Productos beanProductos2 =  daoProductos.consultaEspecificaPorClave2019(txtClavePro.getText());
                                 Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
                                 System.out.println("bean   usuario 9" + beanUsuario.getNombre());
                                 if (beanProductos2 == null) {
                                     //quiere decir que esa clave no esta registrada en la bd
                                     //llenasmos el bean PRo
 
-                                    System.out.println("valeverga  enttron aqui");
+                                    
                                     System.out.println("clave generada " + txtClavePro.getText());
                                     beanProductos.setIdproductos(Integer.parseInt(txtClavePro.getText()));
                                     beanProductos.setUsuarios(beanUsuario);
-                                    System.out.println("el puto bean " + beanProductos.getUsuarios());
+                                  
                                     beanProductos.setClave(txtClavePro.getText());
                                     beanProductos.setNombre(txtNombrePro.getText());
                                     beanProductos.setPrecio(Integer.parseInt(txtPrecioPro.getText()));
@@ -2662,6 +2648,7 @@ car.dispose();
 
         }
     }
+
     public void aceptarVentaRapida(JTextField txtNombre, JTextField txtCantidad, JTextField txtPrecio,
             JFrame frame, JTable tablaVentas, DefaultTableModel defaultTablaVentas, JTextField txtTotalAPagar,
             String idUsuario) {
@@ -2726,5 +2713,38 @@ car.dispose();
         } else {//termina la  validacion del  campo
 
         }
+    }
+    
+      public Clientes buscarClienteSiTieneDeuda2019(int precioProducto) {
+        Clientes bean = null;
+        // System.out.println("llamado por otra  ventana");
+        if (almacenamientoDeListas.listaClientes.size() != 0) {
+
+            bean = (Clientes) daoCliente.consultaEspecificaPorNombreBean(almacenamientoDeListas.listaClientes.get(0).getNombrecompleto());
+
+            if (bean != null) {
+
+                Set<Deudatotal> listaDeuda = bean.getDeudatotals();
+                if (listaDeuda.size() != 0) {
+                    for (Deudatotal deudatotal : listaDeuda) {
+                        if (deudatotal.getStatus().equalsIgnoreCase("No pagado")) {
+                            int nuevaDeuda = deudatotal.getDeudatotal() + precioProducto;
+                            bean.setNuevaDeuda(nuevaDeuda);
+                            //enviamos el bean a pantalla clientecondeuda
+                            clienteConDeuda.bean = bean;
+                            clienteConDeuda ccd = new clienteConDeuda();
+                            ccd.setVisible(true);
+                        }
+                    }
+                } else {
+
+                }
+            } else {
+                System.out.println("el cliente no esta registrado en la bd");
+            }
+
+        } else {
+        }
+        return bean;
     }
 }

@@ -169,4 +169,25 @@ public class daoClientes implements metodosDao {
         }
         return bean;
     }
+    
+    public Clientes consultaEspecificaPorNombreBean2019(String nombre) {
+
+        Clientes bean = new Clientes();
+//tanajamdo en control ventas, nuevo registro pantalla
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+          Query hql=session.createQuery("select c.idclientes,c.nombrecompleto,c.telefono,c.fecharegistro from Clientes as u where c.nombrecompleto='"+nombre+"'");
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            JOptionPane.showMessageDialog(null, "Error adaoClientes consultaEspecificaPorNombreBean2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            session.close();
+        }
+        return bean;
+
+    }
 }
