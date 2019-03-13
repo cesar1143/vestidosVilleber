@@ -186,27 +186,27 @@ public class daoUsuarios implements metodosDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            
-            Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u where u.usuario='"+usuario+"' and u.contra='"+contra+"'");
-           
+
+            Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u where u.usuario='" + usuario + "' and u.contra='" + contra + "'");
+
             List<Object[]> listaRes = hql.list();
             if (listaRes.size() > 0) {
                 for (int i = 0; i < listaRes.size(); i++) {
                     bean = new Usuarios();
-              String id=listaRes.get(i)[0]+"";
-              String nombre=listaRes.get(i)[1]+"";
-              String apaterno=listaRes.get(i)[2]+"";
-              String amaterno=listaRes.get(i)[3]+"";
-              String usuario2=listaRes.get(i)[4]+"";
-              String contra2=listaRes.get(i)[5]+"";
-                   
-              bean.setIdusuarios(Integer.parseInt(id));
-              bean.setNombre(nombre);
-              bean.setApaterno(apaterno);
-              bean.setAmaterno(amaterno);
-              bean.setUsuario(usuario2);
-              bean.setContra(contra2);
-             
+                    String id = listaRes.get(i)[0] + "";
+                    String nombre = listaRes.get(i)[1] + "";
+                    String apaterno = listaRes.get(i)[2] + "";
+                    String amaterno = listaRes.get(i)[3] + "";
+                    String usuario2 = listaRes.get(i)[4] + "";
+                    String contra2 = listaRes.get(i)[5] + "";
+
+                    bean.setIdusuarios(Integer.parseInt(id));
+                    bean.setNombre(nombre);
+                    bean.setApaterno(apaterno);
+                    bean.setAmaterno(amaterno);
+                    bean.setUsuario(usuario2);
+                    bean.setContra(contra2);
+
                 }
             } else {
 
@@ -224,33 +224,33 @@ public class daoUsuarios implements metodosDao {
         }
         return bean;
     }
-    
-     public Usuarios consultaEspecifica2019(String id) {
+
+    public Usuarios consultaEspecifica2019(String id) {
         Usuarios bean = new Usuarios();
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
-           Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u where u.idusuarios='"+id+"'");
-           
+            Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u where u.idusuarios='" + id + "'");
+
             List<Object[]> listaRes = hql.list();
             if (listaRes.size() > 0) {
                 for (int i = 0; i < listaRes.size(); i++) {
                     bean = new Usuarios();
-              String idPro=listaRes.get(i)[0]+"";
-              String nombre=listaRes.get(i)[1]+"";
-              String apaterno=listaRes.get(i)[2]+"";
-              String amaterno=listaRes.get(i)[3]+"";
-              String usuario2=listaRes.get(i)[4]+"";
-              String contra2=listaRes.get(i)[5]+"";
-                   
-              bean.setIdusuarios(Integer.parseInt(idPro));
-              bean.setNombre(nombre);
-              bean.setApaterno(apaterno);
-              bean.setAmaterno(amaterno);
-              bean.setUsuario(usuario2);
-              bean.setContra(contra2);
-             
+                    String idPro = listaRes.get(i)[0] + "";
+                    String nombre = listaRes.get(i)[1] + "";
+                    String apaterno = listaRes.get(i)[2] + "";
+                    String amaterno = listaRes.get(i)[3] + "";
+                    String usuario2 = listaRes.get(i)[4] + "";
+                    String contra2 = listaRes.get(i)[5] + "";
+
+                    bean.setIdusuarios(Integer.parseInt(idPro));
+                    bean.setNombre(nombre);
+                    bean.setApaterno(apaterno);
+                    bean.setAmaterno(amaterno);
+                    bean.setUsuario(usuario2);
+                    bean.setContra(contra2);
+
                 }
             } else {
 
@@ -268,4 +268,80 @@ public class daoUsuarios implements metodosDao {
         return bean;
     }
 
+    public List<Usuarios> consultarTodos2019() {
+        List<Usuarios> lista = new ArrayList<Usuarios>();
+        try {
+
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra from Usuarios as u");
+
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+                    Usuarios bean = new Usuarios();
+                    String idPro = listaRes.get(i)[0] + "";
+                    String nombre = listaRes.get(i)[1] + "";
+                    String apaterno = listaRes.get(i)[2] + "";
+                    String amaterno = listaRes.get(i)[3] + "";
+                    String usuario2 = listaRes.get(i)[4] + "";
+                    String contra2 = listaRes.get(i)[5] + "";
+
+                    bean.setIdusuarios(Integer.parseInt(idPro));
+                    bean.setNombre(nombre);
+                    bean.setApaterno(apaterno);
+                    bean.setAmaterno(amaterno);
+                    bean.setUsuario(usuario2);
+                    bean.setContra(contra2);
+                    lista.add(bean);
+
+                }
+            }
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar todos los usuarios" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+
+        return lista;
+    }
+    
+    public Usuarios consultaEspecificaPorUsuario2019(String usuario) {
+        Usuarios bean = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+           Query  hql=session.createQuery("select u.usuario,u.nombre from  Usuarios as u where u.usuario='"+usuario+"'");
+            
+           List<Object[]>listaRes=hql.list();
+            if (listaRes.size()>0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+                    bean = new Usuarios();
+                    String usu=listaRes.get(i)[0]+"";
+                    String nombre=listaRes.get(i)[1]+"";
+                    bean.setUsuario(usuario);
+                    bean.setNombre(nombre);
+                }
+            }else{
+                
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error daousuarios consultaEspecificaPorUsuario2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        return bean;
+    }
 }

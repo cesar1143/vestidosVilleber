@@ -19,6 +19,7 @@ public class Productos  implements java.io.Serializable {
      private String color;
      private String tipo;
      private Date fecharegistro;
+     //private String  fecharegistro;
      private byte[] foto;
      private String descripcion;
      private Integer cantidad;

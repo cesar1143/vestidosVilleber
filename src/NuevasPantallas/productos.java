@@ -57,7 +57,7 @@ byte[]fotoGlobal=null;
     controlVentas controlVen = new controlVentas();
 
     //============================ INSTANCIA DE LA TABLAS =========================================================
-    DefaultTableModel tablaProductos, tablaVentas;
+   public static DefaultTableModel tablaProductos, tablaVentas;
 
     public productos() {
 
@@ -1080,7 +1080,7 @@ byte[]fotoGlobal=null;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public static javax.swing.JTable jTable2;
     private javax.swing.JLabel labelFotoVentaProductos;
     private javax.swing.JLabel labelFotoVerProductosProductos;
     private javax.swing.JTextField txtBuscarProductos;

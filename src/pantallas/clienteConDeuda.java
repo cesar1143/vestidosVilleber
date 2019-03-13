@@ -5,52 +5,66 @@
  */
 package pantallas;
 
+import NuevasPantallas.productos;
 import beans.Clientes;
 import beans.Deudatotal;
 import beans.Pagos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 import java.util.Set;
+import modelo.daoClientes;
 
 /**
  *
  * @author famsa
  */
 public class clienteConDeuda extends javax.swing.JFrame {
- //para el frame
+    //para el frame
+
     int x = 0, y = 0;
     /**
      * Creates new form clienteConDeuda
      */
-   public static Clientes bean= new Clientes();
+    public static String precioPro = "";
+    public static Clientes bean = new Clientes();
+
     public clienteConDeuda() {
         initComponents();
         this.setTitle("Cliente con  deuda");
-        if (bean!=null) {
-            Set<Deudatotal>listaDeuda=bean.getDeudatotals();
-            
-            for (Deudatotal deudatotal : listaDeuda) {
-                  if (deudatotal.getStatus().equalsIgnoreCase("No pagado")) {
-                    nombre.setText(bean.getNombrecompleto());
-                    deuda.setText(deudatotal.getDeudatotal()+"");
-                    txtNuevaDeuda.setText(bean.getNuevaDeuda()+"");
-                    Set<Pagos>listaPagos=deudatotal.getPagoses();
-                     int sumaPagos=0;
-                      System.out.println("tamaño lista pafo " + listaPagos.size());
-                      System.out.println("bono actual " +bean.getAbonoActual());
-                      for (Pagos listaPago : listaPagos) {
-                          System.out.println("abono lista " +listaPago.getAbono());
-                        sumaPagos =sumaPagos+listaPago.getAbono();
-                          System.out.println("duma pagos " + sumaPagos);
-                        
-                        
-                      }
-                      int restan=Integer.parseInt(txtNuevaDeuda.getText())-(sumaPagos+bean.getAbonoActual());
-                      txtRestan.setText(restan+"");
-                    
-                    
+        if (bean != null) {
+            /*1. obtenmos la deuda mas el pro a compra*/
+            Deudatotal beanDeuda = new daoClientes().obtnerDeudaXIdCliente(bean.getIdclientes() + "");
+
+            if (beanDeuda != null) {
+                int sumSubtotal=0;
+                if (productos.jTable2.getSelectedRow()>0) {
+                    for (int i = 0; i < productos.jTable2.getRowCount(); i++) {
+                         sumSubtotal=sumSubtotal+Integer.parseInt(productos.tablaVentas.getValueAt(i, 4)+"");
+                    }
+                   
                 }
+                int sumaPagos = 0;
+                int nuevaDeuda = beanDeuda.getDeudatotal() + sumSubtotal;
+                nombre.setText(bean.getNombrecompleto());
+                deuda.setText(beanDeuda.getDeudatotal() + "");
+                txtNuevaDeuda.setText(nuevaDeuda + "");
+                List<Pagos> lista = new daoClientes().obtnerPagosXidDeuda(beanDeuda.getIddeudatotal() + "");
+
+                if (lista.size() > 0) {
+
+                    for (int i = 0; i < lista.size(); i++) {
+                        sumaPagos = sumaPagos + lista.get(i).getAbono();
+                    }
+                } else {
+
+                }
+                int restan = Integer.parseInt(txtNuevaDeuda.getText()) - (sumaPagos + bean.getAbonoActual());
+                txtRestan.setText(restan + "");
+            } else {
+
             }
+
         }
     }
 
@@ -278,11 +292,11 @@ public class clienteConDeuda extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNuevaDeudaActionPerformed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-      
+
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-    x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 

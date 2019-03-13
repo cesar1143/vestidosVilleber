@@ -281,11 +281,11 @@ public class controlProductos {
                             } else {
 
                             }
-                              int fila = tabla.getSelectedRow();
-                              String valorClave=defaultTabla.getValueAt(fila, 1)+"";
-                              
+                            int fila = tabla.getSelectedRow();
+                            String valorClave = defaultTabla.getValueAt(fila, 1) + "";
+
                             //validamos si el producto ya esta registrado
-                            if (validarProductoExisteten(clave.getText()) &&!clave.getText().equalsIgnoreCase(valorClave)) {
+                            if (validarProductoExisteten(clave.getText()) && !clave.getText().equalsIgnoreCase(valorClave)) {
                                 mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                                 mensajeAdvertencia.labelMensaje.setText("El producto ya esta registrado");
                                 menAdvertencia.setVisible(true);
@@ -320,7 +320,6 @@ public class controlProductos {
 
                                         // JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                                         // llenarTabla(tabla, defaultTabla);
-                                       
                                         defaultTabla.setValueAt(bean.getClave(), fila, 1);
                                         defaultTabla.setValueAt(bean.getNombre().toUpperCase(), fila, 2);
                                         defaultTabla.setValueAt(bean.getDescripcion().toUpperCase(), fila, 3);
@@ -344,7 +343,7 @@ public class controlProductos {
                                         menExito.setVisible(true);
                                         menExito.setAlwaysOnTop(true);
                                         //JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                                    
+
                                         defaultTabla.setValueAt(bean.getClave(), fila, 1);
                                         defaultTabla.setValueAt(bean.getNombre().toUpperCase(), fila, 2);
                                         defaultTabla.setValueAt(bean.getDescripcion().toUpperCase(), fila, 3);
@@ -700,7 +699,7 @@ public class controlProductos {
             vaciarTabla(tablaProAgotados, tablaAgostado);
             for (int i = 0; i < listaPro.size(); i++) {
 
-                tablaAgostado.addRow(new Object[]{listaPro.get(i).getIdProductos(), listaPro.get(i).getClave(), listaPro.get(i).getNombre(),
+                tablaAgostado.addRow(new Object[]{listaPro.get(i).getIdProductos(), listaPro.get(i).getClave(), listaPro.get(i).getNombre().toUpperCase(),
                     listaPro.get(i).getDescripcion(), listaPro.get(i).getCantidad(), listaPro.get(i).getPrecio()});
             }
         } else {
@@ -755,8 +754,8 @@ public class controlProductos {
 
             for (int i = 0; i < lista.size(); i++) {
 
-                defaultTablaProAgotados.addRow(new Object[]{lista.get(i).getIdProductos(), lista.get(i).getClave(), lista.get(i).getNombre(),
-                    lista.get(i).getDescripcion(), lista.get(i).getCantidad(), lista.get(i).getPrecio()});
+                defaultTablaProAgotados.addRow(new Object[]{lista.get(i).getIdProductos(), lista.get(i).getClave(), lista.get(i).getNombre().toUpperCase(),
+                    lista.get(i).getDescripcion().toUpperCase(), lista.get(i).getCantidad(), lista.get(i).getPrecio()});
 
             }
         } else {
@@ -1016,18 +1015,18 @@ public class controlProductos {
         return lista.get(0);
 
     }
-    
-     public void eliminar2109(String id, JTable tabla, DefaultTableModel defaultTabla) {
+
+    public void eliminar2109(String id, JTable tabla, DefaultTableModel defaultTabla) {
         int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta seguro de eliminar el producto seleccionado?");
 
         try {
             if (respuesta == 0) {
                 if (dao.elimianrProducto2019(id)) {
                     //lo quitamos de la tabla
-                    int fila=tabla.getSelectedRow();
+                    int fila = tabla.getSelectedRow();
                     defaultTabla.removeRow(fila);
-                }else{
-                    
+                } else {
+
                 }
             } else {
 
@@ -1035,6 +1034,37 @@ public class controlProductos {
 
         } catch (Exception e) {
         }
+
+    }
+
+    public Productos mostrarImagen32019(int id, JLabel labelFoto) {
+        boolean ban = false;
+        //HACEMOS LACONSUTLA ESPECIFICA PARA OBTEBENER LOS DATOS DEL PRODUCTO
+
+        Productos bean = dao.consultaEspecifica2019(id + "");
+
+        Image imagen = null;
+
+        try {
+
+            if (bean.getFoto() == null) {
+
+                labelFoto.setIcon(null);
+                labelFoto.setText("Sin foto");
+            } else {
+                labelFoto.setText("");
+                imagen = dao.getImage(bean, false);
+
+                Icon icon = new ImageIcon(imagen.getScaledInstance(200, 300, Image.SCALE_DEFAULT));
+                labelFoto.setIcon(icon);
+            }
+
+        } catch (Exception ex) {
+
+            System.out.println("error al cargar al mostrarImagen32019 " + ex.getMessage());
+
+        }
+        return bean;
 
     }
 }

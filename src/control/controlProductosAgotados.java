@@ -30,8 +30,13 @@ import modelo.daoMedidas;
 import modelo.daoProductos;
 import modelo.daoProductosApartados;
 import modelo.daocontrolProductosApartados;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import pantallas.editarProducto;
 import pantallas.editarProducto2;
+import util.NewHibernateUtil;
 import validaciones.validarCampos;
 
 /**
@@ -44,7 +49,9 @@ public class controlProductosAgotados {
     validarCampos validar = new validarCampos();
     Productos beanGlobal = new Productos();
     daocontrolProductosApartados daoApartados = new daocontrolProductosApartados();
-
+SessionFactory sessionFactory=NewHibernateUtil.getSessionFactory();
+    Session session= null;
+    Transaction transaction= null;
     public void eliminar(String id, JTable tabla, DefaultTableModel defaultTabla) {
 
         try {
@@ -58,13 +65,13 @@ public class controlProductosAgotados {
                 Set<Productosapartados> litsaProApartado = bean.getProductosapartadoses();
 
                 if (litsaProApartado.size() > 0) {
-                   // System.out.println("entro aqui")111111111111111111111111111111;
+                    // System.out.println("entro aqui")111111111111111111111111111111;
                     //SI ES IGUAL A 0 QUIERE DECIR QUE ESE PRODUCTO NO ESTA REGISTRADO EN APARTADOS
                     //Y SE ELIMINA SIN PROBLEMA ALGUNO
                     for (Productosapartados productosapartados : litsaProApartado) {
-                       // System.out.println("entro tanatas veces " + productosapartados.getIdproductosapartados());
+                        // System.out.println("entro tanatas veces " + productosapartados.getIdproductosapartados());
                         if (productosapartados.getStatus().equals("Pagado entregado")) {
-                         //   System.out.println("entro aqui");
+                            //   System.out.println("entro aqui");
                             //buscaremos si tiene medidas y fechas este producto y los eliminaremos 
                             Set<Medidas> listaMedidas = productosapartados.getMedidases();
                             Set<Fechaspruebas> listaFechas = productosapartados.getFechaspruebases();
@@ -185,7 +192,7 @@ public class controlProductosAgotados {
                             if (validarProductoExisteten(clave.getText())) {
                                 int fila = tabla.getSelectedRow();
                                 String valorClave = tabla.getValueAt(fila, 1) + "";
-                               
+
                                 if (!beanGlobal.getClave().equals(valorClave)) {
                                     mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                                     mensajeAdvertencia.labelMensaje.setText("El codigo ya esta registrado");
@@ -332,9 +339,9 @@ public class controlProductosAgotados {
         } else {
             mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("No hay ningun registro");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);
-           // JOptionPane.showMessageDialog(null, "No hay ningun registro", "Inforamción", JOptionPane.INFORMATION_MESSAGE);
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            // JOptionPane.showMessageDialog(null, "No hay ningun registro", "Inforamción", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -366,4 +373,54 @@ public class controlProductosAgotados {
         return ban;
 
     }
+
+    public void editarProductosAgotados2019(JTable tablaAgotados, DefaultTableModel defaultAgotados) {
+        int cantidad = 0;
+       
+        try {
+             cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad de los productos"));
+            if (cantidad > 0) {
+                int fila = tablaAgotados.getSelectedRow();
+                String idPro = tablaAgotados.getValueAt(fila, 0) + "";
+                Productos bean = new Productos();
+                bean.setIdproductos(Integer.parseInt(idPro));
+                bean.setCantidad(cantidad);
+
+                if (daoApartados.editarExistencias2019(bean)) {
+                    mensajeExito m= new mensajeExito();
+                    mensajeExito.labelMensaje.setText("Se edito correctamente");
+                    m.setVisible(true);
+                    m.setAlwaysOnTop(true);
+                    defaultAgotados.removeRow(fila);
+                } else {
+
+                }
+            } else {
+                //
+            }
+        } catch (Exception e) {
+            System.out.println("cancelo la ");
+        }
+    }
+     public void eliminar2109(String id, JTable tabla, DefaultTableModel defaultTabla) {
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta seguro de eliminar el producto seleccionado?");
+
+        try {
+            if (respuesta == 0) {
+                if (daoApartados.elimianrProducto2019(id)) {
+                    //lo quitamos de la tabla
+                    int fila = tabla.getSelectedRow();
+                    defaultTabla.removeRow(fila);
+                } else {
+
+                }
+            } else {
+
+            }
+
+        } catch (Exception e) {
+        }
+
+    }
+   
 }

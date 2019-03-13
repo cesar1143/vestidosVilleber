@@ -241,7 +241,7 @@ public class registrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreRegistrarClienteKeyTyped
 
     private void btnregistrarRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarRegistrarClienteActionPerformed
-      controlVentas.registrarCliente(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario+"",
+      controlVentas.registrarCliente2019(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario+"",
               txtTotalApagar, txtEfectivoRecibido, txtCambio,tablaVentas, defaultTablaVentas,tablaProductos,defaultTablaProductos);
     }//GEN-LAST:event_btnregistrarRegistrarClienteActionPerformed
 

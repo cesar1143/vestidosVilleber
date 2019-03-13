@@ -168,8 +168,8 @@ public class daoProductos implements metodosDao {
     }
 
     public Productos consultaEspecifica12PorClave(String clave) {
-        Productos bean = new Productos();
-        String sql = "select foto,nombre,descripcion,clave,precio from productos where clave=? ";
+        Productos bean = null;
+        String sql = "select idproductos,foto,nombre,descripcion,clave,precio from productos where clave=? ";
 
         try {
             con = conexion.getConnection();
@@ -179,12 +179,14 @@ public class daoProductos implements metodosDao {
             ps.setString(1, clave);
             rs = ps.executeQuery();
             while (rs.next()) {
+                bean = new Productos();
                 byte[] img = rs.getBytes("foto");
                 bean.setFoto(img);
                 bean.setClave(rs.getString("clave"));
                 bean.setPrecio(rs.getInt("precio"));
                 bean.setNombre(rs.getString("nombre"));
                 bean.setDescripcion(rs.getString("descripcion"));
+                bean.setIdproductos(rs.getInt("idproductos"));
 
             }
 
@@ -532,7 +534,7 @@ public class daoProductos implements metodosDao {
         List<productos> listaProCatalogo = new ArrayList<>();
 
         productos bean;
-        String sql = "select idproductos,clave,nombre,descripcion,cantidad,precio from productos where cantidad=0";
+        String sql = "select idproductos,clave,nombre,descripcion,cantidad,precio from productos where cantidad=0  order by nombre limit 50";
 
         try {
 
@@ -806,5 +808,28 @@ public class daoProductos implements metodosDao {
         }
         //System.out.println("bean dao " + bean.getClave());
         return ban;
+    }
+    
+        public boolean editarExistencias2019(Productos bean) {
+        boolean ban = false;
+        try {
+            Productos beanPro = (Productos) bean;
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql=session.createQuery("update Productos as p set p.cantidad='"+bean.getCantidad()+"' where p.idproductos='"+bean.getIdproductos()+"'");
+           hql.executeUpdate();
+            transaction.commit();
+            ban = true;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            JOptionPane.showMessageDialog(null, "Error daoproductos editarExistencias2019" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+
+            session.close();
+        }
+        return ban;
+
     }
 }

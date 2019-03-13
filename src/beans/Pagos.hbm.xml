@@ -20,5 +20,8 @@
         <property name="fecharegistro" type="string">
             <column name="fecharegistro" length="15" not-null="true" />
         </property>
+        <property name="fecharegistro2" type="date">
+            <column name="fecharegistro2"   />
+        </property>
     </class>
 </hibernate-mapping>

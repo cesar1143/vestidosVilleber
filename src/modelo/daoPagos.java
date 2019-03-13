@@ -12,8 +12,10 @@ import beans.Medidas;
 import beans.Pagos;
 import beans.Usuarios;
 import interfaces.metodosDao;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
@@ -279,6 +281,7 @@ public class daoPagos implements metodosDao {
 //bean deuda y usuarios
             //usuarios
             Query hqlUsuarios = session.createQuery("select u.idusuarios,u.nombre,u.apaterno,u.amaterno,u.usuario,u.contra,cl.idclientes,cl.nombrecompleto,cl.telefono,cl.fecharegistro from Clientes as cl inner join cl.usuarios  as u where cl.idclientes='" + idCliente + "'");
+            System.out.println("hql " + hqlUsuarios);
             List<Object[]> listaUsuarios = hqlUsuarios.list();
             if (listaUsuarios.size() > 0) {
                 System.out.println("tama " + listaUsuarios.size());
@@ -317,6 +320,7 @@ public class daoPagos implements metodosDao {
             beanPagos.setDeudatotal(beanDeduda);
             beanPagos.setUsuarios(beanUsuario);
             beanPagos.setAbono(abono);
+            beanPagos.setFecharegistro2(fechasDate());
             String fechaActual = fechaActual();
             beanPagos.setFecharegistro(fechaActual);
             int ultimoId = (int) session.save(beanPagos);
@@ -335,7 +339,12 @@ public class daoPagos implements metodosDao {
         }
         return ban;
     }
-    
+    public Date fechasDate(){
+        Date  objDate = new Date(); // Sistema actual La fecha y la hora se asignan a objDate 
+ 
+       
+         return  objDate;
+    }
      public boolean registrarSoloAbonoYcambiarEstatusProductos(String idCliente, int abono, DefaultTableModel defaultTablaPagos) {
         boolean ban = false;
         session = sessionFactory.openSession();

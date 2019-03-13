@@ -1,6 +1,9 @@
 package beans;
 // Generated 08-jun-2018 21:10:54 by Hibernate Tools 4.3.1
 
+import java.util.Date;
+
+
 
 
 /**
@@ -14,6 +17,8 @@ public class Pagos  implements java.io.Serializable {
      private Usuarios usuarios;
      private Integer abono;
      private String fecharegistro;
+     
+     private Date fecharegistro2;
 
     public Pagos() {
     }
@@ -63,6 +68,14 @@ public class Pagos  implements java.io.Serializable {
     
     public void setFecharegistro(String fecharegistro) {
         this.fecharegistro = fecharegistro;
+    }
+
+    public Date getFecharegistro2() {
+        return fecharegistro2;
+    }
+
+    public void setFecharegistro2(Date fecharegistro2) {
+        this.fecharegistro2 = fecharegistro2;
     }
 
 

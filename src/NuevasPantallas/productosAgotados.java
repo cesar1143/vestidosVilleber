@@ -23,6 +23,7 @@ import validaciones.validarCampos;
  * @author famsa
  */
 public class productosAgotados extends javax.swing.JFrame {
+
     //para el frame
     int x = 0, y = 0;
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
@@ -33,7 +34,7 @@ public class productosAgotados extends javax.swing.JFrame {
     controlProductosAgotados controlProAgotados = new controlProductosAgotados();
 
     //============================ INSTANCIA DE LA TABLAS =========================================================
-    DefaultTableModel  tablaProAgotados;
+    DefaultTableModel tablaProAgotados;
 
     public productosAgotados() {
         tablaProAgotados = new DefaultTableModel() {
@@ -46,15 +47,28 @@ public class productosAgotados extends javax.swing.JFrame {
         tablaProAgotados.setColumnIdentifiers(new Object[]{"Id", "Clave", "Nombre", "Descripcion", "Existencias", "Precio"});
 
         initComponents();
-          //mandamos el frame a pantalla  principal para controlarlo al abrirlo
-      principal.frameproductosAgotados=this;
+        //ocultamos boton eliminar
+        btnEliminarProAgotado.setVisible(false);
+        //mandamos el frame a pantalla  principal para controlarlo al abrirlo
+        principal.frameproductosAgotados = this;
         this.setState(MAXIMIZED_BOTH);
         //mandamos la tabla pro agotados a pantalla editar2
         editarProducto2.tabla = jTable3;
         editarProducto2.defaultTabla = tablaProAgotados;
-        
+        //ocult<mos columnas de tb pendientes
+        jTable3.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable3.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTable3.getColumnModel().getColumn(0).setWidth(0);
+        jTable3.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTable3.getColumnModel().getColumn(3).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(3).setPreferredWidth(0);
+        jTable3.getColumnModel().getColumn(3).setWidth(0);
+        jTable3.getColumnModel().getColumn(2).setMaxWidth(250);
+        jTable3.getColumnModel().getColumn(2).setMinWidth(250);
+        jTable3.getColumnModel().getColumn(2).setPreferredWidth(250);
         //llenar tabla
-         controlPro.llenarTabalProAgotados(jTable3, tablaProAgotados);
+        controlPro.llenarTabalProAgotados(jTable3, tablaProAgotados);
     }
 
     /**
@@ -69,8 +83,6 @@ public class productosAgotados extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         txtBuscarProductosProAgotados = new javax.swing.JTextField();
-        btnBuscarProAgotados = new javax.swing.JButton();
-        btnActualizarTablaProAgotados = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -83,13 +95,10 @@ public class productosAgotados extends javax.swing.JFrame {
         btnEditarProAgotado = new javax.swing.JButton();
         btnEliminarProAgotado = new javax.swing.JButton();
         labelFotoProAgotados = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
+        setTitle("Productos Agotados");
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -98,6 +107,11 @@ public class productosAgotados extends javax.swing.JFrame {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -112,30 +126,6 @@ public class productosAgotados extends javax.swing.JFrame {
         txtBuscarProductosProAgotados.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarProductosProAgotadosKeyReleased(evt);
-            }
-        });
-
-        btnBuscarProAgotados.setBackground(new java.awt.Color(255, 0, 204));
-        btnBuscarProAgotados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnBuscarProAgotados.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarProAgotados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/buscar.png"))); // NOI18N
-        btnBuscarProAgotados.setText("Buscar Cliente");
-        btnBuscarProAgotados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarProAgotados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarProAgotadosActionPerformed(evt);
-            }
-        });
-
-        btnActualizarTablaProAgotados.setBackground(new java.awt.Color(255, 0, 204));
-        btnActualizarTablaProAgotados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnActualizarTablaProAgotados.setForeground(new java.awt.Color(255, 255, 255));
-        btnActualizarTablaProAgotados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/actualizar.png"))); // NOI18N
-        btnActualizarTablaProAgotados.setText("Actualizar Tabla");
-        btnActualizarTablaProAgotados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnActualizarTablaProAgotados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarTablaProAgotadosActionPerformed(evt);
             }
         });
 
@@ -211,29 +201,6 @@ public class productosAgotados extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable3);
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         btnEditarProAgotado.setBackground(new java.awt.Color(255, 0, 204));
         btnEditarProAgotado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEditarProAgotado.setForeground(new java.awt.Color(255, 255, 255));
@@ -258,109 +225,84 @@ public class productosAgotados extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEditarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(btnEditarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labelFotoProAgotados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFotoProAgotados.setText("jLabel1");
         labelFotoProAgotados.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jPanel2.setBackground(new java.awt.Color(255, 0, 204));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Productos Agotados");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/actualizarTabla.png"))); // NOI18N
+        jLabel2.setToolTipText("Actulaiza la tabla ");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                jLabel2MouseClicked(evt);
             }
         });
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(164, 164, 164)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel35)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtBuscarProductosProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addComponent(btnBuscarProAgotados)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnActualizarTablaProAgotados)))
-                        .addGap(560, 560, 560))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditarProAgotado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addComponent(labelFotoProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addComponent(labelFotoProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel35)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtBuscarProductosProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel35)
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarProductosProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizarTablaProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(btnEditarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(labelFotoProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 159, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addComponent(labelFotoProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 218, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -380,29 +322,21 @@ public class productosAgotados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarProductosProAgotadosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosProAgotadosKeyReleased
-       if (txtBuscarProductosProAgotados.getText().isEmpty()) {
-           controlPro.llenarTabalProAgotados(jTable3, tablaProAgotados);
+        if (txtBuscarProductosProAgotados.getText().isEmpty()) {
+            controlPro.llenarTabalProAgotados(jTable3, tablaProAgotados);
         } else {
             controlPro.buscarProductoPorNombreORClaveORDescripcioProAgotadosLike(txtBuscarProductosProAgotados, jTable3, tablaProAgotados);
         }
     }//GEN-LAST:event_txtBuscarProductosProAgotadosKeyReleased
 
-    private void btnBuscarProAgotadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProAgotadosActionPerformed
-          controlPro.buscarProductoPorNombreORClaveORDescripcioProAgotados(txtBuscarProductosProAgotados, jTable3, tablaProAgotados);
-    }//GEN-LAST:event_btnBuscarProAgotadosActionPerformed
-
-    private void btnActualizarTablaProAgotadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaProAgotadosActionPerformed
-         controlPro.llenarTabalProAgotados(jTable3, tablaProAgotados);
-    }//GEN-LAST:event_btnActualizarTablaProAgotadosActionPerformed
-
     private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
         byte[] foto;
         int fila = jTable3.getSelectedRow();
         Object valorId = jTable3.getValueAt(fila, 0);
-        Productos bean = controlPro.mostrarImagen3(Integer.parseInt(valorId + ""), labelFotoProAgotados);
+        Productos bean = controlPro.mostrarImagen32019(Integer.parseInt(valorId + ""), labelFotoProAgotados);
         if (bean != null) {
-            txtNombreProAgotados.setText(bean.getNombre());
-            txtAreaDetalleProAgotados.setText(bean.getDescripcion());
+            txtNombreProAgotados.setText(bean.getNombre().toUpperCase());
+            txtAreaDetalleProAgotados.setText(bean.getDescripcion().toUpperCase());
         } else {
 
         }
@@ -417,31 +351,33 @@ public class productosAgotados extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
         } else {
-            if (principal.controleditarProducto2 == false) {
+            /*if (principal.controleditarProducto2 == false) {
                 int fila = jTable3.getSelectedRow();
                 Object valorId = jTable3.getValueAt(fila, 0);
                 controlProAgotados.consultaEspecificaParaModificar(Integer.parseInt(valorId + ""));
                 editarProducto2 ep2 = new editarProducto2();
 
                 ep2.setVisible(true);
-                principal.controleditarProducto2 = true;
-            } else {
+                principal.controleditarProducto2 = true;*/
+                //solo se  cambiara la cantidad
+                controlProAgotados.editarProductosAgotados2019( jTable3, tablaProAgotados);
+           /* } else {
                 mensajeAdvertencia men = new mensajeAdvertencia();
-            mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
-            men.setVisible(true);
-            men.setAlwaysOnTop(true);
+                mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
 
                 //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 principal.frameeditarProducto2.setAlwaysOnTop(true);
                 principal.frameeditarProducto2.setAlwaysOnTop(false);
-            }
+            }*/
 
         }
     }//GEN-LAST:event_btnEditarProAgotadoActionPerformed
 
     private void btnEliminarProAgotadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProAgotadoActionPerformed
         if (jTable3.getSelectedRow() == -1) {
-mensajeAdvertencia men = new mensajeAdvertencia();
+            mensajeAdvertencia men = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
             men.setVisible(true);
             men.setAlwaysOnTop(true);
@@ -450,18 +386,9 @@ mensajeAdvertencia men = new mensajeAdvertencia();
         } else {
             int fila = jTable3.getSelectedRow();
             Object valorId = jTable3.getValueAt(fila, 0);
-            controlProAgotados.eliminar(valorId + "", jTable3, tablaProAgotados);
+            controlProAgotados.eliminar2109(valorId + "", jTable3, tablaProAgotados);
         }
     }//GEN-LAST:event_btnEliminarProAgotadoActionPerformed
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.setState(ICONIFIED);
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-       principal.controlproductosAgotados=false;
-        dispose();
-    }//GEN-LAST:event_jLabel4MouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         x = evt.getX();
@@ -469,9 +396,17 @@ mensajeAdvertencia men = new mensajeAdvertencia();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-      Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        controlPro.llenarTabalProAgotados(jTable3, tablaProAgotados);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       principal.controlproductosAgotados=false;
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -509,20 +444,15 @@ mensajeAdvertencia men = new mensajeAdvertencia();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizarTablaProAgotados;
-    private javax.swing.JButton btnBuscarProAgotados;
     private javax.swing.JButton btnEditarProAgotado;
     private javax.swing.JButton btnEliminarProAgotado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;

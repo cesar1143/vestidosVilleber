@@ -711,11 +711,9 @@ public class daoProductosApartados implements metodosDao {
 
             System.out.println("bean foto " + bean.getFotoString());
             FileInputStream archivoFoto = new FileInputStream(bean.getFotoString());
-           
+
             //ps.setBinaryStream(5, archivoFoto);
-           
-            
-           /* Query hqlPro = session.createQuery("update Productos as p set   p.foto='" + b.getInputStream() + "'  where p.idproductos='" + bean.getIdproductos() + "'");
+            /* Query hqlPro = session.createQuery("update Productos as p set   p.foto='" + b.getInputStream() + "'  where p.idproductos='" + bean.getIdproductos() + "'");
             hqlPro.executeUpdate();*/
             modificarProductoConFoto(bean);
             System.out.println("modificmaos foto " + bean.getIdproductos());
@@ -736,28 +734,170 @@ public class daoProductosApartados implements metodosDao {
         return ban;
 
     }
-    
-     public boolean modificarProductoConFoto(Productos bean) {
+
+    public boolean modificarProductoConFoto(Productos bean) {
         boolean ban = false;
         String sql = "update productos set foto=? where idproductos=?";
-        Connection con=null;
+        Connection con = null;
         try {
             con = conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             FileInputStream archivoFoto = new FileInputStream(bean.getFotoString());
-            System.out.println("archivoFoto " +archivoFoto);
+            System.out.println("archivoFoto " + archivoFoto);
             ps.setBinaryStream(1, archivoFoto);
-            
-            
+
             ps.setInt(2, bean.getIdproductos());
             ban = ps.executeUpdate() == 1;
             ban = true;
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Mensaje daoproductosApartados modificarProductoConFoto " + e.getMessage());
         }
         return ban;
-        
+
+    }
+
+    public Productosapartados consultaEspecifica2019(String id) {
+        Productosapartados bean = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql = session.createQuery("select proA.idproductosapartados,proA.fecharegistro,proA.status,proA.cantidadVenta,proA.detallesproducto from Productosapartados as proA where  proA.idproductosapartados='" + id + "'");
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+                    bean = new Productosapartados();
+                    String idProA = listaRes.get(i)[0] + "";
+                    String fecha = listaRes.get(i)[1] + "";
+                    String status = listaRes.get(i)[2] + "";
+                    String cantida = listaRes.get(i)[3] + "";
+                    String detalles = listaRes.get(i)[4] + "";
+                    bean.setIdproductosapartados(Integer.parseInt(idProA));
+                    bean.setFecharegistro(fecha);
+                    bean.setCantidadVenta(Integer.parseInt(cantida));
+                    bean.setDetallesproducto(detalles);
+
+                }
+            } else {
+
+            }
+            transaction.commit();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error daoproductoapartados consultaEspecifica2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        return bean;
+    }
+
+    public List<Pagos> consultarTodosPorDia2019(String fecha) {
+        // List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
+        List<Pagos> lista = new ArrayList<Pagos>();
+        try {
+
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql = session.createQuery("select p.idpagos,p.abono,p.fecharegistro,p.deudatotal.iddeudatotal from Pagos as p where p.fecharegistro2='" + fecha + "' order by p.fecharegistro2");
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+
+                    String idPagos = listaRes.get(i)[0] + "";
+
+                    String abono = listaRes.get(i)[1] + "";
+                    String fechaRe = listaRes.get(i)[2] + "";
+                    String idDeuda = listaRes.get(i)[3] + "";
+                    String nombre = "";
+                    Query hqlCliente = session.createQuery("select c.nombrecompleto,c.telefono from Deudatotal  as d inner join d.clientes as c where d.iddeudatotal='" + idDeuda + "' ");
+                    List<Object[]> listaResCli = hqlCliente.list();
+                   
+                    if (listaResCli.size()>0) {
+                       for (int j = 0; j < listaResCli.size(); j++) {
+                        nombre=listaResCli.get(j)[0]+"";
+                    } 
+                    }else{
+                        
+                    }
+                    
+                    Pagos p = new Pagos();
+                    p.setIdpagos(Integer.parseInt(idPagos));
+                    p.setAbono(Integer.parseInt(abono));
+                    p.setFecharegistro(fechaRe + "," + idDeuda + "," + nombre);
+                    lista.add(p);
+                }
+            } else {
+
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error daoproductosapartados  consultarTodosPorDia2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+
+        return lista;
+    }
+    
+    public List<Pagos> consultarTodosPorSemana2019(String fecha,String fechaFinal) {
+        // List<Productosapartados> listaObj = new ArrayList<Productosapartados>();
+        List<Pagos> lista = new ArrayList<Pagos>();
+        try {
+            
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql = session.createQuery("select p.idpagos,p.abono,p.fecharegistro,p.deudatotal.iddeudatotal,p.fecharegistro2 from Pagos as p where p.fecharegistro2>='" + fecha + "' and p.fecharegistro2<='" + fechaFinal + "' order by  p.fecharegistro2 ");
+            
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+                for (int i = 0; i < listaRes.size(); i++) {
+
+                    String idPagos = listaRes.get(i)[0] + "";
+
+                    String abono = listaRes.get(i)[1] + "";
+                    String fechaRe = listaRes.get(i)[2] + "";
+                    String idDeuda = listaRes.get(i)[3] + "";
+                    String nombre = "";
+                    Query hqlCliente = session.createQuery("select c.nombrecompleto,c.telefono from Deudatotal  as d inner join d.clientes as c where d.iddeudatotal='" + idDeuda + "' ");
+                    List<Object[]> listaResCli = hqlCliente.list();
+                   
+                    if (listaResCli.size()>0) {
+                       for (int j = 0; j < listaResCli.size(); j++) {
+                        nombre=listaResCli.get(j)[0]+"";
+                    } 
+                    }else{
+                        
+                    }
+                    
+                    Pagos p = new Pagos();
+                    p.setIdpagos(Integer.parseInt(idPagos));
+                    p.setAbono(Integer.parseInt(abono));
+                    p.setFecharegistro(fechaRe + "," + idDeuda + "," + nombre);
+                    lista.add(p);
+                }
+            } else {
+
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error daoproductosapartados  consultarTodosPorDia2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+
+        return lista;
     }
 }

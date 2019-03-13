@@ -54,10 +54,10 @@ public class controlInicioSesion {
                             bean.setUsuario(usuario.getText());
                             bean.setContra(contra.getText());
                             //if validar si elusuario ya existe
-                            if (dao.consultaEspecificaPorUsuario(usuario.getText()) != null) {
+                            if (dao.consultaEspecificaPorUsuario2019(usuario.getText()) == null) {
                                 if (dao.registrar(bean)) {
                                     mensajeExito menExito = new mensajeExito();
-                                    mensajeExito.labelMensaje.setText("El usuario  se registro correctamente");
+                                    mensajeExito.labelMensaje.setText("Registro Exitoso");
                                     menExito.setVisible(true);
                                     menExito.setAlwaysOnTop(true);
                                     //   JOptionPane.showMessageDialog(null, "El usuario  se registro correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
@@ -71,12 +71,9 @@ public class controlInicioSesion {
 
                                 }
                             } else {
-                                mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
-                                mensajeAdvertencia.labelMensaje.setText("Este usuario  ya esta registrado," + "\nintenta con otro  nombre de usuario");
-                                menAdvertencia.setVisible(true);
-                                menAdvertencia.setAlwaysOnTop(true);
+                                
 
-                                //JOptionPane.showMessageDialog(null, "Este usuario  ya esta registrado, intente con otro  nombre de usuario");
+                                JOptionPane.showMessageDialog(null, "Este usuario  ya esta registrado, intenta con otro  nombre de usuario");
                                 usuario.requestFocus();
                             }
 
@@ -180,18 +177,14 @@ public class controlInicioSesion {
 
 //METODO CONSULTAR TODOS   
     public List<Usuarios> consultarTodos() {
-        List<Usuarios> listaUsu = new ArrayList<Usuarios>();
-        List<Object> listaObjec = dao.consultarTodos();
-        if (listaObjec.size() == 0) {
+    
+        List<Usuarios> listaUsu = dao.consultarTodos2019();
+        if (listaUsu.size() == 0) {
             //JOptionPane.showMessageDialog(null, "No hay usuarios registrados", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
 
             //COMO OBTENEMOS UNA LISTA DE OBJETOS DEBEMOS CONVERTIRLOS A USUARIOS
-            for (int i = 0; i < listaObjec.size(); i++) {
-                bean = (Usuarios) listaObjec.get(i);
-                listaUsu.add(bean);
-
-            }
+           
 
         }
 
