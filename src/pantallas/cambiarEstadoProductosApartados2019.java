@@ -292,9 +292,11 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUnoPorUnoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        principal1.controlcambiarEstadoProductosApartados = false;
+       /* principal1.controlcambiarEstadoProductosApartados = false;
         principalUsuarios.controlcambiarEstadoProductosApartados = false;
-        principal.controlcambiarEstadoProductosEntregadosNoPagados2019=false;
+        principal.controlcambiarEstadoProductosEntregadosNoPagados2019=false;*/
+        JOptionPane.showMessageDialog(null, "Selecciona un estatus para los productos","Advertencia!",JOptionPane.WARNING_MESSAGE);
+                
       
     }//GEN-LAST:event_formWindowClosing
 

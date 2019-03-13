@@ -118,13 +118,22 @@ public class controlProductoPendientes {
             vaciarTabla(tablaPendientes, modelTablaPendientes);
 
             for (int i = 0; i < lista.size(); i++) {
+                String hacer="PRUEBA";
+                if ( lista.get(i).getStatus().equalsIgnoreCase("apartado")) {
+                    
+                }else if( lista.get(i).getStatus().equalsIgnoreCase("pagado no entregado")){
+                    hacer="ENTREGAR";
+                }else{
+                    
+                }
                 modelTablaPendientes.addRow(new Object[]{
                     lista.get(i).getIdproductosapartados(),
                     lista.get(i).getClave(),
                     lista.get(i).getStatus().toUpperCase(),
                     lista.get(i).getCantidadVenta(),
                     lista.get(i).getFechaPrueba(),
-                    lista.get(i).getFechaEvento()});
+                    lista.get(i).getFechaEvento(),
+                hacer});
             }
 
         } else {
@@ -1391,7 +1400,6 @@ public class controlProductoPendientes {
                 menExito.setAlwaysOnTop(true);
                 //JOptionPane.showMessageDialog(null, "Se edito correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 productosPendientes.txtAreaDetalleProductoPendiente.setText(descripcion.getText().toUpperCase());
-               
 
             } else {
                 mensajeError menError = new mensajeError();
@@ -1403,5 +1411,21 @@ public class controlProductoPendientes {
             }
         }
 
+    }
+
+    public void cerrarVentana() {
+        if (principal.controlverPagos == false) {
+
+        } else {
+            principal.controlverPagos = false;
+            principal.frameverPagos.dispose();
+        }
+        
+        if (principal.controlcambiarEstadoProductosEntregadosNoPagados2019 == false) {
+
+        } else {
+            principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
+              principal.framecambiarEstadoProductosEntregadosNoPagados2019.dispose();
+        }
     }
 }

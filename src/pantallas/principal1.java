@@ -2514,8 +2514,8 @@ public class principal1 extends javax.swing.JFrame {
 
         String tipoReporte = spinerReportes.getSelectedItem().toString();
         //recibe  tiporeporte,fechai,fecha-f,fechaA,txtmostraVenta,tabla, default,label
-        new controlReportes().reportes(tipoReporte, fechaInicialReportes, fechaFinalReportes, fechaAñoReportes, txtMostrarVentaReportes,
-                jTable7, tablaReportes, labelVentaReportes, labelFechaInicialReportes, labelFechaAñoReportes, labelFechaFinalReportes);
+        //new controlReportes().reportes(tipoReporte, fechaInicialReportes, fechaFinalReportes, fechaAñoReportes, txtMostrarVentaReportes,
+               // jTable7, tablaReportes, labelVentaReportes, labelFechaInicialReportes, labelFechaAñoReportes, labelFechaFinalReportes);
     }//GEN-LAST:event_btnGenerarReporteReportesActionPerformed
 
     private void txtNombreUsuariosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreUsuariosKeyTyped

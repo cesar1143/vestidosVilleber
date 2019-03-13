@@ -19,11 +19,13 @@ import validaciones.validarCampos;
  * @author famsa
  */
 public class usuarios extends javax.swing.JFrame {
+
     //para el frame
     int x = 0, y = 0;
-  controlInicioSesion controlUsuario = new controlInicioSesion();
-   validarCampos validar = new validarCampos();
-  DefaultTableModel  tablaUsuarios;
+    controlInicioSesion controlUsuario = new controlInicioSesion();
+    validarCampos validar = new validarCampos();
+    DefaultTableModel tablaUsuarios;
+
     /**
      * Creates new form usuarios
      */
@@ -39,18 +41,18 @@ public class usuarios extends javax.swing.JFrame {
 
         initComponents();
         //OCULTAMOS EL ID
-        
+
         //validamos los campos
         validar.soloLetras(txtNombreUsuarios);
         validar.soloLetras(txtApaternoUsuarios);
         validar.soloLetras(txtAmaternoUsuarios);
         validar.soloLetras(txtUsuarioUsuarios);
         validar.soloNumerosYLetras(txtContraseñaUsuarios);
-          //mandamos el frame a pantalla  principal para controlarlo al abrirlo
-      principal.frameusuarios=this;
+        //mandamos el frame a pantalla  principal para controlarlo al abrirlo
+        principal.frameusuarios = this;
         this.setState(MAXIMIZED_BOTH);
         //llenamos la tabla
-         controlUsuario.llenarTablaUsuarios(jTable6, tablaUsuarios);
+        controlUsuario.llenarTablaUsuarios(jTable6, tablaUsuarios);
     }
 
     /**
@@ -392,9 +394,9 @@ public class usuarios extends javax.swing.JFrame {
                 principal.controleditarUsuario = true;
             } else {
                 mensajeAdvertencia men = new mensajeAdvertencia();
-            mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
-            men.setVisible(true);
-            men.setAlwaysOnTop(true);
+                mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
                 //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 principal.frameeditarUsuario.setAlwaysOnTop(true);
                 principal.frameeditarUsuario.setAlwaysOnTop(false);
@@ -404,17 +406,24 @@ public class usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarUsuariosActionPerformed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-       x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-principal.controlusuarios=false;
+
+        if (principal.controleditarUsuario == false) {
+
+        } else {
+            principal.controleditarUsuario = false;
+            principal.frameeditarUsuario.dispose();
+        }
+        principal.controlusuarios = false;
     }//GEN-LAST:event_formWindowClosing
 
     /**

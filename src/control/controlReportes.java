@@ -35,7 +35,9 @@ public class controlReportes {
 
     public void reportes(String tipoReporte, JDateChooser fechaInicial, JDateChooser fechaFinal, JYearChooser fechaAño,
             JTextField mostrarVenta, JTable tablaReportes, DefaultTableModel defaultTablaReportes,
-            JLabel labeltextoVenta, JLabel labelFechaInicial, JLabel labelFechaAño, JLabel labelfechaFinal) {
+            JLabel labeltextoVenta, JLabel labelFechaInicial, JLabel labelFechaAño, 
+            JLabel labelfechaFinal,JTextField txtDineroCaja,JTextField  txtDinerototalCaja,
+            JLabel labelTotalVenta,JTextField txtTotalVenta) {
         if (tipoReporte.equals("Selecciona...")) {
             mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("Selecciona algun tipo de consulta");
@@ -53,7 +55,9 @@ public class controlReportes {
                 //recibe una fecha,txtmostrarVenta,labelventa,tabla,defaultabla
                 //String fecha, JTable tablaReportes, DefaultTableModel defaultReportes, JTextField txtTotalVenta, JLabel labelMensaje
                 //obtenerProductosVendidosPorDia(obtenerFecha(fechaInicial), mostrarVenta, labeltextoVenta, tablaReportes, defaultTablaReportes);
-                obtnerPagosPorDia2019(obtenerFecha2(fechaInicial), tablaReportes, defaultTablaReportes, mostrarVenta, labeltextoVenta);
+                obtnerPagosPorDia2019(obtenerFecha2(fechaInicial), 
+                        tablaReportes, defaultTablaReportes,
+                        mostrarVenta, labeltextoVenta,txtDineroCaja,txtDinerototalCaja);
                 //llenamos la tabla reportes
 
             } else {
@@ -72,7 +76,9 @@ public class controlReportes {
                 if (fechaFinal != null) {
                     //System.out.println("entro aqui perro");
                     //    obtenerProductosVendidosPorSemana(obtenerFecha(fechaInicial), obtenerFecha(fechaFinal), mostrarVenta, labeltextoVenta, tablaReportes, defaultTablaReportes);
-                    obtnerPagosPorSemana2019(obtenerFecha2(fechaInicial), obtenerFecha2(fechaFinal), tablaReportes, defaultTablaReportes, mostrarVenta, labeltextoVenta);
+                    obtnerPagosPorSemana2019(obtenerFecha2(fechaInicial),
+                            obtenerFecha2(fechaFinal), tablaReportes,
+                            defaultTablaReportes, txtDinerototalCaja, labelTotalVenta);
                 } else {
                     mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                     mensajeAdvertencia.labelMensaje.setText("Ingresa la fecha");
@@ -95,8 +101,9 @@ public class controlReportes {
             int feañoIngresado = fechaAño.getYear();
             if (feañoIngresado <= añoActual) {
                 //obtenerProductosVendidosPorAño(tipoReporte, mostrarVenta, labeltextoVenta, tablaReportes, defaultTablaReportes);
-                    obtnerPagosPorAño019(feañoIngresado+"", tablaReportes, defaultTablaReportes, mostrarVenta, labeltextoVenta);
-               
+                obtnerPagosPorAño019(feañoIngresado + "", 
+                        tablaReportes, defaultTablaReportes, txtDinerototalCaja, labelTotalVenta);
+
             } else {
                 mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
                 mensajeAdvertencia.labelMensaje.setText("Ingresa un año valido");
@@ -297,8 +304,6 @@ public class controlReportes {
             diaMesSeleccionado = fechaDelDia.substring(0, 1);
             diaNum = fechaDelDia.substring(1, 2);
 
-          
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Al menos elija una FECHA DE NACIMIENTO VALIDA ", "Error..!!", JOptionPane.ERROR_MESSAGE);
 
@@ -313,10 +318,10 @@ public class controlReportes {
         }
 
         String fechaDia = diaMesSeleccionado + "-" + mes1 + "-" + año;
-      
 
         return fechaDia;
     }
+
     public String obtenerFecha2(JDateChooser fecha) {
         int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
         int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
@@ -336,8 +341,6 @@ public class controlReportes {
             diaMesSeleccionado = fechaDelDia.substring(0, 1);
             diaNum = fechaDelDia.substring(1, 2);
 
-           
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Al menos elija una FECHA DE NACIMIENTO VALIDA ", "Error..!!", JOptionPane.ERROR_MESSAGE);
 
@@ -351,13 +354,14 @@ public class controlReportes {
             mes1 = "0" + mes;
         }
 
-        String fechaDia = año+"-"+mes1+"-"+diaMesSeleccionado  ;
-        
+        String fechaDia = año + "-" + mes1 + "-" + diaMesSeleccionado;
 
         return fechaDia;
     }
 
-    public void obtnerPagosPorDia2019(String fecha, JTable tablaReportes, DefaultTableModel defaultReportes, JTextField txtTotalVenta, JLabel labelMensaje) {
+    public void obtnerPagosPorDia2019(String fecha, JTable tablaReportes,
+            DefaultTableModel defaultReportes, JTextField txtTotalVenta, JLabel labelMensaje,
+            JTextField txtDineroCaja, JTextField txtTotalCaja) {
         List<Pagos> lista = new daoProductosApartados().consultarTodosPorDia2019(fecha);
         vaciarTabla(tablaReportes, defaultReportes);
         if (lista.size() > 0) {
@@ -373,9 +377,15 @@ public class controlReportes {
                 defaultReportes.addRow(new Object[]{nombre.toUpperCase(), lista.get(i).getAbono(), valorFecha});
                 sumaPagos = sumaPagos + lista.get(i).getAbono();
             }
+            int cantidad = new daoProductosApartados().consultarCaja(fecha);
             txtTotalVenta.setText(sumaPagos + "");
+            sumaPagos = sumaPagos + cantidad;
+            txtDineroCaja.setText(cantidad + "");
+            txtTotalCaja.setText(sumaPagos + "");
             labelMensaje.setText("Venta total del dia " + valorFecha);
         } else {
+            txtDineroCaja.setText("0");
+            txtTotalCaja.setText("0");
             txtTotalVenta.setText("0");
             labelMensaje.setText("Venta total");
             JOptionPane.showMessageDialog(null, "No hay ningun registro");
@@ -384,7 +394,7 @@ public class controlReportes {
     }
 //TRABAJANDO AQUI REPORTE SEMANALA PENSANDO EN PASAR LA  FECHAREGISTRO DE VARCHAR A DATE PROBAR CON  REGISTRO ABONO
 
-    public void obtnerPagosPorSemana2019(String fecha, String fechaFinal, JTable tablaReportes, DefaultTableModel defaultReportes, 
+    public void obtnerPagosPorSemana2019(String fecha, String fechaFinal, JTable tablaReportes, DefaultTableModel defaultReportes,
             JTextField txtTotalVenta, JLabel labelMensaje) {
         List<Pagos> lista = new daoProductosApartados().consultarTodosPorSemana2019(fecha, fechaFinal);
         vaciarTabla(tablaReportes, defaultReportes);
@@ -410,11 +420,10 @@ public class controlReportes {
             System.out.println("no trae NADA");
         }
     }
-    
-    
-    public void obtnerPagosPorAño019(String  año, JTable tablaReportes, DefaultTableModel defaultReportes, JTextField txtTotalVenta, JLabel labelMensaje) {
-        String fecha=año+"-"+"01"+"-"+"01";
-        String fechaFinal=año+"-"+"12"+"-"+"31";
+
+    public void obtnerPagosPorAño019(String año, JTable tablaReportes, DefaultTableModel defaultReportes, JTextField txtTotalVenta, JLabel labelMensaje) {
+        String fecha = año + "-" + "01" + "-" + "01";
+        String fechaFinal = año + "-" + "12" + "-" + "31";
         List<Pagos> lista = new daoProductosApartados().consultarTodosPorSemana2019(fecha, fechaFinal);
         vaciarTabla(tablaReportes, defaultReportes);
         if (lista.size() > 0) {

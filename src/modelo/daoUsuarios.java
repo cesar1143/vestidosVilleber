@@ -21,6 +21,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import servicios.conexion;
 import util.NewHibernateUtil;
+import validaciones.validarCampos;
 
 /**
  *
@@ -344,4 +345,122 @@ public class daoUsuarios implements metodosDao {
         }
         return bean;
     }
+    
+    public List<String> consultarPruebas2019(String fechaActual){
+        session=sessionFactory.openSession();
+        transaction=session.beginTransaction();
+        boolean ban=false;
+        String respuesta="";
+         List<String>lista=new ArrayList<String>();
+        try {
+            Query hql=session.createQuery("select f.idfechaspruebas,c.nombrecompleto from  Fechaspruebas as f inner  join  f.productosapartados as proA inner  join proA.clientes as c where f.fechaprueba2='"+fechaActual+"' and proA.status='Apartado' ");
+            List<Object[]>listaRes1=hql.list();
+            if (listaRes1.size()>0) {
+               for (int i = 0; i < listaRes1.size(); i++) {
+                  String nombre=listaRes1.get(i)[1]+"";
+                  lista.add(nombre);
+                }
+            }else{
+                
+            }
+            
+           
+            
+            
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error daousuarios consultarPruebas2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        
+        return lista;
+    }
+    
+    
+     public  List<String> consultarEventos2019(String mes,String año){
+        session=sessionFactory.openSession();
+        transaction=session.beginTransaction();
+        boolean ban=false;
+        String respuesta="";
+        List<String>lista=new ArrayList<String>();
+        try {
+            
+            
+            Query hql1=session.createQuery("select f.idfechaspruebas,c.nombrecompleto from  Fechaspruebas as f inner  join  f.productosapartados as proA inner join proA.clientes as c where  month(fechaevento2)='"+mes+"' and year(fechaevento2)='"+año+"'  and  proA.status='Pagado no entregado' or  month(fechaevento2)='"+mes+"' and year(fechaevento2)='"+año+"'  and  proA.status='Apartado'");
+            List<Object[]>listaRes1=hql1.list();
+            if (listaRes1.size()>0) {
+                for (int i = 0; i < listaRes1.size(); i++) {
+                  String nombre=listaRes1.get(i)[1]+"";
+                  lista.add(nombre);
+                }
+                
+            }else{
+                
+            }
+            
+            
+            transaction.commit();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Error daousuarios consultarEventos2019 " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+       return lista; 
+    }
+     
+      public boolean  consultarDineroEnCaja(   ){
+          String arreDatos[] = new validarCampos().obtenerFechaActual().split("-");
+        String dia = arreDatos[0];
+        String mes = arreDatos[1];
+        String año = arreDatos[2];
+        String fecha = año + "-" + mes + "-" + dia;
+          boolean ban=false;
+         Connection con=null;
+         conexion c= new conexion();
+         con=c.getConnection();
+         
+         try {
+             String  sqlConsulta="select cantidad from caja where fecharegistro='"+fecha+"'";
+             System.out.println("sql  consulta "  + sqlConsulta);
+             PreparedStatement ps= con.prepareStatement(sqlConsulta);
+             ResultSet rs=ps.executeQuery();
+             while(rs.next()){
+                 ban=true;
+             }
+             
+             
+         } catch (Exception e) {
+             System.out.println("fallo registro dinero en caja " + e.getMessage());
+         }
+         return ban;
+     }
+     
+     public void  registrarDineroEnCaja(int cantidad,String nombre    ){
+         Connection con=null;
+         conexion c= new conexion();
+         con=c.getConnection();
+         
+         try {
+             
+             String sql="insert into caja(cantidad,fecharegistro,usuario)"
+                     + "values('"+cantidad+"',now(),'"+nombre+"')";
+             System.out.println("sql "+sql);
+             PreparedStatement  ps=con.prepareStatement(sql);
+             
+             ps.executeUpdate();
+             System.out.println("registro exitoso dinero caja");
+             
+         } catch (Exception e) {
+             System.out.println("fallo registro dinero en caja " + e.getMessage());
+         }
+     }
 }

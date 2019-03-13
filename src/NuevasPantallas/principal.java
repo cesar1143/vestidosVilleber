@@ -130,7 +130,7 @@ public class principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -140,6 +140,11 @@ public class principal extends javax.swing.JFrame {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -390,7 +395,7 @@ public class principal extends javax.swing.JFrame {
             .addGroup(panelReportesLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelReportesLayout.setVerticalGroup(
@@ -673,6 +678,10 @@ public class principal extends javax.swing.JFrame {
     private void panelUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelUsuariosMouseExited
         panelUsuarios.setBorder(BorderFactory.createLineBorder(Color.white));
     }//GEN-LAST:event_panelUsuariosMouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      JOptionPane.showMessageDialog(null, "Cierra la session","Advertencia!",JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

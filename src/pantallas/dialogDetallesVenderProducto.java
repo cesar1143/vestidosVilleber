@@ -8,24 +8,31 @@ package pantallas;
 import NuevasPantallas.principal;
 import beans.Productos;
 import control.controlVentas;
+import java.awt.Frame;
+import static java.awt.Frame.ICONIFIED;
 import java.awt.Image;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.daoProductos;
+import static pantallas.detallesVenderProducto.bean;
+import static pantallas.detallesVenderProducto.labelFotoDetallesVenta;
+import static pantallas.detallesVenderProducto.txtExistenciasDetallesVenta;
+import static pantallas.detallesVenderProducto.txtNombreDetallesVenta;
+import static pantallas.detallesVenderProducto.txtPrecioDetallesVenta;
 import validaciones.validarCampos;
 
 /**
  *
  * @author famsa
  */
-public class detallesVenderProducto extends javax.swing.JFrame {
+public class dialogDetallesVenderProducto extends javax.swing.JDialog {
 
-    //para el frame
+     //para el frame
     int x = 0, y = 0;
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
     controlVentas controlV = new controlVentas();
@@ -46,11 +53,11 @@ public class detallesVenderProducto extends javax.swing.JFrame {
     /**
      * Creates new form detallesVenderProducto
      */
-    public detallesVenderProducto() {
+    public dialogDetallesVenderProducto(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         //mandamos el frame al principal1 para cerrarlo
-        principalUsuarios.framedetallesVenderProducto = this;
-        principal.framedetallesVenderProducto = this;
+        
 
         this.setTitle("Detalles del producto a vender");
         this.setLocationRelativeTo(null);
@@ -82,7 +89,6 @@ public class detallesVenderProducto extends javax.swing.JFrame {
             System.out.println("error al cargar al imagen " + ex.getMessage());
 
         }
-
     }
 
     /**
@@ -114,23 +120,6 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                formMouseDragged(evt);
-            }
-        });
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                formMousePressed(evt);
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
@@ -335,7 +324,7 @@ public class detallesVenderProducto extends javax.swing.JFrame {
                 .addComponent(btnAceptarDetallesVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btncancelarDetallesVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -352,41 +341,19 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarDetallesVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDetallesVentaActionPerformed
-        //AL MOMENTO DE DAR HACEPTAR  PREGUNTAREMOS SI EL PRODUCTO LLEVARA ALGUN DETALLE?
-        //1.-SI --> REGISTRAMOS AL CLIENTE Y LOS DETALLES QUE PUEDEN  SER
-        //1.1->MEDIDAS
-        //1.2-->FECHAS
-        //NOTA PARA EL PUNTO 1 --> SI SE REGISTRA EL CLIENTE Y EL CLIENTE AUN SIGUE COMPRANDO DEBEMOS MANDAR A TRAER ESE ULTIMO
-        //CLIENTE REGISTRADO PARA PODER ASIGNAR SU ID ALA DEUDA TOTAL ASI COMO EN PRO APARTADOS
-
-        //2.-NO--> ENTONCES NO REGISTRAMOS AL CLIENTE.
-        //PERO  DEBEMOS DE REGISTRAR SU DEUDA TOTAL Y EN LA TABLA DE APRTADOS COMO CLIENTE GENERAL
-        //EL CUAL  YA ESTARA POR DEFAUL EL LA BD SIN MOSTRARSE EN LAS PANTALLAS
-        int cantidad = Integer.parseInt(txtCantidadDetallesVenta.getText());
-        controlV.aceptarDetallesVenta(txtCantidadDetallesVenta, bean, cantidad, this, tablaProductos,
-                defaultTablaProductos, tablaVentas, defaultTablaVentas, txtTotalAPagar);
-
-    }//GEN-LAST:event_btnAceptarDetallesVentaActionPerformed
-
     private void txtCantidadDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadDetallesVentaKeyPressed
         //CALCULAMOS EL TOTAL A PAGAR DE DICHO PRODUCTO PRECIO * CANTIDAD Y PINTAMOS EL SUBTOTAL
         /* System.out.println("entro");
-          System.out.println("esto pongo " +txtCantidadDetallesVenta.getText().toString().trim());
-          
-            System.out.println("entro  aqui 222");
-           int precio=Integer.parseInt(txtPrecioDetallesVenta.getText().toString().trim());
-           System.out.println("esto pongo " +  Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim()));
-           int cantidad=Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim());
-           int  subtotal=precio*cantidad;
-           txtSubTotalDetallesVenta.setText(subtotal+""); */
+        System.out.println("esto pongo " +txtCantidadDetallesVenta.getText().toString().trim());
 
+        System.out.println("entro  aqui 222");
+        int precio=Integer.parseInt(txtPrecioDetallesVenta.getText().toString().trim());
+        System.out.println("esto pongo " +  Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim()));
+        int cantidad=Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim());
+        int  subtotal=precio*cantidad;
+        txtSubTotalDetallesVenta.setText(subtotal+""); */
 
     }//GEN-LAST:event_txtCantidadDetallesVentaKeyPressed
-
-    private void txtSubTotalDetallesVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubTotalDetallesVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSubTotalDetallesVentaActionPerformed
 
     private void txtCantidadDetallesVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadDetallesVentaKeyReleased
 
@@ -398,8 +365,24 @@ public class detallesVenderProducto extends javax.swing.JFrame {
             txtSubTotalDetallesVenta.setText(subtotal + "");
         } catch (Exception e) {
         }
-
     }//GEN-LAST:event_txtCantidadDetallesVentaKeyReleased
+
+    private void btnAceptarDetallesVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDetallesVentaActionPerformed
+        //AL MOMENTO DE DAR HACEPTAR  PREGUNTAREMOS SI EL PRODUCTO LLEVARA ALGUN DETALLE?
+        //1.-SI --> REGISTRAMOS AL CLIENTE Y LOS DETALLES QUE PUEDEN  SER
+        //1.1->MEDIDAS
+        //1.2-->FECHAS
+        //NOTA PARA EL PUNTO 1 --> SI SE REGISTRA EL CLIENTE Y EL CLIENTE AUN SIGUE COMPRANDO DEBEMOS MANDAR A TRAER ESE ULTIMO
+        //CLIENTE REGISTRADO PARA PODER ASIGNAR SU ID ALA DEUDA TOTAL ASI COMO EN PRO APARTADOS
+
+        //2.-NO--> ENTONCES NO REGISTRAMOS AL CLIENTE.
+        //PERO  DEBEMOS DE REGISTRAR SU DEUDA TOTAL Y EN LA TABLA DE APRTADOS COMO CLIENTE GENERAL
+        //EL CUAL  YA ESTARA POR DEFAUL EL LA BD SIN MOSTRARSE EN LAS PANTALLAS
+        Frame f = JOptionPane.getFrameForComponent(this);
+        int cantidad = Integer.parseInt(txtCantidadDetallesVenta.getText());
+        controlV.aceptarDetallesVenta(txtCantidadDetallesVenta, bean, cantidad, (JFrame) f, tablaProductos,
+            defaultTablaProductos, tablaVentas, defaultTablaVentas, txtTotalAPagar);
+    }//GEN-LAST:event_btnAceptarDetallesVentaActionPerformed
 
     private void btncancelarDetallesVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarDetallesVentaActionPerformed
         // TODO add your handling code here:
@@ -408,30 +391,18 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         principal.controldetallesVenderProducto = false;
     }//GEN-LAST:event_btncancelarDetallesVentaActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        principal.controldetallesVenderProducto = false;
-        principalUsuarios.controldetallesVenderProducto = false;
-
-    }//GEN-LAST:event_formWindowClosing
+    private void txtSubTotalDetallesVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubTotalDetallesVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSubTotalDetallesVentaActionPerformed
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
-        this.setState(ICONIFIED);
+       // this.setState(ICONIFIED);
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-       principal.controldetallesVenderProducto=false;
+        principal.controldetallesVenderProducto=false;
         dispose();
     }//GEN-LAST:event_jLabel17MouseClicked
-
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_formMousePressed
-
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
-    }//GEN-LAST:event_formMouseDragged
 
     /**
      * @param args the command line arguments
@@ -450,20 +421,27 @@ public class detallesVenderProducto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(detallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dialogDetallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(detallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dialogDetallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(detallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dialogDetallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(detallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dialogDetallesVenderProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new detallesVenderProducto().setVisible(true);
+                dialogDetallesVenderProducto dialog = new dialogDetallesVenderProducto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

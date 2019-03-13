@@ -8,11 +8,13 @@ package control;
 import NuevasPantallas.iniciarSesion;
 import NuevasPantallas.principal;
 import NuevasPantallas.productos;
+import NuevasPantallas.productosPendientes;
 import modelo.daoUsuarios;
 import beans.Usuarios;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import javassist.compiler.ast.Variable;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,7 +28,6 @@ import mensajes.mensajeExito;
 import mensajes.mensajeQuestion;
 import pantallas.detallesVenderProducto;
 import pantallas.editarUsuario;
-
 
 import validaciones.validarCampos;
 
@@ -71,7 +72,6 @@ public class controlInicioSesion {
 
                                 }
                             } else {
-                                
 
                                 JOptionPane.showMessageDialog(null, "Este usuario  ya esta registrado, intenta con otro  nombre de usuario");
                                 usuario.requestFocus();
@@ -177,15 +177,13 @@ public class controlInicioSesion {
 
 //METODO CONSULTAR TODOS   
     public List<Usuarios> consultarTodos() {
-    
+
         List<Usuarios> listaUsu = dao.consultarTodos2019();
         if (listaUsu.size() == 0) {
             //JOptionPane.showMessageDialog(null, "No hay usuarios registrados", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
 
             //COMO OBTENEMOS UNA LISTA DE OBJETOS DEBEMOS CONVERTIRLOS A USUARIOS
-           
-
         }
 
         return listaUsu;
@@ -201,9 +199,24 @@ public class controlInicioSesion {
 
             //VALIDAMOS SI ENCONTRO LOS DATOS DEL USUARIO EN LA BD
             if (bean != null) {
-            
+
                 if (bean.getContra().equals(contra.getText())) {
-                   
+                    if (bean.getUsuario().equalsIgnoreCase("mayra")) {
+                        try {
+                            if (dao.consultarDineroEnCaja()) {
+
+                            } else {
+                                int dineroEncaja = 0;
+                                dineroEncaja = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad de dinero que hay en caja"));
+                                dao.registrarDineroEnCaja(dineroEncaja, bean.getUsuario());
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("no registro el dinero en caja");
+                        }
+                    } else {
+
+                    }
                     principal.usuario = bean.getUsuario();
                     principal.idUsuario = bean.getIdusuarios();
 
@@ -213,13 +226,13 @@ public class controlInicioSesion {
                     principal p = new principal();
                     p.setVisible(true);
                     frame.setVisible(false);
-
+                    consultarPruebas2019();
                 } else {
                     mensajeError men = new mensajeError();
                     mensajeError.labelMensaje.setText("Datos incorrectos");
                     men.setVisible(true);
                     men.setAlwaysOnTop(true);
-                    
+
                     // JOptionPane.showMessageDialog(null, "Datos incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -351,47 +364,45 @@ public class controlInicioSesion {
 
                     car.setVisible(true);
                     car.setAlwaysOnTop(true);
-                   
+
                     //para validar las pantallas principales
                     if (principal.controlcatalogo == true) {
-                       
+
                         principal.framecatalogo.dispose();
                         principal.controlcatalogo = false;
                     } else {
 
                     }
                     //=============================
-                  
+
                     if (principal.controlproductos == true) {
-                        
 
                         principal.controlproductos = false;
                         principal.frameproductos.dispose();
                     }
-                    
+
                     if (principal.controlproductosAgotados == true) {
                         principal.controlproductosAgotados = false;
                         principal.frameproductosAgotados.dispose();
                     }
-                   
+
                     if (principal.controlproductosPendientes == true) {
                         principal.controlproductosPendientes = false;
                         principal.frameproductosPendientes.dispose();
                     }
-                   
+
                     if (principal.controlreportes == true) {
                         principal.controlreportes = false;
                         principal.framereportes.dispose();
                     }
-                   
+
                     if (principal.controlusuarios == true) {
                         principal.controlusuarios = false;
                         principal.frameusuarios.dispose();
                     }
-                    
 
                     framePrincipal.dispose();
-                   
+
                     //validamos subventanas
                     if (principal.controlDetallesProducto == true) {
                         principal.controlDetallesProducto = false;
@@ -444,7 +455,6 @@ public class controlInicioSesion {
                         principal.frameeditarUsuario.dispose();
                     }
 
-                  
                     //todas las ventanas los ponemos en false
                     car.dispose();
                     iniciarSesion login = new iniciarSesion();
@@ -457,5 +467,57 @@ public class controlInicioSesion {
         } catch (Exception e) {
         }
 
+    }
+
+    public boolean consultarPruebas2019() {
+        boolean ban = false;
+        String arreDatos[] = new validarCampos().obtenerFechaActual().split("-");
+        String dia = arreDatos[0];
+        String mes = arreDatos[1];
+        String año = arreDatos[2];
+        String fecha = año + "-" + mes + "-" + dia;
+        boolean banPrueba = false;
+        boolean banEvento = false;
+        List<String> listaPruebas = dao.consultarPruebas2019(fecha);
+        List<String> listaEvento = dao.consultarEventos2019(mes, año);
+
+//validamos
+        String mensaje = "";
+        if (listaPruebas.size() > 0 && listaEvento.size() > 0) {
+            String clientesPrueba = "con los clientes";
+            for (int i = 0; i < listaPruebas.size(); i++) {
+                clientesPrueba = clientesPrueba + "\n" + listaPruebas.get(i);
+            }
+
+            String clienteEvento = "A los clientes";
+            for (int i = 0; i < listaEvento.size(); i++) {
+                clienteEvento = clienteEvento + "\n" + listaEvento.get(i);
+            }
+            mensaje = "Hoy hay pruebas" + "\n" + clientesPrueba + "\n Y productos para entregar  este mes " + "\n" + clienteEvento + "\nREVISA EL MODULO PENDIENTES DEL MENU";
+
+            JOptionPane.showMessageDialog(null, mensaje, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+
+        } else if (listaPruebas.size() > 0 && listaEvento.size() == 0) {
+            String clientesPrueba = "con los clientes";
+            for (int i = 0; i < listaPruebas.size(); i++) {
+                clientesPrueba = clientesPrueba + "\n" + listaPruebas.get(i);
+            }
+            mensaje = "Hoy hay pruebas" + "\n" + clientesPrueba + "\nREVISA EL MODULO PENDIENTES DEL MENU";
+
+            JOptionPane.showMessageDialog(null, mensaje, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+
+        } else if (listaPruebas.size() == 0 && listaEvento.size() > 0) {
+            String clienteEvento = "A los clientes";
+            for (int i = 0; i < listaEvento.size(); i++) {
+                clienteEvento = clienteEvento + "\n" + listaEvento.get(i);
+            }
+            mensaje = "Solo hay  productos para entregar  este mes" + "\n" + clienteEvento + "\nREVISA EL MODULO PENDIENTES DEL MENU";
+
+            JOptionPane.showMessageDialog(null, mensaje, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+
+        }
+        return ban;
     }
 }

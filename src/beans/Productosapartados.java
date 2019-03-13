@@ -2,6 +2,7 @@ package beans;
 // Generated 08-jun-2018 21:10:54 by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ public class Productosapartados  implements java.io.Serializable {
      private Productos productos;
      private Usuarios usuarios;
      private String fecharegistro;
+     private Date fecharegistro2;
      private String status;
      private int cantidadVenta;
      private String detallesproducto;

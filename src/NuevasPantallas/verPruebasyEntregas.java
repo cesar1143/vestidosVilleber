@@ -30,7 +30,7 @@ import validaciones.validarCampos;
  *
  * @author famsa
  */
-public class productosPendientes extends javax.swing.JFrame {
+public class verPruebasyEntregas extends javax.swing.JFrame {
     //para el frame
 
     int x = 0, y = 0;
@@ -44,7 +44,7 @@ public class productosPendientes extends javax.swing.JFrame {
     //recibimos el frame  de ver pagos
     public static JFrame frameverpagos;
 
-    public productosPendientes() {
+    public verPruebasyEntregas() {
         tablaPendientes = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -52,7 +52,7 @@ public class productosPendientes extends javax.swing.JFrame {
             }
 
         };
-        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento","Hacer"});
         tablaMedidas = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -668,20 +668,21 @@ public class productosPendientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(productosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verPruebasyEntregas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(productosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verPruebasyEntregas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(productosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verPruebasyEntregas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(productosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verPruebasyEntregas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new productosPendientes().setVisible(true);
+                new verPruebasyEntregas().setVisible(true);
             }
         });
     }

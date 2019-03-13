@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -899,5 +900,26 @@ public class daoProductosApartados implements metodosDao {
         }
 
         return lista;
+    }
+    
+    public int consultarCaja(String fecha){
+            int dinero=0;
+         Connection con=null;
+         conexion c= new conexion();
+         con=c.getConnection();
+         
+         try {
+             String  sqlConsulta="select cantidad from caja where fecharegistro=NOW()";
+             PreparedStatement ps= con.prepareStatement(sqlConsulta);
+             ResultSet rs=ps.executeQuery();
+             while(rs.next()){
+                dinero=rs.getInt("cantidad");
+             }
+             
+             
+         } catch (Exception e) {
+             System.out.println("fallo registro dinero en caja " + e.getMessage());
+         }
+         return dinero;
     }
 }

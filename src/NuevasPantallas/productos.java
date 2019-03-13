@@ -11,8 +11,11 @@ import control.controlInicioSesion;
 import control.controlProductos;
 import control.controlVentas;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -24,6 +27,7 @@ import mensajes.mensajeAdvertencia;
 import static pantallas.cambiarEstadoProductosApartados.tablaPendientes;
 import pantallas.detallesDelProducto;
 import pantallas.detallesVenderProducto;
+import pantallas.dialogDetallesVenderProducto;
 import pantallas.editarProducto;
 import pantallas.editarProducto2;
 import pantallas.nuevoRegistro;
@@ -36,8 +40,9 @@ import validaciones.validarCampos;
  *
  * @author famsa
  */
-public class productos extends javax.swing.JFrame implements Runnable {
-byte[]fotoGlobal=null;
+public class productos extends javax.swing.JFrame implements Runnable, KeyListener {
+
+    byte[] fotoGlobal = null;
     //para el reloj
     String hora, minuto, segundo;
 
@@ -57,7 +62,7 @@ byte[]fotoGlobal=null;
     controlVentas controlVen = new controlVentas();
 
     //============================ INSTANCIA DE LA TABLAS =========================================================
-   public static DefaultTableModel tablaProductos, tablaVentas;
+    public static DefaultTableModel tablaProductos, tablaVentas;
 
     public productos() {
 
@@ -137,6 +142,12 @@ byte[]fotoGlobal=null;
 
         detallesVenderProducto.tablaProductos = jTable1;
         detallesVenderProducto.defaultTablaProductos = tablaProductos;
+        //para dialog
+        dialogDetallesVenderProducto.tablaProductos = jTable1;
+        dialogDetallesVenderProducto.defaultTablaProductos = tablaProductos;
+        dialogDetallesVenderProducto.tablaVentas = jTable2;
+        dialogDetallesVenderProducto.defaultTablaVentas = tablaVentas;
+        dialogDetallesVenderProducto.txtTotalAPagar = txtTotalPagarProductos;
 
         registrarCliente.tablaProductos = jTable1;
         registrarCliente.defaultTablaProductos = tablaProductos;
@@ -148,6 +159,7 @@ byte[]fotoGlobal=null;
         detallesVenderProducto.tablaVentas = jTable2;
         detallesVenderProducto.defaultTablaVentas = tablaVentas;
         detallesVenderProducto.txtTotalAPagar = txtTotalPagarProductos;
+
         //tabla ventas
         //enviar datos a registrarCliente
         registrarCliente.txtTotalApagar = txtTotalPagarProductos;
@@ -291,6 +303,9 @@ byte[]fotoGlobal=null;
 
         txtBuscarProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtBuscarProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarProductosKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarProductosKeyReleased(evt);
             }
@@ -341,6 +356,11 @@ byte[]fotoGlobal=null;
         btnVenderProProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVenderProProductosActionPerformed(evt);
+            }
+        });
+        btnVenderProProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnVenderProProductosKeyPressed(evt);
             }
         });
 
@@ -492,6 +512,8 @@ byte[]fotoGlobal=null;
                         .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        btnVenderProProductos.getAccessibleContext().setAccessibleParent(this);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venta de productos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
@@ -717,7 +739,7 @@ byte[]fotoGlobal=null;
         int fila = jTable1.getSelectedRow();
         String valorId = jTable1.getValueAt(fila, 0) + "";
         Productos bean = controlPro.mostrarImagen(valorId, labelFotoVerProductosProductos);
-        fotoGlobal=bean.getFoto();
+        fotoGlobal = bean.getFoto();
         if (bean != null) {
             txtNombreProductoProductos.setText(bean.getNombre());
             txtDescripcionProductos.setText(bean.getDescripcion());
@@ -760,9 +782,9 @@ byte[]fotoGlobal=null;
 
     private void btnActualizarTablaProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaProductosActionPerformed
         txtNombreProductoProductos.setText("");
-       labelFotoVerProductosProductos.setText("");
-       labelFotoVerProductosProductos.setIcon(null);
-       txtDescripcionProductos.setText("");
+        labelFotoVerProductosProductos.setText("");
+        labelFotoVerProductosProductos.setIcon(null);
+        txtDescripcionProductos.setText("");
         controlPro.llenarTabla(jTable1, tablaProductos);
     }//GEN-LAST:event_btnActualizarTablaProductosActionPerformed
 
@@ -817,14 +839,14 @@ byte[]fotoGlobal=null;
 
                 Productos bean = new Productos();
                 bean.setIdproductos(Integer.parseInt(valorId + ""));
-                bean.setCantidad(Integer.parseInt(valorExistencias+""));
+                bean.setCantidad(Integer.parseInt(valorExistencias + ""));
                 bean.setNombre(valorNombre + "");
                 bean.setPrecio(Integer.parseInt(valorPrecio + ""));
-                bean.setClave(valorClave+"");
+                bean.setClave(valorClave + "");
                 bean.setFoto(fotoGlobal);
-                
-                detallesVenderProducto.bean=bean;
-                detallesVenderProducto d= new detallesVenderProducto();
+
+                detallesVenderProducto.bean = bean;
+                detallesVenderProducto d = new detallesVenderProducto();
                 d.setVisible(true);
 
                 //tenemos que enviar un bean productos a detalles vender producto para mostrar los datos delproducto seleccionado
@@ -971,9 +993,9 @@ byte[]fotoGlobal=null;
         //buscamos  por clave,nombres ,descripcion
         String dato = txtBuscarProductos.getText();
         txtNombreProductoProductos.setText("");
-       labelFotoVerProductosProductos.setText("");
-       labelFotoVerProductosProductos.setIcon(null);
-       txtDescripcionProductos.setText("");
+        labelFotoVerProductosProductos.setText("");
+        labelFotoVerProductosProductos.setIcon(null);
+        txtDescripcionProductos.setText("");
         controlPro.consultarPorClaveNombreDescripcionLike(dato, jTable1, tablaProductos);
     }//GEN-LAST:event_txtBuscarProductosKeyReleased
 
@@ -988,8 +1010,9 @@ byte[]fotoGlobal=null;
     }//GEN-LAST:event_formMouseDragged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
+        controlPro.cerrarVentana();
         principal.controlproductos = false;
+
     }//GEN-LAST:event_formWindowClosing
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -1007,6 +1030,14 @@ byte[]fotoGlobal=null;
             principal.frameventaRapida.setAlwaysOnTop(false);
         }
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void txtBuscarProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarProductosKeyPressed
+
+    private void btnVenderProProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVenderProProductosKeyPressed
+
+    }//GEN-LAST:event_btnVenderProProductosKeyPressed
 
     /**
      * @param args the command line arguments
@@ -1092,4 +1123,69 @@ byte[]fotoGlobal=null;
     private javax.swing.JTextField txtReloj;
     private javax.swing.JTextField txtTotalPagarProductos;
     // End of variables declaration//GEN-END:variables
+ @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("se  presiono aqui");
+        if (e.VK_F12 == e.getKeyCode()) {
+            System.out.println("me presio na f1222");
+            if (jTable1.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un producto de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                if (principal.controldetallesVenderProducto == false) {
+                    int fila = jTable1.getSelectedRow();
+
+                    Object valorId = jTable1.getValueAt(fila, 0);
+
+                    Object valorExistencias = jTable1.getValueAt(fila, 4);
+                    Object valorNombre = jTable1.getValueAt(fila, 2);
+                    Object valorPrecio = jTable1.getValueAt(fila, 5);
+                    Object valorClave = jTable1.getValueAt(fila, 1);
+
+                    Productos bean = new Productos();
+                    bean.setIdproductos(Integer.parseInt(valorId + ""));
+                    bean.setCantidad(Integer.parseInt(valorExistencias + ""));
+                    bean.setNombre(valorNombre + "");
+                    bean.setPrecio(Integer.parseInt(valorPrecio + ""));
+                    bean.setClave(valorClave + "");
+                    bean.setFoto(fotoGlobal);
+
+                    detallesVenderProducto.bean = bean;
+                    detallesVenderProducto d = new detallesVenderProducto();
+                    d.setVisible(true);
+
+                    //tenemos que enviar un bean productos a detalles vender producto para mostrar los datos delproducto seleccionado
+                    //controlPro.consultaEspecificaParaEnviarAPantllas(Integer.parseInt(valorId + ""), Integer.parseInt(valorExistencias + ""), "detallesVenderProducto");
+                    principal.controldetallesVenderProducto = true;
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.framedetallesVenderProducto.setAlwaysOnTop(true);
+                    principal.framedetallesVenderProducto.setAlwaysOnTop(false);
+                }
+
+            }
+        } else {
+            System.out.println("presionars  otra cosa");
+        }
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

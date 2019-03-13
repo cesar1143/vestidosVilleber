@@ -29,6 +29,7 @@
         <property name="detallesproducto" type="string">
             <column name="detallesproducto" length="100" />
         </property>
+        
         <set name="productosvendidoses" table="productosvendidos" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="productosapartados_id" />

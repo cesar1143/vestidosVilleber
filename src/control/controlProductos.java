@@ -1067,4 +1067,34 @@ public class controlProductos {
         return bean;
 
     }
+
+    public void cerrarVentana() {
+        if (principal.controldetallesVenderProducto == false) {
+
+        } else {
+            principal.controldetallesVenderProducto = false;
+            principal.framedetallesVenderProducto.dispose();
+        }
+
+        if (principal.controlnuevoRegistro == false) {
+
+        } else {
+            principal.controlnuevoRegistro = false;
+            principal.framenuevoRegistro.dispose();
+        }
+        
+        if (principal.controlregistrarProducto == false) {
+
+        } else {
+            principal.controlregistrarProducto = false;
+            principal.frameregistrarProducto.dispose();
+        }
+        
+        if (principal.controleditarProducto == false) {
+
+        } else {
+            principal.controleditarProducto = false;
+            principal.frameeditarProducto.dispose();
+        }
+    }
 }

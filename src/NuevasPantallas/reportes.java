@@ -52,6 +52,10 @@ public class reportes extends javax.swing.JFrame {
         labelFechaAñoReportes.setVisible(false);
         labelFechaFinalReportes.setVisible(false);
         fechaFinalReportes.setVisible(false);
+        labelVentaReportes.setVisible(false);
+        txtMostrarVentaReportes.setVisible(false);
+        labelVentaReportes2.setVisible(false);
+        txtDineroCaja.setVisible(false);
 
     }
 
@@ -77,6 +81,11 @@ public class reportes extends javax.swing.JFrame {
         btnGenerarReporteReportes = new javax.swing.JButton();
         txtMostrarVentaReportes = new javax.swing.JTextField();
         labelVentaReportes = new javax.swing.JLabel();
+        labelDineroTotalCaja = new javax.swing.JLabel();
+        labelVentaReportes2 = new javax.swing.JLabel();
+        txtDineroTotalCaja = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtDineroCaja = new javax.swing.JTextField();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
@@ -154,46 +163,81 @@ public class reportes extends javax.swing.JFrame {
         txtMostrarVentaReportes.setBackground(new java.awt.Color(229, 222, 222));
         txtMostrarVentaReportes.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         txtMostrarVentaReportes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMostrarVentaReportes.setText("0");
 
         labelVentaReportes.setBackground(new java.awt.Color(255, 255, 255));
         labelVentaReportes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         labelVentaReportes.setText("Venta");
+
+        labelDineroTotalCaja.setBackground(new java.awt.Color(255, 255, 255));
+        labelDineroTotalCaja.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        labelDineroTotalCaja.setText("Dinero en caja");
+
+        labelVentaReportes2.setBackground(new java.awt.Color(255, 255, 255));
+        labelVentaReportes2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        labelVentaReportes2.setText("Dinero en caja");
+
+        txtDineroTotalCaja.setEditable(false);
+        txtDineroTotalCaja.setBackground(new java.awt.Color(229, 222, 222));
+        txtDineroTotalCaja.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        txtDineroTotalCaja.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDineroTotalCaja.setText("0");
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtDineroCaja.setEditable(false);
+        txtDineroCaja.setBackground(new java.awt.Color(229, 222, 222));
+        txtDineroCaja.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        txtDineroCaja.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDineroCaja.setText("0");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelFechaFinalReportes)
-                                .addGroup(jPanel20Layout.createSequentialGroup()
-                                    .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDineroTotalCaja, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel20Layout.createSequentialGroup()
+                                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelFechaFinalReportes)
+                                        .addGroup(jPanel20Layout.createSequentialGroup()
+                                            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel20Layout.createSequentialGroup()
+                                                        .addGap(2, 2, 2)
+                                                        .addComponent(labelFechaInicialReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                                                        .addComponent(labelFechaAñoReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jLabel15))
+                                            .addGap(24, 24, 24)
+                                            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(fechaInicialReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(spinerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jPanel20Layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(labelFechaInicialReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                                                .addComponent(labelFechaAñoReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(jLabel15))
-                                    .addGap(24, 24, 24)
-                                    .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(fechaInicialReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(spinerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(labelVentaReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnGenerarReporteReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(fechaFinalReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaAñoReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(2, 2, 2)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtMostrarVentaReportes))
+                                                .addComponent(labelVentaReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(295, 295, 295)
+                                                .addComponent(txtMostrarVentaReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(btnGenerarReporteReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(fechaFinalReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(fechaAñoReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(2, 2, 2)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel20Layout.createSequentialGroup()
+                                .addComponent(labelVentaReportes2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDineroCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(labelDineroTotalCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -227,10 +271,20 @@ public class reportes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGenerarReporteReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(labelVentaReportes)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMostrarVentaReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVentaReportes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtMostrarVentaReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDineroCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVentaReportes2))
+                .addGap(31, 31, 31)
+                .addComponent(labelDineroTotalCaja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDineroTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -253,7 +307,7 @@ public class reportes extends javax.swing.JFrame {
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -275,8 +329,8 @@ public class reportes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 674, Short.MAX_VALUE))
-                .addContainerGap(185, Short.MAX_VALUE))
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -306,6 +360,10 @@ public class reportes extends javax.swing.JFrame {
             labelFechaAñoReportes.setVisible(false);
             labelFechaFinalReportes.setVisible(false);
             fechaFinalReportes.setVisible(false);
+            labelVentaReportes.setVisible(false);
+            txtMostrarVentaReportes.setVisible(false);
+            labelVentaReportes2.setVisible(false);
+            txtDineroCaja.setVisible(false);
         }
         if (tipoReporte.equals("Dia")) {
             txtMostrarVentaReportes.setText("");
@@ -318,6 +376,10 @@ public class reportes extends javax.swing.JFrame {
             labelFechaAñoReportes.setVisible(false);
             fechaFinalReportes.setVisible(false);
             labelFechaFinalReportes.setVisible(false);
+            labelVentaReportes.setVisible(true);
+            txtMostrarVentaReportes.setVisible(true);
+            labelVentaReportes2.setVisible(true);
+            txtDineroCaja.setVisible(true);
 
         } else if (tipoReporte.equals("Semana")) {
             txtMostrarVentaReportes.setText("");
@@ -333,6 +395,10 @@ public class reportes extends javax.swing.JFrame {
             fechaFinalReportes.setVisible(true);
             labelFechaFinalReportes.setText("Fecha final");
             labelFechaFinalReportes.setVisible(true);
+            labelVentaReportes.setVisible(false);
+            txtMostrarVentaReportes.setVisible(false);
+            labelVentaReportes2.setVisible(false);
+            txtDineroCaja.setVisible(false);
 
         } else if (tipoReporte.equals("Año")) {
             txtMostrarVentaReportes.setText("");
@@ -345,6 +411,10 @@ public class reportes extends javax.swing.JFrame {
 
             fechaFinalReportes.setVisible(false);
             labelFechaFinalReportes.setVisible(false);
+            labelVentaReportes.setVisible(false);
+            txtMostrarVentaReportes.setVisible(false);
+            labelVentaReportes2.setVisible(false);
+            txtDineroCaja.setVisible(false);
 
         } else if (tipoReporte.equals("Mes con mas ventas")) {
             txtMostrarVentaReportes.setText("");
@@ -357,6 +427,10 @@ public class reportes extends javax.swing.JFrame {
 
             fechaFinalReportes.setVisible(false);
             labelFechaFinalReportes.setVisible(false);
+            labelVentaReportes.setVisible(false);
+            txtMostrarVentaReportes.setVisible(false);
+            labelVentaReportes2.setVisible(false);
+            txtDineroCaja.setVisible(false);
 
         }
     }//GEN-LAST:event_spinerReportesActionPerformed
@@ -367,7 +441,9 @@ public class reportes extends javax.swing.JFrame {
         String tipoReporte = spinerReportes.getSelectedItem().toString();
         //recibe  tiporeporte,fechai,fecha-f,fechaA,txtmostraVenta,tabla, default,label
         new controlReportes().reportes(tipoReporte, fechaInicialReportes, fechaFinalReportes, fechaAñoReportes, txtMostrarVentaReportes,
-                jTable7, tablaReportes, labelVentaReportes, labelFechaInicialReportes, labelFechaAñoReportes, labelFechaFinalReportes);
+                jTable7, tablaReportes, labelVentaReportes, labelFechaInicialReportes,
+                labelFechaAñoReportes, labelFechaFinalReportes, txtDineroCaja,
+                txtDineroTotalCaja,labelDineroTotalCaja,txtDineroTotalCaja);
     }//GEN-LAST:event_btnGenerarReporteReportesActionPerformed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -444,17 +520,22 @@ public class reportes extends javax.swing.JFrame {
     public static com.toedter.calendar.JYearChooser fechaAñoReportes;
     public static com.toedter.calendar.JDateChooser fechaFinalReportes;
     public static com.toedter.calendar.JDateChooser fechaInicialReportes;
+    private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTable jTable7;
+    public static javax.swing.JLabel labelDineroTotalCaja;
     public static javax.swing.JLabel labelFechaAñoReportes;
     public static javax.swing.JLabel labelFechaFinalReportes;
     public static javax.swing.JLabel labelFechaInicialReportes;
     public static javax.swing.JLabel labelVentaReportes;
+    public static javax.swing.JLabel labelVentaReportes2;
     public static javax.swing.JComboBox spinerReportes;
+    public static javax.swing.JTextField txtDineroCaja;
+    public static javax.swing.JTextField txtDineroTotalCaja;
     public static javax.swing.JTextField txtMostrarVentaReportes;
     // End of variables declaration//GEN-END:variables
 }
