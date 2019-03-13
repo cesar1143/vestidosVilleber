@@ -23,7 +23,7 @@ import javax.imageio.stream.ImageInputStream;
 import javax.swing.JOptionPane;
 import servicios.conexion;
 
-/**
+/** 
  *
  * @author Usuario
  */
