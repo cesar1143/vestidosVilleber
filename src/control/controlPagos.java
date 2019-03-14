@@ -35,10 +35,10 @@ import validaciones.validarCampos;
  * @author famsa
  */
 public class controlPagos {
-
+    
     validarCampos validar = new validarCampos();
     daoPagos daoP = new daoPagos();
-
+    
     public void registrar(JTextField txtAbono, JTextField txtEfectivoRecibido, JTextField txtCambio, JTextField txtDeuda, JTextField txtResta,
             String nombreCliente, JTable tablaPagos, DefaultTableModel defaultTablaPagos, String idUsuario, JFrame frame) {
         if (validar.validarCampos(txtAbono)) {
@@ -76,9 +76,9 @@ public class controlPagos {
                                             Set<Pagos> listaPagos = beanDeuda.getPagoses();
                                             int sumaPagos = 0;
                                             for (Pagos listaPago : listaPagos) {
-
+                                                
                                                 sumaPagos = sumaPagos + listaPago.getAbono();
-
+                                                
                                                 defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
                                             }
                                             int restante = Integer.parseInt(txtDeuda.getText()) - sumaPagos;
@@ -106,24 +106,24 @@ public class controlPagos {
                                                     cambiarEstadoProductosApartados.beanCliente = beanCliente;
                                                     principal.controlverPagos = false;
                                                     frame.dispose();
-
+                                                    
                                                     cambiarEstadoProductosApartados cambiar = new cambiarEstadoProductosApartados();
                                                     cambiar.setVisible(true);
                                                 } else {
                                                     System.out.println("fallo al modificar el estado de la deuda");
                                                 }
-
+                                                
                                             } else {
-
+                                                
                                             }
-
+                                            
                                         }
                                     }
                                 }
                             }
-
+                            
                         } else {
-
+                            
                         }
                     } else {
                         txtAbono.requestFocus();
@@ -133,7 +133,7 @@ public class controlPagos {
                         menAdvertencia.setAlwaysOnTop(true);
                         //  JOptionPane.showMessageDialog(null, "Ingresa un abono menor, al efectivo Recibido");
                     }
-
+                    
                 } else {
                     txtAbono.requestFocus();
                     mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
@@ -142,13 +142,13 @@ public class controlPagos {
                     menAdvertencia.setAlwaysOnTop(true);
                     //JOptionPane.showMessageDialog(null, "Ingresa un abono menor al restante de la deuda ");
                 }
-
+                
             }
-
+            
         }
-
+        
     }
-
+    
     public void mostrarInformacionDeuda(String nombreCliente) {
         //buscamos el cliente por su nombre para obtner su deuda
         Clientes beanCliente = (Clientes) new daoClientes().consultaEspecificaPorNombreBean(nombreCliente);
@@ -156,35 +156,35 @@ public class controlPagos {
             //mandamos el bean a ver pagos
             verPagos.beanClientes = beanCliente;
             verPagos2.beanClientes = beanCliente;
-
+            
         } else {
             verPagos.beanClientes = null;
             verPagos2.beanClientes = null;
         }
     }
-
+    
     public void vaciarTabla(JTable tabla, DefaultTableModel defaultTabla) {
-
+        
         for (int i = 0; i < tabla.getRowCount(); i++) {
             defaultTabla.removeRow(i);
-
+            
             i -= 1;
-
+            
         }
-
+        
     }
-
+    
     public void llenarTablaPagos(JTable tablaPagos, DefaultTableModel defaultTablaPagos, List<Pagos> listaPago) {
         for (int i = 0; i < listaPago.size(); i++) {
             //defaultTablaPagos.addRow(new Object[]{listaPago.get(i).getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
         }
-
+        
     }
-
+    
     public void editar(JTable tablaPagos, DefaultTableModel defaultTablaPagos, String nombreCliente, JTextField txtDeuda, JTextField txtResta) {
         int fila = tablaPagos.getSelectedRow();
         int valorId = Integer.parseInt(tablaPagos.getValueAt(fila, 0) + "");
-
+        
         try {
             int abono = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el nuevo abono"));
             if (Integer.parseInt(txtDeuda.getText()) < abono) {
@@ -211,45 +211,45 @@ public class controlPagos {
                     //  System.out.println("lista deuda " + listaDeuda.size());
                     if (listaDeuda.size() > 0) {
                         for (Deudatotal deudatotal : listaDeuda) {
-
+                            
                             if (deudatotal.getStatus().equals("No pagado")) {
 
                                 //obtnemos su pagos
                                 Set<Pagos> listaPagos = deudatotal.getPagoses();
                                 int sumaPagos = 0;
-
+                                
                                 if (listaPagos.size() > 0) {
-
+                                    
                                     for (Pagos listaPago : listaPagos) {
-
+                                        
                                         sumaPagos = sumaPagos + listaPago.getAbono();
-
+                                        
                                         defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
                                     }
                                     int restante = Integer.parseInt(txtDeuda.getText()) - sumaPagos;
                                     txtResta.setText(restante + "");
-
+                                    
                                 }
-
+                                
                             }
                         }
                     }
                 }
             }
-
+            
         } catch (Exception e) {
         }
-
+        
     }
-
+    
     public void eliminar(JTable tablaPagos, DefaultTableModel defaultTablaPagos, String nombreCliente, JTextField txtDeuda, JTextField txtResta) {
-
+        
         try {
             int respuesta = JOptionPane.showConfirmDialog(null, "¿ Esta  seguro de eliminar  el pago ?");
             if (respuesta == 0) {
                 int fila = tablaPagos.getSelectedRow();
                 int valorId = Integer.parseInt(tablaPagos.getValueAt(fila, 0) + "");
-
+                
                 Pagos beanP = (Pagos) daoP.consultaEspecifica(valorId + "");
                 if (daoP.eliminar(beanP)) {
                     mensajeExito menExito = new mensajeExito();
@@ -272,28 +272,28 @@ public class controlPagos {
                                     for (Pagos listaPago : listaPagos) {
                                         //System.out.println("abono " + listaPago.getAbono());
                                         sumaPagos = sumaPagos + listaPago.getAbono();
-
+                                        
                                         defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
                                     }
                                     int restante = Integer.parseInt(txtDeuda.getText()) - sumaPagos;
                                     txtResta.setText(restante + "");
                                 }
-
+                                
                             }
                         }
                     }
                 }
             } else {
-
+                
             }
         } catch (Exception e) {
         }
-
+        
     }
 //*********************** metodos nuevos cesar 2019 ********************************************
 
     public void mostrarPagosyabonos(String idCliente, JTable tablaPagos, DefaultTableModel modelPagos,
-            JTextField txtDeuda, JTextField txtRestan) {
+            JTextField txtDeuda, JTextField txtRestan, JTextField txtTotalAbonos) {
         List<Clientes> lista = daoP.mostrarPagosyabonos(idCliente);
         if (lista.size() > 0) {
             String deuda = "";
@@ -305,17 +305,18 @@ public class controlPagos {
                     lista.get(i).getUsuarios().getNombre()});
                 deuda = lista.get(i).getDeudatotal().getDeudatotal() + "";
                 restan = restan + lista.get(i).getPagos().getAbono();
-
+                
             }
             verPagos.idDeuda = lista.get(0).getDeudatotal().getIddeudatotal() + "";
+            txtTotalAbonos.setText(restan + "");
             restan = Integer.parseInt(deuda) - restan;
             txtDeuda.setText(deuda);
             txtRestan.setText(restan + "");
-
+            
         } else {
-
+            
         }
-
+        
     }
 //*********************************** nuevos metodo cesar 2019  ***************************************
     //al registrar  el abono debemos de ver si ya es el ultimo pago   
@@ -357,9 +358,9 @@ public class controlPagos {
                                             Set<Pagos> listaPagos = beanDeuda.getPagoses();
                                             int sumaPagos = 0;
                                             for (Pagos listaPago : listaPagos) {
-
+                                                
                                                 sumaPagos = sumaPagos + listaPago.getAbono();
-
+                                                
                                                 defaultTablaPagos.addRow(new Object[]{listaPago.getIdpagos(), listaPago.getAbono(), listaPago.getFecharegistro(), listaPago.getUsuarios().getNombre()});
                                             }
                                             int restante = Integer.parseInt(txtDeuda.getText()) - sumaPagos;
@@ -387,24 +388,24 @@ public class controlPagos {
                                                     cambiarEstadoProductosApartados.beanCliente = beanCliente;
                                                     principal.controlverPagos = false;
                                                     frame.dispose();
-
+                                                    
                                                     cambiarEstadoProductosApartados cambiar = new cambiarEstadoProductosApartados();
                                                     cambiar.setVisible(true);
                                                 } else {
                                                     System.out.println("fallo al modificar el estado de la deuda");
                                                 }
-
+                                                
                                             } else {
-
+                                                
                                             }
-
+                                            
                                         }
                                     }
                                 }
                             }
-
+                            
                         } else {
-
+                            
                         }
                     } else {
                         txtAbono.requestFocus();
@@ -414,7 +415,7 @@ public class controlPagos {
                         menAdvertencia.setAlwaysOnTop(true);
                         //  JOptionPane.showMessageDialog(null, "Ingresa un abono menor, al efectivo Recibido");
                     }
-
+                    
                 } else {
                     txtAbono.requestFocus();
                     mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
@@ -423,16 +424,17 @@ public class controlPagos {
                     menAdvertencia.setAlwaysOnTop(true);
                     //JOptionPane.showMessageDialog(null, "Ingresa un abono menor al restante de la deuda ");
                 }
-
+                
             }
-
+            
         }
-
+        
     }
-
+    
     public void registrarAbono2(JTextField txtAbono, JTextField txtEfectivoRecibido, JTextField txtCambio,
             JTextField txtDeuda, JTextField txtResta, String nombreCliente, JTable tablaPagos,
-            DefaultTableModel defaultTablaPagos, String idUsuario, JFrame frame, String idCliente) {
+            DefaultTableModel defaultTablaPagos, String idUsuario, 
+            JFrame frame, String idCliente,JTextField txtTotalAbonos) {
         if (validar.validarCampos(txtAbono)) {
             if (validar.validarCampos(txtEfectivoRecibido)) {
                 int abono = Integer.parseInt(txtAbono.getText());
@@ -451,6 +453,7 @@ public class controlPagos {
                         txtAbono.setText("");
                         txtEfectivoRecibido.setText("");
                         txtCambio.setText("");
+                        txtTotalAbonos.setText(txtDeuda.getText());
                         frame.dispose();
                         principal.controlverPagos = false;
                     }
@@ -468,18 +471,20 @@ public class controlPagos {
                         txtAbono.setText("");
                         txtEfectivoRecibido.setText("");
                         txtCambio.setText("");
+                        int sum=sumaPagos(defaultTablaPagos);
+                        txtTotalAbonos.setText(sum+"");
                     } else {
-
+                        
                     }
-
+                    
                 }
-
+                
             }
-
+            
         }
-
+        
     }
-
+    
     public boolean registrarSoloAbono(String idCliente, int abono, DefaultTableModel defaultTablaPagos) {
         boolean ban = false;
         System.out.println("idClientes " + idCliente);
@@ -490,44 +495,44 @@ public class controlPagos {
             exito.setAlwaysOnTop(true);
             ban = true;
         } else {
-
+            
         }
-
+        
         return ban;
     }
-
+    
     public boolean registrarSoloAbonoYcambiarEstatusProductos(String idCliente, int abono, DefaultTableModel defaultTablaPagos) {
         boolean ban = false;
-   
+        
         if (daoP.registrarSoloAbonoYcambiarEstatusProductos(idCliente, abono, defaultTablaPagos)) {
-
+            
             mensajeExito exito = new mensajeExito();
             mensajeExito.labelMensaje.setText("Ultimo abono registrado correctamente!");
             exito.setVisible(true);
             exito.setAlwaysOnTop(true);
             //para cambiar el estatus de  los productos apartados y cambiar el  estatus de deuda total
-        
+            
             cambiarEstadoProductosApartados2019 c = new cambiarEstadoProductosApartados2019();
             cambiarEstadoProductosApartados2019.idCliente = idCliente;
-
+            
             c.setVisible(true);
             ban = true;
         } else {
-
+            
         }
-
+        
         return ban;
     }
-
+    
     public void editar2019(JTable tablaPagos, DefaultTableModel defaultTablaPagos,
             String nombreCliente, JTextField txtDeuda, JTextField txtResta, JFrame frame, String idCliente,
-             String idDeuda) {
+            String idDeuda, JTextField txtTotalAbono) {
         int fila = tablaPagos.getSelectedRow();
         int valorId = Integer.parseInt(tablaPagos.getValueAt(fila, 0) + "");
         int deuda = Integer.parseInt(txtDeuda.getText());
         int resta = Integer.parseInt(txtResta.getText());
         int valorAbono = Integer.parseInt(tablaPagos.getValueAt(fila, 1) + "");
-
+        
         try {
             int abono = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el nuevo abono"));
             resta = resta + valorAbono;
@@ -543,8 +548,9 @@ public class controlPagos {
                 if (daoP.editar2019(valorId + "", abono + "")) {
                     daoP.editarStatusDeuda2019(idDeuda);
                     tablaPagos.setValueAt(abono, fila, 1);
-                    int nuevaResta = deuda - sumaPagos(defaultTablaPagos);
-
+                    int  sum=sumaPagos(defaultTablaPagos);
+                    int nuevaResta = deuda -sum ;
+                    txtTotalAbono.setText(sum + "");
                     txtResta.setText(nuevaResta + "");
                     mensajeExito menExito = new mensajeExito();
                     mensajeExito.labelMensaje.setText("El ultimo abono se modifico correctamente");
@@ -552,18 +558,18 @@ public class controlPagos {
                     menExito.setAlwaysOnTop(true);
                     frame.dispose();
                     principal.controlverPagos = false;
-               
+                    
                     cambiarEstadoProductosApartados2019.idCliente = idCliente;
                     cambiarEstadoProductosApartados2019 c = new cambiarEstadoProductosApartados2019();
-
+                    
                     c.setVisible(true);
-
+                    
                 } else {
-
+                    
                 }
-
+                
             } else if (abono < resta) {
-
+                
                 if (daoP.editar2019(valorId + "", abono + "")) {
                     mensajeExito menExito = new mensajeExito();
                     mensajeExito.labelMensaje.setText("El abono se modifico correctamente");
@@ -573,22 +579,24 @@ public class controlPagos {
                     //cambiamos el abono en la tabla  de apagos y recalcular cuanto resta
                     //pintamos  el  nuevo abono
                     tablaPagos.setValueAt(abono, fila, 1);
-
-                    int nuevaResta = deuda - sumaPagos(defaultTablaPagos);
+                    int sum=sumaPagos(defaultTablaPagos);
+                    int nuevaResta = deuda - sum;
+                    txtTotalAbono.setText(sum+"");
                     txtResta.setText(nuevaResta + "");
                 }
             } else {
-
+                
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error al modificar el abono " + e.getMessage());
         }
-
+        
     }
-
+    
     public void eliminar2019(JTable tablaPagos, DefaultTableModel defaultTablaPagos,
-            String nombreCliente, JTextField txtDeuda, JTextField txtResta, JFrame frame, String idCliente) {
+            String nombreCliente, JTextField txtDeuda, 
+            JTextField txtResta, JFrame frame, String idCliente,JTextField txtTotalAbonos) {
         int fila = tablaPagos.getSelectedRow();
         int valorId = Integer.parseInt(tablaPagos.getValueAt(fila, 0) + "");
         int deuda = Integer.parseInt(txtDeuda.getText());
@@ -605,19 +613,21 @@ public class controlPagos {
                     //cambiamos el abono en la tabla  de apagos y recalcular cuanto resta
                     //pintamos  el  nuevo abono
                     defaultTablaPagos.removeRow(fila);
-                    int nuevaResta = deuda - sumaPagos(defaultTablaPagos);
+                    int sum=sumaPagos(defaultTablaPagos);
+                    int nuevaResta = deuda - sum;
+                    txtTotalAbonos.setText(sum+"");
                     txtResta.setText(nuevaResta + "");
                 }
             } else {
-
+                
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error al eliminar el abono " + e.getMessage());
         }
-
+        
     }
-
+    
     public int sumaPagos(DefaultTableModel tabla) {
         int sumPagos = 0;
         if (tabla.getRowCount() > 0) {
@@ -626,9 +636,9 @@ public class controlPagos {
                 sumPagos += abono;
             }
         } else {
-
+            
         }
-
+        
         return sumPagos;
     }
 }

@@ -193,7 +193,7 @@ public class daoProductosApartados implements metodosDao {
 
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            Query hql = session.createQuery("select proA.idproductosapartados,proA.fecharegistro,proA.status,proA.cantidadVenta,proA.detallesproducto,usu.idusuarios,pro.clave,usu.nombre from  Productosapartados as proA inner join   proA.clientes as cli inner join proA.usuarios as usu  inner join proA.productos as pro   where proA.status!='Pagado entregado' and cli.idclientes='" + idCliente + "'");
+            Query hql = session.createQuery("select proA.idproductosapartados,proA.fecharegistro,proA.status,proA.cantidadVenta,proA.detallesproducto,usu.idusuarios,pro.clave,usu.nombre,pro.precio,pro.nombre from  Productosapartados as proA inner join   proA.clientes as cli inner join proA.usuarios as usu  inner join proA.productos as pro   where proA.status!='Pagado entregado' and cli.idclientes='" + idCliente + "'");
 
             List<Object[]> lista = hql.list();
 
@@ -235,13 +235,15 @@ public class daoProductosApartados implements metodosDao {
                 String usuario_id = lista.get(i)[5] + "";
                 String clave = lista.get(i)[6] + "";
                 String nombrecompleto = lista.get(i)[7] + "";
+                String precio = lista.get(i)[8] + "";
+                String nombrePro = lista.get(i)[9] + "";
 
                 bean.setIdproductosapartados(Integer.parseInt(idProApa));
                 bean.setFecharegistro(fechaRegistro);
                 bean.setStatus(status);
                 bean.setCantidadVenta(Integer.parseInt(cantidadVenta));
                 bean.setDetallesproducto(detallesproducto);
-                bean.setClave(clave);
+                bean.setClave(clave+"-"+precio+"-"+nombrePro);
                 bean.setNombrecompleto(nombrecompleto);
 
                 listaObj.add(bean);
@@ -909,7 +911,7 @@ public class daoProductosApartados implements metodosDao {
          con=c.getConnection();
          
          try {
-             String  sqlConsulta="select cantidad from caja where fecharegistro=NOW()";
+             String  sqlConsulta="select cantidad from caja where fecharegistro='"+fecha+"'";
              PreparedStatement ps= con.prepareStatement(sqlConsulta);
              ResultSet rs=ps.executeQuery();
              while(rs.next()){

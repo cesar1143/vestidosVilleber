@@ -892,22 +892,30 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
             if (jTable2.getRowCount() == 0) {
 
             } else {
-                if (Integer.parseInt(txtEfectivoRecibidoProductos.getText()) >= Integer.parseInt(txtTotalPagarProductos.getText().toString())) {
+                if (!txtEfectivoRecibidoProductos.getText().isEmpty()) {
+                    if (Integer.parseInt(txtEfectivoRecibidoProductos.getText()) >= Integer.parseInt(txtTotalPagarProductos.getText().toString())) {
 
-                    jLabel5.setText("Cambio:");
-                    jLabel5.setForeground(Color.BLUE);
-                    int cambio = Integer.parseInt(txtEfectivoRecibidoProductos.getText()) - Integer.parseInt(txtTotalPagarProductos.getText().toString());
-                    txtCambioProductos.setForeground(Color.BLUE);
-                    txtCambioProductos.setText(cambio + "");
+                        jLabel5.setText("Cambio:");
+                        jLabel5.setForeground(Color.BLUE);
+                        int cambio = Integer.parseInt(txtEfectivoRecibidoProductos.getText()) - Integer.parseInt(txtTotalPagarProductos.getText().toString());
+                        txtCambioProductos.setForeground(Color.BLUE);
+                        txtCambioProductos.setText(cambio + "");
 
+                    } else {
+                        jLabel5.setText("Restan:");
+                        jLabel5.setForeground(Color.red);
+                        int cambio = Integer.parseInt(txtTotalPagarProductos.getText().toString()) - Integer.parseInt(txtEfectivoRecibidoProductos.getText());
+                        txtCambioProductos.setForeground(Color.red);
+
+                        txtCambioProductos.setText(cambio + "");
+                    }
                 } else {
-                    jLabel5.setText("Restan:");
-                    jLabel5.setForeground(Color.red);
-                    int cambio = Integer.parseInt(txtTotalPagarProductos.getText().toString()) - Integer.parseInt(txtEfectivoRecibidoProductos.getText());
-                    txtCambioProductos.setForeground(Color.red);
-
-                    txtCambioProductos.setText(cambio + "");
+                     jLabel5.setText("Cambio:");
+                        jLabel5.setForeground(Color.BLUE);
+                    txtCambioProductos.setForeground(Color.BLUE);
+                    txtCambioProductos.setText("0");
                 }
+
             }
 
         }

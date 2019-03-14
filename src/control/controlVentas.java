@@ -615,13 +615,14 @@ public class controlVentas {
                                 registrarCliente registrarClien = new registrarCliente();
                                 registrarClien.setVisible(true);
 
-                            } else if(String.valueOf(estado).equalsIgnoreCase("Pagado entregado")) {
+                            } else if (String.valueOf(estado).equalsIgnoreCase("Pagado entregado")) {
                                 car.setVisible(true);
                                 System.out.println("entro en registrar venta 4");
                                 almacenamientoDeListas.estadoProductoAPartadoGlobal = "Pagado entregado";
                                 almacenamientoDeListas.estadoDeudaGlobal = "Pagado";
                                 almacenamientoDeListas.abonoPagoGlobal = Integer.parseInt(txtTotalApagar.getText());
                                 Clientes beanCliente = daoCliente.consultaEspecificaPorNombreBean2019("cliente general");
+
                                 System.out.println("cliente general " + beanCliente.getIdclientes());
                                 boolean banRegistroVenta = false;
                                 //Nota=aqui debemos asignarle esa venta al cliente general
@@ -726,7 +727,7 @@ public class controlVentas {
 
                                 }
 
-                            }else{
+                            } else {
                                 System.out.println("se cancelo el status");
                             }//aquiva un else
 
@@ -758,7 +759,7 @@ public class controlVentas {
                         Clientes beanCliente = (Clientes) daoCliente.consultaEspecificaPorNombreBean2019(beanClienteLista.getNombrecompleto());
                         if (beanCliente != null) {
                             System.out.println("cliente registrado en la base de datos 5");
-                            Set<Deudatotal> listaDeuda = beanCliente.getDeudatotals();
+                            //Set<Deudatotal> listaDeuda = beanCliente.getDeudatotals();
                             Deudatotal listaDeuda2 = daoCliente.obtnerDeudaXIdCliente(beanCliente.getIdclientes() + "");
                             if (listaDeuda2 != null) {
                                 System.out.println("esta registrado en la tabla deudatotal 5");
@@ -1100,6 +1101,9 @@ public class controlVentas {
                             System.out.println("cliente no registrado en bd y lo registramos 5");
                             //registramos el cliente
                             Clientes beanLista = almacenamientoDeListas.listaClientes.get(0);
+                            Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica2019(idUsuario);
+
+                            beanLista.setUsuarios(beanUsuario);
                             if (daoCliente.registrar(beanLista)) {
                                 banRegistroVenta = true;
 
@@ -1123,7 +1127,7 @@ public class controlVentas {
                                     //el cual sera su primera deuda
                                     Pagos beanPagos = new Pagos();
                                     beanPagos.setDeudatotal(deudatotal1);
-                                    Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica2019(idUsuario);
+                                    //  Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica2019(idUsuario);
                                     beanPagos.setUsuarios(beanUsuario);
 
                                     System.out.println("abonoPagoGlobal 5 " + abonoPago);
@@ -1456,7 +1460,7 @@ public class controlVentas {
                                                 llenarListaMedidas(beanM, beanProductos.getIdproductos());
                                                 //ahora llenamos el bean de fechas y mandamos a traer el metodo llenar listaFechas
                                                 int dia = fechaPrueba.getCalendar().get(Calendar.DAY_OF_MONTH);
-                                                int mes = fechaPrueba.getCalendar().get(Calendar.MARCH)+1;
+                                                int mes = fechaPrueba.getCalendar().get(Calendar.MARCH) + 1;
                                                 int año = fechaPrueba.getCalendar().get(Calendar.YEAR);
                                                 String mes1 = mes + "";
                                                 String dia1 = dia + "";
@@ -1473,7 +1477,7 @@ public class controlVentas {
                                                 String fechaPrue = dia1 + "-" + mes1 + "-" + año;
                                                 //  System.out.println("fecha preuba " + fechaPrue);
                                                 int diaE = fechaEvento.getCalendar().get(Calendar.DAY_OF_MONTH);
-                                                int mesE = fechaEvento.getCalendar().get(Calendar.MARCH)+1;
+                                                int mesE = fechaEvento.getCalendar().get(Calendar.MARCH) + 1;
                                                 int añoE = fechaEvento.getCalendar().get(Calendar.YEAR);
                                                 String mes2 = mesE + "";
                                                 String dia2 = diaE + "";
@@ -1764,7 +1768,7 @@ public class controlVentas {
                 //ahora llenamos el bean de fechas y mandamos a traer el metodo llenar listaFechas
                 //ahora llenamos el bean de fechas y mandamos a traer el metodo llenar listaFechas
                 int dia = fechaPrueba.getCalendar().get(Calendar.DAY_OF_MONTH);
-                int mes = fechaPrueba.getCalendar().get(Calendar.MARCH)+1;
+                int mes = fechaPrueba.getCalendar().get(Calendar.MARCH) + 1;
                 int año = fechaPrueba.getCalendar().get(Calendar.YEAR);
                 String mes1 = mes + "";
                 String dia1 = dia + "";
@@ -1781,7 +1785,7 @@ public class controlVentas {
                 String fechaPrue = dia1 + "-" + mes1 + "-" + año;
 
                 int diaE = fechaEvento.getCalendar().get(Calendar.DAY_OF_MONTH);
-                int mesE = fechaEvento.getCalendar().get(Calendar.MARCH)+1;
+                int mesE = fechaEvento.getCalendar().get(Calendar.MARCH) + 1;
                 int añoE = fechaEvento.getCalendar().get(Calendar.YEAR);
                 String mes2 = mesE + "";
                 String dia2 = diaE + "";
@@ -1806,7 +1810,7 @@ public class controlVentas {
                 beanFechas.setFecharegistro(validar.obtenerFechaActual());
                 beanFechas.setFechaevento2(obtenerFechaDate(fechaEvento));
                 beanFechas.setFechaprueba2(obtenerFechaDate(fechaPrueba));
-               
+
                 // System.out.println("fecha evento " + beanFechas.getFechaevento());
                 // System.out.println("fechaPrueba " + beanFechas.getFechaprueba());
                 llenarListaFechas(beanFechas, beanProductos.getIdproductos());
@@ -2051,8 +2055,9 @@ public class controlVentas {
                         System.out.println("telefon " + telefono);
                         beanCliente2.setTelefono(telefono);
                         beanCliente2.setFecharegistro(validar.obtenerFechaActual());
-
-                        beanCliente2.setUsuarios((Usuarios) daoUsuario.consultaEspecifica(idUsuario));
+                        Usuarios beanUsuario = daoUsuario.consultaEspecifica2019(idUsuario);
+                        beanCliente2.setUsuarios(beanUsuario);
+                        //************** YA PASE AQUII *******************
                         if (daoCliente.registrar(beanCliente2)) {
                             banRegistroVenta = true;
                             System.out.println("se registro el cliente y por ley  no tiene deuda, ni medidas y tampoco fechas");
@@ -2072,7 +2077,7 @@ public class controlVentas {
 
                                 Pagos beanPagos = new Pagos();
                                 beanPagos.setDeudatotal(deudatotal1);
-                                Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
+
                                 beanPagos.setUsuarios(beanUsuario);
                                 System.out.println("abonoPagoGlobal " + almacenamientoDeListas.abonoPagoGlobal);
                                 beanPagos.setAbono(almacenamientoDeListas.abonoPagoGlobal);
@@ -2996,15 +3001,16 @@ public class controlVentas {
                         System.out.println("telefon " + telefono);
                         beanCliente2.setTelefono(telefono);
                         beanCliente2.setFecharegistro(validar.obtenerFechaActual());
+                        Usuarios beanUsuario = daoUsuario.consultaEspecifica2019(idUsuario);
 
-                        beanCliente2.setUsuarios((Usuarios) daoUsuario.consultaEspecifica(idUsuario));
+                        beanCliente2.setUsuarios(beanUsuario);
                         if (daoCliente.registrar(beanCliente2)) {
                             banRegistroVenta = true;
                             System.out.println("se registro el cliente y por ley  no tiene deuda, ni medidas y tampoco fechas");
                             System.out.println("vamos a registrar la deuda total");
 
                             Deudatotal beanDeudaT = new Deudatotal();
-                            beanCliente = (Clientes) daoCliente.consultaEspecificaPorNombreBean(txtNombre.getText());
+                            beanCliente = (Clientes) daoCliente.consultaEspecificaPorNombreBean2019(txtNombre.getText());
                             beanDeudaT.setClientes(beanCliente);
                             beanDeudaT.setDeudatotal(Integer.parseInt(txtTotalApagar.getText()));
                             beanDeudaT.setStatus(almacenamientoDeListas.estadoDeudaGlobal);
@@ -3013,11 +3019,10 @@ public class controlVentas {
                                 banRegistroVenta = true;
                                 System.out.println("se  registro la deuda");
                                 System.out.println("registramos el pago");
-                                Deudatotal deudatotal1 = (Deudatotal) daoDeuda.consultaEspecifica(almacenamientoDeListas.ultimoRegistroDeuda + "");
+                                Deudatotal deudatotal1 =  daoDeuda.consultaEspecifica2019(almacenamientoDeListas.ultimoRegistroDeuda + "");
 
                                 Pagos beanPagos = new Pagos();
                                 beanPagos.setDeudatotal(deudatotal1);
-                                Usuarios beanUsuario = (Usuarios) daoUsuario.consultaEspecifica(idUsuario);
                                 beanPagos.setUsuarios(beanUsuario);
                                 System.out.println("abonoPagoGlobal " + almacenamientoDeListas.abonoPagoGlobal);
                                 beanPagos.setAbono(almacenamientoDeListas.abonoPagoGlobal);
@@ -3032,7 +3037,7 @@ public class controlVentas {
                                     for (int i = 0; i < tablaVentas.getRowCount(); i++) {
                                         int valorId = Integer.parseInt(tablaVentas.getValueAt(i, 0) + "");
                                         int valorCantidad = Integer.parseInt(tablaVentas.getValueAt(i, 2) + "");
-                                        Productos beanProductos = (Productos) daoProductos.consultaEspecifica(valorId + "");
+                                        Productos beanProductos =  daoProductos.consultaEspecifica2019(valorId + "");
                                         Productosapartados beanProApartados = new Productosapartados();
                                         beanProApartados.setClientes(beanCliente);
                                         beanProApartados.setProductos(beanProductos);
@@ -3046,7 +3051,7 @@ public class controlVentas {
                                             int nuevaExistencia = beanProductos.getCantidad() - valorCantidad;
                                             beanProductos.setCantidad(nuevaExistencia);
                                             System.out.println("actualizamos las existencias de los productos ");
-                                            if (daoProductos.editar(beanProductos)) {
+                                            if (daoProductos.editarExistencias2019(beanProductos)) {
                                                 System.out.println("se modifico  la existencia del producto " + beanProductos.getIdproductos());
                                             }
 

@@ -635,13 +635,14 @@ public class daoProductos implements metodosDao {
     }
 
     public Productos consultaEspecifica2019(String id) { // System.out.println("dao "+ id);
-        Productos bean = new Productos();
+        Productos bean=null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             Query hql = session.createQuery("select p.idproductos,p.clave,p.precio,p.color,p.tipo,p.fecharegistro,p.foto,p.descripcion,p.cantidad,p.nombre from Productos as p where p.idproductos='" + id + "'");
             List<Object[]> listaRes = hql.list();
             if (listaRes.size() > 0) {
+                bean = new Productos();
                 for (int i = 0; i < listaRes.size(); i++) {
                     String idPro = listaRes.get(i)[0] + "";
                     String calve = listaRes.get(i)[1] + "";

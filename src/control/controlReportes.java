@@ -57,7 +57,7 @@ public class controlReportes {
                 //obtenerProductosVendidosPorDia(obtenerFecha(fechaInicial), mostrarVenta, labeltextoVenta, tablaReportes, defaultTablaReportes);
                 obtnerPagosPorDia2019(obtenerFecha2(fechaInicial), 
                         tablaReportes, defaultTablaReportes,
-                        mostrarVenta, labeltextoVenta,txtDineroCaja,txtDinerototalCaja);
+                        mostrarVenta, labeltextoVenta,txtDineroCaja,txtDinerototalCaja,labelTotalVenta);
                 //llenamos la tabla reportes
 
             } else {
@@ -361,7 +361,7 @@ public class controlReportes {
 
     public void obtnerPagosPorDia2019(String fecha, JTable tablaReportes,
             DefaultTableModel defaultReportes, JTextField txtTotalVenta, JLabel labelMensaje,
-            JTextField txtDineroCaja, JTextField txtTotalCaja) {
+            JTextField txtDineroCaja, JTextField txtTotalCaja,JLabel labeltotalCaja) {
         List<Pagos> lista = new daoProductosApartados().consultarTodosPorDia2019(fecha);
         vaciarTabla(tablaReportes, defaultReportes);
         if (lista.size() > 0) {
@@ -383,6 +383,8 @@ public class controlReportes {
             txtDineroCaja.setText(cantidad + "");
             txtTotalCaja.setText(sumaPagos + "");
             labelMensaje.setText("Venta total del dia " + valorFecha);
+            labeltotalCaja.setText("Dinero total en caja");
+            
         } else {
             txtDineroCaja.setText("0");
             txtTotalCaja.setText("0");

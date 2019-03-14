@@ -118,22 +118,28 @@ public class controlProductoPendientes {
             vaciarTabla(tablaPendientes, modelTablaPendientes);
 
             for (int i = 0; i < lista.size(); i++) {
-                String hacer="PRUEBA";
-                if ( lista.get(i).getStatus().equalsIgnoreCase("apartado")) {
-                    
-                }else if( lista.get(i).getStatus().equalsIgnoreCase("pagado no entregado")){
-                    hacer="ENTREGAR";
-                }else{
-                    
+                String hacer = "PRUEBA";
+                if (lista.get(i).getStatus().equalsIgnoreCase("apartado")) {
+
+                } else if (lista.get(i).getStatus().equalsIgnoreCase("pagado no entregado")) {
+                    hacer = "ENTREGAR";
+                } else {
+
                 }
+                String arreDatos[]=lista.get(i).getClave().split("-");
+                String clave=arreDatos[0];
+                String precio=arreDatos[1];
+                String nombre=arreDatos[2];
                 modelTablaPendientes.addRow(new Object[]{
                     lista.get(i).getIdproductosapartados(),
-                    lista.get(i).getClave(),
+                    clave,
+                    nombre,
+                    precio,
                     lista.get(i).getStatus().toUpperCase(),
                     lista.get(i).getCantidadVenta(),
                     lista.get(i).getFechaPrueba(),
                     lista.get(i).getFechaEvento(),
-                hacer});
+                    hacer});
             }
 
         } else {
@@ -1420,12 +1426,12 @@ public class controlProductoPendientes {
             principal.controlverPagos = false;
             principal.frameverPagos.dispose();
         }
-        
+
         if (principal.controlcambiarEstadoProductosEntregadosNoPagados2019 == false) {
 
         } else {
             principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
-              principal.framecambiarEstadoProductosEntregadosNoPagados2019.dispose();
+            principal.framecambiarEstadoProductosEntregadosNoPagados2019.dispose();
         }
     }
 }

@@ -52,7 +52,7 @@ public class productosPendientes extends javax.swing.JFrame {
             }
 
         };
-        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave","Nombre","Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         tablaMedidas = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -86,10 +86,12 @@ public class productosPendientes extends javax.swing.JFrame {
         jTable4.getColumnModel().getColumn(0).setMinWidth(0);
         jTable4.getColumnModel().getColumn(0).setPreferredWidth(0);
         jTable4.getColumnModel().getColumn(0).setWidth(0);
-        jTable4.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTable4.getColumnModel().getColumn(1).setMinWidth(100);
-        jTable4.getColumnModel().getColumn(2).setPreferredWidth(200);
-        jTable4.getColumnModel().getColumn(2).setMinWidth(200);
+        jTable4.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable4.getColumnModel().getColumn(1).setMinWidth(80);
+        jTable4.getColumnModel().getColumn(2).setPreferredWidth(130);
+        jTable4.getColumnModel().getColumn(2).setMinWidth(130);
+        jTable4.getColumnModel().getColumn(4).setPreferredWidth(160);
+        jTable4.getColumnModel().getColumn(4).setMinWidth(160);
 
 //ocultar columna de tbmedidas
         jTable5.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -462,7 +464,7 @@ public class productosPendientes extends javax.swing.JFrame {
         } else {
             if (principal.controlverPagos == false) {
                 int fila = jTable4.getSelectedRow();
-                String estado = jTable4.getValueAt(fila, 2) + "";
+                String estado = jTable4.getValueAt(fila, 4) + "";
 
                 if (estado.equalsIgnoreCase("Apartado")) {
                     int filaCliente = tbClientes.getSelectedRow();
@@ -509,7 +511,7 @@ public class productosPendientes extends javax.swing.JFrame {
         } else {
             if (principal.controlcambiarEstadoProductosEntregadosNoPagados2019 == false) {
                 int fila = jTable4.getSelectedRow();
-                String estado = jTable4.getValueAt(fila, 2) + "";
+                String estado = jTable4.getValueAt(fila, 4) + "";
 
                 if (estado.equalsIgnoreCase("Pagado no entregado")) {
 

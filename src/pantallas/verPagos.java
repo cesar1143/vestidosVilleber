@@ -75,7 +75,7 @@ public class verPagos extends javax.swing.JFrame {
         validar.soloNumeros(txtEfectivoRecibido);
         //llenamos los campos123
 
-        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos, txtDeudTotal, txtRestan);
+        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos, txtDeudTotal, txtRestan,txtTotalPagos);
         /*if (beanClientes != null) {
             //Set<Productosapartados>listaProApartados=beanCliente.getProductosapartadoses();
             txtNombreDelCiente.setText(beanClientes.getNombrecompleto().toUpperCase());
@@ -131,6 +131,8 @@ public class verPagos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtRestan = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtTotalPagos = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtNombreDelCiente = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -268,6 +270,16 @@ public class verPagos extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("hkjhkhkjhjkhkjhkjhkjhkjhj");
 
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 0, 204));
+        jLabel8.setText("Total Abonos:");
+
+        txtTotalPagos.setEditable(false);
+        txtTotalPagos.setBackground(new java.awt.Color(229, 222, 222));
+        txtTotalPagos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtTotalPagos.setForeground(new java.awt.Color(51, 0, 204));
+        txtTotalPagos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -286,25 +298,39 @@ public class verPagos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDeudTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(78, 78, 78)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTotalPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtRestan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(42, 42, 42)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 9, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRestan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeudTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRestan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDeudTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(txtTotalPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -482,7 +508,8 @@ public class verPagos extends javax.swing.JFrame {
         /*controlP.registrar(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
         txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.idUsuario + "", this);*/
         controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
-                txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.usuario + "", this, idCliente);
+                txtNombreDelCiente.getText(), jTable1,
+                tablaPagos, principal.usuario + "", this, idCliente,txtTotalPagos);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -516,7 +543,7 @@ public class verPagos extends javax.swing.JFrame {
             // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
         } else {
             controlP.editar2019(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(),
-                    txtDeudTotal, txtRestan, this, idCliente, idDeuda);
+                    txtDeudTotal, txtRestan, this, idCliente, idDeuda,txtTotalPagos);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -611,6 +638,7 @@ public class verPagos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -623,5 +651,6 @@ public class verPagos extends javax.swing.JFrame {
     private javax.swing.JTextField txtEfectivoRecibido;
     public static javax.swing.JTextField txtNombreDelCiente;
     private javax.swing.JTextField txtRestan;
+    private javax.swing.JTextField txtTotalPagos;
     // End of variables declaration//GEN-END:variables
 }
