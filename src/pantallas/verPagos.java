@@ -555,7 +555,9 @@ public class verPagos extends javax.swing.JFrame {
             menAdvertencia.setAlwaysOnTop(true);
             // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
         } else {
-            controlP.eliminar2019(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(), txtDeudTotal, txtRestan, this, idCliente);
+            controlP.eliminar2019(jTable1, tablaPagos,
+                    txtNombreDelCiente.getText().toString(),
+                    txtDeudTotal, txtRestan, this, idCliente,txtTotalPagos);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
