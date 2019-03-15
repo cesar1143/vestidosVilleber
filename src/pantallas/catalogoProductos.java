@@ -1142,7 +1142,7 @@ public class catalogoProductos extends javax.swing.JFrame {
                                     }
                                 }
                             }
-
+ 
                         }
                         c.dispose();
 
