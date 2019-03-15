@@ -635,7 +635,7 @@ public class daoProductos implements metodosDao {
     }
 
     public Productos consultaEspecifica2019(String id) { // System.out.println("dao "+ id);
-        Productos bean=null;
+        Productos bean = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
@@ -743,7 +743,7 @@ public class daoProductos implements metodosDao {
             transaction = session.beginTransaction();
 
             Query hql = session.createQuery("select proA.idproductosapartados,proA.status from Productosapartados as proA inner  join proA.productos as p where p.idproductos='" + id + "'");
-            
+
             List<Object[]> listaRes = hql.list();
             if (listaRes.size() > 0) {
                 boolean banChechar = false;//para ver si todos los pro apartados son pagado entregado
@@ -787,14 +787,14 @@ public class daoProductos implements metodosDao {
                 }
 
             } else {
-                
+
                 Query hqlPro = session.createQuery("delete from Productos as p where p.idproductos='" + id + "'");
                 hqlPro.executeUpdate();
-                 mensajeExito menExito = new mensajeExito();
-                    mensajeExito.labelMensaje.setText("Se elimino correctamente");
-                    menExito.setVisible(true);
-                    menExito.setAlwaysOnTop(true);
-                    ban=true;
+                mensajeExito menExito = new mensajeExito();
+                mensajeExito.labelMensaje.setText("Se elimino correctamente");
+                menExito.setVisible(true);
+                menExito.setAlwaysOnTop(true);
+                ban = true;
             }
             transaction.commit();
 
@@ -810,15 +810,15 @@ public class daoProductos implements metodosDao {
         //System.out.println("bean dao " + bean.getClave());
         return ban;
     }
-    
-        public boolean editarExistencias2019(Productos bean) {
+
+    public boolean editarExistencias2019(Productos bean) {
         boolean ban = false;
         try {
             Productos beanPro = (Productos) bean;
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            Query hql=session.createQuery("update Productos as p set p.cantidad='"+bean.getCantidad()+"' where p.idproductos='"+bean.getIdproductos()+"'");
-           hql.executeUpdate();
+            Query hql = session.createQuery("update Productos as p set p.cantidad='" + bean.getCantidad() + "' where p.idproductos='" + bean.getIdproductos() + "'");
+            hql.executeUpdate();
             transaction.commit();
             ban = true;
         } catch (HibernateException e) {
@@ -832,5 +832,113 @@ public class daoProductos implements metodosDao {
         }
         return ban;
 
+    }
+
+    public  List<Productos>  consultaTodos2019() { // System.out.println("dao "+ id);
+        Productos bean = null;
+         List<Productos> lista=new ArrayList<Productos>();
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql = session.createQuery("select p.idproductos,p.clave,p.precio,p.color,p.tipo,p.fecharegistro,p.foto,p.descripcion,p.cantidad,p.nombre from Productos as p where p.cantidad>0 and foto is not null order by p.nombre ");
+           hql.setMaxResults(24);
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+               
+                for (int i = 0; i < listaRes.size(); i++) {
+                     bean = new Productos();
+                    String idPro = listaRes.get(i)[0] + "";
+                    String calve = listaRes.get(i)[1] + "";
+                    String precio = listaRes.get(i)[2] + "";
+                    String color = listaRes.get(i)[3] + "";
+                    String tipo = listaRes.get(i)[4] + "";
+                    String fechaRegistro = listaRes.get(i)[5] + "";
+                    byte[] foto = (byte[]) listaRes.get(i)[6];
+                    String descripcion = listaRes.get(i)[7] + "";
+                    String cantidad = listaRes.get(i)[8] + "";
+                    String nombre = listaRes.get(i)[9] + "";
+                    bean.setIdproductos(Integer.parseInt(idPro));
+                    bean.setClave(calve);
+                    bean.setPrecio(Integer.parseInt(precio));
+                    bean.setColor(color);
+                    bean.setTipo(tipo);
+                    //bean.setFecharegistro(fecharegistro);
+                    bean.setFoto(foto);
+                    bean.setDescripcion(descripcion);
+                    bean.setCantidad(Integer.parseInt(cantidad));
+                    bean.setNombre(nombre);
+                    lista.add(bean);
+
+                }
+            } else {
+
+            }
+            transaction.commit();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error consulta especifica " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        //System.out.println("bean dao " + bean.getClave());
+        return lista;
+    }
+    
+    public  List<Productos>  consultaTodosPorNombre2019(String  nombrePro) { // System.out.println("dao "+ id);
+        Productos bean = null;
+         List<Productos> lista=new ArrayList<Productos>();
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query hql = session.createQuery("select p.idproductos,p.clave,p.precio,p.color,p.tipo,p.fecharegistro,p.foto,p.descripcion,p.cantidad,p.nombre from Productos as p where p.nombre like '"+nombrePro+"%' and p.cantidad>0 and foto is not null order by p.nombre ");
+          
+            List<Object[]> listaRes = hql.list();
+            if (listaRes.size() > 0) {
+               
+                for (int i = 0; i < listaRes.size(); i++) {
+                     bean = new Productos();
+                    String idPro = listaRes.get(i)[0] + "";
+                    String calve = listaRes.get(i)[1] + "";
+                    String precio = listaRes.get(i)[2] + "";
+                    String color = listaRes.get(i)[3] + "";
+                    String tipo = listaRes.get(i)[4] + "";
+                    String fechaRegistro = listaRes.get(i)[5] + "";
+                    byte[] foto = (byte[]) listaRes.get(i)[6];
+                    String descripcion = listaRes.get(i)[7] + "";
+                    String cantidad = listaRes.get(i)[8] + "";
+                    String nombre = listaRes.get(i)[9] + "";
+                    bean.setIdproductos(Integer.parseInt(idPro));
+                    bean.setClave(calve);
+                    bean.setPrecio(Integer.parseInt(precio));
+                    bean.setColor(color);
+                    bean.setTipo(tipo);
+                    //bean.setFecharegistro(fecharegistro);
+                    bean.setFoto(foto);
+                    bean.setDescripcion(descripcion);
+                    bean.setCantidad(Integer.parseInt(cantidad));
+                    bean.setNombre(nombre);
+                    lista.add(bean);
+
+                }
+            } else {
+
+            }
+            transaction.commit();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error consulta especifica " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+        } finally {
+            session.close();
+        }
+        //System.out.println("bean dao " + bean.getClave());
+        return lista;
     }
 }

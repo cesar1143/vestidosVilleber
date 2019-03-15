@@ -29,6 +29,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import static pantallas.cambiarEstadoProductosApartados2019.defaultTablaPendientes;
 import static pantallas.verPagos.beanClientes;
 import util.NewHibernateUtil;
 
@@ -56,7 +57,7 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
             }
 
         };
-        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave","Nombre","Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         initComponents();
         //ocultamos el id
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -80,13 +81,15 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
         for (int i = 0; i < defaultTablaPendientes.getRowCount(); i++) {
             String id = defaultTablaPendientes.getValueAt(i, 0) + "";
             String clave = defaultTablaPendientes.getValueAt(i, 1) + "";
-            String estado = defaultTablaPendientes.getValueAt(i, 2) + "";
-            String cantidad = defaultTablaPendientes.getValueAt(i, 3) + "";
-            String fechaPrueba = defaultTablaPendientes.getValueAt(i, 4) + "";
-            String fechaEvento = defaultTablaPendientes.getValueAt(i, 5) + "";
+             String nombre = defaultTablaPendientes.getValueAt(i, 2) + "";
+            String precio = defaultTablaPendientes.getValueAt(i, 3) + "";
+            String estado = defaultTablaPendientes.getValueAt(i, 4) + "";
+            String cantidad = defaultTablaPendientes.getValueAt(i, 5) + "";
+            String fechaPrueba = defaultTablaPendientes.getValueAt(i, 6) + "";
+            String fechaEvento = defaultTablaPendientes.getValueAt(i, 7) + "";
         
                 if (estado.equalsIgnoreCase("pagado no entregado")) {
-                    tablaCambioEstado.addRow(new Object[]{id, clave, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
+                    tablaCambioEstado.addRow(new Object[]{id, clave,nombre.toUpperCase(),precio, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
 
                 }
             

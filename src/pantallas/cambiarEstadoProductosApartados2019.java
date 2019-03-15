@@ -56,7 +56,7 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
             }
 
         };
-        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave","Nombre","Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         initComponents();
         //ocultamos el id
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -80,16 +80,17 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
         for (int i = 0; i < defaultTablaPendientes.getRowCount(); i++) {
             String id = defaultTablaPendientes.getValueAt(i, 0) + "";
             String clave = defaultTablaPendientes.getValueAt(i, 1) + "";
-            String estado = defaultTablaPendientes.getValueAt(i, 2) + "";
-            String cantidad = defaultTablaPendientes.getValueAt(i, 3) + "";
-            String fechaPrueba = defaultTablaPendientes.getValueAt(i, 4) + "";
-            String fechaEvento = defaultTablaPendientes.getValueAt(i, 5) + "";
-        
-                if (estado.equalsIgnoreCase("apartado")) {
-                    tablaCambioEstado.addRow(new Object[]{id, clave, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
+            String nombre = defaultTablaPendientes.getValueAt(i, 2) + "";
+            String precio = defaultTablaPendientes.getValueAt(i, 3) + "";
+            String estado = defaultTablaPendientes.getValueAt(i, 4) + "";
+            String cantidad = defaultTablaPendientes.getValueAt(i, 5) + "";
+            String fechaPrueba = defaultTablaPendientes.getValueAt(i, 6) + "";
+            String fechaEvento = defaultTablaPendientes.getValueAt(i, 7) + "";
 
-                }
-            
+            if (estado.equalsIgnoreCase("apartado")) {
+                tablaCambioEstado.addRow(new Object[]{id, clave,nombre.toUpperCase(),precio, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
+
+            }
 
         }
 
@@ -292,12 +293,12 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUnoPorUnoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       /* principal1.controlcambiarEstadoProductosApartados = false;
+        /* principal1.controlcambiarEstadoProductosApartados = false;
         principalUsuarios.controlcambiarEstadoProductosApartados = false;
         principal.controlcambiarEstadoProductosEntregadosNoPagados2019=false;*/
-        JOptionPane.showMessageDialog(null, "Selecciona un estatus para los productos","Advertencia!",JOptionPane.WARNING_MESSAGE);
-                
-      
+        JOptionPane.showMessageDialog(null, "Selecciona un estatus para los productos", "Advertencia!", JOptionPane.WARNING_MESSAGE);
+
+
     }//GEN-LAST:event_formWindowClosing
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked

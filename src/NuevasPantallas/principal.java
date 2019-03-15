@@ -13,7 +13,9 @@ import javafx.scene.layout.Border;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import mensajes.mensajeAdvertencia;
 import mensajes.mensajeQuestion;
+import pantallas.catalogoProductos;
 
 /**
  *
@@ -29,6 +31,7 @@ public class principal extends javax.swing.JFrame {
 
 //para validar las pantallas   que se abran solo una vez
     public static boolean controlDetallesProducto = false;
+    public static boolean controlDetallesProducto2 = false;
     public static boolean controlcambiarEstadoProductosApartados = false;
     public static boolean controlcancelarProductosApartados = false;
     public static boolean controldetallesDelProducto = false;
@@ -47,10 +50,11 @@ public class principal extends javax.swing.JFrame {
     public static boolean controlreportes = false;
     public static boolean controlusuarios = false;
     public static boolean controlventaRapida = false;
-    public static  boolean controlcambiarEstadoProductosEntregadosNoPagados2019=false;
-    public static boolean controleditarProductoPendientes2019=false;
+    public static boolean controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
+    public static boolean controleditarProductoPendientes2019 = false;
 
     public static JFrame frameDetallesProducto;
+    public static JFrame frameDetallesProducto2;
     public static JFrame framecambiarEstadoProductosApartados;
     public static JFrame framecancelarProductosApartados;
     public static JFrame framedetallesDelProducto;
@@ -61,8 +65,8 @@ public class principal extends javax.swing.JFrame {
     public static JFrame framenuevoRegistro;
     public static JFrame frameregistrarProducto;
     public static JFrame frameverPagos;
-     public static JFrame framecambiarEstadoProductosEntregadosNoPagados2019;
-     public static JFrame frameeditarProductoPendientes2019;
+    public static JFrame framecambiarEstadoProductosEntregadosNoPagados2019;
+    public static JFrame frameeditarProductoPendientes2019;
 
     //para validar las pantallas principales
     public static JFrame framecatalogo;
@@ -591,7 +595,19 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPendientesMouseClicked
 
     private void panelCatalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCatalogoMouseClicked
-        JOptionPane.showMessageDialog(null, "Fuera de servicio, trabajando en el", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        if (principal.controlcatalogo == false) {
+            catalogoProductos c = new catalogoProductos();
+            c.setVisible(true);
+            principal.controlcatalogo = true;
+        } else {
+            principal.framecatalogo.setAlwaysOnTop(true);
+            principal.framecatalogo.setAlwaysOnTop(false);
+            mensajeAdvertencia m = new mensajeAdvertencia();
+            mensajeAdvertencia.labelMensaje.setText("La ventana ya esta abierta");
+            m.setVisible(true);
+            m.setAlwaysOnTop(true);
+        }
+
     }//GEN-LAST:event_panelCatalogoMouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -680,7 +696,7 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_panelUsuariosMouseExited
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-      JOptionPane.showMessageDialog(null, "Cierra la session","Advertencia!",JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Cierra la session", "Advertencia!", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_formWindowClosing
 
     /**

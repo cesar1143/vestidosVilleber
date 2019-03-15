@@ -1082,19 +1082,25 @@ public class controlProductos {
             principal.controlnuevoRegistro = false;
             principal.framenuevoRegistro.dispose();
         }
-        
+
         if (principal.controlregistrarProducto == false) {
 
         } else {
             principal.controlregistrarProducto = false;
             principal.frameregistrarProducto.dispose();
         }
-        
+
         if (principal.controleditarProducto == false) {
 
         } else {
             principal.controleditarProducto = false;
             principal.frameeditarProducto.dispose();
         }
+    }
+
+    public List<Productos> consultarTodos2019() {
+        List<Productos> lista = dao.consultaTodos2019();
+       
+        return lista;
     }
 }

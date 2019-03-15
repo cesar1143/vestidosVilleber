@@ -133,7 +133,7 @@ public class controlProductoPendientes {
                 modelTablaPendientes.addRow(new Object[]{
                     lista.get(i).getIdproductosapartados(),
                     clave,
-                    nombre,
+                    nombre.toUpperCase(),
                     precio,
                     lista.get(i).getStatus().toUpperCase(),
                     lista.get(i).getCantidadVenta(),

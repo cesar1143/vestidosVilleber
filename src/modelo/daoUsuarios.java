@@ -430,7 +430,7 @@ public class daoUsuarios implements metodosDao {
          
          try {
              String  sqlConsulta="select cantidad from caja where fecharegistro='"+fecha+"'";
-             System.out.println("sql  consulta "  + sqlConsulta);
+            
              PreparedStatement ps= con.prepareStatement(sqlConsulta);
              ResultSet rs=ps.executeQuery();
              while(rs.next()){
@@ -453,11 +453,11 @@ public class daoUsuarios implements metodosDao {
              
              String sql="insert into caja(cantidad,fecharegistro,usuario)"
                      + "values('"+cantidad+"',now(),'"+nombre+"')";
-             System.out.println("sql "+sql);
+             
              PreparedStatement  ps=con.prepareStatement(sql);
              
              ps.executeUpdate();
-             System.out.println("registro exitoso dinero caja");
+            
              
          } catch (Exception e) {
              System.out.println("fallo registro dinero en caja " + e.getMessage());
