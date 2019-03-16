@@ -8,6 +8,7 @@ package pantallas;
 import NuevasPantallas.principal;
 import beans.Clientes;
 import beans.Productos;
+import control.controlProductoPendientes;
 import control.controlVentas;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -15,12 +16,18 @@ import javax.swing.table.DefaultTableModel;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import static pantallas.cancelarProductosApartados2019.defaultTablaPendientes;
+import static pantallas.cancelarProductosApartados2019.idCliente;
+import static pantallas.cancelarProductosApartados2019.tablaPendientes;
+
 /**
  *
  * @author famsa
  */
 public class detallesDelProducto extends javax.swing.JFrame {
-     //para el frame
+    //para el frame
+
     int x = 0, y = 0;
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
 
@@ -149,9 +156,19 @@ public class detallesDelProducto extends javax.swing.JFrame {
                 jPanel1MousePressed(evt);
             }
         });
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del cliente", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel10KeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 0, 204));
@@ -159,6 +176,9 @@ public class detallesDelProducto extends javax.swing.JFrame {
 
         txtNombreDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreDetallesDelProductoKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreDetallesDelProductoKeyReleased(evt);
             }
@@ -173,6 +193,9 @@ public class detallesDelProducto extends javax.swing.JFrame {
 
         txtTelefonoDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtTelefonoDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoDetallesDelProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoDetallesDelProductoKeyTyped(evt);
             }
@@ -205,6 +228,11 @@ public class detallesDelProducto extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 204));
@@ -212,9 +240,19 @@ public class detallesDelProducto extends javax.swing.JFrame {
 
         checkMedidasDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         checkMedidasDetallesDelProducto.setText("Sí");
+        checkMedidasDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                checkMedidasDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         checkFechasDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         checkFechasDetallesDelProducto.setText("Sí");
+        checkFechasDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                checkFechasDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 204));
@@ -248,18 +286,33 @@ public class detallesDelProducto extends javax.swing.JFrame {
         );
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 0, 204));
         jLabel12.setText("Modificaciones para el producto:");
 
         txtDetallesDetallesDelProducto.setColumns(20);
         txtDetallesDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtDetallesDetallesDelProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtDetallesDetallesDelProducto.setRows(5);
+        txtDetallesDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDetallesDetallesDelProductoKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDetallesDetallesDelProducto);
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medidas del producto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel13KeyPressed(evt);
+            }
+        });
 
         txtTalleDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTalleDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTalleDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 0, 204));
@@ -270,14 +323,29 @@ public class detallesDelProducto extends javax.swing.JFrame {
         jLabel25.setText("Sise:");
 
         txtSiseDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSiseDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSiseDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         txtHombrosDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtHombrosDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtHombrosDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 0, 204));
         jLabel26.setText("Hombros:");
 
         txtBustoDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtBustoDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBustoDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel27.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 0, 204));
@@ -288,24 +356,44 @@ public class detallesDelProducto extends javax.swing.JFrame {
         jLabel28.setText("Cintura:");
 
         txtCinturaDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCinturaDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCinturaDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel29.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 0, 204));
         jLabel29.setText("Cadera:");
 
         txtCaderaDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCaderaDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCaderaDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel30.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 0, 204));
         jLabel30.setText("Largo falda:");
 
         txtLargoFaldaDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtLargoFaldaDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLargoFaldaDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         jLabel31.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 0, 204));
         jLabel31.setText("Ancho Puño:");
 
         txtAnchoPuñoDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtAnchoPuñoDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAnchoPuñoDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -395,14 +483,31 @@ public class detallesDelProducto extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fechas", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel32.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 0, 204));
         jLabel32.setText("Fecha prueba:");
 
+        fechaPruebaDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaPruebaDetallesDelProductoKeyPressed(evt);
+            }
+        });
+
         jLabel33.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 0, 204));
         jLabel33.setText("Fecha evento:");
+
+        fechaEventoDetallesDelProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaEventoDetallesDelProductoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -452,7 +557,7 @@ public class detallesDelProducto extends javax.swing.JFrame {
         btnCancelarDetallesDelProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarDetallesDelProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarDetallesDelProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarDetallesDelProducto.setText("Cancelar");
+        btnCancelarDetallesDelProducto.setText("F1- Cancelar");
         btnCancelarDetallesDelProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarDetallesDelProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -604,7 +709,7 @@ public class detallesDelProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoDetallesDelProductoKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_formWindowClosing
 
     private void btnCancelarDetallesDelProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarDetallesDelProductoActionPerformed
@@ -622,18 +727,98 @@ public class detallesDelProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-     
+
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-       x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void txtNombreDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreDetallesDelProductoKeyPressed
+
+    private void txtTelefonoDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoDetallesDelProductoKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoDetallesDelProductoKeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+      metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jPanel10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel10KeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel10KeyPressed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void checkMedidasDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_checkMedidasDetallesDelProductoKeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_checkMedidasDetallesDelProductoKeyPressed
+
+    private void checkFechasDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_checkFechasDetallesDelProductoKeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_checkFechasDetallesDelProductoKeyPressed
+
+    private void txtDetallesDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDetallesDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtDetallesDetallesDelProductoKeyPressed
+
+    private void jPanel13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel13KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel13KeyPressed
+
+    private void txtTalleDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTalleDetallesDelProductoKeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtTalleDetallesDelProductoKeyPressed
+
+    private void txtSiseDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSiseDetallesDelProductoKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtSiseDetallesDelProductoKeyPressed
+
+    private void txtHombrosDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHombrosDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtHombrosDetallesDelProductoKeyPressed
+
+    private void txtBustoDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBustoDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtBustoDetallesDelProductoKeyPressed
+
+    private void txtCinturaDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCinturaDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtCinturaDetallesDelProductoKeyPressed
+
+    private void txtCaderaDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCaderaDetallesDelProductoKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtCaderaDetallesDelProductoKeyPressed
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void fechaPruebaDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaPruebaDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_fechaPruebaDetallesDelProductoKeyPressed
+
+    private void fechaEventoDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaEventoDetallesDelProductoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_fechaEventoDetallesDelProductoKeyPressed
+
+    private void txtLargoFaldaDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLargoFaldaDetallesDelProductoKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtLargoFaldaDetallesDelProductoKeyPressed
+
+    private void txtAnchoPuñoDetallesDelProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnchoPuñoDetallesDelProductoKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtAnchoPuñoDetallesDelProductoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -714,4 +899,21 @@ public class detallesDelProducto extends javax.swing.JFrame {
     private javax.swing.JTextField txtTalleDetallesDelProducto;
     private javax.swing.JTextField txtTelefonoDetallesDelProducto;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              controlV.aceptarDetallesDelProducto(txtNombreDetallesDelProducto, txtTelefonoDetallesDelProducto, txtDetallesDetallesDelProducto,
+                checkMedidasDetallesDelProducto, checkFechasDetallesDelProducto, txtTalleDetallesDelProducto, txtSiseDetallesDelProducto,
+                txtHombrosDetallesDelProducto, txtBustoDetallesDelProducto, txtCinturaDetallesDelProducto, txtCaderaDetallesDelProducto, txtLargoFaldaDetallesDelProducto,
+                txtAnchoPuñoDetallesDelProducto, fechaPruebaDetallesDelProducto, fechaEventoDetallesDelProducto, principal1.idUSuario, beanProductos,
+                cantidadParaComprar, tablaVentas, defaultTablaVentas, this, txtTotalAPagar, tablaProductos, defaultTablaProductos);
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+           dispose();
+        principalUsuarios.controldetallesDelProducto = false;
+        principal.controldetallesDelProducto = false;
+        }
+    }
 }

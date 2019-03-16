@@ -68,6 +68,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jPanel2KeyPressed"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -119,6 +122,9 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable1KeyPressed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -136,6 +142,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jPanel3KeyPressed"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -177,7 +186,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Iconos/todos.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Cancelar todos"/>
+                    <Property name="text" type="java.lang.String" value="F1- Cancelar todos"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Cursor de Mano"/>
                     </Property>
@@ -200,7 +209,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Iconos/unoporuno.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Cancelar uno por uno"/>
+                    <Property name="text" type="java.lang.String" value="F2- Cancelar uno por uno"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Cursor de Mano"/>
                     </Property>

@@ -16,6 +16,7 @@ import beans.Productosapartados;
 import control.controlProductoPendientes;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
             }
 
         };
-        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave","Nombre","Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave", "Nombre", "Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         initComponents();
         //ocultamos el id
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -88,7 +89,7 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
             String fechaEvento = defaultTablaPendientes.getValueAt(i, 7) + "";
 
             if (estado.equalsIgnoreCase("apartado")) {
-                tablaCambioEstado.addRow(new Object[]{id, clave,nombre.toUpperCase(),precio, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
+                tablaCambioEstado.addRow(new Object[]{id, clave, nombre.toUpperCase(), precio, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
 
             }
 
@@ -157,7 +158,7 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
         btnTodos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTodos.setForeground(new java.awt.Color(255, 255, 255));
         btnTodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/todos.png"))); // NOI18N
-        btnTodos.setText("Todos");
+        btnTodos.setText("F1- Todos");
         btnTodos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +170,7 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
         btnUnoPorUno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnUnoPorUno.setForeground(new java.awt.Color(255, 255, 255));
         btnUnoPorUno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/unoporuno.png"))); // NOI18N
-        btnUnoPorUno.setText("Uno por uno");
+        btnUnoPorUno.setText("F2- Uno por uno");
         btnUnoPorUno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUnoPorUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,8 +186,8 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUnoPorUno, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(btnUnoPorUno)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,6 +290,7 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTodosActionPerformed
 
     private void btnUnoPorUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoPorUnoActionPerformed
+    
         new controlProductoPendientes().btncambiarEstadoProductosUnoPorUno2(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
     }//GEN-LAST:event_btnUnoPorUnoActionPerformed
 
@@ -368,4 +370,13 @@ public class cambiarEstadoProductosApartados2019 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+          new controlProductoPendientes().btncambiarEstadoProductosTodo2(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
+
+        }else  if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            new controlProductoPendientes().btncambiarEstadoProductosUnoPorUno2(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
+        }
+    }
 }

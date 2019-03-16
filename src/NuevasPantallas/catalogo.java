@@ -14,6 +14,7 @@ import control.controlProductos;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -628,4 +629,6 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JLabel labelImg17;
     private javax.swing.JLabel labelImg29;
     // End of variables declaration//GEN-END:variables
+
+
 }

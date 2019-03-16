@@ -15,9 +15,13 @@ import beans.Productosapartados;
 import control.controlProductoPendientes;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.Set;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import static pantallas.cambiarEstadoProductosEntregadosNoPagados2019.defaultTablaPendientes;
+import static pantallas.cambiarEstadoProductosEntregadosNoPagados2019.idCliente;
+import static pantallas.cambiarEstadoProductosEntregadosNoPagados2019.tablaPendientes;
 import static pantallas.verPagos.beanClientes;
 
 /**
@@ -49,7 +53,7 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
         };
         tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave producto", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
         principal.framecancelarProductosApartados = this;
         //llenamos  la tabla
@@ -67,7 +71,7 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
             String cantidad = defaultTablaPendientes.getValueAt(i, 3) + "";
             String fechaPrueba = defaultTablaPendientes.getValueAt(i, 4) + "";
             String fechaEvento = defaultTablaPendientes.getValueAt(i, 5) + "";
-            System.out.println("fechaEvento  " +  fechaEvento);
+            System.out.println("fechaEvento  " + fechaEvento);
 
             if (estado.equalsIgnoreCase("apartado")) {
                 tablaCambioEstado.addRow(new Object[]{id, clave, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
@@ -120,22 +124,37 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tablaCambioEstado);
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "opciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel3KeyPressed(evt);
+            }
+        });
 
         btnTodos.setBackground(new java.awt.Color(255, 0, 204));
         btnTodos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTodos.setForeground(new java.awt.Color(255, 255, 255));
         btnTodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/todos.png"))); // NOI18N
-        btnTodos.setText("Cancelar todos");
+        btnTodos.setText("F1- Cancelar todos");
         btnTodos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +166,7 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
         btnUnoPorUno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnUnoPorUno.setForeground(new java.awt.Color(255, 255, 255));
         btnUnoPorUno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/unoporuno.png"))); // NOI18N
-        btnUnoPorUno.setText("Cancelar uno por uno");
+        btnUnoPorUno.setText("F2- Cancelar uno por uno");
         btnUnoPorUno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUnoPorUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,16 +292,17 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
 
     private void btnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosActionPerformed
         //descpues de cambiar los estado tenemos que actualizar la tabla pendientes y cerrar esta ventana
-        new controlProductoPendientes().btnCancelarProdcutosTodos2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes,idCliente);
+        new controlProductoPendientes().btnCancelarProdcutosTodos2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
 
     }//GEN-LAST:event_btnTodosActionPerformed
 
     private void btnUnoPorUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoPorUnoActionPerformed
-        new controlProductoPendientes().btnCancelarProdcutosUnoPorUno2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes,idCliente);
+        new controlProductoPendientes().btnCancelarProdcutosUnoPorUno2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
     }//GEN-LAST:event_btnUnoPorUnoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         principal1.controlcancelarProductosApartados = false;
+        principal.controlcancelarProductosApartados = false;
     }//GEN-LAST:event_formWindowClosing
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
@@ -309,6 +329,18 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void jPanel3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel3KeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3KeyPressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -365,4 +397,18 @@ public class cancelarProductosApartados2019 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal1.controlcancelarProductosApartados = false;
+            principal.controlcancelarProductosApartados = false;
+
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            new controlProductoPendientes().btnCancelarProdcutosTodos2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            new controlProductoPendientes().btnCancelarProdcutosUnoPorUno2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
+        }
+    }
 }

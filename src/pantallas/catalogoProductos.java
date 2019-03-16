@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -561,11 +562,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-           
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -584,11 +585,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-          
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -606,11 +607,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-           
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -628,11 +629,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-          
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -650,11 +651,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-          
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -672,11 +673,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-        
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -694,11 +695,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-            
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -720,7 +721,7 @@ public class catalogoProductos extends javax.swing.JFrame {
             } else {
 
             }
-           
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -738,11 +739,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-            
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -760,11 +761,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-           
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -782,11 +783,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-        
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -804,11 +805,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 DetallesProducto.idProducto = id;
                 DetallesProducto d = new DetallesProducto();
                 d.setVisible(true);
-                 principal.controlDetallesProducto = true;
+                principal.controlDetallesProducto = true;
             } else {
 
             }
-           
+
         } else {
             principal.frameDetallesProducto.setAlwaysOnTop(true);
             principal.frameDetallesProducto.setAlwaysOnTop(false);
@@ -936,7 +937,7 @@ public class catalogoProductos extends javax.swing.JFrame {
         txtNombre.setEnabled(false);
         txtNombre.setBackground(Color.GRAY);
         List<Productos> lista = new daoProductos().consultaTodosPorNombre2019(txtNombre.getText());
-      
+
         listaPro.clear();
         contadorImgenes = 12;
         valori = 0;
@@ -958,7 +959,7 @@ public class catalogoProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        principal.controlcatalogo=false;
+        principal.controlcatalogo = false;
     }//GEN-LAST:event_formWindowClosing
 
     /**
@@ -997,7 +998,7 @@ public class catalogoProductos extends javax.swing.JFrame {
     }
 
     public void pintarImagenes(List<Productos> lista) {
-        
+
         if (lista.size() == 0) {
             JOptionPane.showMessageDialog(null, "No existe ningun producto");
             foto1.setIcon(null);
@@ -1103,13 +1104,13 @@ public class catalogoProductos extends javax.swing.JFrame {
                         } else {
                             next.setVisible(false);
                         }
-                      
+
                         for (valori = 0; valori < contadorImgenes; valori++) {
 
                             if (valori == listaPro.size()) {
-                                
+
                                 for (int i = valori; i < 12; i++) {
-                                    
+
                                     listaFotos.get(i).setIcon(null);
                                     listaFotos.get(i).setText("Sin  foto");
                                 }
@@ -1142,7 +1143,7 @@ public class catalogoProductos extends javax.swing.JFrame {
                                     }
                                 }
                             }
- 
+
                         }
                         c.dispose();
 
@@ -1156,7 +1157,7 @@ public class catalogoProductos extends javax.swing.JFrame {
     }
 
     public void pintarImagenesYaCargadas() {
-      
+
         Thread hilo = new Thread() {
             @Override
             public void run() {
@@ -1284,7 +1285,7 @@ public class catalogoProductos extends javax.swing.JFrame {
 
         };
         hilo.start();
-      
+
         if (valori < listaPro.size()) {
             next.setVisible(true);
         } else {
@@ -1324,4 +1325,18 @@ public class catalogoProductos extends javax.swing.JFrame {
     private javax.swing.JPanel panel;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (principal.controlDetallesProducto == false) {
+
+            } else {
+                principal.controlDetallesProducto = false;
+                principal.frameDetallesProducto.dispose();
+            }
+            principal.controlcatalogo = false;
+            dispose();
+        } else {
+        }
+    }
 }

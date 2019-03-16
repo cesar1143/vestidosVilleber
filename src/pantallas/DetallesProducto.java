@@ -8,8 +8,10 @@ package pantallas;
 import NuevasPantallas.principal;
 import beans.Productos;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import mensajes.cargando;
 import modelo.daoProductos;
 
@@ -23,7 +25,7 @@ public class DetallesProducto extends javax.swing.JFrame {
      * Creates new form DetallesProducto
      */
     public static String idProducto = "";
-
+    
     public DetallesProducto() {
         initComponents();
         principalUsuarios.frameDetallesProducto = this;
@@ -31,9 +33,9 @@ public class DetallesProducto extends javax.swing.JFrame {
         principal.frameDetallesProducto = this;
         this.setLocationRelativeTo(null);
         llenarDatos();
-
+        
     }
-
+    
     public void llenarDatos() {
         Thread hilo = new Thread() {
             @Override
@@ -57,15 +59,15 @@ public class DetallesProducto extends javax.swing.JFrame {
                     } catch (Exception e) {
                         c.dispose();
                     }
-
+                    
                 } else {
                     System.out.println("bean  null");
                 }
             }
-
+            
         };
         hilo.start();
-
+        
     }
 
     /**
@@ -101,9 +103,19 @@ public class DetallesProducto extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         labelFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelFoto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelFotoKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 204));
@@ -113,6 +125,11 @@ public class DetallesProducto extends javax.swing.JFrame {
         txtCodigo.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCodigo.setEnabled(false);
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 204));
@@ -123,6 +140,11 @@ public class DetallesProducto extends javax.swing.JFrame {
         txtPrecio.setForeground(new java.awt.Color(255, 0, 204));
         txtPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPrecio.setEnabled(false);
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 204));
@@ -133,6 +155,11 @@ public class DetallesProducto extends javax.swing.JFrame {
         txtNombre.setForeground(new java.awt.Color(255, 0, 204));
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombre.setEnabled(false);
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 204));
@@ -153,12 +180,22 @@ public class DetallesProducto extends javax.swing.JFrame {
                 txtExistenciasActionPerformed(evt);
             }
         });
+        txtExistencias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtExistenciasKeyPressed(evt);
+            }
+        });
 
         txtDescripcion.setEditable(false);
         txtDescripcion.setBackground(new java.awt.Color(229, 222, 222));
         txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         txtDescripcion.setRows(5);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDescripcion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -248,8 +285,36 @@ public class DetallesProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void txtExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExistenciasActionPerformed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
     }//GEN-LAST:event_txtExistenciasActionPerformed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoKeyPressed
+
+    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioKeyPressed
+
+    private void txtExistenciasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciasKeyPressed
+ metodosBotones(evt);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtExistenciasKeyPressed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void labelFotoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelFotoKeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_labelFotoKeyPressed
+
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionKeyPressed
 
     /**
      * @param args the command line arguments
@@ -301,4 +366,14 @@ public class DetallesProducto extends javax.swing.JFrame {
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal1.controlDetallesProducto = false;
+            principal.controlDetallesProducto = false;
+            principalUsuarios.controlDetallesProducto = false;
+            dispose();
+        } else {
+        }
+    }
 }

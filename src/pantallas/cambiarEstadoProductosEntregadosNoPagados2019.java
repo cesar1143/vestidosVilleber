@@ -13,6 +13,7 @@ import beans.Deudatotal;
 import beans.Fechaspruebas;
 import beans.Pagos;
 import beans.Productosapartados;
+import java.awt.event.KeyEvent;
 import control.controlProductoPendientes;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -57,7 +58,7 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
             }
 
         };
-        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave","Nombre","Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaCambioEstado.setColumnIdentifiers(new Object[]{"Id", "Clave", "Nombre", "Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         initComponents();
         //ocultamos el id
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -81,18 +82,17 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
         for (int i = 0; i < defaultTablaPendientes.getRowCount(); i++) {
             String id = defaultTablaPendientes.getValueAt(i, 0) + "";
             String clave = defaultTablaPendientes.getValueAt(i, 1) + "";
-             String nombre = defaultTablaPendientes.getValueAt(i, 2) + "";
+            String nombre = defaultTablaPendientes.getValueAt(i, 2) + "";
             String precio = defaultTablaPendientes.getValueAt(i, 3) + "";
             String estado = defaultTablaPendientes.getValueAt(i, 4) + "";
             String cantidad = defaultTablaPendientes.getValueAt(i, 5) + "";
             String fechaPrueba = defaultTablaPendientes.getValueAt(i, 6) + "";
             String fechaEvento = defaultTablaPendientes.getValueAt(i, 7) + "";
-        
-                if (estado.equalsIgnoreCase("pagado no entregado")) {
-                    tablaCambioEstado.addRow(new Object[]{id, clave,nombre.toUpperCase(),precio, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
 
-                }
-            
+            if (estado.equalsIgnoreCase("pagado no entregado")) {
+                tablaCambioEstado.addRow(new Object[]{id, clave, nombre.toUpperCase(), precio, estado.toUpperCase(), cantidad, fechaPrueba, fechaEvento});
+
+            }
 
         }
 
@@ -119,7 +119,7 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -145,22 +145,37 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
                 jPanel2MousePressed(evt);
             }
         });
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tablaCambioEstado);
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cambiar estado", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel3KeyPressed(evt);
+            }
+        });
 
         btnTodos.setBackground(new java.awt.Color(255, 0, 204));
         btnTodos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTodos.setForeground(new java.awt.Color(255, 255, 255));
         btnTodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/todos.png"))); // NOI18N
-        btnTodos.setText("Todos");
+        btnTodos.setText("F1- Todos");
         btnTodos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +187,7 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
         btnUnoPorUno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnUnoPorUno.setForeground(new java.awt.Color(255, 255, 255));
         btnUnoPorUno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/unoporuno.png"))); // NOI18N
-        btnUnoPorUno.setText("Uno por uno");
+        btnUnoPorUno.setText("F2- Uno por uno");
         btnUnoPorUno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUnoPorUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,8 +203,8 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
                 .addContainerGap()
                 .addComponent(btnTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUnoPorUno, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(btnUnoPorUno)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,10 +324,7 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         principal1.controlcambiarEstadoProductosApartados = false;
         principalUsuarios.controlcambiarEstadoProductosApartados = false;
-        mensajeAdvertencia m = new mensajeAdvertencia();
-        mensajeAdvertencia.labelMensaje.setText("Selecciona un estado");
-        m.setVisible(true);
-        m.setAlwaysOnTop(true);
+        principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
     }//GEN-LAST:event_formWindowClosing
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
@@ -335,9 +347,21 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
     }//GEN-LAST:event_formMousePressed
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        principal.controlcambiarEstadoProductosEntregadosNoPagados2019=false;
+        principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
         dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void jPanel3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel3KeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3KeyPressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+      metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -390,4 +414,19 @@ public class cambiarEstadoProductosEntregadosNoPagados2019 extends javax.swing.J
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal1.controlcambiarEstadoProductosApartados = false;
+            principalUsuarios.controlcambiarEstadoProductosApartados = false;
+            principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = false;
+
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            new controlProductoPendientes().btncambiarEstadoProductosPagadoNoEntregadoTodos2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            new controlProductoPendientes().btncambiarEstadoProductosPagadoNoEntregadoUnoPorUno2019(this, jTable1, tablaCambioEstado, tablaPendientes, defaultTablaPendientes, idCliente);
+        }
+    }
 }
