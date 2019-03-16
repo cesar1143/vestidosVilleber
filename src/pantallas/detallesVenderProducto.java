@@ -11,6 +11,7 @@ import control.controlVentas;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
@@ -370,16 +371,21 @@ public class detallesVenderProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarDetallesVentaActionPerformed
 
     private void txtCantidadDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadDetallesVentaKeyPressed
-        //CALCULAMOS EL TOTAL A PAGAR DE DICHO PRODUCTO PRECIO * CANTIDAD Y PINTAMOS EL SUBTOTAL
-        /* System.out.println("entro");
-          System.out.println("esto pongo " +txtCantidadDetallesVenta.getText().toString().trim());
-          
-            System.out.println("entro  aqui 222");
-           int precio=Integer.parseInt(txtPrecioDetallesVenta.getText().toString().trim());
-           System.out.println("esto pongo " +  Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim()));
-           int cantidad=Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim());
-           int  subtotal=precio*cantidad;
-           txtSubTotalDetallesVenta.setText(subtotal+""); */
+        //AL MOMENTO DE DAR HACEPTAR  PREGUNTAREMOS SI EL PRODUCTO LLEVARA ALGUN DETALLE?
+        //1.-SI --> REGISTRAMOS AL CLIENTE Y LOS DETALLES QUE PUEDEN  SER
+        //1.1->MEDIDAS
+        //1.2-->FECHAS
+        //NOTA PARA EL PUNTO 1 --> SI SE REGISTRA EL CLIENTE Y EL CLIENTE AUN SIGUE COMPRANDO DEBEMOS MANDAR A TRAER ESE ULTIMO
+        //CLIENTE REGISTRADO PARA PODER ASIGNAR SU ID ALA DEUDA TOTAL ASI COMO EN PRO APARTADOS
+
+        //2.-NO--> ENTONCES NO REGISTRAMOS AL CLIENTE.
+        //PERO  DEBEMOS DE REGISTRAR SU DEUDA TOTAL Y EN LA TABLA DE APRTADOS COMO CLIENTE GENERAL
+        //EL CUAL  YA ESTARA POR DEFAUL EL LA BD SIN MOSTRARSE EN LAS PANTALLAS
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int cantidad = Integer.parseInt(txtCantidadDetallesVenta.getText());
+            controlV.aceptarDetallesVenta(txtCantidadDetallesVenta, bean, cantidad, this, tablaProductos,
+                    defaultTablaProductos, tablaVentas, defaultTablaVentas, txtTotalAPagar);
+        }
 
 
     }//GEN-LAST:event_txtCantidadDetallesVentaKeyPressed
@@ -419,7 +425,7 @@ public class detallesVenderProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-       principal.controldetallesVenderProducto=false;
+        principal.controldetallesVenderProducto = false;
         dispose();
     }//GEN-LAST:event_jLabel17MouseClicked
 

@@ -11,6 +11,7 @@ import control.controlVentas;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
@@ -115,6 +116,9 @@ public class ventaRapida extends javax.swing.JFrame {
         txtPrecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecioKeyReleased(evt);
             }
@@ -137,6 +141,11 @@ public class ventaRapida extends javax.swing.JFrame {
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 204));
@@ -317,30 +326,35 @@ public class ventaRapida extends javax.swing.JFrame {
         //EL CUAL  YA ESTARA POR DEFAUL EL LA BD SIN MOSTRARSE EN LAS PANTALLAS
         int cantidad = Integer.parseInt(txtCantidad.getText());
         if (txtCantidad.getText().isEmpty()) {
-            mensajeAdvertencia menAdvertencia=new  mensajeAdvertencia();
+            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("completa el campo");
             txtCantidad.requestFocus();
             menAdvertencia.setVisible(true);
-        }else{
-            
-         controlV.aceptarVentaRapida(txtNombre,txtCantidad,txtPrecio,this,
-                 tablaVentas, defaultTablaVentas,txtTotalAPagar,principal.idUsuario+"");
-    }
-       
+        } else {
+
+            controlV.aceptarVentaRapida(txtNombre, txtCantidad, txtPrecio, this,
+                    tablaVentas, defaultTablaVentas, txtTotalAPagar, principal.idUsuario + "");
+        }
+
 
     }//GEN-LAST:event_btnAceptarDetallesVentaActionPerformed
 
     private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
-        //CALCULAMOS EL TOTAL A PAGAR DE DICHO PRODUCTO PRECIO * CANTIDAD Y PINTAMOS EL SUBTOTAL
-        /* System.out.println("entro");
-          System.out.println("esto pongo " +txtCantidadDetallesVenta.getText().toString().trim());
-          
-            System.out.println("entro  aqui 222");
-           int precio=Integer.parseInt(txtPrecioDetallesVenta.getText().toString().trim());
-           System.out.println("esto pongo " +  Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim()));
-           int cantidad=Integer.parseInt(txtCantidadDetallesVenta.getText().toString().trim());
-           int  subtotal=precio*cantidad;
-           txtSubTotalDetallesVenta.setText(subtotal+""); */
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+        if (txtCantidad.getText().isEmpty()) {
+            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+            mensajeAdvertencia.labelMensaje.setText("completa el campo");
+            txtCantidad.requestFocus();
+            menAdvertencia.setVisible(true);
+        } else {
+
+            controlV.aceptarVentaRapida(txtNombre, txtCantidad, txtPrecio, this,
+                    tablaVentas, defaultTablaVentas, txtTotalAPagar, principal.idUsuario + "");
+        }
+        }
+        
+        
 
 
     }//GEN-LAST:event_txtCantidadKeyPressed
@@ -403,19 +417,39 @@ public class ventaRapida extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void txtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyReleased
-          try {
+        try {
             if (txtPrecio.getText().isEmpty()) {
                 txtSubtotal.setText("");
                 txtCantidad.setText("");
-                
+
             } else {
-                
+
             }
 
         } catch (Exception e) {
         }
 
     }//GEN-LAST:event_txtPrecioKeyReleased
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!txtNombre.getText().isEmpty()) {
+                txtPrecio.requestFocus();
+            } else {
+                txtNombre.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!txtPrecio.getText().isEmpty()) {
+                txtCantidad.requestFocus();
+            } else {
+                txtPrecio.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtPrecioKeyPressed
 
     /**
      * @param args the command line arguments

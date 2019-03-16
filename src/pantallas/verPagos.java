@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import mensajes.mensajeAdvertencia;
 
 /**
@@ -75,7 +76,7 @@ public class verPagos extends javax.swing.JFrame {
         validar.soloNumeros(txtEfectivoRecibido);
         //llenamos los campos123
 
-        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos, txtDeudTotal, txtRestan,txtTotalPagos);
+        controlP.mostrarPagosyabonos(idCliente, jTable1, tablaPagos, txtDeudTotal, txtRestan, txtTotalPagos);
         /*if (beanClientes != null) {
             //Set<Productosapartados>listaProApartados=beanCliente.getProductosapartadoses();
             txtNombreDelCiente.setText(beanClientes.getNombrecompleto().toUpperCase());
@@ -358,6 +359,11 @@ public class verPagos extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de abono", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
 
         txtAbono.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtAbono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAbonoKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 204));
@@ -373,6 +379,9 @@ public class verPagos extends javax.swing.JFrame {
 
         txtEfectivoRecibido.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtEfectivoRecibido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEfectivoRecibidoKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtEfectivoRecibidoKeyReleased(evt);
             }
@@ -509,7 +518,7 @@ public class verPagos extends javax.swing.JFrame {
         txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.idUsuario + "", this);*/
         controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
                 txtNombreDelCiente.getText(), jTable1,
-                tablaPagos, principal.usuario + "", this, idCliente,txtTotalPagos);
+                tablaPagos, principal.usuario + "", this, idCliente, txtTotalPagos);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -543,7 +552,7 @@ public class verPagos extends javax.swing.JFrame {
             // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
         } else {
             controlP.editar2019(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(),
-                    txtDeudTotal, txtRestan, this, idCliente, idDeuda,txtTotalPagos);
+                    txtDeudTotal, txtRestan, this, idCliente, idDeuda, txtTotalPagos);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -557,7 +566,7 @@ public class verPagos extends javax.swing.JFrame {
         } else {
             controlP.eliminar2019(jTable1, tablaPagos,
                     txtNombreDelCiente.getText().toString(),
-                    txtDeudTotal, txtRestan, this, idCliente,txtTotalPagos);
+                    txtDeudTotal, txtRestan, this, idCliente, txtTotalPagos);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -589,6 +598,22 @@ public class verPagos extends javax.swing.JFrame {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void txtAbonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbonoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!txtAbono.getText().isEmpty()) {
+                txtEfectivoRecibido.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtAbonoKeyPressed
+
+    private void txtEfectivoRecibidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectivoRecibidoKeyPressed
+      if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
+                txtNombreDelCiente.getText(), jTable1,
+                tablaPagos, principal.usuario + "", this, idCliente, txtTotalPagos);
+        }
+    }//GEN-LAST:event_txtEfectivoRecibidoKeyPressed
 
     /**
      * @param args the command line arguments

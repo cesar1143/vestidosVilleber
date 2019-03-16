@@ -12,6 +12,7 @@ import control.controlProductosAgotados;
 import java.awt.MouseInfo;
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mensajes.mensajeAdvertencia;
@@ -117,6 +118,11 @@ public class productosAgotados extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jLabel35.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 0, 204));
@@ -124,6 +130,9 @@ public class productosAgotados extends javax.swing.JFrame {
 
         txtBuscarProductosProAgotados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtBuscarProductosProAgotados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarProductosProAgotadosKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarProductosProAgotadosKeyReleased(evt);
             }
@@ -132,6 +141,11 @@ public class productosAgotados extends javax.swing.JFrame {
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos  Agotados", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
         jPanel17.setForeground(new java.awt.Color(255, 0, 204));
+        jPanel17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel17KeyPressed(evt);
+            }
+        });
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
         jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre  y descripcion del producto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
@@ -199,13 +213,18 @@ public class productosAgotados extends javax.swing.JFrame {
                 jTable3MousePressed(evt);
             }
         });
+        jTable3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable3KeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
 
         btnEditarProAgotado.setBackground(new java.awt.Color(255, 0, 204));
         btnEditarProAgotado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEditarProAgotado.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarProAgotado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/editar.png"))); // NOI18N
-        btnEditarProAgotado.setText("Editar");
+        btnEditarProAgotado.setText("F1- Editar");
         btnEditarProAgotado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProAgotado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +236,7 @@ public class productosAgotados extends javax.swing.JFrame {
         btnEliminarProAgotado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEliminarProAgotado.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarProAgotado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/eliminar.png"))); // NOI18N
-        btnEliminarProAgotado.setText("Eliminar");
+        btnEliminarProAgotado.setText("F2- Eliminar");
         btnEliminarProAgotado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarProAgotado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,9 +254,9 @@ public class productosAgotados extends javax.swing.JFrame {
                     .addComponent(jScrollPane3)
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarProAgotado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminarProAgotado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditarProAgotado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
@@ -284,7 +303,7 @@ public class productosAgotados extends javax.swing.JFrame {
                         .addComponent(txtBuscarProductosProAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)))
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,9 +378,9 @@ public class productosAgotados extends javax.swing.JFrame {
 
                 ep2.setVisible(true);
                 principal.controleditarProducto2 = true;*/
-                //solo se  cambiara la cantidad
-                controlProAgotados.editarProductosAgotados2019( jTable3, tablaProAgotados);
-           /* } else {
+            //solo se  cambiara la cantidad
+            controlProAgotados.editarProductosAgotados2019(jTable3, tablaProAgotados);
+            /* } else {
                 mensajeAdvertencia men = new mensajeAdvertencia();
                 mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
                 men.setVisible(true);
@@ -405,8 +424,24 @@ public class productosAgotados extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       principal.controlproductosAgotados=false;
+        principal.controlproductosAgotados = false;
     }//GEN-LAST:event_formWindowClosing
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void txtBuscarProductosProAgotadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosProAgotadosKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarProductosProAgotadosKeyPressed
+
+    private void jTable3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable3KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jTable3KeyPressed
+
+    private void jPanel17KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel17KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel17KeyPressed
 
     /**
      * @param args the command line arguments
@@ -461,4 +496,54 @@ public class productosAgotados extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscarProductosProAgotados;
     private javax.swing.JTextField txtNombreProAgotados;
     // End of variables declaration//GEN-END:variables
+public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlproductosAgotados = false;
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            if (jTable3.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un producto de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                /*if (principal.controleditarProducto2 == false) {
+                int fila = jTable3.getSelectedRow();
+                Object valorId = jTable3.getValueAt(fila, 0);
+                controlProAgotados.consultaEspecificaParaModificar(Integer.parseInt(valorId + ""));
+                editarProducto2 ep2 = new editarProducto2();
+
+                ep2.setVisible(true);
+                principal.controleditarProducto2 = true;*/
+                //solo se  cambiara la cantidad
+                controlProAgotados.editarProductosAgotados2019(jTable3, tablaProAgotados);
+                /* } else {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+
+                //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                principal.frameeditarProducto2.setAlwaysOnTop(true);
+                principal.frameeditarProducto2.setAlwaysOnTop(false);
+            }*/
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            if (jTable3.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                int fila = jTable3.getSelectedRow();
+                Object valorId = jTable3.getValueAt(fila, 0);
+                controlProAgotados.eliminar2109(valorId + "", jTable3, tablaProAgotados);
+            }
+        }
+    }
 }

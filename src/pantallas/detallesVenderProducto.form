@@ -135,7 +135,6 @@
                           <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnAceptarDetallesVenta" min="-2" pref="57" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btncancelarDetallesVenta" min="-2" pref="54" max="-2" attributes="0"/>

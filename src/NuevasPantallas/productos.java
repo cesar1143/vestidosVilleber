@@ -11,6 +11,7 @@ import control.controlInicioSesion;
 import control.controlProductos;
 import control.controlVentas;
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Frame;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -268,9 +269,19 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de productos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel8KeyPressed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tablaProductos);
@@ -283,13 +294,18 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
                 jTable1MousePressed(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnEliminarProProductos.setBackground(new java.awt.Color(255, 0, 204));
         btnEliminarProProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEliminarProProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarProProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/eliminar.png"))); // NOI18N
-        btnEliminarProProductos.setText("Eliminar Producto");
+        btnEliminarProProductos.setText("F5 - Eliminar");
         btnEliminarProProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarProProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,7 +331,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnRegistrarProProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRegistrarProProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarProProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/agregar.png"))); // NOI18N
-        btnRegistrarProProductos.setText("Registrar Producto");
+        btnRegistrarProProductos.setText("F3 - Registrar");
         btnRegistrarProProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarProProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,7 +343,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnActualizarTablaProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnActualizarTablaProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizarTablaProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/actualizar.png"))); // NOI18N
-        btnActualizarTablaProductos.setText("Actualizar Tabla");
+        btnActualizarTablaProductos.setText("Actualizar ");
         btnActualizarTablaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizarTablaProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,7 +355,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnEditarProProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEditarProProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarProProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/editar.png"))); // NOI18N
-        btnEditarProProductos.setText("Editar Producto");
+        btnEditarProProductos.setText("F4 - Editar");
         btnEditarProProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,7 +367,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnVenderProProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnVenderProProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnVenderProProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vender.png"))); // NOI18N
-        btnVenderProProductos.setText("Vender Producto");
+        btnVenderProProductos.setText("F1 - Vender ");
         btnVenderProProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVenderProProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,7 +387,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnVenderProProductos3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnVenderProProductos3.setForeground(new java.awt.Color(255, 255, 255));
         btnVenderProProductos3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/agregar.png"))); // NOI18N
-        btnVenderProProductos3.setText("Nuevo Registro");
+        btnVenderProProductos3.setText("F2 - Nuevo ");
         btnVenderProProductos3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVenderProProductos3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,7 +451,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ventarapida.png"))); // NOI18N
-        jLabel1.setText("Venta rapida");
+        jLabel1.setText("F6-Venta rapida");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -453,9 +469,9 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(25, 25, 25))
+                        .addGap(37, 37, 37))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtBuscarProductos)
@@ -517,6 +533,11 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venta de productos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel10KeyPressed(evt);
+            }
+        });
 
         txtTotalPagarProductos.setEditable(false);
         txtTotalPagarProductos.setBackground(new java.awt.Color(204, 204, 204));
@@ -537,6 +558,9 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         txtEfectivoRecibidoProductos.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         txtEfectivoRecibidoProductos.setForeground(new java.awt.Color(0, 0, 204));
         txtEfectivoRecibidoProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEfectivoRecibidoProductosKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtEfectivoRecibidoProductosKeyReleased(evt);
             }
@@ -559,6 +583,11 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
                 jTable2MousePressed(evt);
             }
         });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable2KeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         btnRegistrarVentaProductos.setBackground(new java.awt.Color(255, 0, 204));
@@ -577,7 +606,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnCancelarVentaProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarVentaProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarVentaProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarVentaProductos.setText("Cancelar Venta");
+        btnCancelarVentaProductos.setText("F11 - Cancelar");
         btnCancelarVentaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarVentaProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -589,7 +618,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         btnQuitarProductoProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnQuitarProductoProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnQuitarProductoProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/quitar.png"))); // NOI18N
-        btnQuitarProductoProductos.setText("Quitar Producto ");
+        btnQuitarProductoProductos.setText("F10-Quitar ");
         btnQuitarProductoProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuitarProductoProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -703,11 +732,11 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -723,7 +752,7 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -910,8 +939,8 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
                         txtCambioProductos.setText(cambio + "");
                     }
                 } else {
-                     jLabel5.setText("Cambio:");
-                        jLabel5.setForeground(Color.BLUE);
+                    jLabel5.setText("Cambio:");
+                    jLabel5.setForeground(Color.BLUE);
                     txtCambioProductos.setForeground(Color.BLUE);
                     txtCambioProductos.setText("0");
                 }
@@ -1040,12 +1069,37 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void txtBuscarProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosKeyPressed
-        // TODO add your handling code here:
+        metodosBotones(evt);
     }//GEN-LAST:event_txtBuscarProductosKeyPressed
 
     private void btnVenderProProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVenderProProductosKeyPressed
 
     }//GEN-LAST:event_btnVenderProProductosKeyPressed
+
+    private void txtEfectivoRecibidoProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectivoRecibidoProductosKeyPressed
+        metodosBotones(evt);
+
+    }//GEN-LAST:event_txtEfectivoRecibidoProductosKeyPressed
+
+    private void jPanel8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel8KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel8KeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jPanel10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel10KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel10KeyPressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+      metodosBotones(evt);
+    }//GEN-LAST:event_jTable2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -1131,10 +1185,10 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
     private javax.swing.JTextField txtReloj;
     private javax.swing.JTextField txtTotalPagarProductos;
     // End of variables declaration//GEN-END:variables
- @Override
+
     public void keyPressed(KeyEvent e) {
         System.out.println("se  presiono aqui");
-        if (e.VK_F12 == e.getKeyCode()) {
+        if (KeyEvent.VK_F1 == e.getKeyCode()) {
             System.out.println("me presio na f1222");
             if (jTable1.getSelectedRow() == -1) {
                 mensajeAdvertencia men = new mensajeAdvertencia();
@@ -1194,6 +1248,205 @@ public class productos extends javax.swing.JFrame implements Runnable, KeyListen
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            if (jTable1.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un producto de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                if (principal.controldetallesVenderProducto == false) {
+                    int fila = jTable1.getSelectedRow();
+
+                    Object valorId = jTable1.getValueAt(fila, 0);
+
+                    Object valorExistencias = jTable1.getValueAt(fila, 4);
+                    Object valorNombre = jTable1.getValueAt(fila, 2);
+                    Object valorPrecio = jTable1.getValueAt(fila, 5);
+                    Object valorClave = jTable1.getValueAt(fila, 1);
+
+                    Productos bean = new Productos();
+                    bean.setIdproductos(Integer.parseInt(valorId + ""));
+                    bean.setCantidad(Integer.parseInt(valorExistencias + ""));
+                    bean.setNombre(valorNombre + "");
+                    bean.setPrecio(Integer.parseInt(valorPrecio + ""));
+                    bean.setClave(valorClave + "");
+                    bean.setFoto(fotoGlobal);
+
+                    detallesVenderProducto.bean = bean;
+                    detallesVenderProducto d = new detallesVenderProducto();
+                    d.setVisible(true);
+
+                    //tenemos que enviar un bean productos a detalles vender producto para mostrar los datos delproducto seleccionado
+                    //controlPro.consultaEspecificaParaEnviarAPantllas(Integer.parseInt(valorId + ""), Integer.parseInt(valorExistencias + ""), "detallesVenderProducto");
+                    principal.controldetallesVenderProducto = true;
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.framedetallesVenderProducto.setAlwaysOnTop(true);
+                    principal.framedetallesVenderProducto.setAlwaysOnTop(false);
+                }
+
+            }
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            if (principal.controlnuevoRegistro == false) {
+                nuevoRegistro newRegistro = new nuevoRegistro();
+                newRegistro.setVisible(true);
+                principal.controlnuevoRegistro = true;
+            } else {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                principal.framenuevoRegistro.setAlwaysOnTop(true);
+                principal.framenuevoRegistro.setAlwaysOnTop(false);
+            }
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F3) {
+            if (principal.controlregistrarProducto == false) {
+                registrarProducto resgistrar = new registrarProducto();
+                resgistrar.setVisible(true);
+                principal.controlregistrarProducto = true;
+            } else {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                principal.frameregistrarProducto.setAlwaysOnTop(true);
+                principal.frameregistrarProducto.setAlwaysOnTop(false);
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F4) {
+            if (jTable1.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un producto de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                if (principal.controleditarProducto == false) {
+                    int fila = jTable1.getSelectedRow();
+                    Object valorId = jTable1.getValueAt(fila, 0);
+                    controlPro.consultaEspecificaParaModificar(Integer.parseInt(valorId + ""));
+                    editarProducto ep = new editarProducto();
+
+                    ep.setVisible(true);
+                    principal.controleditarProducto = true;
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.frameeditarProducto.setAlwaysOnTop(true);
+                    principal.frameeditarProducto.setAlwaysOnTop(false);
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            if (jTable1.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+
+            } else {
+                int fila = jTable1.getSelectedRow();
+                Object valorId = jTable1.getValueAt(fila, 0);
+
+                controlPro.eliminar2109(valorId + "", jTable1, tablaProductos);
+            }
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F6) {
+            if (principal.controlventaRapida == false) {
+                ventaRapida ventaRa = new ventaRapida();
+                ventaRa.setVisible(true);
+                principal.controlventaRapida = true;
+            } else {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                principal.frameventaRapida.setAlwaysOnTop(true);
+                principal.frameventaRapida.setAlwaysOnTop(false);
+            }
+            //PARA COBRAR
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jTable2.getRowCount() == 0) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("La tabla ventas esta vacia");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "La tabla ventas esta vacia", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                JFrame t = this;
+
+                controlVen.registrarVenta(jTable2, tablaVentas, txtTotalPagarProductos, txtEfectivoRecibidoProductos, txtCambioProductos, principal.idUsuario + "", t, jTable1, tablaProductos, null, null);
+
+            }
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F11) {
+            if (jTable2.getRowCount() == 0) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("La tabla ventas esta vacia");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "La tabla ventas esta vacia", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+
+                controlVen.btnCanelarVenta(jTable2, tablaVentas, txtTotalPagarProductos, txtEfectivoRecibidoProductos, txtCambioProductos, jTable1, tablaProductos);
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F10) {
+            if (jTable2.getRowCount() == 0) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("La tabla ventas esta vacia");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //  JOptionPane.showMessageDialog(null, "La tabla ventas esta vacia", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                if (jTable2.getSelectedRow() == -1) {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla ventas");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla ventas", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    int fila = jTable2.getSelectedRow();
+                    int valorID = Integer.parseInt(jTable2.getValueAt(fila, 0) + "");
+                    int valorCantidad = Integer.parseInt(jTable2.getValueAt(fila, 2) + "");
+                    int valorSubtotal = Integer.parseInt(jTable2.getValueAt(fila, 4) + "");
+
+                    controlVen.btnQuitarProductosTablaVentas(valorID, valorCantidad, valorSubtotal,
+                            txtTotalPagarProductos, txtEfectivoRecibidoProductos, txtCambioProductos,
+                            jTable1, tablaProductos, jLabel5);
+
+                    tablaVentas.removeRow(fila);
+
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            controlPro.cerrarVentana();
+            principal.controlproductos = false;
+            dispose();
+        }
     }
 
 }

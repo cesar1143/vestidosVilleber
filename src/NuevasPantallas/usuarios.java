@@ -8,6 +8,7 @@ package NuevasPantallas;
 import control.controlInicioSesion;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mensajes.mensajeAdvertencia;
@@ -103,12 +104,25 @@ public class usuarios extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Registro de  usuarios", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel9KeyPressed(evt);
+            }
+        });
 
         txtNombreUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreUsuariosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreUsuariosKeyTyped(evt);
             }
@@ -124,6 +138,9 @@ public class usuarios extends javax.swing.JFrame {
 
         txtApaternoUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtApaternoUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApaternoUsuariosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtApaternoUsuariosKeyTyped(evt);
             }
@@ -135,6 +152,9 @@ public class usuarios extends javax.swing.JFrame {
 
         txtAmaternoUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtAmaternoUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAmaternoUsuariosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAmaternoUsuariosKeyTyped(evt);
             }
@@ -146,12 +166,18 @@ public class usuarios extends javax.swing.JFrame {
 
         txtUsuarioUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtUsuarioUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioUsuariosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtUsuarioUsuariosKeyTyped(evt);
             }
         });
 
         txtContraseñaUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaUsuariosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtContraseñaUsuariosKeyTyped(evt);
             }
@@ -177,7 +203,7 @@ public class usuarios extends javax.swing.JFrame {
         btnCancelarUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarUsuarios.setText("Cancelar");
+        btnCancelarUsuarios.setText("F1- Cancelar");
         btnCancelarUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +220,7 @@ public class usuarios extends javax.swing.JFrame {
                 .addComponent(btnRegistrarUsuarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelarUsuarios)
-                .addGap(56, 56, 56))
+                .addGap(37, 37, 37))
             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel9Layout.createSequentialGroup()
                     .addContainerGap()
@@ -225,11 +251,11 @@ public class usuarios extends javax.swing.JFrame {
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGap(22, 22, 22))
             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel9Layout.createSequentialGroup()
                     .addGap(21, 21, 21)
@@ -256,19 +282,29 @@ public class usuarios extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuarios Registrados", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel11KeyPressed(evt);
+            }
+        });
 
         jTable6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable6.setModel(tablaUsuarios);
         jTable6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable6.getTableHeader().setResizingAllowed(false);
         jTable6.getTableHeader().setReorderingAllowed(false);
+        jTable6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable6KeyPressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable6);
 
         btnEditarUsuarios.setBackground(new java.awt.Color(255, 0, 204));
         btnEditarUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEditarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/editar.png"))); // NOI18N
-        btnEditarUsuarios.setText("Editar");
+        btnEditarUsuarios.setText("F2- Editar");
         btnEditarUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,8 +320,8 @@ public class usuarios extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(btnEditarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,6 +462,42 @@ public class usuarios extends javax.swing.JFrame {
         principal.controlusuarios = false;
     }//GEN-LAST:event_formWindowClosing
 
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jPanel9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel9KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel9KeyPressed
+
+    private void txtNombreUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreUsuariosKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreUsuariosKeyPressed
+
+    private void txtApaternoUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApaternoUsuariosKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtApaternoUsuariosKeyPressed
+
+    private void txtAmaternoUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmaternoUsuariosKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmaternoUsuariosKeyPressed
+
+    private void txtUsuarioUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioUsuariosKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioUsuariosKeyPressed
+
+    private void txtContraseñaUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaUsuariosKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseñaUsuariosKeyPressed
+
+    private void jPanel11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel11KeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11KeyPressed
+
+    private void jTable6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable6KeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jTable6KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -481,4 +553,46 @@ public class usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreUsuarios;
     private javax.swing.JTextField txtUsuarioUsuarios;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+            if (principal.controleditarUsuario == false) {
+
+            } else {
+                principal.controleditarUsuario = false;
+                principal.frameeditarUsuario.dispose();
+            }
+            principal.controlusuarios = false;
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            controlUsuario.cancelar(txtNombreUsuarios, txtApaternoUsuarios, txtAmaternoUsuarios, txtUsuarioUsuarios, txtContraseñaUsuarios);
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            if (jTable6.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Selecciona una fila  de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (principal.controleditarUsuario == false) {
+                    int fila = jTable6.getSelectedRow();
+                    Object valorId = jTable6.getValueAt(fila, 0);
+                    controlUsuario.btnEditar(valorId + "", jTable6, tablaUsuarios);
+                    principal.controleditarUsuario = true;
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.frameeditarUsuario.setAlwaysOnTop(true);
+                    principal.frameeditarUsuario.setAlwaysOnTop(false);
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            controlUsuario.Regsitrar(txtNombreUsuarios, txtApaternoUsuarios, txtAmaternoUsuarios, txtUsuarioUsuarios, txtContraseñaUsuarios, jTable6, tablaUsuarios);
+        }
+    }
 }

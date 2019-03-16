@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
  
 /**
@@ -69,9 +71,8 @@ public class registrarCliente extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -82,6 +83,11 @@ public class registrarCliente extends javax.swing.JFrame {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -96,6 +102,9 @@ public class registrarCliente extends javax.swing.JFrame {
 
         txtNombreRegistrarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreRegistrarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreRegistrarClienteKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreRegistrarClienteKeyTyped(evt);
             }
@@ -107,6 +116,9 @@ public class registrarCliente extends javax.swing.JFrame {
 
         txtTelefonoRegistrarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtTelefonoRegistrarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoRegistrarClienteKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoRegistrarClienteKeyTyped(evt);
             }
@@ -139,14 +151,6 @@ public class registrarCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel20MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -156,8 +160,6 @@ public class registrarCliente extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel20)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -165,7 +167,6 @@ public class registrarCliente extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
                     .addComponent(jLabel19)
                     .addComponent(jLabel18))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -257,10 +258,6 @@ public class registrarCliente extends javax.swing.JFrame {
         this.setState(ICONIFIED);
     }//GEN-LAST:event_jLabel19MouseClicked
 
-    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-        dispose();
-    }//GEN-LAST:event_jLabel20MouseClicked
-
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
       x = evt.getX();
         y = evt.getY();
@@ -271,6 +268,29 @@ public class registrarCliente extends javax.swing.JFrame {
 Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void txtTelefonoRegistrarClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoRegistrarClienteKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+             controlVentas.registrarCliente2019(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario+"",
+              txtTotalApagar, txtEfectivoRecibido, txtCambio,tablaVentas, defaultTablaVentas,tablaProductos,defaultTablaProductos); 
+         }
+    }//GEN-LAST:event_txtTelefonoRegistrarClienteKeyPressed
+
+    private void txtNombreRegistrarClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRegistrarClienteKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           if(!txtNombreRegistrarCliente.getText().isEmpty()){
+               txtTelefonoRegistrarCliente.requestFocus();
+               
+           }else{
+               txtNombreRegistrarCliente.requestFocus();
+           }
+            
+         }
+    }//GEN-LAST:event_txtNombreRegistrarClienteKeyPressed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       JOptionPane.showMessageDialog(null, "Registra el cliente, para registrar la venta"+"\nCierre el sistema para cancelar");
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -312,7 +332,6 @@ Point point = MouseInfo.getPointerInfo().getLocation();
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

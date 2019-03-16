@@ -6,6 +6,7 @@
 package mensajes;
 
 import control.controlInicioSesion;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 /**
@@ -13,14 +14,16 @@ import javax.swing.JFrame;
  * @author famsa
  */
 public class mensajeQuestion extends javax.swing.JFrame {
-public static JFrame framePrincipal=new JFrame();
+
+    public static JFrame framePrincipal = new JFrame();
+
     /**
      * Creates new form mensajeQuestion
      */
     public mensajeQuestion() {
         initComponents();
-        
-           this.setLocationRelativeTo(null);
+
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +48,11 @@ public static JFrame framePrincipal=new JFrame();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(99, 154, 229)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(60, 130, 195));
 
@@ -52,6 +60,11 @@ public static JFrame framePrincipal=new JFrame();
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Confirmar ");
+        jLabel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel1KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -71,9 +84,19 @@ public static JFrame framePrincipal=new JFrame();
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/info.png"))); // NOI18N
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
 
         labelMensaje.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         labelMensaje.setText("jLabel3");
+        labelMensaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelMensajeKeyPressed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(60, 130, 195));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -83,13 +106,23 @@ public static JFrame framePrincipal=new JFrame();
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(60, 130, 195));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setText("Cancelar");
+        jButton2.setText("F1-Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
             }
         });
 
@@ -99,16 +132,16 @@ public static JFrame framePrincipal=new JFrame();
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 192, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 177, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,11 +177,11 @@ public static JFrame framePrincipal=new JFrame();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+
         if (mensajeQuestion.labelMensaje.getText().equalsIgnoreCase("¿ Esta seguro de  cerrar sesión ?")) {
             dispose();
             new controlInicioSesion().cerrarSesionPrincipal(framePrincipal);
-        }else{
+        } else {
             System.out.println("no hay metodo");
         }
 
@@ -157,6 +190,30 @@ public static JFrame framePrincipal=new JFrame();
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jLabel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jLabel1KeyPressed
+
+    private void labelMensajeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelMensajeKeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_labelMensajeKeyPressed
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+         metodosBotones(evt);
+    }//GEN-LAST:event_jLabel2KeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+       metodosBotones(evt);
+    }//GEN-LAST:event_jButton2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -202,4 +259,17 @@ public static JFrame framePrincipal=new JFrame();
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel labelMensaje;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (mensajeQuestion.labelMensaje.getText().equalsIgnoreCase("¿ Esta seguro de  cerrar sesión ?")) {
+                dispose();
+                new controlInicioSesion().cerrarSesionPrincipal(framePrincipal);
+            } else {
+                System.out.println("no hay metodo");
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            dispose();
+        }
+    }
 }

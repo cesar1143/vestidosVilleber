@@ -9,6 +9,7 @@ import control.controlInicioSesion;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javafx.scene.layout.Border;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -423,6 +424,11 @@ public class principal extends javax.swing.JFrame {
                 panelUsuariosMouseExited(evt);
             }
         });
+        panelUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                panelUsuariosKeyPressed(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 0, 204));
@@ -699,6 +705,10 @@ public class principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Cierra la session", "Advertencia!", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_formWindowClosing
 
+    private void panelUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelUsuariosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelUsuariosKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -766,4 +776,8 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JPanel panelReportes;
     private javax.swing.JPanel panelUsuarios;
     // End of variables declaration//GEN-END:variables
+
+
+            
+
 }

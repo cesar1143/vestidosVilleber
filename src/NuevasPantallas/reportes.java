@@ -8,6 +8,7 @@ package NuevasPantallas;
 import control.controlReportes;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static pantallas.principal1.fechaAñoReportes;
@@ -110,9 +111,19 @@ public class reportes extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Consultar reporte de ventas", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel20KeyPressed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 0, 204));
@@ -132,6 +143,11 @@ public class reportes extends javax.swing.JFrame {
         });
 
         fechaInicialReportes.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        fechaInicialReportes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaInicialReportesKeyPressed(evt);
+            }
+        });
 
         labelFechaInicialReportes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         labelFechaInicialReportes.setForeground(new java.awt.Color(255, 0, 204));
@@ -141,7 +157,18 @@ public class reportes extends javax.swing.JFrame {
         labelFechaAñoReportes.setForeground(new java.awt.Color(255, 0, 204));
         labelFechaAñoReportes.setText("Ingresar año:");
 
+        fechaAñoReportes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaAñoReportesKeyPressed(evt);
+            }
+        });
+
         fechaFinalReportes.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        fechaFinalReportes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaFinalReportesKeyPressed(evt);
+            }
+        });
 
         labelFechaFinalReportes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         labelFechaFinalReportes.setForeground(new java.awt.Color(255, 0, 204));
@@ -287,10 +314,20 @@ public class reportes extends javax.swing.JFrame {
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalles de Pagos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel19.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel19KeyPressed(evt);
+            }
+        });
 
         jTable7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable7.setModel(tablaReportes);
         jTable7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable7KeyPressed(evt);
+            }
+        });
         jScrollPane8.setViewportView(jTable7);
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -378,7 +415,6 @@ public class reportes extends javax.swing.JFrame {
             txtMostrarVentaReportes.setVisible(true);
             labelVentaReportes2.setVisible(true);
             txtDineroCaja.setVisible(true);
-            
 
         } else if (tipoReporte.equals("Semana")) {
             txtMostrarVentaReportes.setText("");
@@ -442,7 +478,7 @@ public class reportes extends javax.swing.JFrame {
         new controlReportes().reportes(tipoReporte, fechaInicialReportes, fechaFinalReportes, fechaAñoReportes, txtMostrarVentaReportes,
                 jTable7, tablaReportes, labelVentaReportes, labelFechaInicialReportes,
                 labelFechaAñoReportes, labelFechaFinalReportes, txtDineroCaja,
-                txtDineroTotalCaja,labelDineroTotalCaja,txtDineroTotalCaja);
+                txtDineroTotalCaja, labelDineroTotalCaja, txtDineroTotalCaja);
     }//GEN-LAST:event_btnGenerarReporteReportesActionPerformed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -466,12 +502,40 @@ public class reportes extends javax.swing.JFrame {
         }
         labelVentaReportes.setText("Venta total");
         labelDineroTotalCaja.setText("Venta total");
-      
+
         txtMostrarVentaReportes.setText("0");
-        
+
         txtDineroCaja.setText("0");
         txtDineroTotalCaja.setText("0");
     }//GEN-LAST:event_spinerReportesItemStateChanged
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jPanel20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel20KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel20KeyPressed
+
+    private void fechaInicialReportesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaInicialReportesKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_fechaInicialReportesKeyPressed
+
+    private void fechaAñoReportesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaAñoReportesKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_fechaAñoReportesKeyPressed
+
+    private void fechaFinalReportesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaFinalReportesKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_fechaFinalReportesKeyPressed
+
+    private void jTable7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable7KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jTable7KeyPressed
+
+    private void jPanel19KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel19KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel19KeyPressed
     public void vaciarTabla(JTable tabla, DefaultTableModel defaultTabla) {
 
         for (int i = 0; i < tabla.getRowCount(); i++) {
@@ -542,4 +606,19 @@ public class reportes extends javax.swing.JFrame {
     public static javax.swing.JTextField txtDineroTotalCaja;
     public static javax.swing.JTextField txtMostrarVentaReportes;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            String tipoReporte = spinerReportes.getSelectedItem().toString();
+            //recibe  tiporeporte,fechai,fecha-f,fechaA,txtmostraVenta,tabla, default,label
+            new controlReportes().reportes(tipoReporte, fechaInicialReportes, fechaFinalReportes, fechaAñoReportes, txtMostrarVentaReportes,
+                    jTable7, tablaReportes, labelVentaReportes, labelFechaInicialReportes,
+                    labelFechaAñoReportes, labelFechaFinalReportes, txtDineroCaja,
+                    txtDineroTotalCaja, labelDineroTotalCaja, txtDineroTotalCaja);
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlreportes = false;
+            dispose();
+        }
+    }
 }

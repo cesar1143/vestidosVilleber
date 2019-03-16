@@ -12,6 +12,7 @@ import control.controlProductoPendientes;
 import control.controlProductos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,7 +53,7 @@ public class productosPendientes extends javax.swing.JFrame {
             }
 
         };
-        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave","Nombre","Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
+        tablaPendientes.setColumnIdentifiers(new Object[]{"Id", "Clave", "Nombre", "Precio", "Estado", "Cantidad", "Fecha prueba", "Fecha Evento"});
         tablaMedidas = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -100,7 +101,7 @@ public class productosPendientes extends javax.swing.JFrame {
         jTable5.getColumnModel().getColumn(0).setWidth(0);
 
         controlPendientes.llenarTablaClientes(tbClientes, tablaClientes, jTable4, tablaPendientes,
-                 jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
+                jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
         //validar quien esta iniciando sesion 
         if (usuario.equalsIgnoreCase("Mayra")) {
 
@@ -176,12 +177,27 @@ public class productosPendientes extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         labelFotoPendientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFotoPendientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        labelFotoPendientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelFotoPendientesKeyPressed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda del cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         tbClientes.setModel(tablaClientes);
         tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,6 +214,9 @@ public class productosPendientes extends javax.swing.JFrame {
 
         txtBuscarProductosPendientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtBuscarProductosPendientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarProductosPendientesKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarProductosPendientesKeyReleased(evt);
             }
@@ -245,6 +264,11 @@ public class productosPendientes extends javax.swing.JFrame {
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos  pendientes", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel15.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel15KeyPressed(evt);
+            }
+        });
 
         jTable4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable4.setModel(tablaPendientes);
@@ -261,13 +285,18 @@ public class productosPendientes extends javax.swing.JFrame {
                 jTable4MousePressed(evt);
             }
         });
+        jTable4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable4KeyPressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable4);
 
         btnEditarProProductos.setBackground(new java.awt.Color(255, 0, 204));
         btnEditarProProductos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEditarProProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarProProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/editar.png"))); // NOI18N
-        btnEditarProProductos.setText("Editar ");
+        btnEditarProProductos.setText("F4-Editar ");
         btnEditarProProductos.setToolTipText("Para editar la foto y la descripcion del producto apartado");
         btnEditarProProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -280,7 +309,7 @@ public class productosPendientes extends javax.swing.JFrame {
         btnCancelarPedidoPendientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarPedidoPendientes.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarPedidoPendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarPedidoPendientes.setText("Cancelar");
+        btnCancelarPedidoPendientes.setText("F3-Cancelar");
         btnCancelarPedidoPendientes.setToolTipText("Para cancelar  un producto que esta apartado");
         btnCancelarPedidoPendientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarPedidoPendientes.addActionListener(new java.awt.event.ActionListener() {
@@ -293,7 +322,7 @@ public class productosPendientes extends javax.swing.JFrame {
         btnEntregarProductoPendientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEntregarProductoPendientes.setForeground(new java.awt.Color(255, 255, 255));
         btnEntregarProductoPendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/entregar.png"))); // NOI18N
-        btnEntregarProductoPendientes.setText("Entregar ");
+        btnEntregarProductoPendientes.setText("F2-Entregar ");
         btnEntregarProductoPendientes.setToolTipText("Para entregar un producto que ya esta pagado");
         btnEntregarProductoPendientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntregarProductoPendientes.addActionListener(new java.awt.event.ActionListener() {
@@ -306,7 +335,7 @@ public class productosPendientes extends javax.swing.JFrame {
         btnAbonarPagoPendientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnAbonarPagoPendientes.setForeground(new java.awt.Color(255, 255, 255));
         btnAbonarPagoPendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/abonar.png"))); // NOI18N
-        btnAbonarPagoPendientes.setText("Abonar");
+        btnAbonarPagoPendientes.setText("F1-Abonar");
         btnAbonarPagoPendientes.setToolTipText("Para registrar un abono de un producto apartado");
         btnAbonarPagoPendientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAbonarPagoPendientes.addActionListener(new java.awt.event.ActionListener() {
@@ -323,12 +352,12 @@ public class productosPendientes extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 6, Short.MAX_VALUE))
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(btnAbonarPagoPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(btnAbonarPagoPendientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEntregarProductoPendientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelarPedidoPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelarPedidoPendientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditarProProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -435,10 +464,10 @@ public class productosPendientes extends javax.swing.JFrame {
         if (txtBuscarProductosPendientes.getText().isEmpty()) {
 
             controlPendientes.llenarTablaClientes(tbClientes, tablaClientes, jTable4, tablaPendientes,
-                     jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
+                    jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
         } else {
             controlPendientes.buscarClienteFiltrado(tbClientes, tablaClientes, txtBuscarProductosPendientes, jTable4, tablaPendientes,
-                     jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
+                    jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
         }
     }//GEN-LAST:event_txtBuscarProductosPendientesKeyReleased
 
@@ -614,11 +643,10 @@ public class productosPendientes extends javax.swing.JFrame {
             if (principal.controleditarProductoPendientes2019 == false) {
                 int fila = jTable4.getSelectedRow();
                 String valorIdProApa = jTable4.getValueAt(fila, 0) + "";
-             
-              
-                 editarProductoPendientes2019.idproApa = valorIdProApa ;
+
+                editarProductoPendientes2019.idproApa = valorIdProApa;
                 editarProductoPendientes2019 ep = new editarProductoPendientes2019();
-               
+
                 ep.setVisible(true);
                 principal.controleditarProductoPendientes2019 = true;
             } else {
@@ -636,11 +664,11 @@ public class productosPendientes extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         controlPendientes.llenarTablaClientes(tbClientes, tablaClientes, jTable4, tablaPendientes,
-                 jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
+                jTable5, tablaMedidas, txtAreaDetalleProductoPendiente, labelFotoPendientes);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void tbClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbClientesKeyPressed
-
+        metodosBotones(evt);
     }//GEN-LAST:event_tbClientesKeyPressed
 
     private void tbClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMousePressed
@@ -652,6 +680,33 @@ public class productosPendientes extends javax.swing.JFrame {
         principal.controlproductosPendientes = false;
         controlPendientes.cerrarVentana();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jTable4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable4KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jTable4KeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        // TODO add your handling code here:
+        metodosBotones(evt);
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void txtBuscarProductosPendientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosPendientesKeyPressed
+        metodosBotones(evt);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarProductosPendientesKeyPressed
+
+    private void jPanel15KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel15KeyPressed
+        metodosBotones(evt);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel15KeyPressed
+
+    private void labelFotoPendientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelFotoPendientesKeyPressed
+        metodosBotones(evt);
+    }//GEN-LAST:event_labelFotoPendientesKeyPressed
 
     /**
      * @param args the command line arguments
@@ -710,4 +765,169 @@ public class productosPendientes extends javax.swing.JFrame {
     public static javax.swing.JTextArea txtAreaDetalleProductoPendiente;
     private javax.swing.JTextField txtBuscarProductosPendientes;
     // End of variables declaration//GEN-END:variables
+   public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            //mostraremos una pantalla con los pagos,deduda y lo que resta
+            if (jTable4.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (principal.controlverPagos == false) {
+                    int fila = jTable4.getSelectedRow();
+                    String estado = jTable4.getValueAt(fila, 4) + "";
+
+                    if (estado.equalsIgnoreCase("Apartado")) {
+                        int filaCliente = tbClientes.getSelectedRow();
+                        String idCliente = tbClientes.getValueAt(filaCliente, 0) + "";
+                        String nombreCliente = tbClientes.getValueAt(filaCliente, 1) + "";
+                        // new controlPagos().mostrarInformacionDeuda(nombre);
+                        //enviamos la tabla
+
+                        verPagos.idCliente = idCliente;
+                        verPagos verP = new verPagos();
+                        verPagos.txtNombreDelCiente.setText(nombreCliente);
+                        verP.setVisible(true);
+
+                        principal.controlverPagos = true;
+                    } else {
+                        mensajeAdvertencia men = new mensajeAdvertencia();
+                        mensajeAdvertencia.labelMensaje.setText("El cliente no tiene deduda");
+                        men.setVisible(true);
+                        men.setAlwaysOnTop(true);
+                        // JOptionPane.showMessageDialog(null, "El cliente no tiene deduda", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.frameverPagos.setAlwaysOnTop(true);
+                    principal.frameverPagos.setAlwaysOnTop(false);
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            if (jTable4.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //  JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (principal.controlcambiarEstadoProductosEntregadosNoPagados2019 == false) {
+                    int fila = jTable4.getSelectedRow();
+                    String estado = jTable4.getValueAt(fila, 4) + "";
+
+                    if (estado.equalsIgnoreCase("Pagado no entregado")) {
+
+                        //solo mandamos idCliente
+                        int filaCliente = tbClientes.getSelectedRow();
+                        String idCliente = tablaClientes.getValueAt(filaCliente, 0) + "";
+
+                        cambiarEstadoProductosEntregadosNoPagados2019 c = new cambiarEstadoProductosEntregadosNoPagados2019();
+                        cambiarEstadoProductosEntregadosNoPagados2019.idCliente = idCliente;
+                        c.setVisible(true);
+                        principal.controlcambiarEstadoProductosEntregadosNoPagados2019 = true;
+                    } else {
+                        mensajeAdvertencia men = new mensajeAdvertencia();
+                        mensajeAdvertencia.labelMensaje.setText("El cliente no tiene productos pendientes");
+                        men.setVisible(true);
+                        men.setAlwaysOnTop(true);
+                        //  JOptionPane.showMessageDialog(null, "El cliente no tiene productos pendientes", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                    }
+
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+
+                    //  JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.framecambiarEstadoProductosEntregadosNoPagados2019.setAlwaysOnTop(true);
+                    principal.framecambiarEstadoProductosEntregadosNoPagados2019.setAlwaysOnTop(false);
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F3) {
+            if (jTable4.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+                if (principal.controlcancelarProductosApartados == false) {
+                    int fila = jTable4.getSelectedRow();
+                    String estado = jTable4.getValueAt(fila, 2) + "";
+
+                    if (estado.equalsIgnoreCase("Apartado")) {
+                        String idCliente = tbClientes.getValueAt(fila, 0) + "";
+
+                        cancelarProductosApartados2019 c = new cancelarProductosApartados2019();
+                        cancelarProductosApartados2019.idCliente = idCliente;
+                        c.setVisible(true);
+                        principal.controlcancelarProductosApartados = true;
+                    } else {
+                        mensajeAdvertencia men = new mensajeAdvertencia();
+                        mensajeAdvertencia.labelMensaje.setText("El cliente no tiene productos pendientes");
+                        men.setVisible(true);
+                        men.setAlwaysOnTop(true);
+                        //JOptionPane.showMessageDialog(null, "El cliente no tiene productos pendientes", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    // JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.framecancelarProductosApartados.setAlwaysOnTop(true);
+                    principal.framecancelarProductosApartados.setAlwaysOnTop(false);
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F4) {
+            if (jTable4.getSelectedRow() == -1) {
+                mensajeAdvertencia men = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona un producto de la tabla");
+                men.setVisible(true);
+                men.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                if (principal.controleditarProductoPendientes2019 == false) {
+                    int fila = jTable4.getSelectedRow();
+                    String valorIdProApa = jTable4.getValueAt(fila, 0) + "";
+
+                    editarProductoPendientes2019.idproApa = valorIdProApa;
+                    editarProductoPendientes2019 ep = new editarProductoPendientes2019();
+
+                    ep.setVisible(true);
+                    principal.controleditarProductoPendientes2019 = true;
+                } else {
+                    mensajeAdvertencia men = new mensajeAdvertencia();
+                    mensajeAdvertencia.labelMensaje.setText("Ya esta abierto esta ventana");
+                    men.setVisible(true);
+                    men.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(null, "Ya esta abierto esta ventana", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    principal.frameeditarProductoPendientes2019.setAlwaysOnTop(true);
+                    principal.frameeditarProductoPendientes2019.setAlwaysOnTop(false);
+                }
+
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlproductosPendientes = false;
+            controlPendientes.cerrarVentana();
+            dispose();
+        } else {
+
+        }
+    }
 }
