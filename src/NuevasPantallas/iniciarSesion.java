@@ -74,7 +74,7 @@ public class iniciarSesion extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesion");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
@@ -92,8 +92,18 @@ public class iniciarSesion extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,9 +165,19 @@ public class iniciarSesion extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/login.png"))); // NOI18N
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
 
         spinnerUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         spinnerUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        spinnerUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                spinnerUsuarioKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 204));
@@ -299,14 +319,30 @@ public class iniciarSesion extends javax.swing.JFrame {
 
         if (checkMostrarContra.isSelected()) {
 
-            txtContra.setEchoChar((char)0);
+            txtContra.setEchoChar((char) 0);
 
-        }else{
+        } else {
 
             txtContra.setEchoChar('*');
 
         }
     }//GEN-LAST:event_checkMostrarContraActionPerformed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void spinnerUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spinnerUsuarioKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_spinnerUsuarioKeyPressed
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -340,7 +376,7 @@ public class iniciarSesion extends javax.swing.JFrame {
             public void run() {
                 new iniciarSesion().setVisible(true);
             }
-        });
+        });  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -359,4 +395,16 @@ public class iniciarSesion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> spinnerUsuario;
     private javax.swing.JPasswordField txtContra;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String usuario = spinnerUsuario.getSelectedItem().toString();
+            // this.setEnabled(false);
+            JFrame t = this;
+
+            control.iniciarSesion(usuario, txtContra, t);
+        }
+    }
 }

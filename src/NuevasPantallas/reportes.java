@@ -115,6 +115,9 @@ public class reportes extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPanel1KeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPanel1KeyReleased(evt);
+            }
         });
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
@@ -139,6 +142,11 @@ public class reportes extends javax.swing.JFrame {
         spinerReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 spinerReportesActionPerformed(evt);
+            }
+        });
+        spinerReportes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                spinerReportesKeyPressed(evt);
             }
         });
 
@@ -536,6 +544,14 @@ public class reportes extends javax.swing.JFrame {
     private void jPanel19KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel19KeyPressed
         metodosBotones(evt); // TODO add your handling code here:
     }//GEN-LAST:event_jPanel19KeyPressed
+
+    private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
+     
+    }//GEN-LAST:event_jPanel1KeyReleased
+
+    private void spinerReportesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spinerReportesKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_spinerReportesKeyPressed
     public void vaciarTabla(JTable tabla, DefaultTableModel defaultTabla) {
 
         for (int i = 0; i < tabla.getRowCount(); i++) {
