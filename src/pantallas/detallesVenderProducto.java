@@ -135,9 +135,19 @@ public class detallesVenderProducto extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         labelFotoDetallesVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFotoDetallesVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        labelFotoDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelFotoDetallesVentaKeyPressed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 204));
@@ -147,6 +157,11 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         txtPrecioDetallesVenta.setBackground(new java.awt.Color(229, 222, 222));
         txtPrecioDetallesVenta.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtPrecioDetallesVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPrecioDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioDetallesVentaKeyPressed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 204));
@@ -156,6 +171,11 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         txtExistenciasDetallesVenta.setBackground(new java.awt.Color(229, 222, 222));
         txtExistenciasDetallesVenta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txtExistenciasDetallesVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtExistenciasDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtExistenciasDetallesVentaKeyPressed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 204));
@@ -176,6 +196,11 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         txtNombreDetallesVenta.setBackground(new java.awt.Color(229, 222, 222));
         txtNombreDetallesVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreDetallesVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombreDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreDetallesVentaKeyPressed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 204));
@@ -192,16 +217,26 @@ public class detallesVenderProducto extends javax.swing.JFrame {
                 btnAceptarDetallesVentaActionPerformed(evt);
             }
         });
+        btnAceptarDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAceptarDetallesVentaKeyPressed(evt);
+            }
+        });
 
         btncancelarDetallesVenta.setBackground(new java.awt.Color(255, 0, 204));
         btncancelarDetallesVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btncancelarDetallesVenta.setForeground(new java.awt.Color(255, 255, 255));
         btncancelarDetallesVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btncancelarDetallesVenta.setText("Cancelar");
+        btncancelarDetallesVenta.setText("F1- Cancelar");
         btncancelarDetallesVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncancelarDetallesVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarDetallesVentaActionPerformed(evt);
+            }
+        });
+        btncancelarDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btncancelarDetallesVentaKeyPressed(evt);
             }
         });
 
@@ -226,6 +261,11 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Información del producto");
+        jLabel10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel10KeyPressed(evt);
+            }
+        });
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -234,12 +274,22 @@ public class detallesVenderProducto extends javax.swing.JFrame {
                 jLabel16MouseClicked(evt);
             }
         });
+        jLabel16.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel16KeyPressed(evt);
+            }
+        });
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel17MouseClicked(evt);
+            }
+        });
+        jLabel17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel17KeyPressed(evt);
             }
         });
 
@@ -332,7 +382,6 @@ public class detallesVenderProducto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(68, 68, 68)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAceptarDetallesVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btncancelarDetallesVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,6 +488,46 @@ public class detallesVenderProducto extends javax.swing.JFrame {
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
 
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void txtNombreDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreDetallesVentaKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreDetallesVentaKeyPressed
+
+    private void txtPrecioDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioDetallesVentaKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioDetallesVentaKeyPressed
+
+    private void txtExistenciasDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciasDetallesVentaKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtExistenciasDetallesVentaKeyPressed
+
+    private void btnAceptarDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarDetallesVentaKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarDetallesVentaKeyPressed
+
+    private void btncancelarDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btncancelarDetallesVentaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btncancelarDetallesVentaKeyPressed
+
+    private void labelFotoDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelFotoDetallesVentaKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_labelFotoDetallesVentaKeyPressed
+
+    private void jLabel10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel10KeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10KeyPressed
+
+    private void jLabel16KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel16KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16KeyPressed
+
+    private void jLabel17KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel17KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel17KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -494,4 +583,31 @@ public class detallesVenderProducto extends javax.swing.JFrame {
     public static javax.swing.JTextField txtPrecioDetallesVenta;
     private javax.swing.JTextField txtSubTotalDetallesVenta;
     // End of variables declaration//GEN-END:variables
+  public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controldetallesVenderProducto = false;
+            principalUsuarios.controldetallesVenderProducto = false;
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            this.dispose();
+            principalUsuarios.controldetallesVenderProducto = false;
+            principal.controldetallesVenderProducto = false;
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //AL MOMENTO DE DAR HACEPTAR  PREGUNTAREMOS SI EL PRODUCTO LLEVARA ALGUN DETALLE?
+            //1.-SI --> REGISTRAMOS AL CLIENTE Y LOS DETALLES QUE PUEDEN  SER
+            //1.1->MEDIDAS
+            //1.2-->FECHAS
+            //NOTA PARA EL PUNTO 1 --> SI SE REGISTRA EL CLIENTE Y EL CLIENTE AUN SIGUE COMPRANDO DEBEMOS MANDAR A TRAER ESE ULTIMO
+            //CLIENTE REGISTRADO PARA PODER ASIGNAR SU ID ALA DEUDA TOTAL ASI COMO EN PRO APARTADOS
+
+            //2.-NO--> ENTONCES NO REGISTRAMOS AL CLIENTE.
+            //PERO  DEBEMOS DE REGISTRAR SU DEUDA TOTAL Y EN LA TABLA DE APRTADOS COMO CLIENTE GENERAL
+            //EL CUAL  YA ESTARA POR DEFAUL EL LA BD SIN MOSTRARSE EN LAS PANTALLAS
+            int cantidad = Integer.parseInt(txtCantidadDetallesVenta.getText());
+            controlV.aceptarDetallesVenta(txtCantidadDetallesVenta, bean, cantidad, this, tablaProductos,
+                    defaultTablaProductos, tablaVentas, defaultTablaVentas, txtTotalAPagar);
+        } else {
+
+        }
+    }
 }

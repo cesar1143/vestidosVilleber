@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import mensajes.mensajeAdvertencia;
 import modelo.daoProductos;
+import static pantallas.editarUsuario.defaultTablaUsuarios;
+import static pantallas.editarUsuario.tablaUsuarios;
 import validaciones.validarCampos;
 
 /**
@@ -108,6 +110,11 @@ public class ventaRapida extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 204));
@@ -141,6 +148,11 @@ public class ventaRapida extends javax.swing.JFrame {
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombreKeyPressed(evt);
@@ -150,6 +162,11 @@ public class ventaRapida extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 204));
         jLabel14.setText("Nombre  del producto:");
+        jLabel14.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel14KeyPressed(evt);
+            }
+        });
 
         btnAceptarDetallesVenta.setBackground(new java.awt.Color(255, 0, 204));
         btnAceptarDetallesVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -162,16 +179,26 @@ public class ventaRapida extends javax.swing.JFrame {
                 btnAceptarDetallesVentaActionPerformed(evt);
             }
         });
+        btnAceptarDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAceptarDetallesVentaKeyPressed(evt);
+            }
+        });
 
         btncancelarDetallesVenta.setBackground(new java.awt.Color(255, 0, 204));
         btncancelarDetallesVenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btncancelarDetallesVenta.setForeground(new java.awt.Color(255, 255, 255));
         btncancelarDetallesVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btncancelarDetallesVenta.setText("Cancelar");
+        btncancelarDetallesVenta.setText("F1- Cancelar");
         btncancelarDetallesVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncancelarDetallesVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarDetallesVentaActionPerformed(evt);
+            }
+        });
+        btncancelarDetallesVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btncancelarDetallesVentaKeyPressed(evt);
             }
         });
 
@@ -185,17 +212,32 @@ public class ventaRapida extends javax.swing.JFrame {
                 txtSubtotalActionPerformed(evt);
             }
         });
+        txtSubtotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSubtotalKeyPressed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 0, 204));
         jLabel15.setText("Subtotal:");
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Información del producto");
+        jLabel10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel10KeyPressed(evt);
+            }
+        });
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -204,12 +246,22 @@ public class ventaRapida extends javax.swing.JFrame {
                 jLabel16MouseClicked(evt);
             }
         });
+        jLabel16.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel16KeyPressed(evt);
+            }
+        });
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel17MouseClicked(evt);
+            }
+        });
+        jLabel17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel17KeyPressed(evt);
             }
         });
 
@@ -340,21 +392,7 @@ public class ventaRapida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarDetallesVentaActionPerformed
 
     private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            int cantidad = Integer.parseInt(txtCantidad.getText());
-        if (txtCantidad.getText().isEmpty()) {
-            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
-            mensajeAdvertencia.labelMensaje.setText("completa el campo");
-            txtCantidad.requestFocus();
-            menAdvertencia.setVisible(true);
-        } else {
-
-            controlV.aceptarVentaRapida(txtNombre, txtCantidad, txtPrecio, this,
-                    tablaVentas, defaultTablaVentas, txtTotalAPagar, principal.idUsuario + "");
-        }
-        }
-        
-        
+         metodosBotones(evt);
 
 
     }//GEN-LAST:event_txtCantidadKeyPressed
@@ -432,24 +470,52 @@ public class ventaRapida extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioKeyReleased
 
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!txtNombre.getText().isEmpty()) {
-                txtPrecio.requestFocus();
-            } else {
-                txtNombre.requestFocus();
-            }
-        }
+         metodosBotones(evt);
     }//GEN-LAST:event_txtNombreKeyPressed
 
     private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!txtPrecio.getText().isEmpty()) {
-                txtCantidad.requestFocus();
-            } else {
-                txtPrecio.requestFocus();
-            }
-        }
+          metodosBotones(evt);
     }//GEN-LAST:event_txtPrecioKeyPressed
+
+    private void jLabel10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel10KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10KeyPressed
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+          metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void jLabel16KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel16KeyPressed
+         metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel16KeyPressed
+
+    private void jLabel17KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel17KeyPressed
+         metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel17KeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+         metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jLabel14KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel14KeyPressed
+          metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel14KeyPressed
+
+    private void txtSubtotalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubtotalKeyPressed
+          metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtSubtotalKeyPressed
+
+    private void btnAceptarDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarDetallesVentaKeyPressed
+         metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarDetallesVentaKeyPressed
+
+    private void btncancelarDetallesVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btncancelarDetallesVentaKeyPressed
+          metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_btncancelarDetallesVentaKeyPressed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -506,4 +572,40 @@ public class ventaRapida extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtSubtotal;
     // End of variables declaration//GEN-END:variables
+ public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlventaRapida = false;
+            dispose();
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //AL MOMENTO DE DAR HACEPTAR  PREGUNTAREMOS SI EL PRODUCTO LLEVARA ALGUN DETALLE?
+        //1.-SI --> REGISTRAMOS AL CLIENTE Y LOS DETALLES QUE PUEDEN  SER
+        //1.1->MEDIDAS
+        //1.2-->FECHAS
+        //NOTA PARA EL PUNTO 1 --> SI SE REGISTRA EL CLIENTE Y EL CLIENTE AUN SIGUE COMPRANDO DEBEMOS MANDAR A TRAER ESE ULTIMO
+        //CLIENTE REGISTRADO PARA PODER ASIGNAR SU ID ALA DEUDA TOTAL ASI COMO EN PRO APARTADOS
+
+        //2.-NO--> ENTONCES NO REGISTRAMOS AL CLIENTE.
+        //PERO  DEBEMOS DE REGISTRAR SU DEUDA TOTAL Y EN LA TABLA DE APRTADOS COMO CLIENTE GENERAL
+        //EL CUAL  YA ESTARA POR DEFAUL EL LA BD SIN MOSTRARSE EN LAS PANTALLAS
+        int cantidad = Integer.parseInt(txtCantidad.getText());
+        if (txtCantidad.getText().isEmpty()) {
+            mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+            mensajeAdvertencia.labelMensaje.setText("completa el campo");
+            txtCantidad.requestFocus();
+            menAdvertencia.setVisible(true);
+        } else {
+
+            controlV.aceptarVentaRapida(txtNombre, txtCantidad, txtPrecio, this,
+                    tablaVentas, defaultTablaVentas, txtTotalAPagar, principal.idUsuario + "");
+        }
+        
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            // TODO add your handling code here:
+        this.dispose();
+
+        principal.controlventaRapida = false;
+        }
+    }
+
 }

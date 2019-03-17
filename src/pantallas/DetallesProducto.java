@@ -43,7 +43,7 @@ public class DetallesProducto extends javax.swing.JFrame {
                 cargando c = new cargando();
                 c.setVisible(true);
                 c.setAlwaysOnTop(true);
-                System.out.println("idpro " + idProducto);
+                
                 Productos bean = new daoProductos().consultaEspecifica2019(idProducto);
                 if (bean != null) {
                     txtCodigo.setText(bean.getClave());
@@ -282,6 +282,7 @@ public class DetallesProducto extends javax.swing.JFrame {
         principal1.controlDetallesProducto = false;
         principal.controlDetallesProducto = false;
         principalUsuarios.controlDetallesProducto = false;
+        catalogoProductos.labelPrincipal.requestFocus();
     }//GEN-LAST:event_formWindowClosing
 
     private void txtExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExistenciasActionPerformed
@@ -372,6 +373,7 @@ public class DetallesProducto extends javax.swing.JFrame {
             principal1.controlDetallesProducto = false;
             principal.controlDetallesProducto = false;
             principalUsuarios.controlDetallesProducto = false;
+            catalogoProductos.labelPrincipal.requestFocus();
             dispose();
         } else {
         }

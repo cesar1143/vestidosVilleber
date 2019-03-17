@@ -2789,7 +2789,7 @@ public class controlVentas {
     public Clientes registrarCliente2019(JTextField txtNombre, JTextField txtTelefono, JFrame frame,
             String idUsuario, JTextField txtTotalApagar, JTextField txtEfectivoRecibido, JTextField txtCambio, JTable tablaVentas, DefaultTableModel defaultTablaVentas,
             JTable tablaProductos, DefaultTableModel defaultTablaProductos) {
-        System.out.println("aqui mero homi");
+        
         if (validar.validarCampos(txtNombre)) {
 
             Thread hilo = new Thread() {
@@ -3114,6 +3114,7 @@ public class controlVentas {
             hilo.start();
 
         } else {
+            
 
         }
 

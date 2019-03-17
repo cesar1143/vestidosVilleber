@@ -29,20 +29,22 @@ import static pantallas.detallesDelProducto.beanCliente;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import mensajes.mensajeAdvertencia;
-
-
+import static pantallas.editarUsuario.defaultTablaUsuarios;
+import static pantallas.editarUsuario.tablaUsuarios;
 
 /**
  *
  * @author famsa
  */
 public class nuevoRegistro extends javax.swing.JFrame {
-     //para el frame
+    //para el frame
+
     int x = 0, y = 0;
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
 
-   Image foto;
+    Image foto;
     File file;
     validarCampos validar = new validarCampos();
     controlVentas controlV = new controlVentas();
@@ -50,19 +52,18 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
     public static JTable tablaVentas = new JTable();
     public static DefaultTableModel defaultTablaVentas = new DefaultTableModel();
-    public static int cantidadParaComprar=0;
+    public static int cantidadParaComprar = 0;
     public static JTextField txtTotalApagar;
-    
-    
-      public static Clientes beanCliente= new Clientes();
+
+    public static Clientes beanCliente = new Clientes();
 
     /**
      * Creates new form nuevoRegistro
      */
     public nuevoRegistro() {
         initComponents();
-     
-         principal.framenuevoRegistro=this;
+
+        principal.framenuevoRegistro = this;
 //VALIDAMOS LOS CAMPOS DE LA VENTANA NUEVOS REGISTROS
         //DATOS DEL CLIENTE
         validar.soloLetras(txtNombreNuevoRegistro);
@@ -84,13 +85,12 @@ public class nuevoRegistro extends javax.swing.JFrame {
         validar.soloNumerosConPunto(txtLargoFaldaNuevoRegistro);
         validar.soloNumerosConPunto(txtAnchoPuñoNuevoRegistro);
         jPanel3.setVisible(false);
-        
-        
-         //validamos  si le beanClientes trae datos o no
-        if (almacenamientoDeListas.listaClientes.size()==0) {
-            
-        }else{
-            beanCliente=almacenamientoDeListas.listaClientes.get(0);
+
+        //validamos  si le beanClientes trae datos o no
+        if (almacenamientoDeListas.listaClientes.size() == 0) {
+
+        } else {
+            beanCliente = almacenamientoDeListas.listaClientes.get(0);
             txtNombreNuevoRegistro.setText(beanCliente.getNombrecompleto());
             txtNombreNuevoRegistro.setEditable(false);
             txtTelefonoNuevoRegistro.setText(beanCliente.getTelefono());
@@ -186,9 +186,19 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del cliente", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel9KeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 0, 204));
@@ -196,6 +206,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         txtNombreNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreNuevoRegistroKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreNuevoRegistroKeyTyped(evt);
             }
@@ -207,6 +220,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         txtTelefonoNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtTelefonoNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoNuevoRegistroKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoNuevoRegistroKeyTyped(evt);
             }
@@ -237,6 +253,11 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del producto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel11KeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 0, 204));
@@ -245,6 +266,11 @@ public class nuevoRegistro extends javax.swing.JFrame {
         txtClaveNuevoRegistro.setEditable(false);
         txtClaveNuevoRegistro.setBackground(new java.awt.Color(229, 222, 222));
         txtClaveNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtClaveNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 204));
@@ -252,6 +278,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         txtNombreProNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreProNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreProNuevoRegistroKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreProNuevoRegistroKeyTyped(evt);
             }
@@ -259,6 +288,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         txtPrecioNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecioNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioNuevoRegistroKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioNuevoRegistroKeyTyped(evt);
             }
@@ -270,6 +302,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         txtColorNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtColorNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtColorNuevoRegistroKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtColorNuevoRegistroKeyTyped(evt);
             }
@@ -285,6 +320,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         txtCantidadNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCantidadNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadNuevoRegistroKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadNuevoRegistroKeyTyped(evt);
             }
@@ -300,10 +338,20 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         spinnerTipoNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         spinnerTipoNuevoRegistro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boda", "Bautizo", "XV años", "XVIII años", "Plata", "Presentacion", "Trajes", "Ninguno" }));
+        spinnerTipoNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                spinnerTipoNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         txtDescripcionNuevoRegistro.setColumns(20);
         txtDescripcionNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtDescripcionNuevoRegistro.setRows(5);
+        txtDescripcionNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionNuevoRegistroKeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(txtDescripcionNuevoRegistro);
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -315,6 +363,11 @@ public class nuevoRegistro extends javax.swing.JFrame {
         checkFotoNuevoRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkFotoNuevoRegistroActionPerformed(evt);
+            }
+        });
+        checkFotoNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                checkFotoNuevoRegistroKeyPressed(evt);
             }
         });
 
@@ -329,16 +382,26 @@ public class nuevoRegistro extends javax.swing.JFrame {
                 btnAceptarNuevoRegistroActionPerformed(evt);
             }
         });
+        btnAceptarNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAceptarNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         btnCancelarNuevoRegistro.setBackground(new java.awt.Color(255, 0, 204));
         btnCancelarNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarNuevoRegistro.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarNuevoRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarNuevoRegistro.setText("Cancelar");
+        btnCancelarNuevoRegistro.setText("F1- Cancelar");
         btnCancelarNuevoRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarNuevoRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarNuevoRegistroActionPerformed(evt);
+            }
+        });
+        btnCancelarNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCancelarNuevoRegistroKeyPressed(evt);
             }
         });
 
@@ -353,11 +416,26 @@ public class nuevoRegistro extends javax.swing.JFrame {
                 btnGeneralClaveNuevoRegistroActionPerformed(evt);
             }
         });
+        btnGeneralClaveNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnGeneralClaveNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medidas del producto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel13KeyPressed(evt);
+            }
+        });
 
         txtTalleNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTalleNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTalleNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 0, 204));
@@ -368,14 +446,29 @@ public class nuevoRegistro extends javax.swing.JFrame {
         jLabel25.setText("Sise:");
 
         txtSiseNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSiseNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSiseNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         txtHombrosNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtHombrosNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtHombrosNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 0, 204));
         jLabel26.setText("Hombros:");
 
         txtBustoNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtBustoNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBustoNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel27.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 0, 204));
@@ -386,24 +479,44 @@ public class nuevoRegistro extends javax.swing.JFrame {
         jLabel28.setText("Cintura:");
 
         txtCinturaNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCinturaNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCinturaNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel29.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 0, 204));
         jLabel29.setText("Cadera:");
 
         txtCaderaNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCaderaNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCaderaNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel30.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 0, 204));
         jLabel30.setText("Largo falda:");
 
         txtLargoFaldaNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtLargoFaldaNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLargoFaldaNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         jLabel31.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 0, 204));
         jLabel31.setText("Ancho Puño:");
 
         txtAnchoPuñoNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtAnchoPuñoNuevoRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAnchoPuñoNuevoRegistroKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -494,14 +607,31 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fechas", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 0, 204));
         jLabel23.setText("Fecha prueba:");
 
+        fechaPrueba.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaPruebaKeyPressed(evt);
+            }
+        });
+
         jLabel24.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 0, 204));
         jLabel24.setText("Fecha evento:");
+
+        fechaEvento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaEventoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -537,9 +667,19 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Foto producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12)), "Foto producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel3KeyPressed(evt);
+            }
+        });
 
         labelFoto.setText("jLabel1");
         labelFoto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        labelFoto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelFotoKeyPressed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 0, 204));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -550,6 +690,11 @@ public class nuevoRegistro extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
 
@@ -689,11 +834,21 @@ public class nuevoRegistro extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Nuevo registro");
+        jLabel20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel20KeyPressed(evt);
+            }
+        });
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -702,12 +857,22 @@ public class nuevoRegistro extends javax.swing.JFrame {
                 jLabel21MouseClicked(evt);
             }
         });
+        jLabel21.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel21KeyPressed(evt);
+            }
+        });
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel22MouseClicked(evt);
+            }
+        });
+        jLabel22.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel22KeyPressed(evt);
             }
         });
 
@@ -784,9 +949,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_checkFotoNuevoRegistroActionPerformed
 
     private void btnCancelarNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarNuevoRegistroActionPerformed
-       dispose();
-       
-        principal.controlnuevoRegistro=false;
+        dispose();
+
+        principal.controlnuevoRegistro = false;
     }//GEN-LAST:event_btnCancelarNuevoRegistroActionPerformed
 
     private void btnGeneralClaveNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralClaveNuevoRegistroActionPerformed
@@ -801,9 +966,9 @@ public class nuevoRegistro extends javax.swing.JFrame {
             //si trae algun objeto o datos mostramos mensaje de que  ya existe  esa  clave
             mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
             mensajeAdvertencia.labelMensaje.setText("Esta clave ya existe" + "\n GENERE OTRA POR FAVOR");
-          menAdvertencia.setVisible(true);
-            menAdvertencia .setAlwaysOnTop(true);
-           // JOptionPane.showMessageDialog(null, "Esta clave ya existe en la base de datos" + "\n GENERE OTRA POR FAVOR", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            menAdvertencia.setVisible(true);
+            menAdvertencia.setAlwaysOnTop(true);
+            // JOptionPane.showMessageDialog(null, "Esta clave ya existe en la base de datos" + "\n GENERE OTRA POR FAVOR", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
             txtClaveNuevoRegistro.setText(claveGenerada + "");
         }
@@ -811,19 +976,19 @@ public class nuevoRegistro extends javax.swing.JFrame {
 
     private void btnAceptarNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarNuevoRegistroActionPerformed
         String tipoPro = spinnerTipoNuevoRegistro.getSelectedItem().toString();
-        System.out.println("String tipo " + tipoPro);
+
         controlV.btnAceptarNuevoRegistro(txtNombreNuevoRegistro, txtTelefonoNuevoRegistro, txtClaveNuevoRegistro,
                 txtNombreProNuevoRegistro, txtPrecioNuevoRegistro, txtColorNuevoRegistro, tipoPro, txtCantidadNuevoRegistro,
                 txtTalleNuevoRegistro, txtSiseNuevoRegistro, txtHombrosNuevoRegistro, txtBustoNuevoRegistro,
-                txtCinturaNuevoRegistro, txtCaderaNuevoRegistro, txtLargoFaldaNuevoRegistro,txtAnchoPuñoNuevoRegistro, 
-                fechaPrueba, fechaEvento, txtDescripcionNuevoRegistro, checkFotoNuevoRegistro, labelFoto, principal.idUsuario+"",
+                txtCinturaNuevoRegistro, txtCaderaNuevoRegistro, txtLargoFaldaNuevoRegistro, txtAnchoPuñoNuevoRegistro,
+                fechaPrueba, fechaEvento, txtDescripcionNuevoRegistro, checkFotoNuevoRegistro, labelFoto, principal.idUsuario + "",
                 file, this, tablaVentas, defaultTablaVentas, cantidadParaComprar, txtTotalApagar);
 
-        
+
     }//GEN-LAST:event_btnAceptarNuevoRegistroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    //tutorial   https://codigo--java.blogspot.mx/2014/06/uso-basico-de-elementos-swing-con_5.html
+        //tutorial   https://codigo--java.blogspot.mx/2014/06/uso-basico-de-elementos-swing-con_5.html
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de archivos JPEG(*.JPG ;*.JEPG;*.PNG)", "jpg", "jpeg", "png");
         JFileChooser archivo = new JFileChooser();
         archivo.addChoosableFileFilter(filtro);
@@ -883,53 +1048,47 @@ public class nuevoRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        principal.controlnuevoRegistro=false;
-        
+        principal.controlnuevoRegistro = false;
+
     }//GEN-LAST:event_formWindowClosing
 
     private void txtNombreNuevoRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreNuevoRegistroKeyTyped
-        if(txtNombreNuevoRegistro.getText().length()== 39)
-        {
+        if (txtNombreNuevoRegistro.getText().length() == 39) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtNombreNuevoRegistroKeyTyped
 
     private void txtTelefonoNuevoRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoNuevoRegistroKeyTyped
-       if(txtTelefonoNuevoRegistro.getText().length()== 10)
-        {
+        if (txtTelefonoNuevoRegistro.getText().length() == 10) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtTelefonoNuevoRegistroKeyTyped
 
     private void txtNombreProNuevoRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProNuevoRegistroKeyTyped
-       if(txtNombreNuevoRegistro.getText().length()== 19)
-        {
+        if (txtNombreNuevoRegistro.getText().length() == 19) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtNombreProNuevoRegistroKeyTyped
 
     private void txtPrecioNuevoRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioNuevoRegistroKeyTyped
-        if(txtPrecioNuevoRegistro.getText().length()== 10)
-        {
+        if (txtPrecioNuevoRegistro.getText().length() == 10) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtPrecioNuevoRegistroKeyTyped
 
     private void txtColorNuevoRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorNuevoRegistroKeyTyped
-      if(txtColorNuevoRegistro.getText().length()== 19)
-        {
+        if (txtColorNuevoRegistro.getText().length() == 19) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtColorNuevoRegistroKeyTyped
 
     private void txtCantidadNuevoRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadNuevoRegistroKeyTyped
-      if(txtCantidadNuevoRegistro.getText().length()== 10)
-        {
+        if (txtCantidadNuevoRegistro.getText().length() == 10) {
             evt.consume();
 
         }
@@ -940,12 +1099,12 @@ public class nuevoRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-        principal.controlnuevoRegistro=false;
+        principal.controlnuevoRegistro = false;
         dispose();
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-      x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
 
     }//GEN-LAST:event_formMousePressed
@@ -954,6 +1113,146 @@ public class nuevoRegistro extends javax.swing.JFrame {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void jLabel20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel20KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel20KeyPressed
+
+    private void jLabel21KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel21KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel21KeyPressed
+
+    private void jLabel22KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel22KeyPressed
+        metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel22KeyPressed
+
+    private void jPanel9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel9KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel9KeyPressed
+
+    private void txtNombreNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreNuevoRegistroKeyPressed
+
+    private void txtTelefonoNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoNuevoRegistroKeyPressed
+
+    private void jPanel11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel11KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11KeyPressed
+
+    private void btnGeneralClaveNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnGeneralClaveNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnGeneralClaveNuevoRegistroKeyPressed
+
+    private void txtClaveNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveNuevoRegistroKeyPressed
+
+    private void txtNombreProNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreProNuevoRegistroKeyPressed
+
+    private void txtPrecioNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioNuevoRegistroKeyPressed
+
+    private void txtColorNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtColorNuevoRegistroKeyPressed
+
+    private void spinnerTipoNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spinnerTipoNuevoRegistroKeyPressed
+        metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_spinnerTipoNuevoRegistroKeyPressed
+
+    private void txtCantidadNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadNuevoRegistroKeyPressed
+
+    private void checkFotoNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_checkFotoNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_checkFotoNuevoRegistroKeyPressed
+
+    private void jPanel13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel13KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel13KeyPressed
+
+    private void txtTalleNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTalleNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtTalleNuevoRegistroKeyPressed
+
+    private void txtSiseNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSiseNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtSiseNuevoRegistroKeyPressed
+
+    private void txtHombrosNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHombrosNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtHombrosNuevoRegistroKeyPressed
+
+    private void txtBustoNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBustoNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtBustoNuevoRegistroKeyPressed
+
+    private void txtCinturaNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCinturaNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtCinturaNuevoRegistroKeyPressed
+
+    private void txtCaderaNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCaderaNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtCaderaNuevoRegistroKeyPressed
+
+    private void txtLargoFaldaNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLargoFaldaNuevoRegistroKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLargoFaldaNuevoRegistroKeyPressed
+
+    private void txtAnchoPuñoNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnchoPuñoNuevoRegistroKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtAnchoPuñoNuevoRegistroKeyPressed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void fechaPruebaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaPruebaKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_fechaPruebaKeyPressed
+
+    private void fechaEventoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaEventoKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_fechaEventoKeyPressed
+
+    private void jPanel3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel3KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3KeyPressed
+
+    private void labelFotoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelFotoKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_labelFotoKeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void txtDescripcionNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionNuevoRegistroKeyPressed
+
+    private void btnCancelarNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarNuevoRegistroKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarNuevoRegistroKeyPressed
+
+    private void btnAceptarNuevoRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarNuevoRegistroKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarNuevoRegistroKeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -1048,4 +1347,26 @@ public class nuevoRegistro extends javax.swing.JFrame {
     private javax.swing.JTextField txtTalleNuevoRegistro;
     private javax.swing.JTextField txtTelefonoNuevoRegistro;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlnuevoRegistro = false;
+            dispose();
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String tipoPro = spinnerTipoNuevoRegistro.getSelectedItem().toString();
+
+            controlV.btnAceptarNuevoRegistro(txtNombreNuevoRegistro, txtTelefonoNuevoRegistro, txtClaveNuevoRegistro,
+                    txtNombreProNuevoRegistro, txtPrecioNuevoRegistro, txtColorNuevoRegistro, tipoPro, txtCantidadNuevoRegistro,
+                    txtTalleNuevoRegistro, txtSiseNuevoRegistro, txtHombrosNuevoRegistro, txtBustoNuevoRegistro,
+                    txtCinturaNuevoRegistro, txtCaderaNuevoRegistro, txtLargoFaldaNuevoRegistro, txtAnchoPuñoNuevoRegistro,
+                    fechaPrueba, fechaEvento, txtDescripcionNuevoRegistro, checkFotoNuevoRegistro, labelFoto, principal.idUsuario + "",
+                    file, this, tablaVentas, defaultTablaVentas, cantidadParaComprar, txtTotalApagar);
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+
+            principal.controlnuevoRegistro = false;
+            dispose();
+        }
+    }
 }

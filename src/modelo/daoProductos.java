@@ -889,6 +889,7 @@ public class daoProductos implements metodosDao {
     }
     
     public  List<Productos>  consultaTodosPorNombre2019(String  nombrePro) { // System.out.println("dao "+ id);
+       
         Productos bean = null;
          List<Productos> lista=new ArrayList<Productos>();
         try {

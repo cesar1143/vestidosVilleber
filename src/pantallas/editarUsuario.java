@@ -13,45 +13,46 @@ import javax.swing.table.DefaultTableModel;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
-
-
+import java.awt.event.KeyEvent;
 
 /**
  *
  * @author famsa
  */
 public class editarUsuario extends javax.swing.JFrame {
-     //para el frame
+    //para el frame
+
     int x = 0, y = 0;
 //INTANCIAMOS  LAS CLASES A UTILIZAR
-     validarCampos validar = new validarCampos();
-     controlInicioSesion control= new controlInicioSesion();
-     public static Usuarios  beanUsuario;
-     public static JTable tablaUsuarios= new JTable();
-     public static DefaultTableModel defaultTablaUsuarios= new DefaultTableModel();
+    validarCampos validar = new validarCampos();
+    controlInicioSesion control = new controlInicioSesion();
+    public static Usuarios beanUsuario;
+    public static JTable tablaUsuarios = new JTable();
+    public static DefaultTableModel defaultTablaUsuarios = new DefaultTableModel();
+
     /**
      * Creates new form registrarUsuario
      */
     public editarUsuario() {
         initComponents();
-        principal.frameeditarUsuario=this;
+        principal.frameeditarUsuario = this;
         validar.soloLetras(txtNombre);
         validar.soloLetras(txtApaterno);
         validar.soloLetras(txtAmaterno);
         validar.soloLetras(txtUsuario);
         validar.soloNumerosYLetras(txtContraseña);
-        
-        if (beanUsuario!=null) {
-            txtId.setText(beanUsuario.getIdusuarios()+"");
+
+        if (beanUsuario != null) {
+            txtId.setText(beanUsuario.getIdusuarios() + "");
             txtNombre.setText(beanUsuario.getNombre());
             txtApaterno.setText(beanUsuario.getApaterno());
             txtAmaterno.setText(beanUsuario.getAmaterno());
             txtUsuario.setText(beanUsuario.getUsuario());
             txtContraseña.setText(beanUsuario.getContra());
-        }else{
-            
+        } else {
+
         }
-        
+
     }
 
     /**
@@ -105,6 +106,11 @@ public class editarUsuario extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 204));
@@ -112,6 +118,9 @@ public class editarUsuario extends javax.swing.JFrame {
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
             }
@@ -123,6 +132,9 @@ public class editarUsuario extends javax.swing.JFrame {
 
         txtApaterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtApaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApaternoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtApaternoKeyTyped(evt);
             }
@@ -134,6 +146,9 @@ public class editarUsuario extends javax.swing.JFrame {
 
         txtAmaterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtAmaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAmaternoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAmaternoKeyTyped(evt);
             }
@@ -143,6 +158,9 @@ public class editarUsuario extends javax.swing.JFrame {
         txtUsuario.setBackground(new java.awt.Color(229, 222, 222));
         txtUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyTyped(evt);
             }
@@ -160,11 +178,16 @@ public class editarUsuario extends javax.swing.JFrame {
         btnCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("F1- Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
+            }
+        });
+        btnCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCancelarKeyPressed(evt);
             }
         });
 
@@ -175,6 +198,9 @@ public class editarUsuario extends javax.swing.JFrame {
             }
         });
         txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtContraseñaKeyTyped(evt);
             }
@@ -191,6 +217,11 @@ public class editarUsuario extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
+        btnEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEditarKeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 0, 204));
@@ -199,13 +230,28 @@ public class editarUsuario extends javax.swing.JFrame {
         txtId.setEditable(false);
         txtId.setBackground(new java.awt.Color(229, 222, 222));
         txtId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdKeyPressed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel5KeyPressed(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Editar datos del usuario");
+        jLabel21.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel21KeyPressed(evt);
+            }
+        });
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -214,12 +260,22 @@ public class editarUsuario extends javax.swing.JFrame {
                 jLabel22MouseClicked(evt);
             }
         });
+        jLabel22.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel22KeyPressed(evt);
+            }
+        });
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel23MouseClicked(evt);
+            }
+        });
+        jLabel23.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel23KeyPressed(evt);
             }
         });
 
@@ -342,56 +398,51 @@ public class editarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-control.Editar(txtNombre, txtApaterno, txtAmaterno, txtUsuario, txtContraseña, tablaUsuarios, defaultTablaUsuarios, txtId.getText(),this);
+        control.Editar(txtNombre, txtApaterno, txtAmaterno, txtUsuario, txtContraseña, tablaUsuarios, defaultTablaUsuarios, txtId.getText(), this);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-      dispose();
-      principal.controleditarUsuario=false;
+        dispose();
+        principal.controleditarUsuario = false;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        principal1.controleditarUsuario=false;
+        principal1.controleditarUsuario = false;
     }//GEN-LAST:event_formWindowClosing
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-      if(txtNombre.getText().length()== 19)
-        {
+        if (txtNombre.getText().length() == 19) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApaternoKeyTyped
-       if(txtApaterno.getText().length()== 19)
-        {
+        if (txtApaterno.getText().length() == 19) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtApaternoKeyTyped
 
     private void txtAmaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmaternoKeyTyped
-       if(txtAmaterno.getText().length()== 19)
-        {
+        if (txtAmaterno.getText().length() == 19) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtAmaternoKeyTyped
 
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
-      if(txtUsuario.getText().length()== 19)
-        {
+        if (txtUsuario.getText().length() == 19) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtUsuarioKeyTyped
 
     private void txtContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyTyped
-       if(txtContraseña.getText().length()== 9)
-        {
+        if (txtContraseña.getText().length() == 9) {
             evt.consume();
 
-        } 
+        }
     }//GEN-LAST:event_txtContraseñaKeyTyped
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
@@ -399,7 +450,7 @@ control.Editar(txtNombre, txtApaterno, txtAmaterno, txtUsuario, txtContraseña, 
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        principal.controleditarUsuario=false;
+        principal.controleditarUsuario = false;
         dispose();
     }//GEN-LAST:event_jLabel23MouseClicked
 
@@ -408,14 +459,66 @@ control.Editar(txtNombre, txtApaterno, txtAmaterno, txtUsuario, txtContraseña, 
     }//GEN-LAST:event_txtContraseñaActionPerformed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-       x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jLabel21KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel21KeyPressed
+        metodosBotones(evt);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel21KeyPressed
+
+    private void jPanel5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel5KeyPressed
+
+    private void jLabel22KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel22KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel22KeyPressed
+
+    private void jLabel23KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel23KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel23KeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void txtIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdKeyPressed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApaternoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApaternoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtApaternoKeyPressed
+
+    private void txtAmaternoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmaternoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmaternoKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseñaKeyPressed
+
+    private void btnEditarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEditarKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarKeyPressed
+
+    private void btnCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -474,4 +577,16 @@ control.Editar(txtNombre, txtApaterno, txtAmaterno, txtUsuario, txtContraseña, 
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+  public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controleditarUsuario = false;
+            dispose();
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            control.Editar(txtNombre, txtApaterno, txtAmaterno, txtUsuario, txtContraseña, tablaUsuarios, defaultTablaUsuarios, txtId.getText(), this);
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+             dispose();
+        principal.controleditarUsuario = false;
+        }
+    }
 }

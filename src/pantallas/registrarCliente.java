@@ -17,37 +17,37 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
- 
 /**
  *
  * @author famsa
  */
 public class registrarCliente extends javax.swing.JFrame {
+
     //para el frame
     int x = 0, y = 0;
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
     validarCampos validar = new validarCampos();
-    controlVentas  controlVentas=new controlVentas();
-    
+    controlVentas controlVentas = new controlVentas();
+
     //recibimos  los valores de la clase principal1
-    public static JTextField  txtTotalApagar;
-    public static JTextField  txtEfectivoRecibido;
-     public static JTextField  txtCambio;
+    public static JTextField txtTotalApagar;
+    public static JTextField txtEfectivoRecibido;
+    public static JTextField txtCambio;
     public static JTable tablaVentas;
     public static DefaultTableModel defaultTablaVentas;
     public static JTable tablaProductos;
     public static DefaultTableModel defaultTablaProductos;
-    
+
     /**
      * Creates new form registrarCliente
      */
     public registrarCliente() {
         initComponents();
-        
+
         this.setTitle("Registro de cliente");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
         validar.soloLetras(txtNombreRegistrarCliente);
         validar.soloNumeros(txtTelefonoRegistrarCliente);
     }
@@ -95,6 +95,11 @@ public class registrarCliente extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel10KeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 0, 204));
@@ -135,19 +140,39 @@ public class registrarCliente extends javax.swing.JFrame {
                 btnregistrarRegistrarClienteActionPerformed(evt);
             }
         });
+        btnregistrarRegistrarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnregistrarRegistrarClienteKeyPressed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Registrar cliente");
+        jLabel18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel18KeyPressed(evt);
+            }
+        });
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel19MouseClicked(evt);
+            }
+        });
+        jLabel19.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel19KeyPressed(evt);
             }
         });
 
@@ -234,21 +259,19 @@ public class registrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreRegistrarClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRegistrarClienteKeyTyped
-        if(txtNombreRegistrarCliente.getText().length()== 39)
-        {
+        if (txtNombreRegistrarCliente.getText().length() == 39) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtNombreRegistrarClienteKeyTyped
 
     private void btnregistrarRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarRegistrarClienteActionPerformed
-      controlVentas.registrarCliente2019(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario+"",
-              txtTotalApagar, txtEfectivoRecibido, txtCambio,tablaVentas, defaultTablaVentas,tablaProductos,defaultTablaProductos);
+        controlVentas.registrarCliente2019(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario + "",
+                txtTotalApagar, txtEfectivoRecibido, txtCambio, tablaVentas, defaultTablaVentas, tablaProductos, defaultTablaProductos);
     }//GEN-LAST:event_btnregistrarRegistrarClienteActionPerformed
 
     private void txtTelefonoRegistrarClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoRegistrarClienteKeyTyped
-     if(txtTelefonoRegistrarCliente.getText().length()== 14)
-        {
+        if (txtTelefonoRegistrarCliente.getText().length() == 14) {
             evt.consume();
 
         }
@@ -259,38 +282,47 @@ public class registrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-      x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
 
-Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
 
     private void txtTelefonoRegistrarClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoRegistrarClienteKeyPressed
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             controlVentas.registrarCliente2019(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario+"",
-              txtTotalApagar, txtEfectivoRecibido, txtCambio,tablaVentas, defaultTablaVentas,tablaProductos,defaultTablaProductos); 
-         }
+       metodosBotones(evt);
     }//GEN-LAST:event_txtTelefonoRegistrarClienteKeyPressed
 
     private void txtNombreRegistrarClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRegistrarClienteKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           if(!txtNombreRegistrarCliente.getText().isEmpty()){
-               txtTelefonoRegistrarCliente.requestFocus();
-               
-           }else{
-               txtNombreRegistrarCliente.requestFocus();
-           }
-            
-         }
+        metodosBotones(evt);
     }//GEN-LAST:event_txtNombreRegistrarClienteKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       JOptionPane.showMessageDialog(null, "Registra el cliente, para registrar la venta"+"\nCierre el sistema para cancelar");
+        JOptionPane.showMessageDialog(null, "Registra el cliente, para registrar la venta" + "\nCierre el sistema para cancelar");
     }//GEN-LAST:event_formWindowClosing
+
+    private void jLabel18KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel18KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel18KeyPressed
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void jPanel10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel10KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel10KeyPressed
+
+    private void btnregistrarRegistrarClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnregistrarRegistrarClienteKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnregistrarRegistrarClienteKeyPressed
+
+    private void jLabel19KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel19KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19KeyPressed
 
     /**
      * @param args the command line arguments
@@ -339,4 +371,14 @@ Point point = MouseInfo.getPointerInfo().getLocation();
     private javax.swing.JTextField txtNombreRegistrarCliente;
     private javax.swing.JTextField txtTelefonoRegistrarCliente;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            controlVentas.registrarCliente2019(txtNombreRegistrarCliente, txtTelefonoRegistrarCliente, this, principal.idUsuario + "",
+                    txtTotalApagar, txtEfectivoRecibido, txtCambio, tablaVentas, defaultTablaVentas, tablaProductos, defaultTablaProductos);
+        } else {
+
+        }
+    }
 }

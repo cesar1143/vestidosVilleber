@@ -11,6 +11,7 @@ import beans.Deudatotal;
 import beans.Pagos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Set;
 import modelo.daoClientes;
@@ -37,12 +38,12 @@ public class clienteConDeuda extends javax.swing.JFrame {
             Deudatotal beanDeuda = new daoClientes().obtnerDeudaXIdCliente(bean.getIdclientes() + "");
 
             if (beanDeuda != null) {
-                int sumSubtotal=0;
-                if (productos.jTable2.getSelectedRow()>0) {
+                int sumSubtotal = 0;
+                if (productos.jTable2.getSelectedRow() > 0) {
                     for (int i = 0; i < productos.jTable2.getRowCount(); i++) {
-                         sumSubtotal=sumSubtotal+Integer.parseInt(productos.tablaVentas.getValueAt(i, 4)+"");
+                        sumSubtotal = sumSubtotal + Integer.parseInt(productos.tablaVentas.getValueAt(i, 4) + "");
                     }
-                   
+
                 }
                 int sumaPagos = 0;
                 int nuevaDeuda = beanDeuda.getDeudatotal() + sumSubtotal;
@@ -111,6 +112,11 @@ public class clienteConDeuda extends javax.swing.JFrame {
                 jPanel1MousePressed(evt);
             }
         });
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Deuda anterior:");
@@ -120,18 +126,33 @@ public class clienteConDeuda extends javax.swing.JFrame {
         deuda.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         deuda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         deuda.setText("jTextField1");
+        deuda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                deudaKeyPressed(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nombre del cliente:");
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
 
         nombre.setEditable(false);
         nombre.setBackground(new java.awt.Color(229, 222, 222));
         nombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombre.setText("jTextField2");
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombreKeyPressed(evt);
+            }
+        });
 
         nuevaDeuda.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nuevaDeuda.setForeground(new java.awt.Color(204, 0, 51));
@@ -147,6 +168,11 @@ public class clienteConDeuda extends javax.swing.JFrame {
                 txtNuevaDeudaActionPerformed(evt);
             }
         });
+        txtNuevaDeuda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNuevaDeudaKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Restan:");
@@ -156,13 +182,28 @@ public class clienteConDeuda extends javax.swing.JFrame {
         txtRestan.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtRestan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtRestan.setText("jTextField1");
+        txtRestan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRestanKeyPressed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Información de la deuda del cliente");
+        jLabel10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel10KeyPressed(evt);
+            }
+        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -305,6 +346,38 @@ public class clienteConDeuda extends javax.swing.JFrame {
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
 
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+       metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_nombreKeyPressed
+
+    private void deudaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deudaKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_deudaKeyPressed
+
+    private void txtNuevaDeudaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevaDeudaKeyPressed
+         metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtNuevaDeudaKeyPressed
+
+    private void txtRestanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRestanKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtRestanKeyPressed
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+ metodosBotones(evt);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyPressed
+
+    private void jLabel10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel10KeyPressed
+        metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -355,4 +428,12 @@ public class clienteConDeuda extends javax.swing.JFrame {
     private javax.swing.JTextField txtNuevaDeuda;
     private javax.swing.JTextField txtRestan;
     // End of variables declaration//GEN-END:variables
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+            dispose();
+        } else {
+        }
+    }
+
 }

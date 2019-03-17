@@ -21,6 +21,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import mensajes.mensajeAdvertencia;
+import static pantallas.editarUsuario.defaultTablaUsuarios;
+import static pantallas.editarUsuario.tablaUsuarios;
 
 /**
  *
@@ -167,13 +169,33 @@ public class verPagos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel1ComponentShown(evt);
+            }
+        });
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Registar y ver abonos");
+        jLabel18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel18KeyPressed(evt);
+            }
+        });
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -182,12 +204,22 @@ public class verPagos extends javax.swing.JFrame {
                 jLabel19MouseClicked(evt);
             }
         });
+        jLabel19.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel19KeyPressed(evt);
+            }
+        });
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel20MouseClicked(evt);
+            }
+        });
+        jLabel20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel20KeyPressed(evt);
             }
         });
 
@@ -217,22 +249,37 @@ public class verPagos extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pagos realizados", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tablaPagos);
         jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnEditar.setBackground(new java.awt.Color(255, 0, 204));
         btnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/editar.png"))); // NOI18N
-        btnEditar.setText("Editar ");
+        btnEditar.setText("F2-Editar ");
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
+            }
+        });
+        btnEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEditarKeyPressed(evt);
             }
         });
 
@@ -240,11 +287,16 @@ public class verPagos extends javax.swing.JFrame {
         btnEliminar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/eliminar.png"))); // NOI18N
-        btnEliminar.setText("Eliminar ");
+        btnEliminar.setText("F3-Eliminar ");
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
+            }
+        });
+        btnEliminar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEliminarKeyPressed(evt);
             }
         });
 
@@ -253,6 +305,11 @@ public class verPagos extends javax.swing.JFrame {
         txtDeudTotal.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtDeudTotal.setForeground(new java.awt.Color(204, 0, 51));
         txtDeudTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDeudTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDeudTotalKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 51));
@@ -267,6 +324,11 @@ public class verPagos extends javax.swing.JFrame {
         txtRestan.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtRestan.setForeground(new java.awt.Color(51, 0, 204));
         txtRestan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtRestan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRestanKeyPressed(evt);
+            }
+        });
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("hkjhkhkjhjkhkjhkjhkjhkjhj");
@@ -280,6 +342,11 @@ public class verPagos extends javax.swing.JFrame {
         txtTotalPagos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtTotalPagos.setForeground(new java.awt.Color(51, 0, 204));
         txtTotalPagos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTotalPagos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTotalPagosKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -354,9 +421,19 @@ public class verPagos extends javax.swing.JFrame {
         txtNombreDelCiente.setBackground(new java.awt.Color(229, 222, 222));
         txtNombreDelCiente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtNombreDelCiente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombreDelCiente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreDelCienteKeyPressed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de abono", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 0, 204))); // NOI18N
+        jPanel3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel3KeyPressed(evt);
+            }
+        });
 
         txtAbono.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtAbono.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -390,6 +467,11 @@ public class verPagos extends javax.swing.JFrame {
         txtCambio.setEditable(false);
         txtCambio.setBackground(new java.awt.Color(229, 222, 222));
         txtCambio.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtCambio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCambioKeyPressed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 0, 204));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -402,16 +484,26 @@ public class verPagos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 0, 204));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        jButton2.setText("Cancelar");
+        jButton2.setText("F1- Cancelar");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
             }
         });
 
@@ -600,20 +692,84 @@ public class verPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void txtAbonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbonoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!txtAbono.getText().isEmpty()) {
-                txtEfectivoRecibido.requestFocus();
-            }
-        }
+        metodosBotones(evt);
     }//GEN-LAST:event_txtAbonoKeyPressed
 
     private void txtEfectivoRecibidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectivoRecibidoKeyPressed
-      if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
-                txtNombreDelCiente.getText(), jTable1,
-                tablaPagos, principal.usuario + "", this, idCliente, txtTotalPagos);
-        }
+        metodosBotones(evt);
     }//GEN-LAST:event_txtEfectivoRecibidoKeyPressed
+
+    private void jLabel18KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel18KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel18KeyPressed
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void txtNombreDelCienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreDelCienteKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreDelCienteKeyPressed
+
+    private void jLabel19KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel19KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19KeyPressed
+
+    private void jLabel20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel20KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel20KeyPressed
+
+    private void jPanel3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel3KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3KeyPressed
+
+    private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1ComponentShown
+
+    private void txtCambioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCambioKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtCambioKeyPressed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void txtDeudTotalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeudTotalKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtDeudTotalKeyPressed
+
+    private void txtTotalPagosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalPagosKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalPagosKeyPressed
+
+    private void txtRestanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRestanKeyPressed
+        metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_txtRestanKeyPressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void btnEditarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEditarKeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarKeyPressed
+
+    private void btnEliminarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEliminarKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarKeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -680,4 +836,45 @@ public class verPagos extends javax.swing.JFrame {
     private javax.swing.JTextField txtRestan;
     private javax.swing.JTextField txtTotalPagos;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlverPagos = false;
+            dispose();
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            /*controlP.registrar(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
+        txtNombreDelCiente.getText(), jTable1, tablaPagos, principal.idUsuario + "", this);*/
+            controlP.registrarAbono2(txtAbono, txtEfectivoRecibido, txtCambio, txtDeudTotal, txtRestan,
+                    txtNombreDelCiente.getText(), jTable1,
+                    tablaPagos, principal.usuario + "", this, idCliente, txtTotalPagos);
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            dispose();
+            principal.controlverPagos = false;
+        } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            if (jTable1.getSelectedRow() == -1) {
+                mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                menAdvertencia.setVisible(true);
+                menAdvertencia.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
+            } else {
+                controlP.editar2019(jTable1, tablaPagos, txtNombreDelCiente.getText().toString(),
+                        txtDeudTotal, txtRestan, this, idCliente, idDeuda, txtTotalPagos);
+            }
+        } else if (evt.getKeyCode() == KeyEvent.VK_F3) {
+
+            if (jTable1.getSelectedRow() == -1) {
+                mensajeAdvertencia menAdvertencia = new mensajeAdvertencia();
+                mensajeAdvertencia.labelMensaje.setText("Selecciona una fila de la tabla");
+                menAdvertencia.setVisible(true);
+                menAdvertencia.setAlwaysOnTop(true);
+                // JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla","Advertencia",JOptionPane.WARNING_MESSAGE);
+            } else {
+                controlP.eliminar2019(jTable1, tablaPagos,
+                        txtNombreDelCiente.getText().toString(),
+                        txtDeudTotal, txtRestan, this, idCliente, txtTotalPagos);
+            }
+        }
+    }
 }

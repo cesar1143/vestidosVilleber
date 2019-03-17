@@ -24,31 +24,34 @@ import modelo.daoProductos;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 
 /**
  *
  * @author famsa
  */
 public class editarProducto extends javax.swing.JFrame {
+
     //para el frame
     int x = 0, y = 0;
     daoProductos dao = new daoProductos();
     Image foto;
     File file;
-    public static Productos bean =new Productos();
+    public static Productos bean = new Productos();
     //ESTOS  VALORES defaultTabla-->SON LLENADOS DESDE LA PANTALLA PRINCIPAL
-    public static DefaultTableModel defaultTabla= new DefaultTableModel();
+    public static DefaultTableModel defaultTabla = new DefaultTableModel();
     public static JTable tabla = new JTable();
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
-     validarCampos validar = new validarCampos();
-    
-     controlProductos controlPro= new controlProductos();
+    validarCampos validar = new validarCampos();
+
+    controlProductos controlPro = new controlProductos();
+
     /**
      * Creates new form editarProducto
      */
     public editarProducto() {
         initComponents();
-        principal.frameeditarProducto=this;
+        principal.frameeditarProducto = this;
         this.setTitle("Editar Producto");
         this.setLocationRelativeTo(null);
         //VALIDAMOS LOS CAMPOS
@@ -58,22 +61,21 @@ public class editarProducto extends javax.swing.JFrame {
         validar.soloLetras(txtColorEditarProducto);
         validar.soloNumeros(txtCantidadEditarProducto);
         validar.soloNumerosYLetras(txtDescripcionEditarProducto);
-        
+
         //LLENAMOS LOS CAMPOS CON EL BEAN QUE NOSTRAEMOS DESDE EL CONTORL PRODUCTOS
-        
-        System.out.println("id " + bean.getIdproductos()+"");
-        txtIdEditarProducto.setText(bean.getIdproductos()+"");
-        txtClaveEditarProducto.setText(bean.getClave()+"");
+        System.out.println("id " + bean.getIdproductos() + "");
+        txtIdEditarProducto.setText(bean.getIdproductos() + "");
+        txtClaveEditarProducto.setText(bean.getClave() + "");
         txtNombreEditarProducto.setText(bean.getNombre().toUpperCase());
-        txtPrecioEditarProducto.setText(bean.getPrecio()+"");
+        txtPrecioEditarProducto.setText(bean.getPrecio() + "");
         txtColorEditarProducto.setText(bean.getColor());
-        txtCantidadEditarProducto.setText(bean.getCantidad()+"");
+        txtCantidadEditarProducto.setText(bean.getCantidad() + "");
         txtDescripcionEditarProducto.setText(bean.getDescripcion().toUpperCase());
         spinnerEditarProducto.setSelectedItem(bean.getTipo());
         System.out.println("fotoot " + bean.getFoto());
-        if (bean.getFoto()==null) {
+        if (bean.getFoto() == null) {
             labelFotoEditarProducto.setText("Sin foto");
-        }else{
+        } else {
             Image imagen;
             try {
                 imagen = dao.getImage(bean, false);
@@ -85,7 +87,7 @@ public class editarProducto extends javax.swing.JFrame {
 
             }
         }
-        
+
     }
 
     /**
@@ -145,6 +147,11 @@ public class editarProducto extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel11KeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 0, 204));
@@ -152,6 +159,9 @@ public class editarProducto extends javax.swing.JFrame {
 
         txtClaveEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtClaveEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveEditarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtClaveEditarProductoKeyTyped(evt);
             }
@@ -163,6 +173,9 @@ public class editarProducto extends javax.swing.JFrame {
 
         txtNombreEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreEditarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreEditarProductoKeyTyped(evt);
             }
@@ -170,6 +183,9 @@ public class editarProducto extends javax.swing.JFrame {
 
         txtPrecioEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecioEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioEditarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioEditarProductoKeyTyped(evt);
             }
@@ -181,6 +197,9 @@ public class editarProducto extends javax.swing.JFrame {
 
         txtColorEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtColorEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtColorEditarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtColorEditarProductoKeyTyped(evt);
             }
@@ -196,6 +215,9 @@ public class editarProducto extends javax.swing.JFrame {
 
         txtCantidadEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCantidadEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadEditarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadEditarProductoKeyTyped(evt);
             }
@@ -211,11 +233,19 @@ public class editarProducto extends javax.swing.JFrame {
 
         spinnerEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         spinnerEditarProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boda", "Bautizo", "XV años", "XVIII años", "Plata", "Presentacion", "Trajes", "Ninguno" }));
+        spinnerEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                spinnerEditarProductoKeyPressed(evt);
+            }
+        });
 
         txtDescripcionEditarProducto.setColumns(20);
         txtDescripcionEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtDescripcionEditarProducto.setRows(5);
         txtDescripcionEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionEditarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDescripcionEditarProductoKeyTyped(evt);
             }
@@ -233,16 +263,26 @@ public class editarProducto extends javax.swing.JFrame {
                 btnAceptarEditarProductoActionPerformed(evt);
             }
         });
+        btnAceptarEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAceptarEditarProductoKeyPressed(evt);
+            }
+        });
 
         btnCancelarEditarProducto.setBackground(new java.awt.Color(255, 0, 204));
         btnCancelarEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarEditarProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarEditarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarEditarProducto.setText("Cancelar");
+        btnCancelarEditarProducto.setText("F1- Cancelar");
         btnCancelarEditarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarEditarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEditarProductoActionPerformed(evt);
+            }
+        });
+        btnCancelarEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCancelarEditarProductoKeyPressed(evt);
             }
         });
 
@@ -257,8 +297,18 @@ public class editarProducto extends javax.swing.JFrame {
                 btnBuscarFotoEditarProductoActionPerformed(evt);
             }
         });
+        btnBuscarFotoEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnBuscarFotoEditarProductoKeyPressed(evt);
+            }
+        });
 
         labelFotoEditarProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        labelFotoEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelFotoEditarProductoKeyPressed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 0, 204));
@@ -267,13 +317,28 @@ public class editarProducto extends javax.swing.JFrame {
         txtIdEditarProducto.setEditable(false);
         txtIdEditarProducto.setBackground(new java.awt.Color(229, 222, 222));
         txtIdEditarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIdEditarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdEditarProductoKeyPressed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Editar datos del producto");
+        jLabel18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel18KeyPressed(evt);
+            }
+        });
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -282,12 +347,22 @@ public class editarProducto extends javax.swing.JFrame {
                 jLabel19MouseClicked(evt);
             }
         });
+        jLabel19.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel19KeyPressed(evt);
+            }
+        });
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel20MouseClicked(evt);
+            }
+        });
+        jLabel20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel20KeyPressed(evt);
             }
         });
 
@@ -353,13 +428,13 @@ public class editarProducto extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(btnCancelarEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAceptarEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3))))
+                        .addComponent(jScrollPane3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(btnCancelarEditarProducto)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAceptarEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(175, 175, 175))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -431,13 +506,13 @@ public class editarProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarProductoActionPerformed
-        String tipo= spinnerEditarProducto.getSelectedItem().toString();
-        controlPro.editar(txtIdEditarProducto, txtClaveEditarProducto, txtNombreEditarProducto, txtPrecioEditarProducto, txtColorEditarProducto, tipo, txtCantidadEditarProducto, txtDescripcionEditarProducto, labelFotoEditarProducto, file,this,tabla,defaultTabla);
+        String tipo = spinnerEditarProducto.getSelectedItem().toString();
+        controlPro.editar(txtIdEditarProducto, txtClaveEditarProducto, txtNombreEditarProducto, txtPrecioEditarProducto, txtColorEditarProducto, tipo, txtCantidadEditarProducto, txtDescripcionEditarProducto, labelFotoEditarProducto, file, this, tabla, defaultTabla);
     }//GEN-LAST:event_btnAceptarEditarProductoActionPerformed
 
     private void btnCancelarEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarProductoActionPerformed
-    dispose();
-    principal.controleditarProducto=false;
+        dispose();
+        principal.controleditarProducto = false;
     }//GEN-LAST:event_btnCancelarEditarProductoActionPerformed
 
     private void btnBuscarFotoEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFotoEditarProductoActionPerformed
@@ -457,11 +532,11 @@ public class editarProducto extends javax.swing.JFrame {
                 String exts = Utils.getExtension(f);
                 if (exts != null) {
                     if (exts.equals(Utils.tiff)
-                        || exts.equals(Utils.tif)
-                        || exts.equals(Utils.gif)
-                        || exts.equals(Utils.jpeg)
-                        || exts.equals(Utils.jpg)
-                        || exts.equals(Utils.png)) {
+                            || exts.equals(Utils.tif)
+                            || exts.equals(Utils.gif)
+                            || exts.equals(Utils.jpeg)
+                            || exts.equals(Utils.jpg)
+                            || exts.equals(Utils.png)) {
                         return true;
                     } else {
                         return false;
@@ -501,55 +576,50 @@ public class editarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarFotoEditarProductoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        principal.controleditarProducto=false;
+        principal.controleditarProducto = false;
+
     }//GEN-LAST:event_formWindowClosing
 
     private void txtClaveEditarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveEditarProductoKeyTyped
-         if(txtClaveEditarProducto.getText().length()== 39)
-        {
+        if (txtClaveEditarProducto.getText().length() == 39) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtClaveEditarProductoKeyTyped
 
     private void txtNombreEditarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEditarProductoKeyTyped
-         if(txtNombreEditarProducto.getText().length()== 19)
-        {
+        if (txtNombreEditarProducto.getText().length() == 19) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtNombreEditarProductoKeyTyped
 
     private void txtPrecioEditarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEditarProductoKeyTyped
- if(txtPrecioEditarProducto.getText().length()== 10)
-        {
+        if (txtPrecioEditarProducto.getText().length() == 10) {
             evt.consume();
 
-        }       
+        }
     }//GEN-LAST:event_txtPrecioEditarProductoKeyTyped
 
     private void txtColorEditarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorEditarProductoKeyTyped
-        if(txtColorEditarProducto.getText().length()== 19)
-        {
+        if (txtColorEditarProducto.getText().length() == 19) {
             evt.consume();
 
-        }   
+        }
     }//GEN-LAST:event_txtColorEditarProductoKeyTyped
 
     private void txtCantidadEditarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadEditarProductoKeyTyped
-        if(txtCantidadEditarProducto.getText().length()== 10)
-        {
+        if (txtCantidadEditarProducto.getText().length() == 10) {
             evt.consume();
 
-        }   
+        }
     }//GEN-LAST:event_txtCantidadEditarProductoKeyTyped
 
     private void txtDescripcionEditarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionEditarProductoKeyTyped
-       if(txtPrecioEditarProducto.getText().length()== 99)
-        {
+        if (txtPrecioEditarProducto.getText().length() == 99) {
             evt.consume();
 
-        }   
+        }
     }//GEN-LAST:event_txtDescripcionEditarProductoKeyTyped
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
@@ -557,19 +627,87 @@ public class editarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-principal.controleditarProducto=false;
+        principal.controleditarProducto = false;
         dispose();
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-      x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-      Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void jPanel11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel11KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11KeyPressed
+
+    private void txtIdEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdEditarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdEditarProductoKeyPressed
+
+    private void txtClaveEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveEditarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveEditarProductoKeyPressed
+
+    private void txtNombreEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEditarProductoKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreEditarProductoKeyPressed
+
+    private void txtPrecioEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEditarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioEditarProductoKeyPressed
+
+    private void txtColorEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorEditarProductoKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtColorEditarProductoKeyPressed
+
+    private void spinnerEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spinnerEditarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_spinnerEditarProductoKeyPressed
+
+    private void txtCantidadEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadEditarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadEditarProductoKeyPressed
+
+    private void txtDescripcionEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionEditarProductoKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionEditarProductoKeyPressed
+
+    private void btnAceptarEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarEditarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarEditarProductoKeyPressed
+
+    private void btnCancelarEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarEditarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarEditarProductoKeyPressed
+
+    private void labelFotoEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelFotoEditarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_labelFotoEditarProductoKeyPressed
+
+    private void btnBuscarFotoEditarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarFotoEditarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarFotoEditarProductoKeyPressed
+
+    private void jLabel20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel20KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel20KeyPressed
+
+    private void jLabel19KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel19KeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19KeyPressed
+
+    private void jLabel18KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel18KeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel18KeyPressed
 
     /**
      * @param args the command line arguments
@@ -634,4 +772,20 @@ principal.controleditarProducto=false;
     private javax.swing.JTextField txtNombreEditarProducto;
     private javax.swing.JTextField txtPrecioEditarProducto;
     // End of variables declaration//GEN-END:variables
+  public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+            principal.controleditarProducto = false;
+            dispose();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String tipo = spinnerEditarProducto.getSelectedItem().toString();
+            controlPro.editar(txtIdEditarProducto, txtClaveEditarProducto, txtNombreEditarProducto, txtPrecioEditarProducto, txtColorEditarProducto, tipo, txtCantidadEditarProducto, txtDescripcionEditarProducto, labelFotoEditarProducto, file, this, tabla, defaultTabla);
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            dispose();
+            principal.controleditarProducto = false;
+        } else {
+
+        }
+    }
+
 }

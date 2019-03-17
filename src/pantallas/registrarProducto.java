@@ -21,32 +21,34 @@ import javax.swing.table.DefaultTableModel;
 import validaciones.validarCampos;
 import java.awt.MouseInfo;
 import java.awt.Point;
-
+import java.awt.event.KeyEvent;
 
 /**
  *
  * @author famsa
  */
 public class registrarProducto extends javax.swing.JFrame {
-     //para el frame
+    //para el frame
+
     int x = 0, y = 0;
 
     Image foto;
     File file;
     //ESTOS  VALORES defaultTabla-->SON LLENADOS DESDE LA PANTALLA PRINCIPAL
-    public static DefaultTableModel defaultTabla= new DefaultTableModel();
+    public static DefaultTableModel defaultTabla = new DefaultTableModel();
     public static JTable tabla = new JTable();
 //=========================== INSTANCIAMOS LA CLASES QUE UTILIZAREMOS ======================================
-     validarCampos validar = new validarCampos();
-    
-     controlProductos controlPro= new controlProductos();
+    validarCampos validar = new validarCampos();
+
+    controlProductos controlPro = new controlProductos();
+
     /**
      * Creates new form registrarProducto
      */
     public registrarProducto() {
         initComponents();
-      
-        principal.frameregistrarProducto=this;
+
+        principal.frameregistrarProducto = this;
         this.setTitle("Registrar Producto");
         this.setLocationRelativeTo(null);
         //VALIDAMOS LOS CAMPOS
@@ -56,7 +58,7 @@ public class registrarProducto extends javax.swing.JFrame {
         validar.soloLetras(txtColorRegistrarProducto);
         validar.soloNumeros(txtCantidadRegistrarProducto);
         validar.soloNumerosYLetras(txtDescripcionRegistrarProducto);
-        
+
     }
 
     /**
@@ -114,6 +116,11 @@ public class registrarProducto extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 238, 238)));
+        jPanel11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel11KeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setText("Codigo:");
@@ -121,6 +128,9 @@ public class registrarProducto extends javax.swing.JFrame {
         txtClaveRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtClaveRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtClaveRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveRegistrarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtClaveRegistrarProductoKeyTyped(evt);
             }
@@ -132,6 +142,9 @@ public class registrarProducto extends javax.swing.JFrame {
         txtNombreRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombreRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtNombreRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreRegistrarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreRegistrarProductoKeyTyped(evt);
             }
@@ -140,6 +153,9 @@ public class registrarProducto extends javax.swing.JFrame {
         txtPrecioRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecioRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtPrecioRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioRegistrarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioRegistrarProductoKeyTyped(evt);
             }
@@ -151,6 +167,9 @@ public class registrarProducto extends javax.swing.JFrame {
         txtColorRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtColorRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtColorRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtColorRegistrarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtColorRegistrarProductoKeyTyped(evt);
             }
@@ -165,6 +184,9 @@ public class registrarProducto extends javax.swing.JFrame {
         txtCantidadRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCantidadRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtCantidadRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadRegistrarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadRegistrarProductoKeyTyped(evt);
             }
@@ -179,12 +201,20 @@ public class registrarProducto extends javax.swing.JFrame {
         spinnerRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         spinnerRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         spinnerRegistrarProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boda", "Bautizo", "XV años", "XVIII años", "Plata", "Presentacion", "Trajes", "Ninguno" }));
+        spinnerRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                spinnerRegistrarProductoKeyPressed(evt);
+            }
+        });
 
         txtDescripcionRegistrarProducto.setColumns(20);
         txtDescripcionRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtDescripcionRegistrarProducto.setForeground(new java.awt.Color(255, 0, 204));
         txtDescripcionRegistrarProducto.setRows(5);
         txtDescripcionRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionRegistrarProductoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDescripcionRegistrarProductoKeyTyped(evt);
             }
@@ -202,16 +232,26 @@ public class registrarProducto extends javax.swing.JFrame {
                 btnAceptarRegistrarProductoActionPerformed(evt);
             }
         });
+        btnAceptarRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAceptarRegistrarProductoKeyPressed(evt);
+            }
+        });
 
         btnCancelarRegistrarProducto.setBackground(new java.awt.Color(255, 0, 204));
         btnCancelarRegistrarProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarRegistrarProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarRegistrarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
-        btnCancelarRegistrarProducto.setText("Cancelar");
+        btnCancelarRegistrarProducto.setText("F1- Cancelar");
         btnCancelarRegistrarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarRegistrarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarRegistrarProductoActionPerformed(evt);
+            }
+        });
+        btnCancelarRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCancelarRegistrarProductoKeyPressed(evt);
             }
         });
 
@@ -226,15 +266,35 @@ public class registrarProducto extends javax.swing.JFrame {
                 btnBuscarFotoRegistrarProductoActionPerformed(evt);
             }
         });
+        btnBuscarFotoRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnBuscarFotoRegistrarProductoKeyPressed(evt);
+            }
+        });
 
         labelFotoRegistrarProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        labelFotoRegistrarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelFotoRegistrarProductoKeyPressed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 204));
+        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel4KeyPressed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Registrar producto");
+        jLabel18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel18KeyPressed(evt);
+            }
+        });
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -243,12 +303,22 @@ public class registrarProducto extends javax.swing.JFrame {
                 jLabel19MouseClicked(evt);
             }
         });
+        jLabel19.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel19KeyPressed(evt);
+            }
+        });
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cancelar.png"))); // NOI18N
         jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel20MouseClicked(evt);
+            }
+        });
+        jLabel20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel20KeyPressed(evt);
             }
         });
 
@@ -387,7 +457,7 @@ public class registrarProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRegistrarProductoActionPerformed
-controlPro.btnCancelar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, txtPrecioRegistrarProducto, txtColorRegistrarProducto, txtCantidadRegistrarProducto, txtDescripcionRegistrarProducto, labelFotoRegistrarProducto);
+        controlPro.btnCancelar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, txtPrecioRegistrarProducto, txtColorRegistrarProducto, txtCantidadRegistrarProducto, txtDescripcionRegistrarProducto, labelFotoRegistrarProducto);
     }//GEN-LAST:event_btnCancelarRegistrarProductoActionPerformed
 
     private void btnBuscarFotoRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFotoRegistrarProductoActionPerformed
@@ -451,59 +521,53 @@ controlPro.btnCancelar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, tx
     }//GEN-LAST:event_btnBuscarFotoRegistrarProductoActionPerformed
 
     private void btnAceptarRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistrarProductoActionPerformed
-      String tipo= spinnerRegistrarProducto.getSelectedItem().toString();
-     
-        controlPro.registrar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, txtPrecioRegistrarProducto, txtColorRegistrarProducto, tipo, txtCantidadRegistrarProducto, txtDescripcionRegistrarProducto, labelFotoRegistrarProducto, file,tabla,defaultTabla);
+        String tipo = spinnerRegistrarProducto.getSelectedItem().toString();
+
+        controlPro.registrar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, txtPrecioRegistrarProducto, txtColorRegistrarProducto, tipo, txtCantidadRegistrarProducto, txtDescripcionRegistrarProducto, labelFotoRegistrarProducto, file, tabla, defaultTabla);
     }//GEN-LAST:event_btnAceptarRegistrarProductoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       principal.controlregistrarProducto=false;
-     
+        principal.controlregistrarProducto = false;
+
     }//GEN-LAST:event_formWindowClosing
 
     private void txtNombreRegistrarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRegistrarProductoKeyTyped
-       if(txtNombreRegistrarProducto.getText().length()== 19)
-        {
+        if (txtNombreRegistrarProducto.getText().length() == 19) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtNombreRegistrarProductoKeyTyped
 
     private void txtClaveRegistrarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveRegistrarProductoKeyTyped
-        if(txtClaveRegistrarProducto.getText().length()== 39)
-        {
+        if (txtClaveRegistrarProducto.getText().length() == 39) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtClaveRegistrarProductoKeyTyped
 
     private void txtPrecioRegistrarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioRegistrarProductoKeyTyped
-        if(txtPrecioRegistrarProducto.getText().length()== 10)
-        {
+        if (txtPrecioRegistrarProducto.getText().length() == 10) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtPrecioRegistrarProductoKeyTyped
 
     private void txtColorRegistrarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorRegistrarProductoKeyTyped
-       if(txtColorRegistrarProducto.getText().length()== 19)
-        {
+        if (txtColorRegistrarProducto.getText().length() == 19) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtColorRegistrarProductoKeyTyped
 
     private void txtCantidadRegistrarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRegistrarProductoKeyTyped
-        if(txtCantidadRegistrarProducto.getText().length()== 10)
-        {
+        if (txtCantidadRegistrarProducto.getText().length() == 10) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtCantidadRegistrarProductoKeyTyped
 
     private void txtDescripcionRegistrarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionRegistrarProductoKeyTyped
-        if(txtDescripcionRegistrarProducto.getText().length()== 99)
-        {
+        if (txtDescripcionRegistrarProducto.getText().length() == 99) {
             evt.consume();
 
         }
@@ -514,19 +578,83 @@ controlPro.btnCancelar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, tx
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-principal.controlregistrarProducto=false;
+        principal.controlregistrarProducto = false;
         dispose();
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-       x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jLabel18KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel18KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel18KeyPressed
+
+    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4KeyPressed
+
+    private void jPanel11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel11KeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11KeyPressed
+
+    private void txtClaveRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveRegistrarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveRegistrarProductoKeyPressed
+
+    private void txtNombreRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRegistrarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreRegistrarProductoKeyPressed
+
+    private void txtPrecioRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioRegistrarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioRegistrarProductoKeyPressed
+
+    private void txtColorRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorRegistrarProductoKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtColorRegistrarProductoKeyPressed
+
+    private void spinnerRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spinnerRegistrarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_spinnerRegistrarProductoKeyPressed
+
+    private void txtCantidadRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRegistrarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadRegistrarProductoKeyPressed
+
+    private void txtDescripcionRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionRegistrarProductoKeyPressed
+       metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionRegistrarProductoKeyPressed
+
+    private void btnCancelarRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarRegistrarProductoKeyPressed
+     metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarRegistrarProductoKeyPressed
+
+    private void btnAceptarRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarRegistrarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarRegistrarProductoKeyPressed
+
+    private void labelFotoRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelFotoRegistrarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_labelFotoRegistrarProductoKeyPressed
+
+    private void btnBuscarFotoRegistrarProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarFotoRegistrarProductoKeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarFotoRegistrarProductoKeyPressed
+
+    private void jLabel19KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel19KeyPressed
+      metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19KeyPressed
+
+    private void jLabel20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel20KeyPressed
+     metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel20KeyPressed
 
     /**
      * @param args the command line arguments
@@ -589,4 +717,19 @@ principal.controlregistrarProducto=false;
     private javax.swing.JTextField txtNombreRegistrarProducto;
     private javax.swing.JTextField txtPrecioRegistrarProducto;
     // End of variables declaration//GEN-END:variables
+
+    public void metodosBotones(KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            principal.controlregistrarProducto = false;
+            dispose();
+
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String tipo = spinnerRegistrarProducto.getSelectedItem().toString();
+
+            controlPro.registrar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, txtPrecioRegistrarProducto, txtColorRegistrarProducto, tipo, txtCantidadRegistrarProducto, txtDescripcionRegistrarProducto, labelFotoRegistrarProducto, file, tabla, defaultTabla);
+        } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            controlPro.btnCancelar(txtClaveRegistrarProducto, txtNombreRegistrarProducto, txtPrecioRegistrarProducto, txtColorRegistrarProducto, txtCantidadRegistrarProducto, txtDescripcionRegistrarProducto, labelFotoRegistrarProducto);
+
+        }
+    }
 }

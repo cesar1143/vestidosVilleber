@@ -87,7 +87,7 @@ public class catalogoProductos extends javax.swing.JFrame {
         next.setVisible(false);
         //metodo para pintar imagenes
         pintarImagenes(controlPro.consultarTodos2019());
-
+        labelPrincipal.requestFocus();
     }
 
     /**
@@ -126,7 +126,7 @@ public class catalogoProductos extends javax.swing.JFrame {
         id11 = new javax.swing.JLabel();
         atras = new javax.swing.JLabel();
         next = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        labelPrincipal = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
@@ -138,6 +138,11 @@ public class catalogoProductos extends javax.swing.JFrame {
         });
 
         panel.setBackground(new java.awt.Color(255, 255, 255));
+        panel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                panelKeyPressed(evt);
+            }
+        });
 
         foto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto1.setToolTipText("Click y muestra detalles  del producto");
@@ -154,6 +159,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 foto1MouseExited(evt);
             }
         });
+        foto1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto1KeyPressed(evt);
+            }
+        });
 
         foto3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -166,6 +176,11 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 foto3MouseExited(evt);
+            }
+        });
+        foto3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto3KeyPressed(evt);
             }
         });
 
@@ -182,6 +197,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 foto2MouseExited(evt);
             }
         });
+        foto2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto2KeyPressed(evt);
+            }
+        });
 
         foto4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -194,6 +214,11 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 foto4MouseExited(evt);
+            }
+        });
+        foto4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto4KeyPressed(evt);
             }
         });
 
@@ -210,6 +235,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 foto5MouseExited(evt);
             }
         });
+        foto5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto5KeyPressed(evt);
+            }
+        });
 
         foto6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -222,6 +252,11 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 foto6MouseExited(evt);
+            }
+        });
+        foto6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto6KeyPressed(evt);
             }
         });
 
@@ -238,6 +273,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 foto7MouseExited(evt);
             }
         });
+        foto7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto7KeyPressed(evt);
+            }
+        });
 
         foto8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -250,6 +290,11 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 foto8MouseExited(evt);
+            }
+        });
+        foto8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto8KeyPressed(evt);
             }
         });
 
@@ -266,6 +311,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 foto9MouseExited(evt);
             }
         });
+        foto9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto9KeyPressed(evt);
+            }
+        });
 
         foto10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -278,6 +328,11 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 foto10MouseExited(evt);
+            }
+        });
+        foto10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto10KeyPressed(evt);
             }
         });
 
@@ -294,6 +349,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 foto11MouseExited(evt);
             }
         });
+        foto11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto11KeyPressed(evt);
+            }
+        });
 
         foto12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -306,6 +366,11 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 foto12MouseExited(evt);
+            }
+        });
+        foto12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                foto12KeyPressed(evt);
             }
         });
 
@@ -346,6 +411,11 @@ public class catalogoProductos extends javax.swing.JFrame {
                 atrasMouseExited(evt);
             }
         });
+        atras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                atrasKeyPressed(evt);
+            }
+        });
 
         next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nextt.png"))); // NOI18N
         next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -366,13 +436,21 @@ public class catalogoProductos extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 204));
-        jLabel1.setText("Buscar por Nombre:");
-        jLabel1.setToolTipText("Refrescar las imagenes");
+        labelPrincipal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        labelPrincipal.setForeground(new java.awt.Color(255, 0, 204));
+        labelPrincipal.setText("Buscar por Nombre:");
+        labelPrincipal.setToolTipText("Refrescar las imagenes");
+        labelPrincipal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                labelPrincipalKeyPressed(evt);
+            }
+        });
 
         txtNombre.setToolTipText("Refrescar las imagenes");
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
             }
@@ -384,6 +462,11 @@ public class catalogoProductos extends javax.swing.JFrame {
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
+            }
+        });
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
             }
         });
 
@@ -419,7 +502,7 @@ public class catalogoProductos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(id12)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
+                        .addComponent(labelPrincipal)
                         .addGap(9, 9, 9)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -474,7 +557,7 @@ public class catalogoProductos extends javax.swing.JFrame {
                         .addComponent(id12)
                         .addComponent(id9)
                         .addComponent(id8)
-                        .addComponent(jLabel1)
+                        .addComponent(labelPrincipal)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -934,17 +1017,23 @@ public class catalogoProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_nextMouseExited
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
-        txtNombre.setEnabled(false);
-        txtNombre.setBackground(Color.GRAY);
-        List<Productos> lista = new daoProductos().consultaTodosPorNombre2019(txtNombre.getText());
+        if (txtNombre.getText().isEmpty()) {
+            pintarImagenes(controlPro.consultarTodos2019());
+            labelPrincipal.requestFocus();
+        } else {
+            txtNombre.setEnabled(false);
+            txtNombre.setBackground(Color.GRAY);
+            List<Productos> lista = new daoProductos().consultaTodosPorNombre2019(txtNombre.getText());
 
-        listaPro.clear();
-        contadorImgenes = 12;
-        valori = 0;
-        contadorLabel = 0;
-        pintarImagenes(lista);
-        txtNombre.setEnabled(true);
-        txtNombre.setBackground(Color.WHITE);
+            listaPro.clear();
+            contadorImgenes = 12;
+            valori = 0;
+            contadorLabel = 0;
+            pintarImagenes(lista);
+            txtNombre.setEnabled(true);
+            txtNombre.setBackground(Color.WHITE);
+        }
+
 
     }//GEN-LAST:event_txtNombreKeyReleased
 
@@ -961,6 +1050,74 @@ public class catalogoProductos extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         principal.controlcatalogo = false;
     }//GEN-LAST:event_formWindowClosing
+
+    private void panelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_panelKeyPressed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyPressed
+
+    private void atrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_atrasKeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_atrasKeyPressed
+
+    private void foto1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto1KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_foto1KeyPressed
+
+    private void foto2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto2KeyPressed
+        metodosBotones(evt);  // TODO add your handling code here:
+    }//GEN-LAST:event_foto2KeyPressed
+
+    private void foto3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto3KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_foto3KeyPressed
+
+    private void foto7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto7KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto7KeyPressed
+
+    private void foto8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto8KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto8KeyPressed
+
+    private void foto9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto9KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto9KeyPressed
+
+    private void foto10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto10KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_foto10KeyPressed
+
+    private void foto4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto4KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto4KeyPressed
+
+    private void foto5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto5KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto5KeyPressed
+
+    private void foto6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto6KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto6KeyPressed
+
+    private void foto11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto11KeyPressed
+        metodosBotones(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_foto11KeyPressed
+
+    private void foto12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_foto12KeyPressed
+        metodosBotones(evt); // TODO add your handling code here:
+    }//GEN-LAST:event_foto12KeyPressed
+
+    private void labelPrincipalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_labelPrincipalKeyPressed
+        metodosBotones(evt);   // TODO add your handling code here:
+    }//GEN-LAST:event_labelPrincipalKeyPressed
 
     /**
      * @param args the command line arguments
@@ -1319,8 +1476,8 @@ public class catalogoProductos extends javax.swing.JFrame {
     private javax.swing.JLabel id7;
     private javax.swing.JLabel id8;
     private javax.swing.JLabel id9;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    public static javax.swing.JLabel labelPrincipal;
     private javax.swing.JLabel next;
     private javax.swing.JPanel panel;
     private javax.swing.JTextField txtNombre;
